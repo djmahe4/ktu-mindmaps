@@ -21,9 +21,7 @@ Here is a mind map that describes the principles of CAD/CAM, Rapid and Additive 
   | - Computer-aided    |
   |   manufacturing (CAM)|
   +---------------------+
-             |
-             |
-             |
+
   +---------------------+
   | Rapid Manufacturing |
   +---------------------+
