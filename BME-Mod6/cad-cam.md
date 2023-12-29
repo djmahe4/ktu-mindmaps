@@ -43,20 +43,21 @@
 * **CNC machine in operation:** (Image of a CNC machine cutting a piece of metal based on CAD data)
 * **Block diagram of CAD/CAM system:**
 ```
-                  +--------------+
-                  | CAD Software |
-                  +--------------+
-                        |
-                        v
+                                            +-------------------------+ 
+                  +--------------+          | -Design Phase           |  
+                  | CAD Software |--------> | -3D Modeling            |
+                  +--------------+          | -Analysis & Simulation  | 
+                        |                   | -Documentation          |
+                        v                   +-------------------------+  
               +--------------+      +--------------+
               | Design Data |------->| CAM Software |
               +--------------+      +--------------+
                         |
                         v
-              +--------------+      +--------------+
+              +--------------+         +--------------+
               | CNC Machine |-------> |  Manufactured |
               |             |         | Product       |
-              +--------------+      +--------------+
+              +--------------+         +--------------+
 ```
 
 **Note:** This is a basic mind map and can be further expanded with more details, examples, and visuals.
