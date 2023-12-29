@@ -39,7 +39,8 @@
 
 **Visuals:**
 
-* **CAD software interface:** (Image of a CAD software interface showing a 3D model of a product)
+* **CAD software interface:** ![stock-photo-computer-cad-software-mock-up-showing-design-of-industrial-sustainable-green-energy-turbine-engine-2291126287](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/3e349a30-16ec-40a8-ae10-e0c719f19261)
+
 * **CNC machine in operation:** (Image of a CNC machine cutting a piece of metal based on CAD data)
 * **Block diagram of CAD/CAM system:**
 ```
