@@ -41,7 +41,8 @@
 
 * **CAD software interface:** ![stock-photo-computer-cad-software-mock-up-showing-design-of-industrial-sustainable-green-energy-turbine-engine-2291126287](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/3e349a30-16ec-40a8-ae10-e0c719f19261)
 
-* **CNC machine in operation:** (Image of a CNC machine cutting a piece of metal based on CAD data)
+* **CNC machine in operation:** ![Principles_of_CNC_Machine_Metal_Cutting](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/b652c093-17fc-4aec-bf35-ee719c18fab5)
+
 * **Block diagram of CAD/CAM system:**
 ```
                                             +-------------------------+ 
