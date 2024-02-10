@@ -73,10 +73,35 @@ Active Hub
 
 ```
 
-5. **Two-Layer Switch (Layer 2 Switch)**: A two-layer switch operates at the data link layer (Layer 2) of the OSI model. It sends frames to the destination port using a MAC address table which stores the MAC addresses of devices associated with that port.
+5. **Two-Layer Switch (Layer 2 Switch)**: A two-layer switch sends frames to the destination port using a MAC address table which stores the MAC addresses of devices associated with that port. A two-layer switch operates at the physical and data link layers, acts as a type of bridge with many ports for better performance, makes filtering decisions based on MAC addresses, and can be more sophisticated than a basic bridge. Some two-layer switches, known as cut-through switches, are designed to forward the frame as soon as they check the MAC addresses. A three-layer switch is used at
+the network layer; it is a kind of router. The two-layer switch performs at the physical
+and data link layers.
+A two-layer switch is a bridge, a bridge with many ports and a design that allows better (faster) performance. A bridge with a few ports can connect a few LANs together. A bridge with many ports may be able to allocate a unique port to each station, with each station on its own independent entity.
+```
+Two-Layer Switch
+|
+|-- Operates at two layers
+|   |-- Physical Layer
+|   |-- Data Link Layer
+|
+|-- Is a type of Bridge
+|   |-- Many ports for better performance
+|   |-- Can connect multiple LANs
+|   |-- Each station can have its own unique port
+|   |-- No competing traffic (no collision)
+|
+|-- Makes filtering decisions based on MAC address
+|
+|-- More sophisticated than a basic bridge
+|   |-- Can have a buffer to hold frames for processing
+|   |-- Can have a switching factor that forwards frames faster
+|
+|-- Some are Cut-Through Switches
+    |-- Designed to forward the frame as soon as they check the MAC addresses
+```
 
-6. **Router**: A router is a device that connects two or more packet-switched networks or subnetworks. It manages traffic between these networks by forwarding data packets to their intended IP addresses, and allows multiple devices to use the same Internet connection.
+7. **Router**: A router is a device that connects two or more packet-switched networks or subnetworks. It manages traffic between these networks by forwarding data packets to their intended IP addresses, and allows multiple devices to use the same Internet connection.
 
-7. **Three-Layer Switch (Layer 3 Switch)**: A three-layer switch is a special network device that has the functionality of a router and a switch combined into one chassis. It operates at both the data link layer (Layer 2) and the network layer (Layer 3) of the OSI model.
+8. **Three-Layer Switch (Layer 3 Switch)**: A three-layer switch is a special network device that has the functionality of a router and a switch combined into one chassis. It operates at both the data link layer (Layer 2) and the network layer (Layer 3) of the OSI model.
 
-8. **Gateway**: A gateway is a connecting point of any network that helps it to connect with different networks. It monitors and controls all the incoming and outgoing traffic of the network.
+9. **Gateway**: A gateway is a connecting point of any network that helps it to connect with different networks. It monitors and controls all the incoming and outgoing traffic of the network.
