@@ -25,6 +25,8 @@ Sure, let's go through each of them:
 1. **Passive Hub**: A passive hub is a basic network device that connects multiple devices together. It does not process or regenerate signals, but simply repeats or copies the signals it receives. It's essentially a connector that connects wires coming from other devices.
 
 2. **Repeater**: A repeater is a networking device that amplifies and regenerates the incoming signal. Its main purpose is to extend the networking distance by increasing the strength and quality of signals.
+![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/533ebdf9-282c-4d90-9629-8505c98c2983)
+
 
 3. **Active Hub**: An active hub, also known as a powered hub or an intelligent hub, strengthens the signal where a passive hub just repeats or copies signals. It needs electricity to operate and is smarter than a passive hub. It's a multi-point repeater with the capability of regenerating signals and can process and monitor information.
 
