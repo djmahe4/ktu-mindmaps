@@ -96,7 +96,7 @@ be modified manually.
 ```
 ![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/203b15fd-59d5-43b7-acf5-b5c98ec20367)
 
-**Loop Problem**
+**Loop Problem** 
 Transparent bridges work fine as long as there are no redundant
 bridges in the system. Systems administrators, however, like to have redundant bridges
 (more than one bridge between a pair of LANs) to make the system more reliable. If a
@@ -132,3 +132,30 @@ Bridge 2 Table: A - LAN 1, D - LAN 2
 To solve this looping problem, the IEEE specification requires that bridges use the Spanning Tree Algorithm to create a loopless topology. This algorithm ensures that there is only one active path between any two network nodes, which prevents loops in the network.
 
 ![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/ec873f8d-849e-49bc-b3cf-5b7da9b2f4d2)
+
+**Spanning Tree** 
+1. **What is a Spanning Tree?**
+   A spanning tree is a subset of a graph, which is a tree that includes all the vertices (or nodes) of the graph¹². In other words, it's a simplified version of the original network, where you can reach any point from any other point, but only along one unique path. This means there are no loops in a spanning tree¹².
+
+2. **Why do we need a Spanning Tree?**
+   In a Local Area Network (LAN), we often have redundant paths for reliability. However, these can create loops, causing broadcast storms and other issues. A spanning tree allows us to keep the network connected while avoiding these loops³.
+
+3. **How is a Spanning Tree created?**
+   - Mentioned Below -
+
+4. **What is a Minimum Spanning Tree (MST)?**
+   An MST is a spanning tree where the total weight (or cost) of all the edges is as small as possible¹². This is particularly useful when the edges have different weights or costs associated with them.
+
+5. **Real-World Applications**
+   Spanning trees are used in various real-world applications, such as computer network routing protocols, telecommunication networks, and more.
+
+![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/1e1a9954-45f5-4b2a-b26b-2dfac3043abd)
+In the graph representation, both LANs and bridges are represented as nodes. The connecting arcs show the connection of a LAN to a bridge and vice versa. Each arc has a cost assigned to it, which could represent the path with minimum hops (nodes), the path with minimum delay, or the path with maximum bandwidth.
+
+The process to find the spanning tree involves three steps:
+1. Every bridge has a built-in ID (normally the serial number, which is unique). Each bridge broadcasts this ID so that all bridges know which one has the smallest ID. The bridge with the smallest ID is selected as the root bridge (root of the tree). We assume that bridge B1 has the smallest ID. It is, therefore, selected as the root bridge.
+2. The algorithm tries to find the shortest path (a path with the shortest cost) from the root bridge to every other bridge or LAN. The shortest path can be found by examining the total cost from the root bridge to the destination.
+3. The combination of the shortest paths creates the shortest tree. Based on the spanning tree, we mark the ports that are part of the spanning tree, the forwarding ports, which forward a frame that the bridge receives. We also mark those ports that are not part of the spanning tree, the blocking ports, which block the frames received by the bridge.
+
+In the spanning tree system, there is only one single path from any LAN to any other LAN. This means there is only one single path from one LAN to any other LAN. No loops are created. This is the basic concept of a spanning tree in a bridged LAN.
+
