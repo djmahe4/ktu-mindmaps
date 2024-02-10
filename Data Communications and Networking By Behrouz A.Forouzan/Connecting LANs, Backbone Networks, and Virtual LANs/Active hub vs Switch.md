@@ -1,4 +1,5 @@
-```Network Devices
+```
+Network Devices
 |
 |-- Active Hub
 |   |-- Operates at the physical layer
