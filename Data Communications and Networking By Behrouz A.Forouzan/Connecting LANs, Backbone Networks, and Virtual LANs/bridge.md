@@ -135,16 +135,16 @@ To solve this looping problem, the IEEE specification requires that bridges use 
 
 **Spanning Tree** 
 1. **What is a Spanning Tree?**
-   A spanning tree is a subset of a graph, which is a tree that includes all the vertices (or nodes) of the graph¹². In other words, it's a simplified version of the original network, where you can reach any point from any other point, but only along one unique path. This means there are no loops in a spanning tree¹².
+   A spanning tree is a subset of a graph, which is a tree that includes all the vertices (or nodes) of the graph. In other words, it's a simplified version of the original network, where you can reach any point from any other point, but only along one unique path. This means there are no loops in a spanning tree.
 
 2. **Why do we need a Spanning Tree?**
-   In a Local Area Network (LAN), we often have redundant paths for reliability. However, these can create loops, causing broadcast storms and other issues. A spanning tree allows us to keep the network connected while avoiding these loops³.
+   In a Local Area Network (LAN), we often have redundant paths for reliability. However, these can create loops, causing broadcast storms and other issues. A spanning tree allows us to keep the network connected while avoiding these loops.
 
 3. **How is a Spanning Tree created?**
-   - Mentioned Below -
+   - Mentioned Below - 
 
 4. **What is a Minimum Spanning Tree (MST)?**
-   An MST is a spanning tree where the total weight (or cost) of all the edges is as small as possible¹². This is particularly useful when the edges have different weights or costs associated with them.
+   An MST is a spanning tree where the total weight (or cost) of all the edges is as small as possible. This is particularly useful when the edges have different weights or costs associated with them.
 
 5. **Real-World Applications**
    Spanning trees are used in various real-world applications, such as computer network routing protocols, telecommunication networks, and more.
@@ -159,3 +159,63 @@ The process to find the spanning tree involves three steps:
 
 In the spanning tree system, there is only one single path from any LAN to any other LAN. This means there is only one single path from one LAN to any other LAN. No loops are created. This is the basic concept of a spanning tree in a bridged LAN.
 
+**Dynamic algorithm** 
+```
+Dynamic Algorithm
+|
+|-- Spanning Tree Algorithm
+|   |
+|   |-- Not Manual: Each bridge is equipped with a software package
+|   |
+|   |-- Dynamic Process: The bridges send special messages (BPDUs) to each other
+|   |
+|   |-- Updates: The spanning tree is updated when there is a change in the system
+|       |
+|       |-- Failure of a Bridge
+|       |
+|       |-- Addition or Deletion of Bridges
+```
+
+In this context, the dynamic algorithm refers to the spanning tree algorithm used in network bridges. This algorithm doesn't require manual entries. Instead, each bridge is equipped with a software package that carries out this process dynamically. The bridges communicate with each other by sending special messages known as Bridge Protocol Data Units (BPDUs). These messages are used to update the spanning tree, which is the optimal path selection in the network. The spanning tree is updated whenever there is a change in the system, such as a failure of a bridge or an addition or deletion of bridges. This ensures that the network remains efficient and loop-free even when changes occur. 
+
+![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/29d29a87-9e9e-405b-be2a-dd095b47d86a)
+
+**Source Routing Bridges** 
+```
+Source Routing Bridges
+|
+|-- Prevent Loops: Used in a system with redundant bridges
+|   |
+|   |-- Transparent Bridge Duties: Filtering frames, forwarding, and blocking
+|       |
+|       |-- Performed By: Source station and, to some extent, the destination station
+|
+|-- Source Routing: A sending station defines the bridges that the frame must visit
+|   |
+|   |-- Frame Contents: Source and destination addresses, and addresses of all bridges to be visited
+|   |
+|   |-- Bridge Addresses: Obtained through the exchange of special frames with the destination prior to sending the data frame
+|
+|-- Design: By IEEE for use with Token Ring LANs (not very common today)
+```
+
+In this context, Source Routing Bridges are used to prevent loops in a system with redundant bridges. The duties of a transparent bridge, which include filtering frames, forwarding, and blocking, are performed by the source station and, to some extent, the destination station. In source routing, a sending station defines the bridges that the frame must visit. The addresses of these bridges are included in the frame, which means the frame contains not only the source and destination addresses, but also the addresses of all bridges to be visited. The source gets these bridge addresses through the exchange of special frames with the destination prior to sending the data frame. Source routing bridges were designed by IEEE to be used with Token Ring LANs, which are not very common today.
+
+**Bridges Connecting Different LANs** 
+```
+Ethernet LAN <---- BRIDGE ----> Wireless LAN
+```
+
+The bridge connects two LANs that may use different protocols at the data link layer. However, there are several issues to consider:
+
+1. **Frame format**: Each LAN type has its own frame format. For example, an Ethernet frame is different from a wireless LAN frame.
+
+2. **Maximum data size**: If an incoming frame's size is too large for the destination LAN, the data must be fragmented into several frames. The data then needs to be reassembled at the destination. However, no protocol at the data link layer allows the fragmentation and reassembly of frames. This is allowed in the network layer. The bridge must therefore discard any frames too large for its system.
+
+3. **Data rate**: Each LAN type has its own data rate. For example, compare the 10-Mbps data rate of an Ethernet with the 1-Mbps data rate of a wireless LAN. The bridge must buffer the frame to compensate for this difference.
+
+4. **Bit order**: Each LAN type has its own strategy in the sending of bits. Some send the most significant bit in a byte first; others send the least significant bit first.
+
+5. **Security**: Some LANs, such as wireless LANs, implement security measures in the data link layer. Other LANs, such as Ethernet, do not. Security often involves encryption. When a bridge receives a frame from a wireless LAN, it needs to decrypt the message before forwarding it to an Ethernet LAN.
+
+6. **Multimedia support**: Some LANs support multimedia and the quality of services needed for this type of communication; others do not. 
