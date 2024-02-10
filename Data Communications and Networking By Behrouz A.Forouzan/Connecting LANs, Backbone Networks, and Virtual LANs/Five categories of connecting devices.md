@@ -73,8 +73,7 @@ Active Hub
 
 ```
 
-5. **Two-Layer Switch (Layer 2 Switch)**: A two-layer switch sends frames to the destination port using a MAC address table which stores the MAC addresses of devices associated with that port. A two-layer switch operates at the physical and data link layers, acts as a type of bridge with many ports for better performance, makes filtering decisions based on MAC addresses, and can be more sophisticated than a basic bridge. Some two-layer switches, known as cut-through switches, are designed to forward the frame as soon as they check the MAC addresses. A three-layer switch is used at
-the network layer; it is a kind of router. The two-layer switch performs at the physical
+5. **Two-Layer Switch (Layer 2 Switch)**: A two-layer switch sends frames to the destination port using a MAC address table which stores the MAC addresses of devices associated with that port. A two-layer switch operates at the physical and data link layers, acts as a type of bridge with many ports for better performance, makes filtering decisions based on MAC addresses, and can be more sophisticated than a basic bridge. Some two-layer switches, known as cut-through switches, are designed to forward the frame as soon as they check the MAC addresses.The two-layer switch performs at the physical
 and data link layers.
 A two-layer switch is a bridge, a bridge with many ports and a design that allows better (faster) performance. A bridge with a few ports can connect a few LANs together. A bridge with many ports may be able to allocate a unique port to each station, with each station on its own independent entity.
 ```
@@ -122,3 +121,22 @@ Router
 9. **Three-Layer Switch (Layer 3 Switch)**: A three-layer switch is a special network device that has the functionality of a router and a switch combined into one chassis. It operates at both the data link layer (Layer 2) and the network layer (Layer 3) of the OSI model.
 
 10. **Gateway**: A gateway is a connecting point of any network that helps it to connect with different networks. It monitors and controls all the incoming and outgoing traffic of the network.
+```
+Gateway
+|
+|-- Operates at all layers
+|   |-- Five layers of the Internet
+|   |-- Seven layers of the OSI model
+|
+|-- Interprets Application Messages
+|   |-- Reads and interprets the message
+|
+|-- Connects Different Internetworks
+|   |-- Can connect networks that use different models
+|   |-- Example: Connecting an OSI model network to an Internet model network
+|
+|-- Translates Between Systems
+    |-- Takes a frame from one system
+    |-- Moves it up to the OSI application layer
+    |-- Removes the message
+```
