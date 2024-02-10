@@ -1,40 +1,37 @@
 ```
-Network Connecting Devices
+Five Categories of Connecting Devices
 |
-|--1. Repeater
-|    |
-|    |-- Operates at Physical Layer
-|    |-- Amplifies signal for longer transmission
+|-- 1. Operate below the physical layer
+|   |-- Example: Passive Hub
 |
-|--2. Hub
-|    |
-|    |-- Operates at Physical Layer
-|    |-- Connects multiple devices in a LAN
+|-- 2. Operate at the physical layer
+|   |-- Example: Repeater
+|   |-- Example: Active Hub
 |
-|--3. Bridge
-|    |
-|    |-- Operates at Data Link Layer
-|    |-- Connects two LANs with the same protocol
+|-- 3. Operate at the physical and data link layers
+|   |-- Example: Bridge
+|   |-- Example: Two-layer Switch
 |
-|--4. Switch
-|    |
-|    |-- Operates at Data Link Layer
-|    |-- Connects multiple devices, more advanced than a hub
+|-- 4. Operate at the physical, data link, and network layers
+|   |-- Example: Router
+|   |-- Example: Three-layer Switch
 |
-|--5. Router
-     |
-     |-- Operates at Network Layer
-     |-- Routes packets across different networks
+|-- 5. Operate at all five layers
+    |-- Example: Gateway
 ```
 
-Here's a brief explanation of each device:
+Sure, let's go through each of them:
 
-1. **Repeater**: A repeater is a network device that regenerates the incoming signal before sending it out again. It operates at the physical layer of the OSI model. Its main function is to amplify the signal for longer transmission distances.
+1. **Passive Hub**: A passive hub is a basic network device that connects multiple devices together. It does not process or regenerate signals, but simply repeats or copies the signals it receives. It's essentially a connector that connects wires coming from other devices.
 
-2. **Hub**: A hub is a physical layer device that is used to connect multiple devices in a network. It broadcasts all data to every port, regardless of the destination of the information.
+2. **Repeater**: A repeater is a networking device that amplifies and regenerates the incoming signal. Its main purpose is to extend the networking distance by increasing the strength and quality of signals.
 
-3. **Bridge**: A bridge operates at the data link layer. It is used to connect two LANs together that use the same protocol. It can also partition a large network into smaller segments and help reduce traffic.
+3. **Active Hub**: An active hub, also known as a powered hub or an intelligent hub, strengthens the signal where a passive hub just repeats or copies signals. It needs electricity to operate and is smarter than a passive hub. It's a multi-point repeater with the capability of regenerating signals and can process and monitor information.
 
-4. **Switch**: A switch operates at the data link layer and is more advanced than a hub. It can connect multiple devices and manage port-to-port data traffic to reduce overall network traffic.
+4. **Two-Layer Switch (Layer 2 Switch)**: A two-layer switch operates at the data link layer (Layer 2) of the OSI model. It sends frames to the destination port using a MAC address table which stores the MAC addresses of devices associated with that port.
 
-5. **Router**: A router operates at the network layer. It is used to route data packets between different networks. It can determine the best path for data packet delivery.
+5. **Router**: A router is a device that connects two or more packet-switched networks or subnetworks. It manages traffic between these networks by forwarding data packets to their intended IP addresses, and allows multiple devices to use the same Internet connection.
+
+6. **Three-Layer Switch (Layer 3 Switch)**: A three-layer switch is a special network device that has the functionality of a router and a switch combined into one chassis. It operates at both the data link layer (Layer 2) and the network layer (Layer 3) of the OSI model.
+
+7. **Gateway**: A gateway is a connecting point of any network that helps it to connect with different networks. It monitors and controls all the incoming and outgoing traffic of the network.
