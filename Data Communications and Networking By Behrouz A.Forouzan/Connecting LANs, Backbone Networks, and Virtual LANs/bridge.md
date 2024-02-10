@@ -65,16 +65,17 @@ A system with transparent bridges needs to meet three key criteria according to 
 
 In essence, a transparent bridge helps to extend a network by connecting devices, learning the network structure, forwarding data correctly, and preventing data loops, all while being invisible to the devices it connects.
 
-The earliest bridges had forwarding tables that were static. 
-The systems administrator would manually enter each table entry during bridge setup. 
-Although the process was simple, it was not practical. If a station was added or deleted, the table had to
+**Learning**
+* The earliest bridges had forwarding tables that were static. 
+* The systems administrator would manually enter each table entry during bridge setup. 
+* Although the process was simple, it was not practical. If a station was added or deleted, the table had to
 be modified manually. 
-The same was true if a station's MAC address changed, which is not a rare event. 
-For example, putting in a new network card means a new MAC address.
-A better solution to the static table is a dynamic table that maps addresses to ports automatically.
-To make a table dynamic, we need a bridge that gradually learns from the frame movements. 
-To do this, the bridge inspects both the destination and the source addresses. 
-The destination address is used for the forwarding decision (table lookup); the source address is used for adding entries to the table and for updating purposes
+* The same was true if a station's MAC address changed, which is not a rare event. 
+* For example, putting in a new network card means a new MAC address.
+* A better solution to the static table is a dynamic table that maps addresses to ports automatically.
+* To make a table dynamic, we need a bridge that gradually learns from the frame movements. 
+* To do this, the bridge inspects both the destination and the source addresses. 
+* The destination address is used for the forwarding decision (table lookup); the source address is used for adding entries to the table and for updating purposes
 ```
 1. A -> D
    Bridge: No entry for A or D
@@ -95,4 +96,32 @@ The destination address is used for the forwarding decision (table lookup); the 
 ```
 ![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/203b15fd-59d5-43b7-acf5-b5c98ec20367)
 
+**Loop Problem**
+```
+LAN 1 <----> Bridge 1 <----> LAN 2
+  ^            ^  ^            ^
+  |            |  |            |
+  |            |  |            |
+  v            v  v            v
+Station A   Frame A->D    Station D
+```
 
+1. **Station A sends a frame to Station D**. Both bridges have empty tables. They forward the frame and update their tables with source address A.
+
+```
+Bridge 1 Table: A - LAN 1
+Bridge 2 Table: A - LAN 1
+```
+
+2. **Two copies of the frame are now on LAN 2**. Bridge 1's copy is received by Bridge 2, and Bridge 2's copy is received by Bridge 1. Both bridges flood the network as they don't have information about destination D. Their tables are updated, but still no information for D.
+
+```
+Bridge 1 Table: A - LAN 1, D - LAN 2
+Bridge 2 Table: A - LAN 1, D - LAN 2
+```
+
+3. **Two copies of the frame are now back on LAN 1**. Step 2 is repeated, and both copies flood the network again.
+
+4. **The process continues indefinitely**. Each bridge regenerates fresh copies of the frames in each iteration.
+
+To solve this looping problem, the IEEE specification requires that bridges use the Spanning Tree Algorithm to create a loopless topology. This algorithm ensures that there is only one active path between any two network nodes, which prevents loops in the network.
