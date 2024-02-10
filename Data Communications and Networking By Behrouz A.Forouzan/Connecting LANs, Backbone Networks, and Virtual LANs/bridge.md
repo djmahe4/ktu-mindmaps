@@ -97,6 +97,11 @@ be modified manually.
 ![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/203b15fd-59d5-43b7-acf5-b5c98ec20367)
 
 **Loop Problem**
+Transparent bridges work fine as long as there are no redundant
+bridges in the system. Systems administrators, however, like to have redundant bridges
+(more than one bridge between a pair of LANs) to make the system more reliable. If a
+bridge fails, another bridge takes over until the failed one is repaired or replaced.
+Redundancy can create loops in the system, which is very undesirable.
 ```
 LAN 1 <----> Bridge 1 <----> LAN 2
   ^            ^  ^            ^
@@ -125,3 +130,5 @@ Bridge 2 Table: A - LAN 1, D - LAN 2
 4. **The process continues indefinitely**. Each bridge regenerates fresh copies of the frames in each iteration.
 
 To solve this looping problem, the IEEE specification requires that bridges use the Spanning Tree Algorithm to create a loopless topology. This algorithm ensures that there is only one active path between any two network nodes, which prevents loops in the network.
+
+![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/ec873f8d-849e-49bc-b3cf-5b7da9b2f4d2)
