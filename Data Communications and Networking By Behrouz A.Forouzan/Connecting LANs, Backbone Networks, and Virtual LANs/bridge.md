@@ -53,8 +53,6 @@ For example, consider two Local Area Networks (LANs) connected by a bridge. If a
 In this way, a bridge can control traffic between different parts of a network, ensuring that data gets where it needs to go efficiently. And importantly, while doing all this, a bridge does not change the physical (MAC) addresses in the frame.
 ![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/b3db63b6-edd0-4326-b079-8488575b32cb)
 
-Sure, let's break it down:
-
 A **Transparent Bridge** is a type of bridge that operates in a way that is invisible to the rest of the network. The devices connected by the bridge don't need to know about the bridge's existence. Even if the bridge is added or removed, the devices don't need to be reconfigured.
 
 A system with transparent bridges needs to meet three key criteria according to the IEEE 802.1d specification:
@@ -66,5 +64,35 @@ A system with transparent bridges needs to meet three key criteria according to 
 3. **Loop Prevention**: The bridge must prevent data loops, which are situations where data keeps circulating in the network without reaching its intended destination.
 
 In essence, a transparent bridge helps to extend a network by connecting devices, learning the network structure, forwarding data correctly, and preventing data loops, all while being invisible to the devices it connects.
+
+The earliest bridges had forwarding tables that were static. 
+The systems administrator would manually enter each table entry during bridge setup. 
+Although the process was simple, it was not practical. If a station was added or deleted, the table had to
+be modified manually. 
+The same was true if a station's MAC address changed, which is not a rare event. 
+For example, putting in a new network card means a new MAC address.
+A better solution to the static table is a dynamic table that maps addresses to ports automatically.
+To make a table dynamic, we need a bridge that gradually learns from the frame movements. 
+To do this, the bridge inspects both the destination and the source addresses. 
+The destination address is used for the forwarding decision (table lookup); the source address is used for adding entries to the table and for updating purposes
+```
+1. A -> D
+   Bridge: No entry for A or D
+   Action: Floods network, learns A is on port 1
+   Table: A - port 1
+
+2. E -> A
+   Bridge: Has entry for A
+   Action: Forwards frame to port 1, learns E is on port 2
+   Table: A - port 1, E - port 2
+
+3. B -> C
+   Bridge: No entry for B or C
+   Action: Floods network, learns B is on port 3
+   Table: A - port 1, E - port 2, B - port 3
+
+4. Continues learning as it forwards frames
+```
+![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/203b15fd-59d5-43b7-acf5-b5c98ec20367)
 
 
