@@ -101,7 +101,24 @@ Two-Layer Switch
 ```
 
 7. **Router**: A router is a device that connects two or more packet-switched networks or subnetworks. It manages traffic between these networks by forwarding data packets to their intended IP addresses, and allows multiple devices to use the same Internet connection.
+![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/2677249c-813f-40f9-a219-8d6bb11f256a)
+```
+Router
+|
+|-- Three-Layer Device
+|   |-- Routes packets based on logical addresses (host-to-host addressing)
+|
+|-- Connects Networks
+|   |-- Connects LANs and WANs in the Internet
+|
+|-- Uses Routing Table
+|   |-- Used for making decisions about the route
+|   |-- Tables are dynamic and updated using routing protocols
+|
+|-- Part of the Internet Infrastructure
+    |-- Used to connect LANs and WANs
+```
 
-8. **Three-Layer Switch (Layer 3 Switch)**: A three-layer switch is a special network device that has the functionality of a router and a switch combined into one chassis. It operates at both the data link layer (Layer 2) and the network layer (Layer 3) of the OSI model.
+9. **Three-Layer Switch (Layer 3 Switch)**: A three-layer switch is a special network device that has the functionality of a router and a switch combined into one chassis. It operates at both the data link layer (Layer 2) and the network layer (Layer 3) of the OSI model.
 
-9. **Gateway**: A gateway is a connecting point of any network that helps it to connect with different networks. It monitors and controls all the incoming and outgoing traffic of the network.
+10. **Gateway**: A gateway is a connecting point of any network that helps it to connect with different networks. It monitors and controls all the incoming and outgoing traffic of the network.
