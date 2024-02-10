@@ -26,6 +26,31 @@ Sure, let's go through each of them:
 
 2. **Repeater**: A repeater is a networking device that amplifies and regenerates the incoming signal. Its main purpose is to extend the networking distance by increasing the strength and quality of signals.
 ![image](https://github.com/djmahe4/ktu-mindmaps/assets/137691824/533ebdf9-282c-4d90-9629-8505c98c2983)
+```
+Repeater
+|
+|-- Operates at the physical layer
+|
+|-- Regenerates signals
+|   |-- Receives a weak or corrupted signal
+|   |-- Regenerates the original bit pattern
+|   |-- Sends the refreshed signal
+|
+|-- Extends the physical length of a LAN
+|   |-- Connects two segments of the same LAN
+|   |-- Does not connect two LANs of different protocols
+|
+|-- Has no filtering capability
+|   |-- Forwards every frame it receives
+|
+|-- Is a regenerator, not an amplifier
+|   |-- Does not amplify the signal
+|   |-- Regenerates the signal
+|
+|-- Placement is vital
+    |-- Must be placed before the signal becomes too weak or corrupted
+    |-- Still able to read the signal well enough to replicate it in its original form
+```
 
 
 3. **Active Hub**: An active hub, also known as a powered hub or an intelligent hub, strengthens the signal where a passive hub just repeats or copies signals. It needs electricity to operate and is smarter than a passive hub. It's a multi-point repeater with the capability of regenerating signals and can process and monitor information.
