@@ -206,16 +206,43 @@ In this context, Source Routing Bridges are used to prevent loops in a system wi
 Ethernet LAN <---- BRIDGE ----> Wireless LAN
 ```
 
-The bridge connects two LANs that may use different protocols at the data link layer. However, there are several issues to consider:
+```
+|
+|-- Theoretical Ability: Connect LANs using different protocols at the data link layer
+|   |
+|   |-- Example: Ethernet LAN to a wireless LAN
+|
+|-- Issues to Consider
+    |
+    |-- Frame Format: Each LAN type has its own frame format
+    |   |
+    |   |-- Example: Ethernet frame vs. wireless LAN frame
+    |
+    |-- Maximum Data Size: If an incoming frame's size is too large for the destination LAN
+    |   |
+    |   |-- Frame must be fragmented into several frames
+    |   |-- Data must be reassembled at the destination
+    |   |-- Bridge must discard any frames too large for its system
+    |
+    |-- Data Rate: Each LAN type has its own data rate
+    |   |
+    |   |-- Example: 10-Mbps data rate of an Ethernet vs. 1-Mbps data rate of a wireless LAN
+    |   |-- Bridge must buffer the frame to compensate for this difference
+    |
+    |-- Bit Order: Each LAN type has its own strategy in the sending of bits
+    |   |
+    |   |-- Some send the most significant bit in a byte first
+    |   |-- Others send the least significant bit first
+    |
+    |-- Security: Some LANs implement security measures in the data link layer
+    |   |
+    |   |-- Example: Wireless LANs implement security, Ethernet LANs do not
+    |   |-- Security often involves encryption
+    |   |-- Bridge needs to decrypt the message before forwarding it to an Ethernet LAN
+    |
+    |-- Multimedia Support: Some LANs support multimedia and the quality of services needed for this type of communication
+        |
+        |-- Others do not
+```
 
-1. **Frame format**: Each LAN type has its own frame format. For example, an Ethernet frame is different from a wireless LAN frame.
-
-2. **Maximum data size**: If an incoming frame's size is too large for the destination LAN, the data must be fragmented into several frames. The data then needs to be reassembled at the destination. However, no protocol at the data link layer allows the fragmentation and reassembly of frames. This is allowed in the network layer. The bridge must therefore discard any frames too large for its system.
-
-3. **Data rate**: Each LAN type has its own data rate. For example, compare the 10-Mbps data rate of an Ethernet with the 1-Mbps data rate of a wireless LAN. The bridge must buffer the frame to compensate for this difference.
-
-4. **Bit order**: Each LAN type has its own strategy in the sending of bits. Some send the most significant bit in a byte first; others send the least significant bit first.
-
-5. **Security**: Some LANs, such as wireless LANs, implement security measures in the data link layer. Other LANs, such as Ethernet, do not. Security often involves encryption. When a bridge receives a frame from a wireless LAN, it needs to decrypt the message before forwarding it to an Ethernet LAN.
-
-6. **Multimedia support**: Some LANs support multimedia and the quality of services needed for this type of communication; others do not. 
+In this context, bridges theoretically should be able to connect Local Area Networks (LANs) using different protocols at the data link layer. However, there are many issues to consider such as frame format, maximum data size, data rate, bit order, security, and multimedia support. Each LAN type has its own specifications for these aspects, and the bridge must be able to handle these differences to effectively connect different LANs
