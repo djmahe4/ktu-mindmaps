@@ -1,7 +1,7 @@
 ```html
 Mind map
 ```
-
+```
 [Central Topic] Data Communications and Networking
 
 [Main Topic] Data Communications
@@ -32,6 +32,7 @@ Mind map
 
 * Definition: A document that specifies technical requirements, methods, processes and practices.
 * Organizations that set standards: International Organization for Standardization (ISO), Institute of Electrical and Electronics Engineers (IEEE), American National Standards Institute (ANSI)
+```
 
 ```html
 Preview
