@@ -6,7 +6,6 @@
 
 Sure, here is a mind map in Markdown format that you can use with Xmind:
 
-```
 # Central Topic: Network Performance
 
 ## Main Topic: Throughput
@@ -48,7 +47,6 @@ Sure, here is a mind map in Markdown format that you can use with Xmind:
 ### Subtopic: There are a number of different physical topologies, including star, bus, ring, and mesh.
 
 ### Subtopic: The physical topology of a network can affect its performance, reliability, and security.
-``` 
 
 ```python
 
