@@ -6,7 +6,6 @@
 
 Sure, here is a mind map in Markdown format that you can use with Xmind:
 
-```
 # Central Topic: Cyber Security
 
 ## Main Topic: Data Flow
@@ -99,7 +98,6 @@ Sure, here is a mind map in Markdown format that you can use with Xmind:
 
 * Attack that relies on human interaction to trick users into revealing sensitive information or performing actions that could compromise security
 * Example: Phone call social engineering attack
-``` 
 
 ```python
 
