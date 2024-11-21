@@ -1,6 +1,6 @@
-**DISCRETE MATHEMATICAL STRUCTURES**
+#**DISCRETE MATHEMATICAL STRUCTURES**
 
-**Module – 1 (Fundamentals of Logic)**   
+##**Module – 1 (Fundamentals of Logic)**   
 Mathematical logic \- Basic connectives and truth table, Statements, Logical Connectives,   
 Tautology, Contradiction. Logical Equivalence \- The Laws of Logic, The Principle of duality,   
 Substitution Rules . The implication \- The Contrapositive, The Converse,The Inverse.  
@@ -8,12 +8,12 @@ Logical Implication \- Rules of Inference. The use of Quantifiers \- Open Statem
 Logically Equivalent – Contrapositive, Converse , Inverse , Logical equivalences and   
 implications for quantified statement, Implications , Negation .  
    
-**Module \- 2 (Fundamentals of Counting Theory)**   
+##**Module \- 2 (Fundamentals of Counting Theory)**   
 The Rule of Sum – Extension of Sum Rule . The Rule of Product \- Extension of Product Rule . Permutations. Combinations. The Binomial Theorem (without proof). Combination with   
 Repetition. The Pigeonhole Principle. The Principle of Inclusion and Exclusion Theorem   
 (Without Proof) \- Generalisation of the Principle. Derangements. 
 
-**Module \- 3 ( Relations and Functions )**   
+##**Module \- 3 ( Relations and Functions )**   
 Cartesian Product \- Binary Relation. Function – domain , range-one to one function, Image Restriction. Properties of Relations- Reachability Relations, Reflexive Relations, Symmetric   
 Relations, Transitive relations, Anti-symmetric Relations, Partial Order relations, Equivalence   
 Relations, Irreflexive relations.   
@@ -23,68 +23,68 @@ and Partitions \- Equivalence Class.
 Lattice \- Dual Lattice , Sub lattice , Properties of glb and lub , Properties of Lattice , Special   
 Lattice , Complete Lattice, Bounded Lattice, Completed Lattice , Distributive Lattice.   
    
-**Module \- 4 (Generating Functions and Recurrence Relations)**  
+##**Module \- 4 (Generating Functions and Recurrence Relations)**  
 Generating Function \- Definition and Examples , Calculation techniques, Exponential   
 generating function. First order linear recurrence relations with constant coefficients –   
 homogeneous, non-homogeneous Solution. Second order linear recurrence relations with   
 constant coefficients, homogeneous, non-homogeneous Solution. 
 
-**Module \- 5 (Algebraic Structures )**  
+##**Module \- 5 (Algebraic Structures )**  
 Algebraic system-properties- Homomorphism and Isomorphism. Semigroup and monoid –   
 cyclic monoid , sub semi group and sub monoid, Homomorphism and Isomorphism of Semi   
 group and monoids. Group- Elementary properties, subgroup, symmetric group on three   
 symbols ,The direct product of two groups, Group Homomorphism, Isomorphism of groups,   
 Cyclic group . Right cosets \- Left cosets . L a g r a n g e ’ s Theorem
 
-**DATA STRUCTURES**
+#**DATA STRUCTURES**
 
-**Module 1 Basic Concepts of Data Structures**   
+##**Module 1 Basic Concepts of Data Structures**   
 System Life Cycle, Algorithms, Performance Analysis, Space Complexity, Time Complexity, Asymptotic Notation, Complexity Calculation of Simple Algorithms 
 
-**Module 2 Arrays and Searching**  
+##**Module 2 Arrays and Searching**  
  Polynomial representation using Arrays, Sparse matrix, Stacks, Queues-Circular Queues, Priority Queues, Double Ended Queues, Evaluation of Expressions Linear Search and Binary Search 
 
-**Module 3 Linked List and Memory Management**  
+##**Module 3 Linked List and Memory Management**  
  Self Referential Structures, Dynamic Memory Allocation, Singly Linked List-Operations on Linked List. Doubly Linked List, Circular Linked List, Stacks and Queues using Linked List, Polynomial representation using Linked List Memory allocation and deallocation-First-fit, Best-fit and Worst-fit allocation schemes 
 
-**Module 4 Trees and Graphs**  
+##**Module 4 Trees and Graphs**  
  Trees, Binary Trees-Tree Operations, Binary Tree Representation, Tree Traversals, Binary Search Trees- Binary Search Tree Operations Graphs, Representation of Graphs, Depth First Search and Breadth First Search on Graphs, Applications of Graphs 
 
-**Module 5 Sorting and Hashing**  
+##**Module 5 Sorting and Hashing**  
  Sorting Techniques – Selection Sort, Insertion Sort, Quick Sort, Merge Sort and Heap Sort Hashing- Hashing Techniques, Collision Resolution, Overflow handling, Hashing functions – Mid square, Division, Folding, Digit Analysis
 
-**Logic System Design**
+#**Logic System Design**
 
-**Module I Number systems, Operations & Codes**  
+##**Module I Number systems, Operations & Codes**  
  Decimal, Binary, Octal and Hexadecimal Number Systems- Number Base Conversions. Addition, Subtraction, Multiplication and Division of binary numbers. Representation of negative numbers- Complements, Subtraction with complements. Addition and subtraction of BCD, Octal and Hexadecimal numbers. Binary codes- Decimal codes, Error detection codes, Reflected code, Character coding schemes – ASCII, EBCDIC. 
 
-**Module II Boolean Algebra**  
+##**Module II Boolean Algebra**  
  Postulates of Boolean Algebra. Basic theorems and Properties of Boolean Algebra. Boolean Functions \- Canonical and Standard forms. Simplification of Boolean Functions- Using Karnaugh- Map Method (upto five variables), Don’t care conditions, Product of sums Total simplification, Tabulation Method. Digital Logic Gates- Implementation of Boolean functions using basic and universal gates. 
 
-**Module III Combinational Logic Circuits**  
+##**Module III Combinational Logic Circuits**  
  Design Procedure & Implementation of combinational logic circuits- Binary adders and subtractors, Binary Parallel adder, Carry look ahead adder, BCD adder, Code converter, Magnitude comparator, Decoder, Demultiplexer, Encoder, Multiplexer, Parity generator/ Checker. 
 
-**Module IV Sequential logic circuits:**  
+##**Module IV Sequential logic circuits:**  
  Flip-flops- SR, JK, T and D. Triggering of flip-flops- Master slave flip- flops, Edge- triggered flip- flops. Excitation table and characteristic equation. Registers- register with parallel load. Counter design: Asynchronous counters- Binary and BCD counters, timing sequences and state diagrams. Synchronous counters- Binary Up- down counter, BCD counter. 
 
-**Module V**   
-**Shift registers**   
+##**Module V**   
+###**Shift registers**   
 Shift registers – Serial In Serial Out, Serial In Parallel Out, Bidirectional Shift Register with Parallel load. Ring counter. Johnson counter- timing sequences and state diagrams. 
 
-**Arithmetic algorithms**  
+###**Arithmetic algorithms**  
  Algorithms for addition and subtraction of binary numbers in signed magnitude and 2’s complement representations. Algorithm for addition and subtraction of BCD numbers. Representation of floating point numbers, Algorithm for addition and subtraction of floating point numbers. 
 
-**Programmable Logic devices**   
+###**Programmable Logic devices**   
 ROM. Programmable Logic Array(PLA)- Implementation of simple circuits using PLA.
 
-**OBJECT ORIENTED PROGRAMMING USING JAVA**
+#**OBJECT ORIENTED PROGRAMMING USING JAVA**
 
-**Module 1 Introduction:**   
+##**Module 1 Introduction:**   
 Approaches to Software Design \- Functional Oriented Design, Object Oriented Design, Case Study of Automated Fire Alarm System.   
 Object Modelling Using Unified Modeling Language (UML) – Basic Object Oriented concepts, UML diagrams, Use case model, Class diagram, Interaction diagram, Activity diagram, State chart diagram.   
 Introduction to Java \- Java programming Environment and Runtime Environment, Development Platforms \-Standard, Enterprise. Java Virtual Machine (JVM), Java compiler, Bytecode, Java applet, Java Buzzwords, Java program structure, Comments, Garbage Collection, Lexical Issues. 
 
-**Module 2 Core Java Fundamentals:**  
+##**Module 2 Core Java Fundamentals:**  
  Primitive Data types \- Integers, Floating Point Types, Characters, Boolean. Literals, Type Conversion and Casting, Variables, Arrays, Strings, Vector class. 
 
 Operators \- Arithmetic Operators, Bitwise Operators, Relational Operators, Boolean Logical Operators, Assignment Operator, Conditional (Ternary) Operator, Operator Precedence. 
@@ -95,11 +95,11 @@ Object Oriented Programming in Java \- Class Fundamentals, Declaring Objects, Ob
 
 Inheritance \- Super Class, Sub Class, The Keyword super, protected Members, Calling Order of Constructors, Method Overriding, the Object class, Abstract Classes and Methods, using final with Inheritance. 
 
-**Module 3 More features of Java:**  
+##**Module 3 More features of Java:**  
  Packages and Interfaces \- Defining Package, CLASSPATH, Access Protection, Importing Packages, Interfaces.   
 Exception Handling \- Checked Exceptions, Unchecked Exceptions, try Block and catch Clause, Multiple catch Clauses, Nested try Statements, throw, throws and finally. Input/Output \- I/O Basics, Reading Console Input, Writing Console Output, PrintWriter Class, Object Streams and Serialization, Working with Files. 
 
-**Module 4 Advanced features of Java:**   
+##**Module 4 Advanced features of Java:**   
 Java Library \- String Handling – String Constructors, String Length, Special String Operations \- Character Extraction, String Comparison, Searching Strings, Modifying Strings, using valueOf(), Comparison of StringBuffer and String. 
 
 Collections framework \- Collections overview, Collections Interfaces- Collection Interface, List Interface. 
@@ -108,12 +108,12 @@ Collections Class – ArrayList class. Accessing a Collection via an Iterator. E
 
 Multithreaded Programming \- The Java Thread Model, The Main Thread, Creating Thread, Creating Multiple Threads, Synchronisation, Suspending, Resuming and Stopping Threads. 
 
-**Module 5 Graphical User Interface and Database support of Java:**   
+##**Module 5 Graphical User Interface and Database support of Java:**   
 Swings fundamentals \- Swing Key Features, Model View Controller (MVC), Swing Controls, Components and Containers, Swing Packages, Event Handling in Swings, Swing Layout Managers, Exploring Swings –JFrame, JLabel, The Swing Buttons, JTextField.
 
  Java DataBase Connectivity (JDBC) \- JDBC overview, Creating and Executing Queries – create table, delete, insert, select.
 
-**DATA STRUCTURES LAB**
+#**DATA STRUCTURES LAB**
 
 1\. Implementation of Polynomials and Sparse matrices using arrays\*\*   
 2\. Implementation of Stack , Queues, Priority Queues, DEQUEUE and Circular Queues using arrays\*\*  
@@ -134,7 +134,7 @@ Swings fundamentals \- Swing Key Features, Model View Controller (MVC), Swing Co
 
 \[\*\* mandatory\]
 
-**OBJECT ORIENTED PROGRAMMING LAB (IN JAVA)**
+#**OBJECT ORIENTED PROGRAMMING LAB (IN JAVA)**
 
 The syllabus contains six sessions (A, B, C, D, E, F). Each session consists of three concrete Java exercises, out of which at least two questions are mandatory. 
 
