@@ -74,7 +74,7 @@ Shift registers – Serial In Serial Out, Serial In Parallel Out, Bidirectional 
 ###   Arithmetic algorithms  
  Algorithms for addition and subtraction of binary numbers in signed magnitude and 2’s complement representations. Algorithm for addition and subtraction of BCD numbers. Representation of floating point numbers, Algorithm for addition and subtraction of floating point numbers. 
 
-##   Programmable Logic devices   
+###   Programmable Logic devices   
 ROM. Programmable Logic Array(PLA)- Implementation of simple circuits using PLA.
 
 #  OBJECT ORIENTED PROGRAMMING USING JAVA
