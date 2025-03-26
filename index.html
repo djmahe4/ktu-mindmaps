@@ -1,0 +1,461 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive OS Concepts</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background-color: #f7fafc;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1a202c;
+        }
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.75;
+            color: #4a5568;
+        }
+        .section ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        .section ul li {
+            margin-bottom: 0.5rem;
+        }
+        . понятие {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        .code-block {
+            background-color: #edf2f7;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        .interactive-area {
+            background-color: #white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        .input-group input, .input-group button, .input-group select {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+        .input-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .input-group button:hover {
+            background-color: #45a049;
+        }
+
+         .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        #deadlockGraphCanvas {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            margin: 1rem auto;
+            display: block;
+            max-width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            max-height: 400px; /* Limit maximum height */
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 1rem auto;
+            display: block;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-4">Interactive OS Concepts</h1>
+        <p class="text-lg text-gray-600 mb-8">Explore OS concepts with live demonstrations.</p>
+
+        <section class="section">
+            <h2>Critical Section Problem</h2>
+            <p>
+                The <понятие>Critical Section Problem</понятие> deals with how to allow multiple processes to access a shared resource without causing problems.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="processCount">Number of Processes:</label>
+                    <input type="number" id="processCount" value="2" min="2">
+                </div>
+                <div class="input-group">
+                    <button id="simulateCriticalSection">Simulate Critical Section</button>
+                </div>
+                <div id="criticalSectionOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Semaphores</h2>
+            <p>
+                <понятие>Semaphores</понятие> are like traffic signals for processes, controlling access to shared resources.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="semaphoreValue">Initial Semaphore Value:</label>
+                    <input type="number" id="semaphoreValue" value="1" min="0">
+                </div>
+                <div class="input-group">
+                    <button id="simulateSemaphore">Simulate Semaphore</button>
+                </div>
+                <div id="semaphoreOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Deadlocks</h2>
+            <p>
+                <понятие>Deadlocks</понятие> occur when processes are stuck, each waiting for the other.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="resourceCount">Number of Resources:</label>
+                    <input type="number" id="resourceCount" value="3" min="1">
+                </div>
+                 <div class="input-group">
+                    <label for="processCountDeadlock">Number of Processes:</label>
+                    <input type="number" id="processCountDeadlock" value="3" min="1">
+                </div>
+                <div class="input-group">
+                    <button id="simulateDeadlock">Simulate Deadlock</button>
+                </div>
+                <canvas id="deadlockGraphCanvas" width="400" height="300"></canvas>
+                <div id="deadlockOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Banker's Algorithm</h2>
+            <p>
+                The <понятие>Banker's Algorithm</понятие> ensures the system stays in a 'safe state'.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="processCountBanker">Number of Processes:</label>
+                    <input type="number" id="processCountBanker" value="3" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="resourceCountBanker">Number of Resources:</label>
+                    <input type="number" id="resourceCountBanker" value="3" min="1">
+                </div>
+                <div class="input-group">
+                    <button id="simulateBankersAlgorithm">Simulate Banker's Algorithm</button>
+                </div>
+                <div id="bankerOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Test-and-Set Instruction</h2>
+            <p>
+                <понятие>Test-and-Set</понятие> is an atomic instruction for mutual exclusion.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <button id="simulateTestAndSet">Simulate Test-and-Set</button>
+                </div>
+                <div id="testAndSetOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Counting vs Binary Semaphores</h2>
+            <p>
+                <понятие>Counting semaphores</понятие> can have values > 1, <понятие>binary semaphores</понятие> are 0 or 1.
+            </p>
+            <div class="interactive-area">
+                 <div class="input-group">
+                    <label for="semaphoreType">Semaphore Type:</label>
+                    <select id="semaphoreType">
+                        <option value="counting">Counting Semaphore</option>
+                        <option value="binary">Binary Semaphore</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <button id="simulateSemaphoreType">Simulate Semaphore Type</button>
+                </div>
+                <div id="semaphoreTypeOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Wait-for Graphs</h2>
+            <p>
+                <понятие>Wait-for graphs</понятие> show which processes are waiting for others.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="processCountWaitGraph">Number of Processes:</label>
+                    <input type="number" id="processCountWaitGraph" value="4" min="1">
+                </div>
+                <div class="input-group">
+                    <button id="simulateWaitForGraph">Simulate Wait-for Graph</button>
+                </div>
+                <canvas id="waitGraphCanvas" width="400" height="300"></canvas>
+                <div id="waitForGraphOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Dining Philosophers Problem</h2>
+            <p>
+                The <понятие>Dining Philosophers Problem</понятие> illustrates resource allocation challenges.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <button id="simulateDiningPhilosophers">Simulate Dining Philosophers</button>
+                </div>
+                <div id="diningPhilosophersOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Readers-Writers Problem</h2>
+            <p>
+                The <понятие>Readers-Writers Problem</понятие> deals with managing access for readers and writers.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <button id="simulateReadersWriters">Simulate Readers-Writers</button>
+                </div>
+                <div id="readersWritersOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Memory Management Concepts</h2>
+             <p>
+                Operating systems employ various techniques to manage memory efficiently.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="memorySize">Memory Size (MB):</label>
+                    <input type="number" id="memorySize" value="100" min="10">
+                </div>
+                <div class="input-group">
+                    <label for="pageSize">Page Size (KB):</label>
+                    <input type="number" id="pageSize" value="10" min="1">
+                </div>
+                <div class="input-group">
+                    <button id="simulateMemoryManagement">Simulate Memory Management</button>
+                </div>
+                <div id="memoryManagementOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Address Translation</h2>
+            <p>
+                The OS translates <понятие>logical addresses</понятие> to <понятие>physical addresses</понятие>.
+            </p>
+            <div class="interactive-area">
+                 <div class="input-group">
+                    <label for="logicalAddress">Logical Address:</label>
+                    <input type="number" id="logicalAddress" value="524287" min="0">
+                </div>
+                <div class="input-group">
+                    <button id="simulateAddressTranslation">Simulate Address Translation</button>
+                </div>
+                <div id="addressTranslationOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Fragmentation</h2>
+            <p>
+                <понятие>Internal fragmentation</понятие> and <понятие>external fragmentation</понятие> can reduce memory efficiency.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="fragmentationType">Fragmentation Type:</label>
+                    <select id="fragmentationType">
+                        <option value="internal">Internal Fragmentation</option>
+                        <option value="external">External Fragmentation</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <button id="simulateFragmentation">Simulate Fragmentation</button>
+                </div>
+                <div id="fragmentationOutput" class="mt-4 text-gray-700"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Page Replacement Algorithms</h2>
+            <p>
+                Algorithms decide which page to replace in memory.
+            </p>
+            <div class="interactive-area">
+                <div class="input-group">
+                    <label for="algorithmType">Algorithm:</label>
+                    <select id="algorithmType">
+                        <option value="FIFO">FIFO</option>
+                        <option value="Optimal">Optimal</option>
+                        <option value="LRU">LRU</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="pageReferences">Page References (e.g., 1,2,3,4,1,2,5):</label>
+                    <input type="text" id="pageReferences" value="1,2,3,4,1,2,5">
+                </div>
+                <div class="input-group">
+                    <label for="frameCount">Number of Frames:</label>
+                    <input type="number" id="frameCount" value="3" min="1">
+                </div>
+                <div class="input-group">
+                    <button id="simulatePageReplacement">Simulate Page Replacement</button>
+                </div>
+                <div id="pageReplacementOutput" class="mt-4 text-gray-700"></div>
+                 <div class="chart-container">
+                    <canvas id="pageFaultChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+    const processCountInput = document.getElementById("processCount");
+    const simulateCriticalSectionButton = document.getElementById("simulateCriticalSection");
+    const criticalSectionOutput = document.getElementById("criticalSectionOutput");
+
+    const semaphoreValueInput = document.getElementById("semaphoreValue");
+    const simulateSemaphoreButton = document.getElementById("simulateSemaphore");
+    const semaphoreOutput = document.getElementById("semaphoreOutput");
+
+    const resourceCountInput = document.getElementById("resourceCount");
+    const processCountDeadlockInput = document.getElementById("processCountDeadlock");
+    const simulateDeadlockButton = document.getElementById("simulateDeadlock");
+    const deadlockGraphCanvas = document.getElementById("deadlockGraphCanvas");
+    const deadlockOutput = document.getElementById("deadlockOutput");
+    const deadlockGraphContext = deadlockGraphCanvas.getContext('2d');
+
+    const processCountBankerInput = document.getElementById("processCountBanker");
+    const resourceCountBankerInput = document.getElementById("resourceCountBanker");
+    const simulateBankersAlgorithmButton = document.getElementById("simulateBankersAlgorithm");
+    const bankerOutput = document.getElementById("bankerOutput");
+
+    const simulateTestAndSetButton = document.getElementById("simulateTestAndSet");
+    const testAndSetOutput = document.getElementById("testAndSetOutput");
+
+    const semaphoreTypeSelect = document.getElementById("semaphoreType");
+    const simulateSemaphoreTypeButton = document.getElementById("simulateSemaphoreType");
+    const semaphoreTypeOutput = document.getElementById("semaphoreTypeOutput");
+
+    const processCountWaitGraphInput = document.getElementById("processCountWaitGraph");
+    const simulateWaitForGraphButton = document.getElementById("simulateWaitForGraphButton");
+    const waitGraphCanvas = document.getElementById("waitGraphCanvas");
+    const waitGraphContext = waitGraphCanvas.getContext('2d');
+    const waitForGraphOutput = document.getElementById("waitForGraphOutput");
+
+    const simulateDiningPhilosophersButton = document.getElementById("simulateDiningPhilosophers");
+    const diningPhilosophersOutput = document.getElementById("diningPhilosophersOutput");
+
+    const simulateReadersWritersButton = document.getElementById("simulateReadersWriters");
+    const readersWritersOutput = document.getElementById("readersWritersOutput");
+
+    const memorySizeInput = document.getElementById("memorySize");
+    const pageSizeInput = document.getElementById("pageSize");
+    const simulateMemoryManagementButton = document.getElementById("simulateMemoryManagement");
+    const memoryManagementOutput = document.getElementById("memoryManagementOutput");
+
+    const logicalAddressInput = document.getElementById("logicalAddress");
+    const simulateAddressTranslationButton = document.getElementById("simulateAddressTranslation");
+    const addressTranslationOutput = document.getElementById("addressTranslationOutput");
+
+    const fragmentationTypeSelect = document.getElementById("fragmentationType");
+    const simulateFragmentationButton = document.getElementById("simulateFragmentation");
+    const fragmentationOutput = document.getElementById("fragmentationOutput");
+
+    const algorithmTypeSelect = document.getElementById("algorithmType");
+    const pageReferencesInput = document.getElementById("pageReferences");
+    const frameCountInput = document.getElementById("frameCount");
+    const simulatePageReplacementButton = document.getElementById("simulatePageReplacement");
+    const pageReplacementOutput = document.getElementById("pageReplacementOutput");
+    const pageFaultChartCanvas = document.getElementById('pageFaultChart').getContext('2d');
+    let pageFaultChart;
+
+
+    // --- Critical Section Simulation ---
+    simulateCriticalSectionButton.addEventListener("click", () => {
+        const processCount = parseInt(processCountInput.value);
+        if (isNaN(processCount) || processCount < 2) {
+            criticalSectionOutput.textContent = "Please enter a valid number of processes (2 or more).";
+            return;
+        }
+
+        let output = "Simulating Critical Section with " + processCount + " processes.\n";
+        let inCriticalSection = false;
+        for (let i = 1; i <= processCount; i++) {
+            if (!inCriticalSection) {
+                output += "Process " + i + " enters critical section.\n";
+                inCriticalSection = true;
+            } else {
+                output += "Process " + i + " waits for critical section.\n";
+            }
+        }
+        output += "Process 1 exits critical section.\n";
+        criticalSectionOutput.textContent = output;
+    });
+
+    // --- Semaphore Simulation ---
+    simulateSemaphoreB
