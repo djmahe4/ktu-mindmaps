@@ -148,3 +148,18 @@ This document provides detailed proofs for the key theorems in graph theory as s
 | Five Color Theorem   | Planar graphs 5-colorable          | Induction on vertices   |
 
 This table summarizes the theorems and their proof methods for quick reference.
+
+* Module 2 *
+
+* | **Type**                          | **Description**                                                       |
+|-----------------------------------|-----------------------------------------------------------------------|
+| **Simple DiGraph**                | No multiple edges or loops.                                           |
+| **Multidigraph**                  | Multiple edges allowed between vertices.                               |
+| **Weighted DiGraph**              | Edges have weights (values).                                           |
+| **Acyclic Directed Graph (DAG)**  | No cycles in the graph.                                               |
+| **Strongly Connected DiGraph**    | All vertices are reachable from each other.                          |
+| **Weakly Connected DiGraph**      | Ignoring edge direction, the graph is connected.                      |
+| **Symmetric DiGraph**             | If A → B, then B → A must also exist.                                |
+| **Asymmetric DiGraph**            | If A → B, there's no guarantee for B → A.                            |
+| **Complete Symmetric DiGraph**    | Every pair of distinct vertices is connected bidirectionally (A ↔ B). |
+| **Complete Asymmetric DiGraph**   | Every pair of distinct vertices is connected unidirectionally (A → B or B → A, but not both). |
