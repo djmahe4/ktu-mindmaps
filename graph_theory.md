@@ -150,8 +150,7 @@ This document provides detailed proofs for the key theorems in graph theory as s
 This table summarizes the theorems and their proof methods for quick reference.
 
 * Module 2 *
-
-* | **Type**                          | **Description**                                                       |
+| **Type**                          | **Description**                                                       |
 |-----------------------------------|-----------------------------------------------------------------------|
 | **Simple DiGraph**                | No multiple edges or loops.                                           |
 | **Multidigraph**                  | Multiple edges allowed between vertices.                               |
