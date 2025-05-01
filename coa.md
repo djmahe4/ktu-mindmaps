@@ -36,3 +36,10 @@
 |-----------|---------------|----------------|--------|
 | Read      | Read directly | Fetch block from memory, load to cache | - |
 | Write     | Write to cache (and memory if write-through; dirty bit set if write-back) | Fetch to cache then write (write-allocate) or write to memory only (no-write-allocate) | Write-Through, Write-Back (hit); Write-Allocate, No-Write-Allocate (miss) |
+
+### Mapping
+| Mapping Type        | Mapping Rule                                      | Address Breakdown           | Pros                                | Cons                    | Example (Block 70)         |
+|---------------------|---------------------------------------------------|------------------------------|--------------------------------------|--------------------------|-----------------------------|
+| Direct              | One block to one line (Index = Block MOD Lines)   | Tag (6), Index (6), Offset (4) | Simple, fast, low cost               | High conflict misses     | Maps to line 6              |
+| Fully Associative   | Any block to any line                             | Tag (12), Offset (4)          | Flexible, low conflict misses        | Complex, expensive, slow | Any line (e.g., 10)         |
+| Set-Associative (2-way) | One block to any line in a set (Set = Block MOD Sets) | Tag (7), Set (5), Offset (4)   | Balanced flexibility, fewer conflicts | Moderate complexity      | Set 6 (line 12 or 13)       |
