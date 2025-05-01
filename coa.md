@@ -1,3 +1,5 @@
+## Module 5
+
 | Mechanism           | CPU Involvement     | Speed     | Use Case                |
 |---------------------|---------------------|-----------|-------------------------|
 | Programmed I/O      | High (polling)      | Slow      | Small, slow devices     |
@@ -27,3 +29,10 @@
 | **Bandwidth**             | Lower bandwidth due to single-cycle transfers and delays. Typical: 100-200 MB/s for EDO DRAM. | Higher bandwidth due to pipelining and DDR. Typical: 25-50 GB/s for DDR4. |
 | **Interface Complexity**  | Simpler interface, fewer control signals, but requires CPU to handle timing variations. | More complex interface with clock signal and command inputs (CS, RAS, CAS, WE interpreted on clock edges). |
 | **Applications**          | Used in older systems (1980s-1990s PCs) where cost was prioritized over speed. | Standard in modern systems (laptops, desktops, servers) requiring high-speed memory access. |
+
+### Cache hit/miss
+
+| Operation | Hit Condition | Miss Condition | Policy |
+|-----------|---------------|----------------|--------|
+| Read      | Read directly | Fetch block from memory, load to cache | - |
+| Write     | Write to cache (and memory if write-through; dirty bit set if write-back) | Fetch to cache then write (write-allocate) or write to memory only (no-write-allocate) | Write-Through, Write-Back (hit); Write-Allocate, No-Write-Allocate (miss) |
