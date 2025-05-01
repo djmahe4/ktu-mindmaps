@@ -13,7 +13,10 @@
 | **Role of Interrupts**   | No interrupts used; CPU polls continuously, no asynchronous signaling.             | Central role: Device raises interrupt to signal data readiness. ISR handles transfer, checks errors, and clears interrupt. Priority and masking manage multiple devices. | Interrupts used only at completion: DMAC sends interrupt to CPU to signal transfer is done. ISR verifies or handles errors. |
 | **Advantages**           | - Simple to implement.<br>- Suitable for slow devices with small data (e.g., keyboard). | - CPU free during I/O, improving efficiency.<br>- Supports multitasking with multiple devices.<br>- Handles asynchronous I/O effectively. | - Fastest for large transfers.<br>- Minimal CPU involvement, freeing it for other tasks.<br>- Efficient for bulk data (e.g., disk I/O). |
 | **Disadvantages**        | - CPU busy polling, wasting cycles.<br>- Inefficient for large or slow transfers.   | - Interrupt overhead (context switching) for frequent small transfers.<br>- Less efficient for very large data blocks compared to DMA. | - Complex hardware (DMAC required).<br>- Bus contention if CPU needs bus during transfer. |
-| **Use Case**             | Slow devices with small data, e.g., reading a keypress from a keyboard.            | General 
+| **Use Case**             | Slow devices with small data, e.g., reading a keypress from a keyboard.            | General I/O operations, e.g., disk reads, network packets, where CPU multitasking is needed. | Large, high-speed transfers, e.g., transferring a 1 MB file from disk to RAM or video streaming. |
+ | **Example**              | CPU polls keyboard status to detect a keypress and reads the character.            | CPU initiates disk read, continues tasks, handles interrupt to move 4 KB to memory.      | DMAC transfers 1 MB video file from disk to RAM, interrupts CPU when done. |
+
+ ### Asynchronous Synchronous Dram
 
 | **Feature**               | **Asynchronous DRAM**                              | **Synchronous DRAM (SDRAM)**                       |
 |---------------------------|---------------------------------------------------|--------------------------------------------------|
