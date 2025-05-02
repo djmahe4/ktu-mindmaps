@@ -43,3 +43,15 @@
 | Direct              | One block to one line (Index = Block MOD Lines)   | Tag (6), Index (6), Offset (4) | Simple, fast, low cost               | High conflict misses     | Maps to line 6              |
 | Fully Associative   | Any block to any line                             | Tag (12), Offset (4)          | Flexible, low conflict misses        | Complex, expensive, slow | Any line (e.g., 10)         |
 | Set-Associative (2-way) | One block to any line in a set (Set = Block MOD Sets) | Tag (7), Set (5), Offset (4)   | Balanced flexibility, fewer conflicts | Moderate complexity      | Set 6 (line 12 or 13)       |
+
+## Module 4
+### Hardwired vs microprogramed control
+
+| **Feature**               | **Hardwired Control**                              | **Microprogrammed Control**                       |
+|---------------------------|---------------------------------------------------|--------------------------------------------------|
+| **Speed**                 | Faster (direct logic, minimal delay).             | Slower (microcode fetching adds overhead).       |
+| **Design Complexity**     | Complex, error-prone for large instruction sets.  | Simpler, software-like, easier to debug.         |
+| **Flexibility**           | Inflexible, hard to modify instructions.          | Flexible, easy to update via microcode.          |
+| **Chip Area**             | Smaller for simple instruction sets.              | Larger due to control memory.                    |
+| **Cost of Changes**       | Expensive (requires hardware redesign).           | Low (update microcode in memory).                |
+| **Use Case**              | RISC processors, embedded systems with fixed instructions. | CISC processors, systems needing frequent updates or emulation. |
