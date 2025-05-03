@@ -75,3 +75,54 @@
 | **Structural Hazard** | Occurs when multiple instructions compete for the same hardware resource (e.g., memory, ALU) in the same cycle. | Two instructions in a 5-stage pipeline (IF, ID, EX, MEM, WB) both need the memory unit in the MEM stage simultaneously. | 1. **Resource Duplication**: Add more resources (e.g., separate instruction and data caches to avoid memory conflicts).<br>2. **Stalling**: Insert a stall (bubble) to delay one instruction, allowing the resource to free up.<br>3. **Resource Scheduling**: Design the pipeline to avoid conflicts (e.g., interleaved memory access). |
 | **Data Hazard** | Occurs when an instruction depends on the result of a previous instruction that hasn’t completed, causing incorrect data access. | Instruction 1: `ADD R1, R2, R3` (writes R1 in WB). Instruction 2: `SUB R4, R1, R5` (needs R1 in EX), causing a read-after-write (RAW) dependency. | 1. **Forwarding (Bypassing)**: Pass the result directly from a later stage (e.g., EX or MEM) to the dependent stage (e.g., EX) without waiting for WB.<br>2. **Stalling**: Insert stalls to delay the dependent instruction until the data is available.<br>3. **Instruction Reordering**: Compiler reorders instructions to avoid dependencies.<br>4. **Register Renaming**: Use different physical registers to eliminate false dependencies (used in advanced CPUs). |
 | **Control Hazard** | Occurs when a branch instruction disrupts the pipeline flow, as the next instruction to fetch is unknown until the branch is resolved. | A branch instruction `BRN Target` (branch if negative) in the EX stage, but the pipeline fetches the next instruction in IF, which may be incorrect. | 1. **Branch Prediction**: Predict branch outcome (e.g., taken/not taken) and fetch accordingly. If wrong, flush pipeline.<br>2. **Delayed Branching**: Execute instructions in the branch delay slot (fixed number of cycles) before branching.<br>3. **Stalling**: Stall the pipeline until the branch outcome is resolved.<br>4. **Speculative Execution**: Execute predicted path speculatively, rollback if incorrect (advanced CPUs). |
+
+## Module 2
+
+### Comparison of Single Cycle, Multiple Cycle, and Pipeline Processor Designs
+
+**Overview**:
+- **Single Cycle**: Executes each instruction in one clock cycle using dedicated hardware for all stages.
+- **Multiple Cycle**: Breaks instruction execution into multiple steps, each taking one clock cycle, sharing hardware resources.
+- **Pipeline**: Overlaps execution of multiple instructions by dividing them into stages, processing different instructions concurrently.
+
+---
+
+### Table: Comparison of Single Cycle, Multiple Cycle, and Pipeline Designs
+
+| **Aspect**               | **Single Cycle**                                                                 | **Multiple Cycle**                                                               | **Pipeline**                                                                     |
+|--------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Definition**           | Executes an entire instruction (fetch, decode, execute, memory, write-back) in one long clock cycle. | Divides instruction execution into multiple steps (e.g., fetch, decode, execute), each in a shorter clock cycle, reusing hardware. | Divides instruction execution into stages (e.g., IF, ID, EX, MEM, WB), processing multiple instructions concurrently in overlapping stages. |
+| **Execution Process**    | All stages (e.g., IF, ID, EX, MEM, WB) are completed in one cycle using separate hardware for each stage. | Stages are executed sequentially over multiple cycles, with shared hardware (e.g., one ALU for execute and address calculation). | Each stage takes one cycle; multiple instructions progress through stages simultaneously (e.g., IF for Instr1, ID for Instr2). |
+| **Clock Cycle Time**     | Long (must accommodate the slowest stage, e.g., memory access). Typically 1–2 ns for simple CPUs. | Short (based on the slowest individual step, e.g., ALU operation). Typically 0.2–0.5 ns per step. | Short (similar to multiple cycle, as each stage is balanced). Typically 0.2–0.5 ns per stage. |
+| **Instruction Throughput** | Low (one instruction per long cycle, e.g., 0.5–1 MIPS). | Moderate (one instruction every 3–5 cycles, e.g., 2–5 MIPS). | High (one instruction per cycle after initial latency, e.g., 5–10 MIPS). |
+| **Hardware Complexity**  | High (dedicated hardware for each stage, e.g., separate adders for PC increment and ALU). | Moderate (shared hardware, e.g., one ALU, but more complex control unit). | High (multiple stage registers, hazard detection logic, forwarding paths). |
+| **Control Unit**         | Simple (fixed control signals for all stages in one cycle). Hardwired or microprogrammed. | Complex (state machine to sequence steps, e.g., fetch, decode). Microprogrammed or hardwired. | Complex (manages stage transitions, hazard resolution). Hardwired or microprogrammed. |
+| **Performance Example**  | `ADD R1, R2, R3`: Takes 1 cycle (e.g., 2 ns), no overlap. 10 instructions = 20 ns. | `ADD R1, R2, R3`: Takes 4–5 cycles (e.g., 0.4 ns × 5 = 2 ns). 10 instructions ≈ 18–20 ns. | `ADD R1, R2, R3`: 5-stage pipeline, 1 cycle per instruction after 5-cycle latency. 10 instructions ≈ 14 ns (5 + 9 × 0.4 ns). |
+| **Advantages**           | - Simple design and control.<br>- Predictable execution time.<br>- No hazards. | - Shorter cycle time.<br>- Efficient hardware reuse.<br>- Flexible for complex instructions. | - High throughput (overlaps instructions).<br>- Efficient for multiple instructions.<br>- Scalable with more stages. |
+| **Disadvantages**        | - Long cycle time (slow for complex instructions).<br>- Wastes resources for simple instructions.<br>- Low throughput. | - Lower throughput than pipeline.<br>- Complex control unit.<br>- Variable instruction latency. | - Complex design (hazard detection, forwarding).<br>- Control hazards (branches).<br>- Initial latency for single instruction. |
+| **Use Case**             | Simple CPUs, educational designs (e.g., basic RISC processors). | Embedded systems, CISC processors (e.g., older x86 designs). | Modern CPUs (e.g., ARM, x86), high-performance systems requiring high throughput. |
+| **Hazards**              | None (single cycle, no overlap). | None (sequential execution, no overlap). | Structural (resource conflicts), Data (dependencies), Control (branches). Resolved via forwarding, stalling, prediction (from your hazard question). |
+
+---
+
+### Notes and Examples
+- **Single Cycle Example**:  
+  - Instruction: `ADD R1, R2, R3`.  
+  - Execution: Fetch, decode, execute (ALU), write-back in one 2 ns cycle.  
+  - **Scenario**: 5 instructions take 5 × 2 ns = 10 ns.  
+  - **Hardware**: Separate memory for IF, ALU for EX, register file for WB.  
+  - **Status Register**: Flags (N, Z, C, V) updated in one cycle (links to your status register question).
+
+- **Multiple Cycle Example**:  
+  - Instruction: `ADD R1, R2, R3`.  
+  - Execution: 5 steps (IF, ID, EX, MEM, WB), each 0.4 ns, total 2 ns.  
+  - **Scenario**: 5 instructions take ~10 ns (overlapping fetch of next instruction reduces total time slightly).  
+  - **Hardware**: Shared ALU for EX and PC increment, single memory unit.  
+  - **Control**: State machine sequences steps (e.g., `PCout, MARin` for IF).
+
+- **Pipeline Example**:  
+  - Instruction: `ADD R1, R2, R3`.  
+  - Execution: 5-stage pipeline (IF, ID, EX, MEM, WB), each 0.4 ns. First instruction takes 5 × 0.4 = 2 ns; subsequent instructions complete every 0.4 ns.  
+  - **Scenario**: 5 instructions take 5 × 0.4 + 4 × 0.4 = 3.6 ns.  
+  - **Hardware**: Stage registers, hazard detection (e.g., forwarding for data hazards).  
+  - **Conditional Branch**: `BRN Target` causes control hazard, resolved by prediction (links to your hazard and conditional control questions).
