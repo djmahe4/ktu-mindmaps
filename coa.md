@@ -127,7 +127,7 @@
   - **Hardware**: Stage registers, hazard detection (e.g., forwarding for data hazards).  
   - **Conditional Branch**: `BRN Target` causes control hazard, resolved by prediction (links to your hazard and conditional control questions).
  
-  ## Module 1
+## Module 1
 
 ### Computer Organisation vs. Computer Architecture: Simplified Differences
 
