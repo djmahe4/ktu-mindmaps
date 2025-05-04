@@ -126,3 +126,32 @@
   - **Scenario**: 5 instructions take 5 × 0.4 + 4 × 0.4 = 3.6 ns.  
   - **Hardware**: Stage registers, hazard detection (e.g., forwarding for data hazards).  
   - **Conditional Branch**: `BRN Target` causes control hazard, resolved by prediction (links to your hazard and conditional control questions).
+ 
+  ## Module 1
+
+### Computer Organisation vs. Computer Architecture: Simplified Differences
+
+**Overview**:
+- **Computer Architecture**: Focuses on the **what**—the functional design and structure of a computer system as seen by the programmer (e.g., instruction set, addressing modes). It’s the blueprint.
+- **Computer Organisation**: Focuses on the **how**—the implementation and operation of the hardware components to realize the architecture (e.g., circuits, control signals). It’s the construction.
+
+**Analogy**:
+- **Architecture**: The architect’s design of a house (layout, rooms, style).
+- **Organisation**: The builder’s implementation (wiring, plumbing, materials).
+
+---
+
+### Table: Differences Between Computer Organisation and Computer Architecture
+
+| **Aspect**               | **Computer Architecture**                                      | **Computer Organisation**                                      |
+|--------------------------|---------------------------------------------------------------|---------------------------------------------------------------|
+| **Definition**           | The functional design and structure of a computer system, defining how it interacts with software (programmer’s view). | The physical implementation and operational details of hardware components to realize the architecture (hardware view). |
+| **Focus**                | **What** the system does (e.g., instruction set, registers). | **How** the system works (e.g., circuits, control signals). |
+| **Scope**                | High-level design: Instruction Set Architecture (ISA), addressing modes, memory organization. | Low-level implementation: Hardware circuits, control unit, datapath, memory hierarchy. |
+| **Examples**             | - Instruction set (e.g., ADD, BRN).<br>- Register set (e.g., R1, R2).<br>- Addressing modes (e.g., direct, indirect). | - ALU design for ADD.<br>- Status register circuits (from your prior question).<br>- Pipeline stages (IF, ID, EX). |
+| **Components**           | - ISA (e.g., RISC, CISC).<br>- Memory addressing (e.g., byte-addressable).<br>- Programmer-visible registers. | - Control unit (hardwired/microprogrammed).<br>- Datapath (ALU, registers).<br>- Cache, buses, clock. |
+| **Abstraction Level**    | Abstract (software-oriented, visible to programmers). | Concrete (hardware-oriented, internal to CPU). |
+| **Design Concern**       | Functionality and performance goals (e.g., support for branches like `BRN`). | Efficiency, cost, and hardware optimization (e.g., micro-operations for `BRN`). |
+| **Example Question**     | What instructions can the CPU execute? (e.g., `ADD R1, R2, R3`). | How is the ADD instruction executed? (e.g., ALU, control signals). |
+| **Relation to Syllabus** | Defines ISA, e.g., coitional statements (`BRN`, from your notes). | Implements ISA, e.g., pipeline hazards, status register design. |
+| **Ease of Change**       | Harder to change (affects software compatibility). | Easier to change (same architecture, different hardware). |
