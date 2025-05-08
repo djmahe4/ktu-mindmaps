@@ -1,5 +1,28 @@
 Below is a comprehensive tutorial that starts completely from scratch. We’ll create our sample tables, insert some values, and then run a series of queries to illustrate a wide range of SQL topics—from basic retrievals and sorting to set operations, grouping, joins, subqueries, views, assertions, and triggers.
 
+**Note:**
+The file provides a good explanation of using `WHERE` and `HAVING` in SQL.
+
+- **WHERE** is used to filter rows before they are grouped. It applies to individual rows in the table.
+  Example:
+  ```sql
+  SELECT name, salary
+  FROM staff
+  WHERE salary > 5000
+  ORDER BY salary DESC;
+  ```
+
+- **HAVING** is used to filter groups of rows after a `GROUP BY` operation. It applies to the results of grouping.
+  Example:
+  ```sql
+  SELECT dno, AVG(salary) AS avg_salary
+  FROM staff
+  GROUP BY dno
+  HAVING AVG(salary) > 5000;
+  ```
+
+Refer to Section 4 of the file for more examples on aggregates and grouping. Let me know if you'd like to explore this further!
+
 For this tutorial, we’ll use two main tables: a **staff** table and a **dep** (department) table. We’ll also create a **Student** table later for the trigger example. Feel free to run these commands in your SQL environment (adjusting data types or syntax as needed for your specific DBMS).
 
 ---
