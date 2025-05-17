@@ -1,7 +1,5 @@
 # **Indian Constitution: Expanded Exam Clean Sheet (with Memory Aids)**
 
----
-
 ## **I. Preamble**
 
 * **Key Terms:** "We, the People..." giving ourselves this Constitution.
