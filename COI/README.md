@@ -110,3 +110,5 @@
 2.  Try to recall the mnemonic or the "Think:" phrase.
 3.  Briefly explain the core concept in your own words.
 4.  Focus on understanding the *purpose* and *function* of each provision.
+
+This expanded sheet aims to provide enough hooks for your memory. Good luck!
