@@ -1,6 +1,6 @@
 **Indian Constitution: Expanded Exam Clean Sheet (with Memory Aids)**
 
-# **I. Preamble**
+**I. Preamble**
     *   **Key Terms:** "We, the People..." giving ourselves this Constitution.
         *   **S-S-S D R:** **S**overeign (independent), **S**ocialist (welfare, equitable distribution), **S**ecular (state has no religion, treats all equally), **D**emocratic (gov by the people), **R**epublic (elected head of state). *(Think: "SSS DRives the Nation")*
         *   **J-L-E-F:** **J**ustice (Social, Economic, Political), **L**iberty (Thought, Expression, Belief, Faith, Worship), **E**quality (Status, Opportunity), **F**raternity (Brotherhood, Dignity, Unity). *(Think: "JELF helps build the Nation")*
@@ -8,12 +8,12 @@
     *   **Interpretative Value:** Helps understand ambiguous provisions.
     *   **Amendability:** Yes (Art 368), but "Basic Structure" (e.g., secularism, democracy, federalism) cannot be altered (Kesavananda Bharati case).
 
-# **II. Citizenship (Part II: Articles 5-11)**
+**II. Citizenship (Part II: Articles 5-11)**
     *   **Core Idea:** Defines who belongs to India. Parliament has power to make laws.
     *   **Acquisition:** **BDR-NI** (By **B**irth, **D**escent, **R**egistration, **N**aturalization, **I**ncorporation of territory). *(Think: "BeDRINI is now an Indian")*
     *   **Termination/Loss:** **R-T-D** (**R**enunciation - you give up, **T**ermination - you take foreign, **D**eprivation - Govt. takes away for fraud/disloyalty). *(Think: "CiTiZenship ReTiDe (retired/removed)")*
 
-# **III. Fundamental Rights (FRs) (Part III: Articles 12-35) – *The Core Guarantees***
+**III. Fundamental Rights (FRs) (Part III: Articles 12-35) – *The Core Guarantees***
     *   **Art 12 (State):** Defines "State" against whom FRs are enforceable (Govt., Parliament, State Leg., Local Authorities, other statutory/non-statutory bodies like LIC, ONGC). *Think: "Who can violate my rights?"*
     *   **Art 13 (Judicial Review):** Laws inconsistent with FRs are VOID. SC & HC can strike them down. *Think: "FRs are Supreme; bad laws get the boot."*
     *   **Right to Equality (Art 14-18):**
@@ -37,18 +37,18 @@
             4.  **C**ertiorari: "To be certified" (quash order of lower court/transfer case).
             5.  **Q**uo Warranto: "By what authority" (legality of claim to public office).
 
-# **IV. Directive Principles of State Policy (DPSP) (Part IV: Articles 36-51)**
+**IV. Directive Principles of State Policy (DPSP) (Part IV: Articles 36-51)**
     *   **Nature:** Guidelines/Instructions for the State (Govt.) to aim for socio-economic justice. "Moral precepts."
     *   **Non-Justiciable (Art 37):** Cannot be enforced in court, but "fundamental in governance."
     *   **Examples:** Equal pay for equal work, Uniform Civil Code (Art 44), Panchayats (Art 40), Protect environment (Art 48A).
     *   **FRs vs. DPSP:** FRs = Negative (restrict state), Justiciable, Political democracy. DPSP = Positive (state to do things), Non-justiciable, Socio-economic democracy. *Think: FR = "My Rights NOW!"; DPSP = "Govt's To-Do List."*
 
-# **V. Fundamental Duties (FDs) (Part IVA: Article 51A)**
+**V. Fundamental Duties (FDs) (Part IVA: Article 51A)**
     *   **Nature:** Moral obligations on citizens. Added by 42nd Amendment (Swaran Singh Committee).
     *   **Examples:** Respect Constitution & Anthem, Cherish freedom struggle ideals, Promote harmony, Protect environment. *Think: "Citizen's Code of Conduct."*
     *   Non-justiciable, but can be used to interpret laws.
 
-# **VI. The Union (Part V)**
+**VI. The Union (Part V)**
     *   **President (Art 52-62, 72):** Nominal/Ceremonial Head.
         *   **Impeachment (Art 61):** Quasi-judicial process for removal for "violation of Constitution."
         *   **Pardoning Power (Art 72):** Can pardon, reprieve, respite, remit, commute sentences. *Think: "President's 7-2 (Saat Khoon Maaf types) powers."*
@@ -62,19 +62,19 @@
         *   **Ordinary Bill vs. Money Bill:** Ordinary can be in either house; Money Bill only LS. Joint sitting for Ordinary, not Money.
         *   **Joint Sitting (Art 108):** If deadlock on Ordinary Bill. Presided by LS Speaker.
 
-# **VII. The States (Part VI) – *Often parallels the Union structure***
+**VII. The States (Part VI) – *Often parallels the Union structure***
     *   **Governor (Art 153):** Nominal Head of State. Agent of Centre.
         *   **Pardoning Power (Art 161):** Similar to President but for state laws.
     *   **CM & CoM (Art 163, 164):** Real executive at state level. Collectively responsible to State Legislative Assembly (Vidhan Sabha).
     *   **State Legislature (Vidhan Sabha & Vidhan Parishad):** VS (Assembly) is like LS. VP (Council, not in all states) is like RS.
 
-# **VIII. The Judiciary**
+**VIII. The Judiciary**
     *   **Supreme Court (SC) (Art 124-147):** Apex court. Guardian of Constitution.
         *   **Jurisdictions:** Original (Centre-State disputes), Appellate (appeals), Advisory (Art 143 - President seeks opinion), Writ (Art 32).
     *   **High Courts (HC) (Art 214-231):** Highest court in a state.
         *   **Writ Jurisdiction (Art 226):** Broader than SC (FRs + "any other purpose").
 
-# **IX. Relations Between Union & States (Part XI & XII)**
+**IX. Relations Between Union & States (Part XI & XII)**
     *   **Legislative (Art 245-255):** 7th Schedule lists:
         *   **List I (Union):** Defence, Foreign Affairs, Currency. (Parliament makes law).
         *   **List II (State):** Public order, Police, Health. (State Leg. makes law).
@@ -82,13 +82,13 @@
         *   **Residuary Powers (Art 248):** With Parliament (subjects not in any list).
     *   **Financial (Part XII):** Distribution of taxes. **Finance Commission (Art 280)** recommends.
 
-# **X. Emergency Provisions (Part XVIII) – *When normal functioning is suspended***
+**X. Emergency Provisions (Part XVIII) – *When normal functioning is suspended***
     *   **National Emergency (Art 352):** Grounds: **WAR** (**W**ar, **A**rmed **R**ebellion (earlier internal disturbance), **E**xternal Aggression).
         *   Impact: FRs (esp. Art 19) can be suspended (Art 20, 21 cannot be). Centre becomes powerful.
     *   **State Emergency / President's Rule (Art 356):** Failure of constitutional machinery in a state. Governor reports.
     *   **Financial Emergency (Art 360):** Threat to financial stability/credit of India. (Never used).
 
-# **XI. Amendment of the Constitution (Part XX)**
+**XI. Amendment of the Constitution (Part XX)**
     *   **Art 368:** Parliament's power to amend.
         *   **Procedures:**
             1.  Simple Majority (not deemed Art 368 amendment).
@@ -96,7 +96,7 @@
             3.  Special Majority + Ratification by 1/2 of State Legislatures (for federal provisions).
         *   **Basic Structure Doctrine:** Cannot be destroyed by amendment.
 
-# **XII. Important Constitutional Bodies & Other Concepts**
+**XII. Important Constitutional Bodies & Other Concepts**
     *   **Comptroller and Auditor General (CAG) (Art 148):** "Guardian of Public Purse." Audits accounts of Union & States. Reports to President/Governor, laid before Parliament/State Leg.
     *   **Union Territories:** Administered by President through Administrator (e.g., Lt. Governor). Different from States.
     *   **Administrative Tribunals (Art 323A, 323B):** For service matters of govt. employees & other specific issues. Reduces HC burden.
@@ -110,5 +110,3 @@
 2.  Try to recall the mnemonic or the "Think:" phrase.
 3.  Briefly explain the core concept in your own words.
 4.  Focus on understanding the *purpose* and *function* of each provision.
-
-This expanded sheet aims to provide enough hooks for your memory. Good luck!
