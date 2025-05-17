@@ -2,8 +2,8 @@
 
 **I. Preamble**
     *   **Key Terms:** "We, the People..." giving ourselves this Constitution.
-        *   **S-S-S D R:** **S**overeign (independent), **S**ocialist (welfare, equitable distribution), **S**ecular (state has no religion, treats all equally), **D**emocratic (gov by the people), **R**epublic (elected head of state). *(Think: "SSS DRives the Nation")*
-        *   **J-L-E-F:** **J**ustice (Social, Economic, Political), **L**iberty (Thought, Expression, Belief, Faith, Worship), **E**quality (Status, Opportunity), **F**raternity (Brotherhood, Dignity, Unity). *(Think: "JELF helps build the Nation")*
+    *   **S-S-S D R:** **S**overeign (independent), **S**ocialist (welfare, equitable distribution), **S**ecular (state has no religion, treats all equally), **D**emocratic (gov by the people), **R**epublic (elected head of state). *(Think: "SSS DRives the Nation")*
+    *   **J-L-E-F:** **J**ustice (Social, Economic, Political), **L**iberty (Thought, Expression, Belief, Faith, Worship), **E**quality (Status, Opportunity), **F**raternity (Brotherhood, Dignity, Unity). *(Think: "JELF helps build the Nation")*
     *   **Significance:** "Identity Card" or "Soul/Key" of the Constitution. Shows philosophy & objectives.
     *   **Interpretative Value:** Helps understand ambiguous provisions.
     *   **Amendability:** Yes (Art 368), but "Basic Structure" (e.g., secularism, democracy, federalism) cannot be altered (Kesavananda Bharati case).
