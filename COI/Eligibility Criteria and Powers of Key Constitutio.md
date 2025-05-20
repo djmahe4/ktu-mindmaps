@@ -161,6 +161,20 @@ Here’s a concise, exam-ready comparison table including the **Governor** along
 | **Attorney General** | - Qualified to be SC judge (HC judge 5+ yrs or advocate 10+ yrs) | - Legal advisor to Govt  - Right to speak in Parliament  - Represents Govt in SC/HC | - At President’s discretion  - No formal process |
 | **CAG** | - No specific qualifications (usually senior IAS) | - Audits govt accounts  - Reports to President | - Like SC judge: Parliament, 2/3 majority, both Houses |
 
+---
+create a seperate table describe different types of powers exhibited by each of them
+
+Here’s a clear, exam-focused table showing the **different types of powers** (executive, legislative, financial, judicial, discretionary/emergency) for each major constitutional position:
+
+| Position         | Executive Powers | Legislative Powers | Financial Powers | Judicial Powers | Discretionary/Emergency Powers |
+|------------------|-----------------|-------------------|------------------|----------------|-------------------------------|
+| **President**    | - Appoints PM, Council of Ministers, Governors, SC/HC judges, CAG, AG, etc. <br> - Administers Union Territories <br> - Conduct of foreign affairs, defense | - Summons, prorogues, dissolves Parliament <br> - Addresses Parliament <br> - Assents/withholds/returns bills <br> - Issues ordinances (Art. 123) | - Causes budget to be laid <br> - Recommends Money Bills <br> - Allocates contingency fund | - Appoints judges <br> - Grants pardons, reprieves, respites, remissions (Art. 72) | - Declares National, State, and Financial Emergencies (Arts. 352, 356, 360) <br> - Discretion in certain situations |
+| **Prime Minister** | - Heads Union Council of Ministers <br> - Allocates portfolios <br> - Advises President <br> - Supervises administration | - Leader of Lok Sabha (if member) <br> - Recommends dissolution of Lok Sabha <br> - Guides government’s legislative agenda | - Guides fiscal policy <br> - Recommends budgetary proposals to Cabinet | - Advises President on judicial appointments | - Advises President on emergency proclamation <br> - Key role in crisis management |
+| **Governor**     | - Appoints CM, Council of Ministers, Advocate General, State officials <br> - Administers State affairs | - Summons, prorogues, dissolves State Legislature <br> - Addresses Legislature <br> - Assents/withholds/reserves bills <br> - Issues ordinances (Art. 213) | - Lays state budget <br> - Recommends Money Bills <br> - Controls state contingency fund | - Grants pardons, reprieves, etc. for state offenses (Art. 161) <br> - Consulted in HC judge appointments | - Recommends President’s Rule (Art. 356) <br> - Discretion in hung assembly, reserving bills, etc. |
+| **Chief Minister** | - Heads State Council of Ministers <br> - Allocates portfolios <br> - Advises Governor <br> - Supervises state administration | - Leads legislative business in Assembly <br> - Guides state legislative agenda | - Guides state fiscal policy <br> - Recommends financial proposals to Cabinet | - Advises Governor on judicial appointments | - Advises Governor during emergencies <br> - Key crisis manager in state |
+| **Attorney General** | - Legal advisor to Govt. of India <br> - Represents Govt. in courts | - Participates in Parliament (no vote) <br> - Assists in law-making (advice) | - Advises on financial legal matters | - Represents Govt. in SC/HC | - N/A |
+| **CAG**          | - Audits accounts of Union/States <br> - Supervises government financial administration | - Submits audit reports to Parliament/State Legislature | - Audits public expenditure <br> - Ensures financial accountability | - N/A | - N/A |
+
 **Tip:** For the Governor, remember: appointed and removed by the President, holds office at President’s pleasure, and has both executive and discretionary powers at the state level[2][3][4][5].
 
 **Exam Tip**: Focus on Articles 14 (Equality), 21 (Life/Liberty), 32 (Writs), 368 (Amendments), and emergency provisions. Memorize writ jurisdictions and federal features for essay questions.
