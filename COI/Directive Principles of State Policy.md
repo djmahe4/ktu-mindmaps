@@ -3,7 +3,7 @@
 # A. Social and Economic Welfare (Articles 38–43)
 
 These focus on economic equality, livelihood, and working conditions.
-Mnemonic: "Every Farmer Gets Just Proper Work & Equal Pay"
+Mnemonic: **"Every Farmer Gets Just Proper Work & Equal Pay"**
 
 E – Equal justice and free legal aid (Art. 39A)
 
@@ -26,7 +26,7 @@ E – Equal pay for equal work (Art. 39(d))
 # B. Gandhian Principles (Articles 40–48)
 
 These reflect Mahatma Gandhi's ideals like village panchayats, khadi, animal husbandry.
-Mnemonic: "Gandhi’s VILLAGE HAD COOL KHADI COWS"
+Mnemonic: **"Gandhi’s VILLAGE HAD COOL KHADI COWS"**
 
 VILLAGE – Village Panchayats (Art. 40)
 
@@ -45,7 +45,7 @@ COWS – Protection of cows and milch animals (Art. 48)
 # C. Liberal-Intellectual Principles (Articles 44–51)
 
 These focus on international peace, uniform civil code, and environment.
-Mnemonic: "Uniform Foreign Peace Ensures Justice"
+Mnemonic: **"Uniform Foreign Peace Ensures Justice"**
 
 Uniform – Uniform Civil Code (Art. 44)
 
