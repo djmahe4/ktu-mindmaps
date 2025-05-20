@@ -1,5 +1,3 @@
-1. Group by Themes
-
 # A. Social and Economic Welfare (Articles 38–43)
 
 These focus on economic equality, livelihood, and working conditions.
