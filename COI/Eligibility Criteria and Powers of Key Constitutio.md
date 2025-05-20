@@ -150,6 +150,18 @@
 - **DPSP**: Non-justiciable; guide state policy (Articles 36-51).
 
 ---
+Here’s a concise, exam-ready comparison table including the **Governor** alongside other major constitutional positions, covering eligibility, powers/duties, and removal criteria:
+
+| Position     | Eligibility Criteria | Powers & Duties | Removal (Who & How) |
+|--------------|---------------------|-----------------|---------------------|
+| **President** | - Citizen of India   - ≥35 years  - Qualified for Lok Sabha  - No office of profit | - Executive: Appoints PM, Ministers, Governors  - Legislative: Summons/dissolves Parliament, ordinances  - Emergency: Proclaims emergencies  - Judicial: Pardons, appoints judges | - Impeachment by Parliament  - Initiated by either House  - 2/3 majority of total membership (Art. 61) |
+| **Prime Minister** | - Citizen of India  - Member of LS/RS (or within 6 months)  - ≥25 (LS)/30 (RS) years  - No office of profit | - Heads Council of Ministers  - Advises President  - Allocates portfolios  - Chairs Cabinet | - Resignation  - Loss of Lok Sabha majority  - Dismissal by President (rare) |
+| **Governor** | - Citizen of India  - ≥35 years  - Not MP/MLA  - No office of profit | - Executive: Appoints CM, Ministers, key state officials  - Legislative: Summons/dissolves Assembly, assents/reserves bills, ordinances  - Judicial: Pardons, consults on judge appointments  - Discretionary: President’s Rule, reserving bills | - By President of India  - Anytime, at pleasure of President (Art. 156)  - No formal process[2][3][4][5] |
+| **Chief Minister** | - Citizen of India  - Member of State Legislature (or within 6 months)  - ≥25 years | - Heads state Council of Ministers  - Advises Governor  - Allocates portfolios | - Resignation  - Loss of assembly majority  - Dismissal by Governor |
+| **Attorney General** | - Qualified to be SC judge (HC judge 5+ yrs or advocate 10+ yrs) | - Legal advisor to Govt  - Right to speak in Parliament  - Represents Govt in SC/HC | - At President’s discretion  - No formal process |
+| **CAG** | - No specific qualifications (usually senior IAS) | - Audits govt accounts  - Reports to President | - Like SC judge: Parliament, 2/3 majority, both Houses |
+
+**Tip:** For the Governor, remember: appointed and removed by the President, holds office at President’s pleasure, and has both executive and discretionary powers at the state level[2][3][4][5].
 
 **Exam Tip**: Focus on Articles 14 (Equality), 21 (Life/Liberty), 32 (Writs), 368 (Amendments), and emergency provisions. Memorize writ jurisdictions and federal features for essay questions.
 
