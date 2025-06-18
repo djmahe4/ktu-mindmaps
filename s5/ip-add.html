@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive IP Subnetting & Concepts Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .card {
+            background-color: rgba(31, 41, 55, 0.5); /* bg-gray-800 with opacity */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(55, 65, 81, 0.5); /* border-gray-700 with opacity */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            border-color: rgba(59, 130, 246, 0.7); /* border-blue-500 with opacity */
+        }
+        .input-field {
+            background-color: #374151; /* bg-gray-700 */
+            border: 1px solid #4b5563; /* border-gray-600 */
+            color: #f3f4f6; /* text-gray-100 */
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6; /* focus:border-blue-500 */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+        }
+        .btn {
+            background-color: #2563eb; /* bg-blue-600 */
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #1d4ed8; /* hover:bg-blue-700 */
+        }
+        .result-box {
+            background-color: #1f2937; /* bg-gray-800 */
+            border-left: 4px solid #3b82f6; /* border-l-4 border-blue-500 */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem; /* rounded-md */
+        }
+        .ip-range-vis {
+            position: relative;
+            height: 40px;
+            background-color: #374151; /* bg-gray-700 */
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid #4b5563;
+        }
+        .ip-range-bar {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.5s ease;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid #4b5563;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-12">
+        <!-- Header -->
+        <header class="text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white">Interactive Networking Guide</h1>
+            <p class="mt-4 text-lg text-gray-400">Visually understand IP addresses, subnetting, and network types.</p>
+        </header>
+
+        <!-- IP Address Inspector -->
+        <section id="ip-inspector">
+            <h2 class="text-3xl font-bold text-white mb-6">IP Address Inspector</h2>
+            <div class="card">
+                <p class="mb-4 text-gray-300">Enter any IPv4 address to see its type, class, and binary representation. This is the first step to understanding what an IP address really is.</p>
+                <div class="flex flex-col sm:flex-row items-center gap-4">
+                    <input type="text" id="ipInput" class="input-field w-full sm:w-1/2 font-mono" placeholder="e.g., 192.168.1.1">
+                    <button id="inspectBtn" class="btn w-full sm:w-auto">Inspect</button>
+                </div>
+                <div id="inspectorResult" class="mt-6 space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- Public vs Private IP Ranges -->
+        <section id="public-private">
+            <h2 class="text-3xl font-bold text-white mb-6">Public vs. Private IP Addresses</h2>
+            <div class="card">
+                <p class="mb-6 text-gray-300">Not all IP addresses can access the internet. Your home network uses <span class="text-blue-400 font-semibold">Private IPs</span>, which are translated by your router to a single <span class="text-green-400 font-semibold">Public IP</span>. This visualization shows the blocks reserved for private networks.</p>
+                
+                <div class="space-y-4">
+                    <!-- Class A -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1 text-sm">
+                            <span class="font-semibold text-blue-400">Class A Private Range</span>
+                            <span class="font-mono text-gray-400">10.0.0.0 - 10.255.255.255 (10.0.0.0/8)</span>
+                        </div>
+                        <div class="ip-range-vis">
+                            <div class="ip-range-bar bg-blue-600" style="left: 3.9%; width: 0.39%;"></div>
+                             <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-gray-200">Full IPv4 Space (0.0.0.0 to 255.255.255.255)</div>
+                        </div>
+                    </div>
+
+                    <!-- Class B -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1 text-sm">
+                            <span class="font-semibold text-yellow-400">Class B Private Range</span>
+                            <span class="font-mono text-gray-400">172.16.0.0 - 172.31.255.255 (172.16.0.0/12)</span>
+                        </div>
+                        <div class="ip-range-vis">
+                            <div class="ip-range-bar bg-yellow-600" style="left: 67.18%; width: 0.78%;"></div>
+                             <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-gray-200">Full IPv4 Space</div>
+                        </div>
+                    </div>
+
+                    <!-- Class C -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1 text-sm">
+                            <span class="font-semibold text-red-400">Class C Private Range</span>
+                            <span class="font-mono text-gray-400">192.168.0.0 - 192.168.255.255 (192.168.0.0/16)</span>
+                        </div>
+                        <div class="ip-range-vis">
+                            <div class="ip-range-bar bg-red-600" style="left: 75.29%; width: 0.06%;"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-gray-200">Full IPv4 Space</div>
+                        </div>
+                    </div>
+                </div>
+                 <p class="mt-6 text-sm text-gray-500">Note: The visualization shows the relative starting position of each private range within the entire IPv4 address space. The bar widths are scaled for visibility, not to the exact size of the address block.</p>
+            </div>
+        </section>
+
+
+        <!-- Subnetting Calculator -->
+        <section id="subnetting-calculator">
+            <h2 class="text-3xl font-bold text-white mb-6">Interactive Subnet Calculator</h2>
+            <div class="card">
+                <p class="mb-4 text-gray-300">Subnetting divides a large network into smaller, efficient sub-networks. Enter a base network address (like 192.168.0.0) and a CIDR prefix (like /24). Then, use the slider to see how you can break it into smaller subnets.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="subnetIpInput" class="block mb-2 font-medium">Base IP Address</label>
+                        <input type="text" id="subnetIpInput" class="input-field w-full font-mono" value="192.168.0.0">
+                    </div>
+                    <div>
+                        <label for="subnetCidrInput" class="block mb-2 font-medium">Base CIDR Prefix</label>
+                        <input type="number" id="subnetCidrInput" class="input-field w-full font-mono" value="24" min="1" max="30">
+                    </div>
+                </div>
+                <div class="mt-6">
+                     <label for="newSubnetCidr" class="block mb-2 font-medium">New Subnet Prefix: <span id="newSubnetCidrLabel" class="font-mono text-blue-400 font-bold">/24</span></label>
+                     <input type="range" id="newSubnetCidr" class="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer" min="24" max="30" value="24">
+                </div>
+                <div class="mt-4 text-center">
+                    <button id="calculateSubnetBtn" class="btn">Calculate Subnets</button>
+                </div>
+                <div id="subnetResult" class="mt-6"></div>
+            </div>
+        </section>
+
+        <!-- Special IP Addresses -->
+        <section id="special-ips">
+            <h2 class="text-3xl font-bold text-white mb-6">Special & Reserved IP Address Ranges</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="font-bold text-xl text-white mb-2">Loopback Address</h3>
+                    <p class="font-mono text-lg text-yellow-400 mb-2">127.0.0.0/8 (commonly 127.0.0.1)</p>
+                    <p class="text-gray-300 flex-grow">This is your computer talking to itself. When you access <code class="bg-gray-900 px-2 py-1 rounded">localhost</code> or <code class="bg-gray-900 px-2 py-1 rounded">127.0.0.1</code>, your device sends network requests to its own software without using any physical network hardware. It's essential for testing applications locally.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl text-white mb-2">APIPA / Link-Local</h3>
+                    <p class="font-mono text-lg text-purple-400 mb-2">169.254.0.0/16</p>
+                    <p class="text-gray-300 flex-grow">If your computer can't find a DHCP server to get an IP address automatically, it assigns itself an IP from this range. This is often called a "host-only" address. It allows communication with other devices on the same local link that are in the same situation, but not with the internet.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl text-white mb-2">Class D / Multicast</h3>
+                    <p class="font-mono text-lg text-cyan-400 mb-2">224.0.0.0/4</p>
+                    <p class="text-gray-300 flex-grow">Unlike other classes, these IPs aren't assigned to individual devices. Instead, they represent a group of recipients. A single packet sent to a multicast address is delivered to all devices in that group. It's used for things like streaming video to multiple users or online gaming.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl text-white mb-2">Class E / Experimental</h3>
+                    <p class="font-mono text-lg text-rose-400 mb-2">240.0.0.0/4</p>
+                    <p class="text-gray-300 flex-grow">This large block of addresses is reserved by the IETF for future use or for experimental purposes. You should not see these addresses in use on any public or private network. They are not allocated for general use.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Helper Functions ---
+        const ipToLong = (ip) => {
+            return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+        };
+
+        const longToIp = (long) => {
+            return [ (long >>> 24), (long >>> 16) & 255, (long >>> 8) & 255, long & 255 ].join('.');
+        };
+
+        const ipToBinary = (ip) => {
+            return ip.split('.').map(octet => parseInt(octet, 10).toString(2).padStart(8, '0')).join('.');
+        };
+
+        const isValidIp = (ip) => {
+            const regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            return regex.test(ip);
+        };
+
+        const privateRanges = [
+            { start: ipToLong('10.0.0.0'), end: ipToLong('10.255.255.255'), name: 'Class A Private', color: 'blue' },
+            { start: ipToLong('172.16.0.0'), end: ipToLong('172.31.255.255'), name: 'Class B Private', color: 'yellow' },
+            { start: ipToLong('192.168.0.0'), end: ipToLong('192.168.255.255'), name: 'Class C Private', color: 'red' },
+        ];
+
+        const specialRanges = [
+            { start: ipToLong('0.0.0.0'), end: ipToLong('0.0.0.0'), name: 'Unspecified Address', color: 'gray' },
+            { start: ipToLong('127.0.0.0'), end: ipToLong('127.255.255.255'), name: 'Loopback Address', color: 'yellow' },
+            { start: ipToLong('169.254.0.0'), end: ipToLong('169.254.255.255'), name: 'Link-Local (APIPA)', color: 'purple' },
+            { start: ipToLong('224.0.0.0'), end: ipToLong('239.255.255.255'), name: 'Class D (Multicast)', color: 'cyan' },
+            { start: ipToLong('240.0.0.0'), end: ipToLong('255.255.255.255'), name: 'Class E (Experimental)', color: 'rose' }
+        ];
+
+        // --- IP Inspector Logic ---
+        const inspectBtn = document.getElementById('inspectBtn');
+        const ipInput = document.getElementById('ipInput');
+        const inspectorResult = document.getElementById('inspectorResult');
+
+        function inspectIp() {
+            const ipStr = ipInput.value.trim();
+            if (!isValidIp(ipStr)) {
+                inspectorResult.innerHTML = `<div class="result-box border-l-red-500"><p class="font-semibold text-red-400">Invalid IP Address format. Please use the format X.X.X.X where X is 0-255.</p></div>`;
+                return;
+            }
+
+            const ipLong = ipToLong(ipStr);
+            const firstOctet = parseInt(ipStr.split('.')[0], 10);
+            let ipClass = '';
+            let ipType = { name: 'Public', color: 'green' };
+
+            // Determine Class
+            if (firstOctet >= 1 && firstOctet <= 126) ipClass = 'A';
+            else if (firstOctet >= 128 && firstOctet <= 191) ipClass = 'B';
+            else if (firstOctet >= 192 && firstOctet <= 223) ipClass = 'C';
+            else if (firstOctet >= 224 && firstOctet <= 239) ipClass = 'D (Multicast)';
+            else if (firstOctet >= 240 && firstOctet <= 255) ipClass = 'E (Experimental)';
+            else ipClass = 'Special (e.g. Loopback)';
+
+
+            // Determine Type (Private/Special/Public)
+            for (const range of specialRanges) {
+                if (ipLong >= range.start && ipLong <= range.end) {
+                    ipType = range;
+                    break;
+                }
+            }
+            // Only check private if not already special
+            if (ipType.name === 'Public') { 
+                for (const range of privateRanges) {
+                    if (ipLong >= range.start && ipLong <= range.end) {
+                        ipType = range;
+                        break;
+                    }
+                }
+            }
+            
+            // Tailwind CSS requires full class names, so we need a map.
+            const colorMap = {
+                blue: { border: 'border-l-blue-500', text: 'text-blue-400' },
+                yellow: { border: 'border-l-yellow-500', text: 'text-yellow-400' },
+                red: { border: 'border-l-red-500', text: 'text-red-400' },
+                green: { border: 'border-l-green-500', text: 'text-green-400' },
+                purple: { border: 'border-l-purple-500', text: 'text-purple-400' },
+                gray: { border: 'border-l-gray-500', text: 'text-gray-400' },
+                cyan: { border: 'border-l-cyan-500', text: 'text-cyan-400' },
+                rose: { border: 'border-l-rose-500', text: 'text-rose-400' },
+            };
+            const typeColors = colorMap[ipType.color] || colorMap['gray'];
+
+            inspectorResult.innerHTML = `
+                <div class="result-box ${typeColors.border}">
+                    <h4 class="text-lg font-bold ${typeColors.text}">${ipType.name}</h4>
+                    <p class="text-gray-400 mt-1">This IP is part of a range designated for a specific purpose.</p>
+                </div>
+                <div class="result-box">
+                    <p><span class="font-semibold text-gray-200">IP Class:</span> <span class="font-mono text-blue-400">${ipClass}</span></p>
+                </div>
+                <div class="result-box">
+                    <p class="font-semibold text-gray-200">Binary Representation:</p>
+                    <p class="font-mono text-green-400 text-lg break-words">${ipToBinary(ipStr)}</p>
+                </div>
+            `;
+        }
+        inspectBtn.addEventListener('click', inspectIp);
+        ipInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') inspectIp();
+        });
+
+
+        // --- Subnet Calculator Logic ---
+        const subnetIpInput = document.getElementById('subnetIpInput');
+        const subnetCidrInput = document.getElementById('subnetCidrInput');
+        const newSubnetCidr = document.getElementById('newSubnetCidr');
+        const newSubnetCidrLabel = document.getElementById('newSubnetCidrLabel');
+        const calculateSubnetBtn = document.getElementById('calculateSubnetBtn');
+        const subnetResult = document.getElementById('subnetResult');
+        
+        subnetCidrInput.addEventListener('input', () => {
+            const baseCidr = parseInt(subnetCidrInput.value) || 24;
+            newSubnetCidr.min = baseCidr;
+            newSubnetCidr.value = baseCidr;
+            newSubnetCidrLabel.textContent = `/${baseCidr}`;
+        });
+        
+        newSubnetCidr.addEventListener('input', () => {
+            newSubnetCidrLabel.textContent = `/${newSubnetCidr.value}`;
+        });
+
+        calculateSubnetBtn.addEventListener('click', () => {
+            const baseIp = subnetIpInput.value;
+            const baseCidr = parseInt(subnetCidrInput.value);
+            const newCidr = parseInt(newSubnetCidr.value);
+
+            if (!isValidIp(baseIp) || isNaN(baseCidr) || isNaN(newCidr) || newCidr < baseCidr || baseCidr < 1 || newCidr > 32) {
+                subnetResult.innerHTML = `<div class="result-box border-l-red-500"><p class="font-semibold text-red-400">Invalid input. Check IP address and ensure New CIDR is greater than or equal to Base CIDR.</p></div>`;
+                return;
+            }
+
+            const baseIpLong = ipToLong(baseIp);
+            const baseMask = -1 << (32 - baseCidr);
+            const networkAddress = baseIpLong & baseMask;
+
+            const subnetBits = newCidr - baseCidr;
+            const numberOfSubnets = Math.pow(2, subnetBits);
+            const hostsPerSubnet = Math.pow(2, 32 - newCidr);
+
+            let resultHTML = `
+                <div class="result-box mb-4">
+                    <h4 class="font-bold text-lg text-white">Subnetting Summary</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+                        <div><p class="text-sm text-gray-400">New Subnet Mask</p><p class="font-mono text-blue-400">${longToIp(-1 << (32-newCidr))}</p></div>
+                        <div><p class="text-sm text-gray-400">Subnets Created</p><p class="font-mono text-blue-400">${numberOfSubnets}</p></div>
+                        <div><p class="text-sm text-gray-400">Addresses per Subnet</p><p class="font-mono text-blue-400">${hostsPerSubnet}</p></div>
+                        <div><p class="text-sm text-gray-400">Usable Hosts</p><p class="font-mono text-blue-400">${hostsPerSubnet > 1 ? hostsPerSubnet - 2 : 0}</p></div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-700 text-gray-300">
+                            <tr>
+                                <th class="p-3">Subnet</th>
+                                <th class="p-3">Network Address</th>
+                                <th class="p-3">Usable Host Range</th>
+                                <th class="p-3">Broadcast Address</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-800">
+            `;
+
+            for (let i = 0; i < numberOfSubnets; i++) {
+                const subnetNetworkAddr = networkAddress + (i * hostsPerSubnet);
+                const broadcastAddr = subnetNetworkAddr + hostsPerSubnet - 1;
+                const firstUsable = hostsPerSubnet > 1 ? subnetNetworkAddr + 1 : subnetNetworkAddr;
+                const lastUsable = hostsPerSubnet > 1 ? broadcastAddr - 1 : broadcastAddr;
+                
+                const usableRange = hostsPerSubnet > 2 
+                    ? `${longToIp(firstUsable)} - ${longToIp(lastUsable)}`
+                    : (hostsPerSubnet === 2 ? `${longToIp(firstUsable)}` : 'N/A');
+
+                resultHTML += `
+                    <tr class="border-b border-gray-700 font-mono text-sm">
+                        <td class="p-3 text-white">${i + 1}</td>
+                        <td class="p-3 text-green-400">${longToIp(subnetNetworkAddr)}</td>
+                        <td class="p-3 text-gray-300">${usableRange}</td>
+                        <td class="p-3 text-red-400">${longToIp(broadcastAddr)}</td>
+                    </tr>
+                `;
+            }
+
+            resultHTML += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            subnetResult.innerHTML = resultHTML;
+        });
+        
+        // Trigger initial calculation
+        calculateSubnetBtn.click();
+        // Trigger initial inspection if there's a value
+        if (ipInput.value) inspectIp();
+    });
+    </script>
+
+</body>
+</html>
