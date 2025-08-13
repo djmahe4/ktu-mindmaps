@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automata Lab — DFA, NFA, ε-NFA & Regular Grammars</title>
+  <style>
+    :root{
+      --bg:#0f1220; --panel:#161a2e; --ink:#e8ebff; --muted:#b5b9d6; --accent:#6ee7ff; --accent2:#a78bfa; --ok:#22c55e; --bad:#ef4444; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b0e1a,#12162a 20%,#0f1220);color:var(--ink)}
+    header{padding:18px 20px;border-bottom:1px solid #262a46;background:rgba(15,18,32,.8);backdrop-filter:saturate(140%) blur(6px);position:sticky;top:0;z-index:10}
+    h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.2px}
+    main{padding:20px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+    .card{background:var(--panel);border:1px solid #25294a;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);overflow:hidden}
+    .card h2{margin:0;padding:14px 16px;border-bottom:1px solid #25294a;font-size:16px;display:flex;gap:10px;align-items:center}
+    .card h2 .chip{font-size:12px;padding:2px 8px;border:1px solid #2c315a;border-radius:10px;color:var(--muted)}
+    .card .body{padding:14px 16px;display:grid;gap:10px}
+    textarea, input, select{width:100%;background:#0b0f23;color:var(--ink);border:1px solid #2b2f54;border-radius:12px;padding:10px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    textarea{min-height:140px;resize:vertical}
+    .row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+    button{appearance:none;border:1px solid #2b2f54;background:linear-gradient(180deg,#1d2344,#151a36);color:var(--ink);padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:600}
+    button:hover{border-color:#3a3f73}
+    button.accent{border-color:#3b83f6;background:linear-gradient(180deg,#2a3160,#1a1f45)}
+    .hint{font-size:12px;color:var(--muted)}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid #2b2f54;color:var(--muted);font-size:12px}
+    .good{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+    details{border:1px dashed #2b2f54;padding:8px;border-radius:12px}
+    summary{cursor:pointer;color:var(--accent)}
+    .out{white-space:pre-wrap;background:#0b0f23;border:1px solid #2b2f54;border-radius:12px;padding:10px}
+    .grid-3{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+    .tag{font-size:11px;color:#c7caf9;background:#0d1331;border:1px solid #2b2f54;border-radius:999px;padding:2px 8px}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+    .kbd{font-family:ui-monospace,monospace;background:#0b0f23;border:1px solid #2b2f54;border-radius:8px;padding:1px 6px;color:#c9ccff}
+    footer{padding:16px;color:var(--muted);text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Automata Lab <span class="pill">DFA</span> <span class="pill">NFA</span> <span class="pill">ε-NFA</span> <span class="pill">Regular Grammars</span></h1>
+  </header>  <main>
+    <!-- DFA / NFA / ε-NFA Simulator -->
+    <section class="card">
+      <h2>Simulate Automata <span class="chip">DFA / NFA / ε-NFA</span></h2>
+      <div class="body">
+        <label>Automaton Definition</label>
+        <textarea id="automatonInput" placeholder="Example:\nstates: q0,q1,q2\nalphabet: a,b\nstart: q0\naccept: q2\ntransitions:\nq0,a -> q1\nq1,b -> q2\nq1,ε -> q0  
+(For NFA: multiple targets with commas. Use ε or eps for epsilon.)"></textarea>
+        <div class="row">
+          <div>
+            <label>Test string</label>
+            <input id="testString" placeholder="e.g., abab" />
+          </div>
+          <div class="toolbar">
+            <button onclick="simulate('dfa')">Run as DFA</button>
+            <button onclick="simulate('nfa')">Run as NFA (ε-aware)</button>
+          </div>
+        </div>
+        <div id="simResult" class="out"></div>
+        <details>
+          <summary>Format help</summary>
+          <div class="hint">
+            <p><b>Required keys:</b> <code>states</code>, <code>alphabet</code>, <code>start</code>, <code>accept</code>, <code>transitions</code>.</p>
+            <p>Transitions: <code>FROM,SYMBOL -&gt; TO1[,TO2,...]</code>. Use <span class="kbd">ε</span> or <span class="kbd">eps</span> for epsilon.</p>
+            <p>DFA must have exactly one TO for each (state, symbol) pair; NFA may have many or none.</p>
+          </div>
+        </details>
+        <div class="toolbar">
+          <button onclick="loadExample('dfa1')">Load DFA example</button>
+          <button onclick="loadExample('nfae1')">Load ε-NFA example</button>
+        </div>
+      </div>
+    </section><!-- ε-closure + ε-elimination -->
+<section class="card">
+  <h2>ε-Tools <span class="chip">ε-closure &amp; Eliminate ε</span></h2>
+  <div class="body">
+    <textarea id="epsInput" placeholder="Paste an ε-NFA here (same format as above)"></textarea>
+    <div class="row">
+      <input id="epsState" placeholder="State for ε-closure (e.g., q0)" />
+      <button onclick="epsilonClosureUI()">Compute ε-closure</button>
+    </div>
+    <div class="toolbar">
+      <button onclick="eliminateEpsilonUI()" class="accent">Eliminate ε (ε-NFA → NFA)</button>
+    </div>
+    <div id="epsOut" class="out"></div>
+  </div>
+</section>
+
+<!-- NFA -> DFA (subset construction) & equivalence check -->
+<section class="card">
+  <h2>Conversions &amp; Equivalence <span class="chip">NFA → DFA · DFA ⇄ NFA</span></h2>
+  <div class="body">
+    <textarea id="convInputA" placeholder="Automaton A (DFA or NFA/ε-NFA)"></textarea>
+    <textarea id="convInputB" placeholder="Automaton B (optional, for equivalence)"></textarea>
+    <div class="toolbar">
+      <button onclick="nfaToDfaUI()" class="accent">Convert (A) NFA/ε-NFA → DFA</button>
+      <button onclick="checkEquivalenceUI()">Check Equivalence A ?= B</button>
+    </div>
+    <div id="convOut" class="out"></div>
+  </div>
+</section>
+
+<!-- Regular Grammar -->
+<section class="card">
+  <h2>Regular Grammars <span class="chip">RG ⇄ Automata</span></h2>
+  <div class="body">
+    <textarea id="rgInput" placeholder="Right-linear grammar, one production per line. Example:\nS -> aA | b | ε\nA -> aS | b\nStart symbol is the LHS of the first production."></textarea>
+    <div class="toolbar">
+      <button onclick="rgToNfaUI()" class="accent">RG → ε-NFA → DFA</button>
+      <button onclick="dfaToRgUI()">DFA → Right-linear Grammar</button>
+      <button onclick="loadRGExample()">Load RG example</button>
+    </div>
+    <div id="rgOut" class="out"></div>
+  </div>
+</section>
+
+<!-- Mini reference -->
+<section class="card">
+  <h2>Mini Reference <span class="chip">Cheat notes</span></h2>
+  <div class="body">
+    <ul>
+      <li><span class="tag">ε-closure</span> All states reachable using only ε from a set.</li>
+      <li><span class="tag">ε-elimination</span> Push labeled edges through ε-closures and absorb ε-accepting.</li>
+      <li><span class="tag">Subset construction</span> DFA states are NFA state-sets with move(ε-closure) per symbol.</li>
+      <li><span class="tag">Equivalence (DFA)</span> Build symmetric difference and test emptiness (no accepting reachable).</li>
+      <li><span class="tag">RG ↔ NFA</span> A→aB → edge A -a→ B; A→a → edge to F; A→ε → A accepting.</li>
+    </ul>
+  </div>
+</section>
+
+  </main>  <footer>
+    Tip: Use the examples to get a feel, then paste your own problems.
+  </footer>  <script>
+  // ---------- Utilities ----------
+  const EPS = 'ε';
+  const epsAliases = new Set([EPS,'eps','epsilon','e']);
+
+  function parseList(v){
+    return v.split(',').map(s=>s.trim()).filter(Boolean);
+  }
+
+  function parseAutomatonText(txt){
+    // Returns {states:Set, alphabet:Set, start, accept:Set, delta:Map(state)->Map(sym)->Set(states), hasEps:boolean}
+    const lines = txt.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+    const obj = {states:new Set(), alphabet:new Set(), start:null, accept:new Set(), delta:new Map(), hasEps:false};
+    let i=0;
+    function ensure(s){ if(!obj.delta.has(s)) obj.delta.set(s,new Map()); }
+    while(i<lines.length){
+      const line = lines[i];
+      if(/^states\s*:/i.test(line)) parseList(line.split(':')[1]||'').forEach(s=>obj.states.add(s));
+      else if(/^alphabet\s*:/i.test(line)) parseList(line.split(':')[1]||'').forEach(a=>obj.alphabet.add(a));
+      else if(/^start\s*:/i.test(line)) obj.start = (line.split(':')[1]||'').trim();
+      else if(/^accept\s*:/i.test(line)) parseList(line.split(':')[1]||'').forEach(a=>obj.accept.add(a));
+      else if(/^transitions\s*:/i.test(line)){
+        i++;
+        while(i<lines.length && !/^[a-z]+\s*:/i.test(lines[i])){
+          const t = lines[i];
+          const m = t.match(/^([^,\s]+)\s*,\s*([^\s]+)\s*->\s*(.+)$/);
+          if(m){
+            const from = m[1].trim();
+            let sym = m[2].trim();
+            if(epsAliases.has(sym)) { sym = EPS; obj.hasEps=true; }
+            const tos = parseList(m[3]);
+            obj.states.add(from); tos.forEach(x=>obj.states.add(x));
+            if(sym!==EPS) obj.alphabet.add(sym);
+            ensure(from);
+            const row = obj.delta.get(from);
+            if(!row.has(sym)) row.set(sym,new Set());
+            tos.forEach(x=>row.get(sym).add(x));
+          }
+          i++;
+        }
+        continue; // already advanced i
+      }
+      i++;
+    }
+    // sanity
+    if(!obj.start) throw new Error('Missing start state');
+    if(!obj.states.has(obj.start)) obj.states.add(obj.start);
+    return obj;
+  }
+
+  function stringifyAutomaton(A, title='Automaton'){
+    const lines = [];
+    lines.push(`${title}`);
+    lines.push(`states: ${[...A.states].join(',')}`);
+    lines.push(`alphabet: ${[...A.alphabet].join(',')}`);
+    lines.push(`start: ${A.start}`);
+    lines.push(`accept: ${[...A.accept].join(',')}`);
+    lines.push('transitions:');
+    for(const s of A.delta.keys()){
+      const row = A.delta.get(s);
+      for(const sym of row.keys()){
+        const tos = [...row.get(sym)].join(',');
+        lines.push(`${s}, ${sym} -> ${tos}`);
+      }
+    }
+    return lines.join('\n');
+  }
+
+  // ---------- ε-closure & moves ----------
+  function epsilonClosure(A, states){
+    const stack = [...states];
+    const closed = new Set(states);
+    while(stack.length){
+      const s = stack.pop();
+      const row = A.delta.get(s);
+      if(row && row.has(EPS)){
+        for(const t of row.get(EPS)){
+          if(!closed.has(t)) { closed.add(t); stack.push(t); }
+        }
+      }
+    }
+    return closed;
+  }
+
+  function move(A, states, sym){
+    const out = new Set();
+    for(const s of states){
+      const row = A.delta.get(s);
+      if(row && row.has(sym)) for(const t of row.get(sym)) out.add(t);
+    }
+    return out;
+  }
+
+  // ---------- Simulation ----------
+  function simulateDFA(A, input){
+    let cur = A.start;
+    for(const ch of input){
+      const row = A.delta.get(cur);
+      if(!row || !row.has(ch) || row.get(ch).size!==1) return {accept:false, trace:`Stuck on symbol '${ch}' from ${cur}`};
+      cur = [...row.get(ch)][0];
+    }
+    const accept = A.accept.has(cur);
+    return {accept, trace:`Ended in ${cur} (${accept? 'ACCEPT':'REJECT'})`};
+  }
+
+  function simulateNFA(A, input){
+    let cur = epsilonClosure(A, new Set([A.start]));
+    const trace = [`Start ε-closure: {${[...cur].join(',')}}`];
+    for(const ch of input){
+      const step = move(A, cur, ch);
+      const after = epsilonClosure(A, step);
+      trace.push(`on '${ch}' → {${[...after].join(',')}}`);
+      cur = after;
+      if(cur.size===0) break;
+    }
+    const accept = [...cur].some(s=>A.accept.has(s));
+    trace.push(accept? 'ACCEPT':'REJECT');
+    return {accept, trace:trace.join('\n')};
+  }
+
+  // ---------- ε-elimination (ε-NFA → NFA) ----------
+  function eliminateEpsilon(A){
+    const B = {states:new Set(A.states), alphabet:new Set(A.alphabet), start:A.start, accept:new Set(), delta:new Map()};
+    // Precompute ε-closure of each state
+    const ecl = {}; for(const s of A.states) ecl[s] = epsilonClosure(A, new Set([s]));
+    // Accepting states: any state whose ε-closure intersects A.accept
+    for(const s of A.states){
+      for(const t of ecl[s]) if(A.accept.has(t)) { B.accept.add(s); break; }
+    }
+    // For each state and symbol, accumulate moves via ε-closure
+    function ensure(s){ if(!B.delta.has(s)) B.delta.set(s,new Map()); }
+    for(const s of A.states){
+      ensure(s);
+      for(const a of A.alphabet){
+        let targets = new Set();
+        for(const q of ecl[s]){
+          const row = A.delta.get(q);
+          if(row && row.has(a)) for(const u of row.get(a)) ecl[u].forEach(x=>targets.add(x));
+        }
+        if(targets.size>0) B.delta.get(s).set(a, targets);
+      }
+    }
+    return B;
+  }
+
+  // ---------- NFA → DFA (subset construction) ----------
+  function nfaToDfa(A){
+    // If ε present, first remove ε
+    const N = A.hasEps ? eliminateEpsilon(A) : A;
+    const startSet = new Set([N.start]);
+    const queue = [];
+    const key = S => `{${[...S].sort().join(',')}}`;
+    const seen = new Map();
+
+    const D = {states:new Set(), alphabet:new Set(N.alphabet), start:null, accept:new Set(), delta:new Map()};
+
+    function ensure(name){ if(!D.delta.has(name)) D.delta.set(name,new Map()); }
+
+    const s0 = startSet; const k0 = key(s0);
+    D.start = k0; D.states.add(k0); queue.push(s0); seen.set(k0, s0);
+
+    while(queue.length){
+      const S = queue.shift();
+      const K = key(S); ensure(K);
+      for(const a of N.alphabet){
+        const dest = new Set();
+        for(const q of S){
+          const row = N.delta.get(q);
+          if(row && row.has(a)) for(const t of row.get(a)) dest.add(t);
+        }
+        const K2 = key(dest);
+        if(dest.size>0){
+          D.states.add(K2); ensure(K2);
+          D.delta.get(K).set(a, new Set([K2]));
+          if(!seen.has(K2)){ queue.push(dest); seen.set(K2, dest); }
+        }
+      }
+    }
+
+    // accepting states: any DFA state whose set intersects N.accept
+    for(const [K,S] of seen.entries()){
+      for(const q of S) if(N.accept.has(q)) { D.accept.add(K); break; }
+    }
+    return D;
+  }
+
+  // ---------- DFA equivalence via symmetric difference emptiness ----------
+  function productDFA(A,B){
+    const P = {states:new Set(), alphabet:new Set([...A.alphabet].filter(a=>B.alphabet.has(a))), start:null, accept:new Set(), delta:new Map()};
+    function ensure(s){ if(!P.delta.has(s)) P.delta.set(s,new Map()); }
+    const start = `(${A.start}|${B.start})`;
+    P.start = start; P.states.add(start); ensure(start);
+    const q=[ [A.start,B.start] ];
+    const seen = new Set([start]);
+    while(q.length){
+      const [x,y] = q.shift(); const name = `(${x}|${y})`; ensure(name);
+      for(const a of P.alphabet){
+        const rx = (A.delta.get(x)||new Map()).get(a);
+        const ry = (B.delta.get(y)||new Map()).get(a);
+        if(!rx || !ry) continue; // partial DFAs — ignore missing
+        const nx = [...rx][0];
+        const ny = [...ry][0];
+        const nn = `(${nx}|${ny})`;
+        P.states.add(nn); ensure(nn);
+        P.delta.get(name).set(a, new Set([nn]));
+        if(!seen.has(nn)){ seen.add(nn); q.push([nx,ny]); }
+      }
+    }
+    // symmetric difference accept: exactly one of components is accepting
+    for(const s of P.states){
+      const m = s.match(/^(.*)\|(.*)$/); const x=m[1], y=m[2];
+      const ax = A.accept.has(x), ay = B.accept.has(y);
+      if(ax!==ay) P.accept.add(s);
+    }
+    return P;
+  }
+
+  function isLanguageEmptyDFA(D){
+    const q=[D.start]; const seen=new Set([D.start]);
+    while(q.length){
+      const s=q.shift(); if(D.accept.has(s)) return false;
+      const row=D.delta.get(s)||new Map();
+      for(const a of row.keys()){
+        const t=[...row.get(a)][0];
+        if(!seen.has(t)){ seen.add(t); q.push(t); }
+      }
+    }
+    return true;
+  }
+
+  // ---------- Regular Grammar Parsing & Conversions ----------
+  function parseRG(text){
+    const lines=text.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+    const prods={}; let startSymbol=null;
+    for(const line of lines){
+      const [lhsRaw,rhsRaw]=line.split('->').map(s=>s&&s.trim());
+      if(!lhsRaw||!rhsRaw) continue; const lhs=lhsRaw;
+      if(startSymbol===null) startSymbol=lhs;
+      prods[lhs]=prods[lhs]||[];
+      rhsRaw.split('|').map(s=>s.trim()).forEach(alt=>prods[lhs].push(alt));
+    }
+    return {prods, start:startSymbol};
+  }
+
+  function rgToENFA(R){
+    // Build ε-NFA: nonterminals are states + a fresh final F
+    const states = new Set(Object.keys(R.prods));
+    const F = 'F_final'; states.add(F);
+    const alphabet = new Set();
+    const delta = new Map(); function ensure(s){ if(!delta.has(s)) delta.set(s,new Map()); }
+    const accept = new Set([F]);
+
+    for(const A of states) ensure(A);
+    for(const A in R.prods){
+      for(const alt of R.prods[A]){
+        if(alt===EPS||alt==='ε'){
+          // A -> ε  (make A accepting)
+          accept.add(A);
+        } else if(/^[a-zA-Z0-9]$/.test(alt)){
+          // A -> a  (single terminal)
+          const a=alt; alphabet.add(a);
+          const row=delta.get(A); if(!row.has(a)) row.set(a,new Set()); row.get(a).add(F);
+        } else if(/^([a-zA-Z0-9])([A-Za-z_][A-Za-z0-9_]*)$/.test(alt)){
+          // A -> aB
+          const m=alt.match(/^([a-zA-Z0-9])([A-Za-z_][A-Za-z0-9_]*)$/);
+          const a=m[1], B=m[2]; alphabet.add(a);
+          const row=delta.get(A); if(!row.has(a)) row.set(a,new Set()); row.get(a).add(B);
+        } else {
+          // Try to parse with space: "a B" or quotes
+          const parts=alt.split(/\s+/).filter(Boolean);
+          if(parts.length===2 && parts[0].length===1){
+            const a=parts[0], B=parts[1]; alphabet.add(a);
+            const row=delta.get(A); if(!row.has(a)) row.set(a,new Set()); row.get(a).add(B);
+          }
+        }
+      }
+    }
+    return {states, alphabet, start:R.start, accept, delta, hasEps:false};
+  }
+
+  function dfaToRG(D){
+    // Right-linear grammar with nonterminals = DFA states; start = D.start
+    const lines=[]; const NT=[...D.states];
+    const isAcc = s=>D.accept.has(s);
+    // map transitions
+    const map={}; for(const s of D.states){ map[s]={}; const row=D.delta.get(s)||new Map(); for(const a of row.keys()){ map[s][a]=[...row.get(a)][0]; }}
+    // For each state S: for each a, if S -a-> T then S -> aT; if T is accepting also add S -> a
+    for(const S of NT){
+      const rules=[]; const row=map[S];
+      for(const a in row){ const T=row[a]; rules.push(`${a}${T}`); if(isAcc(T)) rules.push(`${a}`); }
+      if(isAcc(S)) rules.push(EPS);
+      if(rules.length>0) lines.push(`${S} -> ${rules.join(' | ')}`);
+    }
+    // Place start rule first
+    lines.sort((x,y)=> (x.startsWith(D.start)?-1 : y.startsWith(D.start)?1 : x.localeCompare(y)) );
+    return lines.join('\n');
+  }
+
+  // ---------- UI Glue ----------
+  function show(el, msg){ document.getElementById(el).textContent = msg; }
+
+  function simulate(kind){
+    try{
+      const A = parseAutomatonText(document.getElementById('automatonInput').value);
+      const w = document.getElementById('testString').value || '';
+      const res = (kind==='dfa')? simulateDFA(A,w) : simulateNFA(A,w);
+      show('simResult', `${res.accept? '✅ ACCEPT':'❌ REJECT'}\n${res.trace}`);
+    }catch(e){ show('simResult', '⚠️ '+e.message); }
+  }
+
+  function epsilonClosureUI(){
+    try{
+      const A = parseAutomatonText(document.getElementById('epsInput').value);
+      const s = document.getElementById('epsState').value.trim();
+      if(!s) return show('epsOut','⚠️ Enter a state name');
+      const set = epsilonClosure(A,new Set([s]));
+      show('epsOut', stringifyAutomaton(B,'NFA (ε-eliminated)'));
+    }catch(e){ show('epsOut','⚠️ '+e.message); }}
+
+  function eliminateEpsilonUI(){
+    try{
+      const A = parseAutomatonText(document.getElementById('epsInput').value);
+      const B = eliminateEpsilon(A);
+      show('epsOut', stringifyAutomaton(B,'N
+  function nfaToDfaUI(){
+    try{
+      const A = parseAutomatonText(document.getElementById('convInputA').value);
+      const D = nfaToDfa(A);
+      show('convOut', stringifyAutomaton(D,'DFA (subset construction)'));
+    }catch(e){ show('convOut','⚠️ '+e.message); }
+  }
+
+  function checkEquivalenceUI(){
+    try{
+      const Araw = parseAutomatonText(document.getElementById('convInputA').value);
+      const Braw = parseAutomatonText(document.getElementById('convInputB').value);
+      const A = (Araw.hasEps? nfaToDfa(Araw) : Araw);
+      const B = (Braw.hasEps? nfaToDfa(Braw) : Braw);
+      const P = productDFA(A,B);
+      const eq = isLanguageEmptyDFA(P);
+      show('convOut', `${eq? '✅ Equivalent (languages equal)' : '❌ Not equivalent'}\n\nSymmetric difference DFA:\n` + stringifyAutomaton(P,'Δ(A,B)'));
+    }catch(e){ show('convOut','⚠️ '+e.message); }
+  }
+
+  function rgToNfaUI(){
+    try{
+      const R = parseRG(document.getElementById('rgInput').value);
+      const N = rgToENFA(R);
+      const D = nfaToDfa(N);
+      show('rgOut', stringifyAutomaton(N,'ε-NFA from RG') + '\n\n' + stringifyAutomaton(D,'DFA from RG'));
+    }catch(e){ show('rgOut','⚠️ '+e.message); }
+  }
+
+  function dfaToRgUI(){
+    try{
+      const txt = document.getElementById('rgInput').value;
+      const A = parseAutomatonText(txt);
+      const D = A.hasEps ? nfaToDfa(A) : A; // ensure DFA
+      const G = dfaToRG(D);
+      show('rgOut', G);
+    }catch(e){ show('rgOut','⚠️ '+e.message); }
+  }
+
+  // ---------- Examples ----------
+  function loadExample(which){
+    const dfa1 = `states: q0,q1\nalphabet: a,b\nstart: q0\naccept: q0\ntransitions:\nq0, a -> q1\nq0, b -> q0\nq1, a -> q0\nq1, b -> q1`;
+
+    const nfae1 = `states: q0,q1,q2\nalphabet: a,b\nstart: q0\naccept: q2\ntransitions:\nq0, ε -> q1\nq1, a -> q1,q2\nq1, b -> q1`;
+
+    document.getElementById('automatonInput').value = (which==='dfa1'? dfa1 : nfae1);
+  }
+
+  function loadRGExample(){
+    const rg = `S -> aA | b | ε\nA -> aS | b`;
+    document.getElementById('rgInput').value = rg;
+  }
+  </script>
+</body>
+</html>
