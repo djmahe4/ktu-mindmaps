@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Classical Ciphers – Exam Pack</title>
+<style>
+  :root{--bg:#0b1220;--card:#121a2a;--muted:#a8b6d1;--text:#eaf1ff;--accent:#5b9dff;}
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0b1220,#0e1626);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+  header{position:sticky;top:0;z-index:5;background:rgba(11,18,32,.8);backdrop-filter:blur(8px);border-bottom:1px solid #1f2b44}
+  .wrap{max-width:1100px;margin:0 auto;padding:18px}
+  h1{margin:0;font-size:clamp(20px,2.6vw,34px)}
+  .subtitle{color:var(--muted);margin-top:6px}
+  section{background:var(--card);border:1px solid #1f2b44;border-radius:16px;padding:16px;margin:16px 0}
+  details{border:1px dashed #2a3b5a;border-radius:12px;padding:10px;margin-top:10px}
+  details>summary{cursor:pointer;color:#cfe1ff}
+  .eq{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;background:#0e172a;border:1px solid #263756;border-radius:8px;padding:8px;display:block;overflow:auto}
+  .row{display:grid;grid-template-columns: 1fr 1fr; gap:12px}
+  textarea,input,select,button{width:100%;background:#0f1a2e;color:var(--text);border:1px solid #263756;border-radius:12px;padding:10px}
+  button{cursor:pointer}
+  .note{color:var(--muted)}
+  .kbd{padding:.1em .35em;border:1px solid #3b4d6f;border-bottom-width:2px;border-radius:6px;background:#0e172a}
+  .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#0f1a2e;border:1px solid #263756;font-size:12px;color:#bcd}
+  .grid-3{display:grid;grid-template-columns: repeat(3,1fr); gap:12px}
+  code{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+  .ok{color:#22c55e} .warn{color:#f59e0b} .err{color:#ef4444}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🔐 Classical Ciphers – Exam Pack</h1>
+    <p class="subtitle">Only the requested topics, each with <b>definition</b>, <b>equations</b>, and <b>working code</b> (encryption & decryption). Alphabet A=0 … Z=25; text is uppercased and non‑letters removed unless noted.</p>
+  </div>
+</header>
+<main class="wrap">
+
+<section id="caesar">
+  <h2>1) Caesar Cipher (Shift)</h2>
+  <p><b>Definition:</b> A <i>monoalphabetic substitution</i> that shifts each letter by a fixed key <code>k</code> modulo 26.</p>
+  <div class="eq">Encryption: C<sub>i</sub> = (P<sub>i</sub> + k) mod 26<br>Decryption: P<sub>i</sub> = (C<sub>i</sub> − k) mod 26</div>
+  <details close>
+    <summary>Code (Encrypt/Decrypt)</summary>
+    <pre class="eq"><code>function caesar(text, k, enc=true){
+  k = ((k%26)+26)%26;
+  text = text.toUpperCase().replace(/[^A-Z]/g,'');
+  let out='';
+  for (const ch of text){
+    const x = ch.charCodeAt(0)-65;
+    const y = enc ? (x+k)%26 : (x+26-k)%26;
+    out += String.fromCharCode(65+y);
+  }
+  return out;
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="ca_in" placeholder="ATTACKATDAWN"></textarea></div>
+    <div><textarea id="ca_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input type="number" id="ca_k" value="3" min="0" max="25"></div>
+    <div><button onclick="ca_out.value=caesar(ca_in.value, +ca_k.value, true)">Encrypt →</button></div>
+    <div><button onclick="ca_in.value=caesar(ca_out.value, +ca_k.value, false)">← Decrypt</button></div>
+  </div>
+</section>
+
+<section id="mono">
+  <h2>2) Monoalphabetic Substitution (Keyed)</h2>
+  <p><b>Definition:</b> Build a cipher alphabet by writing a keyword (unique letters), then the remaining A–Z. Map plaintext A–Z to this alphabet.</p>
+  <div class="eq">Let K be the 26‑letter cipher alphabet derived from a keyword.<br>Encryption: C = K[P], Decryption uses inverse mapping K<sup>−1</sup>.</div>
+  <details close>
+    <summary>Code (Build alphabet + Encrypt/Decrypt)</summary>
+    <pre class="eq"><code>function keyedAlphabet(keyword){
+  keyword = (keyword||'').toUpperCase().replace(/[^A-Z]/g,'');
+  const seen=new Set(), alpha=[];
+  for(const ch of keyword){ if(!seen.has(ch)){ seen.add(ch); alpha.push(ch);} }
+  for(let i=0;i<26;i++){ const ch=String.fromCharCode(65+i); if(!seen.has(ch)) alpha.push(ch); }
+  return alpha.join('');
+}
+function monoEncrypt(pt, key){
+  const K = keyedAlphabet(key); const map = {}; for(let i=0;i<26;i++){ map[String.fromCharCode(65+i)] = K[i]; }
+  pt = pt.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  for(const ch of pt){ out += map[ch]; } return out;
+}
+function monoDecrypt(ct, key){
+  const K = keyedAlphabet(key); const inv = {}; for(let i=0;i<26;i++){ inv[K[i]] = String.fromCharCode(65+i); }
+  ct = ct.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  for(const ch of ct){ out += inv[ch]; } return out;
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="mo_in" placeholder="MEETME"></textarea></div>
+    <div><textarea id="mo_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input id="mo_key" value="SECURITY"></div>
+    <div><button onclick="mo_out.value=monoEncrypt(mo_in.value, mo_key.value)">Encrypt →</button></div>
+    <div><button onclick="mo_in.value=monoDecrypt(mo_out.value, mo_key.value)">← Decrypt</button></div>
+  </div>
+</section>
+
+<section id="playfair">
+  <h2>3) Playfair Cipher</h2>
+  <p><b>Definition:</b> A digraph substitution using a 5×5 key square built from a keyword. I/J are combined.</p>
+  <div class="eq">Rules (encryption):<br>
+  • Same row: replace each by letter to its right (wrap).<br>
+  • Same column: replace each by letter below it (wrap).<br>
+  • Rectangle: replace each by letter in its row, in the column of the other.</div>
+  <div class="eq">Preparation: Replace J→I, split into digraphs; insert filler X between repeated letters in a pair; pad with X if odd length.</div>
+  <details close>
+    <summary>Code (Encrypt/Decrypt)</summary>
+    <pre class="eq"><code>function pfSquare(keyword){
+  keyword = keyword.toUpperCase().replace(/[^A-Z]/g,'').replace(/J/g,'I');
+  const seen=new Set(), arr=[];
+  for(const ch of keyword){ if(!seen.has(ch) && ch!=='J'){ seen.add(ch); arr.push(ch);} }
+  for(let i=0;i<26;i++){
+    const ch=String.fromCharCode(65+i); if(ch==='J') continue;
+    if(!seen.has(ch)){ seen.add(ch); arr.push(ch); }
+  }
+  const pos={}; arr.forEach((ch,i)=> pos[ch]=[Math.floor(i/5), i%5]);
+  return {grid:arr, pos};
+}
+function pfPrepare(text){
+  text = text.toUpperCase().replace(/[^A-Z]/g,'').replace(/J/g,'I');
+  const out=[]; let i=0;
+  while(i<text.length){
+    const a=text[i], b=text[i+1];
+    if(!b){ out.push([a,'X']); i+=1; }
+    else if(a===b){ out.push([a,'X']); i+=1; }
+    else { out.push([a,b]); i+=2; }
+  }
+  return out;
+}
+function pfEncrypt(pt, key){
+  const {grid,pos} = pfSquare(key); const pairs = pfPrepare(pt); let out='';
+  for(const [a,b] of pairs){
+    const [ra,ca]=pos[a], [rb,cb]=pos[b];
+    if(ra===rb){ out += grid[ra*5 + ((ca+1)%5)] + grid[rb*5 + ((cb+1)%5)]; }
+    else if(ca===cb){ out += grid[((ra+1)%5)*5 + ca] + grid[((rb+1)%5)*5 + cb]; }
+    else { out += grid[ra*5 + cb] + grid[rb*5 + ca]; }
+  }
+  return out;
+}
+function pfDecrypt(ct, key){
+  const {grid,pos} = pfSquare(key); ct = ct.toUpperCase().replace(/[^A-Z]/g,'');
+  let out=''; for(let i=0;i<ct.length;i+=2){
+    const a=ct[i], b=ct[i+1]; const [ra,ca]=pos[a], [rb,cb]=pos[b];
+    if(ra===rb){ out += grid[ra*5 + ((ca+4)%5)] + grid[rb*5 + ((cb+4)%5)]; }
+    else if(ca===cb){ out += grid[((ra+4)%5)*5 + ca] + grid[((rb+4)%5)*5 + cb]; }
+    else { out += grid[ra*5 + cb] + grid[rb*5 + ca]; }
+  }
+  return out; // Note: stripping filler X is context‑dependent
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="pf_in" placeholder="HIDETHEGOLDINTHETREESTUMP"></textarea></div>
+    <div><textarea id="pf_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input id="pf_key" value="MONARCHY"></div>
+    <div><button onclick="pf_out.value=pfEncrypt(pf_in.value, pf_key.value)">Encrypt →</button></div>
+    <div><button onclick="pf_in.value=pfDecrypt(pf_out.value, pf_key.value)">← Decrypt</button></div>
+  </div>
+</section>
+
+<section id="hill">
+  <h2>4) Hill Cipher (2×2)</h2>
+  <p><b>Definition:</b> A block cipher using matrix multiplication modulo 26. Here we use 2×2 blocks.</p>
+  <div class="eq">Let K be an invertible 2×2 matrix mod 26. Group plaintext as column vectors of size 2.
+  <br>Encryption: <code>C = (K · P) mod 26</code>
+  <br>Decryption: <code>P = (K<sup>−1</sup> · C) mod 26</code>, where K<sup>−1</sup> = (detK)<sup>−1</sup> · adj(K) mod 26.</div>
+  <details close>
+    <summary>Code (Encrypt/Decrypt, 2×2)</summary>
+    <pre class="eq"><code>function mod(n,m){ return ((n%m)+m)%m; }
+function invMod(a,m){
+  a = mod(a,m); for(let x=1;x<m;x++){ if(mod(a*x,m)===1) return x; } return null;
+}
+function hillEncrypt(pt, K){
+  pt = pt.toUpperCase().replace(/[^A-Z]/g,''); if(pt.length%2) pt+='X';
+  const out=[];
+  for(let i=0;i<pt.length;i+=2){
+    const p=[pt.charCodeAt(i)-65, pt.charCodeAt(i+1)-65];
+    const c0 = mod(K[0][0]*p[0] + K[0][1]*p[1], 26);
+    const c1 = mod(K[1][0]*p[0] + K[1][1]*p[1], 26);
+    out.push(String.fromCharCode(65+c0), String.fromCharCode(65+c1));
+  }
+  return out.join('');
+}
+function hillInverse(K){
+  const det = mod(K[0][0]*K[1][1]-K[0][1]*K[1][0],26);
+  const invDet = invMod(det,26); if(invDet===null) return null;
+  const adj=[[ K[1][1], -K[0][1] ], [ -K[1][0], K[0][0] ]];
+  return [[ mod(invDet*adj[0][0],26), mod(invDet*adj[0][1],26) ],
+          [ mod(invDet*adj[1][0],26), mod(invDet*adj[1][1],26) ]];
+}
+function hillDecrypt(ct, K){
+  const Ki = hillInverse(K); if(!Ki) throw new Error('Key matrix not invertible mod 26');
+  ct = ct.toUpperCase().replace(/[^A-Z]/g,''); const out=[];
+  for(let i=0;i<ct.length;i+=2){
+    const c=[ct.charCodeAt(i)-65, ct.charCodeAt(i+1)-65];
+    const p0 = mod(Ki[0][0]*c[0] + Ki[0][1]*c[1], 26);
+    const p1 = mod(Ki[1][0]*c[0] + Ki[1][1]*c[1], 26);
+    out.push(String.fromCharCode(65+p0), String.fromCharCode(65+p1));
+  }
+  return out.join('');
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="hi_in" placeholder="HELP"></textarea></div>
+    <div><textarea id="hi_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div>
+      <select id="hi_key">
+        <option value="3,3,2,5">K=[[3,3],[2,5]] (invertible)</option>
+        <option value="9,4,5,7">K=[[9,4],[5,7]]</option>
+      </select>
+    </div>
+    <div><button onclick="(function(){const a=hi_key.value.split(',').map(Number);const K=[[a[0],a[1]],[a[2],a[3]]];hi_out.value=hillEncrypt(hi_in.value,K)})()">Encrypt →</button></div>
+    <div><button onclick="(function(){const a=hi_key.value.split(',').map(Number);const K=[[a[0],a[1]],[a[2],a[3]]];try{hi_in.value=hillDecrypt(hi_out.value,K)}catch(e){alert(e.message)}})()">← Decrypt</button></div>
+  </div>
+</section>
+
+<section id="polyalphabetic">
+  <h2>5) Polyalphabetic Cipher (General Framework)</h2>
+  <p><b>Definition:</b> Uses multiple shift alphabets controlled by a key stream. Vigenère is the classic example. Two common modes:</p>
+  <ul>
+    <li><b>Vigenère (additive):</b> C<sub>i</sub> = (P<sub>i</sub> + K<sub>i</sub>) mod 26</li>
+    <li><b>Beaufort:</b> C<sub>i</sub> = (K<sub>i</sub> − P<sub>i</sub>) mod 26</li>
+  </ul>
+  <details close>
+    <summary>Code (General polyalphabetic engine)</summary>
+    <pre class="eq"><code>function keyStream(key){
+  key = key.toUpperCase().replace(/[^A-Z]/g,'');
+  return [...key].map(ch=> ch.charCodeAt(0)-65);
+}
+function poly(text, key, mode='vigenere', enc=true){
+  const ks = keyStream(key); if(ks.length===0) return text;
+  text = text.toUpperCase().replace(/[^A-Z]/g,''); let out=''; let j=0;
+  for(const ch of text){
+    const p = ch.charCodeAt(0)-65, k = ks[j % ks.length]; j++;
+    let c;
+    if(mode==='vigenere') c = enc ? (p+k)%26 : (p+26-k)%26;
+    else if(mode==='beaufort') c = enc ? (k+26-p)%26 : (k+26-p)%26; // symmetric
+    out += String.fromCharCode(65+c);
+  }
+  return out;
+}</code></pre>
+  </details>
+</section>
+
+<section id="affine">
+  <h2>6) Affine Cipher</h2>
+  <p><b>Definition:</b> A monoalphabetic substitution combining a multiplicative and additive key. Choose <code>a,b</code> with gcd(a,26)=1.</p>
+  <div class="eq">Encryption: C = (a·P + b) mod 26<br>Decryption: P = a<sup>−1</sup>·(C − b) mod 26, where a<sup>−1</sup> is the modular inverse of a (mod 26).</div>
+  <details close>
+    <summary>Code (Encrypt/Decrypt)</summary>
+    <pre class="eq"><code>function affineEncrypt(pt,a,b){
+  pt = pt.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  for(const ch of pt){ const x=ch.charCodeAt(0)-65; const y=(a*x + b)%26; out += String.fromCharCode(65+((y+26)%26)); }
+  return out;
+}
+function affineDecrypt(ct,a,b){
+  ct = ct.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  const invA = invMod(a,26); if(invA===null) throw new Error('a not invertible mod 26');
+  for(const ch of ct){ const y=ch.charCodeAt(0)-65; const x = (invA * (y - b))%26; out += String.fromCharCode(65+((x+26)%26)); }
+  return out;
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="af_in" placeholder="AFFINECIPHER"></textarea></div>
+    <div><textarea id="af_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input id="af_a" type="number" value="5" title="a (coprime with 26)"></div>
+    <div><input id="af_b" type="number" value="8" title="b"></div>
+    <div class="grid-3" style="grid-template-columns:1fr 1fr 1fr">
+      <button onclick="af_out.value=affineEncrypt(af_in.value,+af_a.value,+af_b.value)">Encrypt →</button>
+      <button onclick="(function(){try{af_in.value=affineDecrypt(af_out.value,+af_a.value,+af_b.value)}catch(e){alert(e.message)}})()">← Decrypt</button>
+      <span class="badge">Valid a: 1,3,5,7,9,11,15,17,19,21,23,25</span>
+    </div>
+  </div>
+</section>
+
+<section id="vigenere">
+  <h2>7) Vigenère Cipher (Explicit)</h2>
+  <p><b>Definition:</b> Classic polyalphabetic cipher using a repeating key. Equivalent to additive stream over mod 26.</p>
+  <div class="eq">Encryption: C<sub>i</sub> = (P<sub>i</sub> + K<sub>i</sub>) mod 26<br>Decryption: P<sub>i</sub> = (C<sub>i</sub> − K<sub>i</sub>) mod 26</div>
+  <details close>
+    <summary>Code (calls general polyalphabetic)</summary>
+    <pre class="eq"><code>function vigEncrypt(pt,key){ return poly(pt,key,'vigenere',true); }
+function vigDecrypt(ct,key){ return poly(ct,key,'vigenere',false); }</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="vi_in" placeholder="ATTACKATDAWN"></textarea></div>
+    <div><textarea id="vi_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input id="vi_key" value="LEMON"></div>
+    <div><button onclick="vi_out.value=vigEncrypt(vi_in.value, vi_key.value)">Encrypt →</button></div>
+    <div><button onclick="vi_in.value=vigDecrypt(vi_out.value, vi_key.value)">← Decrypt</button></div>
+  </div>
+</section>
+
+<section id="trans_keyless">
+  <h2>8) Transposition – Keyless (Rail Fence)</h2>
+  <p><b>Definition:</b> A <i>transposition</i> cipher that writes the message in a zig‑zag across fixed rails and reads off row‑wise. No keyword; the rail number is a parameter.</p>
+  <div class="eq">Permutation by position (no substitution). Encryption pattern determined by rails; decryption reverses the pattern.</div>
+  <details close>
+    <summary>Code (Encrypt/Decrypt)</summary>
+    <pre class="eq"><code>function railEncrypt(text, rails){
+  rails=Math.max(2,Math.min(10,rails|0));
+  text = text.toUpperCase().replace(/[^A-Z]/g,'');
+  const rows = Array.from({length:rails},()=>[]);
+  let r=0, dir=1; for(const ch of text){ rows[r].push(ch); r+=dir; if(r===0||r===rails-1) dir*=-1; }
+  return rows.flat().join('');
+}
+function railDecrypt(cipher, rails){
+  rails=Math.max(2,Math.min(10,rails|0)); cipher=cipher.toUpperCase().replace(/[^A-Z]/g,'');
+  const n=cipher.length; const pattern=[]; let r=0, dir=1;
+  for(let i=0;i<n;i++){ pattern.push(r); r+=dir; if(r===0||r===rails-1) dir*=-1; }
+  const counts=Array(rails).fill(0); pattern.forEach(p=>counts[p]++);
+  const rows=[]; let k=0; for(let i=0;i<rails;i++){ rows[i]=cipher.slice(k,k+counts[i]).split(''); k+=counts[i]; }
+  const idx=Array(rails).fill(0); let out=''; for(const p of pattern){ out+=rows[p][idx[p]++]; }
+  return out;
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="rk_in" placeholder="WEAREDISCOVEREDFLEEATONCE"></textarea></div>
+    <div><textarea id="rk_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input id="rk_rails" type="number" value="3" min="2" max="10"></div>
+    <div><button onclick="rk_out.value=railEncrypt(rk_in.value,+rk_rails.value)">Encrypt →</button></div>
+    <div><button onclick="rk_in.value=railDecrypt(rk_out.value,+rk_rails.value)">← Decrypt</button></div>
+  </div>
+</section>
+
+<section id="trans_keyed">
+  <h2>9) Transposition – Keyed (Columnar)</h2>
+  <p><b>Definition:</b> Write text row‑wise under a keyword, then read columns in alphabetical order of keyword letters.</p>
+  <div class="eq">Let order = order of column indices after sorting keyword letters (stable).<br>Encryption: read columns by that order; Decryption reverses the process.</div>
+  <details close>
+    <summary>Code (Encrypt/Decrypt)</summary>
+    <pre class="eq"><code>function keyOrder(key){
+  key = key.toUpperCase().replace(/[^A-Z]/g,'');
+  const pairs = [...key].map((ch,i)=>({ch,i}));
+  pairs.sort((a,b)=> a.ch===b.ch ? a.i-b.i : a.ch<b.ch? -1:1);
+  return pairs.map(p=>p.i);
+}
+function colEncrypt(text, key){
+  text = text.toUpperCase().replace(/[^A-Z]/g,'');
+  const order = keyOrder(key), cols = order.length; if(!cols) return text;
+  const rows = Math.ceil(text.length/cols);
+  const grid = Array.from({length:rows},()=>Array(cols).fill('X'));
+  let k=0; for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ grid[r][c]= text[k++]||'X'; }}
+  let out=''; for(const c of order){ for(let r=0;r<rows;r++){ out+=grid[r][c]; }}
+  return out;
+}
+function colDecrypt(cipher, key){
+  cipher = cipher.toUpperCase().replace(/[^A-Z]/g,'');
+  const order = keyOrder(key), cols=order.length; if(!cols) return cipher;
+  const rows = Math.ceil(cipher.length/cols);
+  const grid = Array.from({length:rows},()=>Array(cols).fill(''));
+  let k=0; for(const c of order){ for(let r=0;r<rows;r++){ grid[r][c]=cipher[k++]||''; }}
+  let out=''; for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ out+=grid[r][c]; }}
+  return out;
+}</code></pre>
+  </details>
+  <div class="row">
+    <div><textarea id="ck_in" placeholder="ATTACKPOSTPONEDUNTILTWOAM"></textarea></div>
+    <div><textarea id="ck_out" placeholder="Output"></textarea></div>
+  </div>
+  <div class="grid-3" style="margin-top:8px">
+    <div><input id="ck_key" value="ZEBRAS"></div>
+    <div><button onclick="ck_out.value=colEncrypt(ck_in.value, ck_key.value)">Encrypt →</button></div>
+    <div><button onclick="ck_in.value=colDecrypt(ck_out.value, ck_key.value)">← Decrypt</button></div>
+  </div>
+</section>
+
+<footer class="wrap" style="opacity:.85;margin:24px 0 28px">
+  <p class="note">Study Tips: Know each cipher class (<i>substitution vs transposition</i>), the exact modular equations, key conditions (e.g., gcd(a,26)=1 for Affine; invertible matrix for Hill), and typical attacks (frequency analysis for monoalphabetic; Kasiski for Vigenère; pattern reconstruction for transposition). Show one worked example per cipher.</p>
+</footer>
+
+</main>
+
+<script>
+// --- UTILITIES ---
+function mod(n,m){ return ((n%m)+m)%m; }
+function invMod(a,m){ a=mod(a,m); for(let x=1;x<m;x++){ if(mod(a*x,m)===1) return x; } return null; }
+
+// --- 1. CAESAR ---
+function caesar(text, k, enc=true){
+  k = ((k%26)+26)%26;
+  text = text.toUpperCase().replace(/[^A-Z]/g,'');
+  let out='';
+  for (const ch of text){
+    const x = ch.charCodeAt(0)-65;
+    const y = enc ? (x+k)%26 : (x+26-k)%26;
+    out += String.fromCharCode(65+y);
+  }
+  return out;
+}
+
+// --- 2. MONOALPHABETIC ---
+function keyedAlphabet(keyword){
+  keyword = (keyword||'').toUpperCase().replace(/[^A-Z]/g,'');
+  const seen=new Set(), alpha=[];
+  for(const ch of keyword){ if(!seen.has(ch)){ seen.add(ch); alpha.push(ch);} }
+  for(let i=0;i<26;i++){ const ch=String.fromCharCode(65+i); if(!seen.has(ch)) alpha.push(ch); }
+  return alpha.join('');
+}
+function monoEncrypt(pt, key){
+  const K = keyedAlphabet(key); const map = {}; for(let i=0;i<26;i++){ map[String.fromCharCode(65+i)] = K[i]; }
+  pt = pt.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  for(const ch of pt){ out += map[ch] || ''; } return out;
+}
+function monoDecrypt(ct, key){
+  const K = keyedAlphabet(key); const inv = {}; for(let i=0;i<26;i++){ inv[K[i]] = String.fromCharCode(65+i); }
+  ct = ct.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  for(const ch of ct){ out += inv[ch] || ''; } return out;
+}
+
+// --- 3. PLAYFAIR ---
+function pfSquare(keyword){
+  keyword = keyword.toUpperCase().replace(/[^A-Z]/g,'').replace(/J/g,'I');
+  const seen=new Set(), arr=[];
+  for(const ch of keyword){ if(!seen.has(ch) && ch!=='J'){ seen.add(ch); arr.push(ch);} }
+  for(let i=0;i<26;i++){
+    const ch=String.fromCharCode(65+i); if(ch==='J') continue;
+    if(!seen.has(ch)){ seen.add(ch); arr.push(ch); }
+  }
+  const pos={}; arr.forEach((ch,i)=> pos[ch]=[Math.floor(i/5), i%5]);
+  return {grid:arr, pos};
+}
+function pfPrepare(text){
+  text = text.toUpperCase().replace(/[^A-Z]/g,'').replace(/J/g,'I');
+  const out=[]; let i=0;
+  while(i<text.length){
+    const a=text[i], b=text[i+1];
+    if(!b){ out.push([a,'X']); i+=1; }
+    else if(a===b){ out.push([a,'X']); i+=1; }
+    else { out.push([a,b]); i+=2; }
+  }
+  return out;
+}
+function pfEncrypt(pt, key){
+  const {grid,pos} = pfSquare(key); const pairs = pfPrepare(pt); let out='';
+  for(const [a,b] of pairs){
+    const [ra,ca]=pos[a], [rb,cb]=pos[b];
+    if(ra===rb){ out += grid[ra*5 + ((ca+1)%5)] + grid[rb*5 + ((cb+1)%5)]; }
+    else if(ca===cb){ out += grid[((ra+1)%5)*5 + ca] + grid[((rb+1)%5)*5 + cb]; }
+    else { out += grid[ra*5 + cb] + grid[rb*5 + ca]; }
+  }
+  return out;
+}
+function pfDecrypt(ct, key){
+  const {grid,pos} = pfSquare(key); ct = ct.toUpperCase().replace(/[^A-Z]/g,'');
+  let out=''; for(let i=0;i<ct.length;i+=2){
+    const a=ct[i], b=ct[i+1];
+    if (!a || !b || !pos[a] || !pos[b]) continue; // guard against bad input
+    const [ra,ca]=pos[a], [rb,cb]=pos[b];
+    if(ra===rb){ out += grid[ra*5 + ((ca+4)%5)] + grid[rb*5 + ((cb+4)%5)]; }
+    else if(ca===cb){ out += grid[((ra+4)%5)*5 + ca] + grid[((rb+4)%5)*5 + cb]; }
+    else { out += grid[ra*5 + cb] + grid[rb*5 + ca]; }
+  }
+  return out;
+}
+
+// --- 4. HILL ---
+function hillEncrypt(pt, K){
+  pt = pt.toUpperCase().replace(/[^A-Z]/g,''); if(pt.length%2) pt+='X';
+  const out=[];
+  for(let i=0;i<pt.length;i+=2){
+    const p=[pt.charCodeAt(i)-65, pt.charCodeAt(i+1)-65];
+    const c0 = mod(K[0][0]*p[0] + K[0][1]*p[1], 26);
+    const c1 = mod(K[1][0]*p[0] + K[1][1]*p[1], 26);
+    out.push(String.fromCharCode(65+c0), String.fromCharCode(65+c1));
+  }
+  return out.join('');
+}
+function hillInverse(K){
+  const det = mod(K[0][0]*K[1][1]-K[0][1]*K[1][0],26);
+  const invDet = invMod(det,26); if(invDet===null) return null;
+  const adj=[[ K[1][1], -K[0][1] ], [ -K[1][0], K[0][0] ]];
+  return [[ mod(invDet*adj[0][0],26), mod(invDet*adj[0][1],26) ],
+          [ mod(invDet*adj[1][0],26), mod(invDet*adj[1][1],26) ]];
+}
+function hillDecrypt(ct, K){
+  const Ki = hillInverse(K); if(!Ki) throw new Error('Key matrix not invertible mod 26');
+  ct = ct.toUpperCase().replace(/[^A-Z]/g,''); const out=[];
+  for(let i=0;i<ct.length;i+=2){
+    const c=[ct.charCodeAt(i)-65, ct.charCodeAt(i+1)-65];
+    const p0 = mod(Ki[0][0]*c[0] + Ki[0][1]*c[1], 26);
+    const p1 = mod(Ki[1][0]*c[0] + Ki[1][1]*c[1], 26);
+    out.push(String.fromCharCode(65+p0), String.fromCharCode(65+p1));
+  }
+  return out.join('');
+}
+
+// --- 5. POLYALPHABETIC ---
+function keyStream(key){
+  key = key.toUpperCase().replace(/[^A-Z]/g,'');
+  return [...key].map(ch=> ch.charCodeAt(0)-65);
+}
+function poly(text, key, mode='vigenere', enc=true){
+  const ks = keyStream(key); if(ks.length===0) return text;
+  text = text.toUpperCase().replace(/[^A-Z]/g,''); let out=''; let j=0;
+  for(const ch of text){
+    const p = ch.charCodeAt(0)-65, k = ks[j % ks.length]; j++;
+    let c;
+    if(mode==='vigenere') c = enc ? (p+k)%26 : (p+26-k)%26;
+    else if(mode==='beaufort') c = enc ? (k+26-p)%26 : (k+26-p)%26; // symmetric
+    out += String.fromCharCode(65+c);
+  }
+  return out;
+}
+
+// --- 6. AFFINE ---
+function affineEncrypt(pt,a,b){
+  pt = pt.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  for(const ch of pt){ const x=ch.charCodeAt(0)-65; const y=(a*x + b)%26; out += String.fromCharCode(65+((y+26)%26)); }
+  return out;
+}
+function affineDecrypt(ct,a,b){
+  ct = ct.toUpperCase().replace(/[^A-Z]/g,''); let out='';
+  const invA = invMod(a,26); if(invA===null) throw new Error('a not invertible mod 26');
+  for(const ch of ct){ const y=ch.charCodeAt(0)-65; const x = (invA * (y - b))%26; out += String.fromCharCode(65+((x+26)%26)); }
+  return out;
+}
+
+// --- 7. VIGENERE ---
+function vigEncrypt(pt,key){ return poly(pt,key,'vigenere',true); }
+function vigDecrypt(ct,key){ return poly(ct,key,'vigenere',false); }
+
+// --- 8. RAIL FENCE ---
+function railEncrypt(text, rails){
+  rails=Math.max(2,Math.min(10,rails|0));
+  text = text.toUpperCase().replace(/[^A-Z]/g,'');
+  const rows = Array.from({length:rails},()=>[]);
+  let r=0, dir=1; for(const ch of text){ rows[r].push(ch); r+=dir; if(r===0||r===rails-1) dir*=-1; }
+  return rows.flat().join('');
+}
+function railDecrypt(cipher, rails){
+  rails=Math.max(2,Math.min(10,rails|0)); cipher=cipher.toUpperCase().replace(/[^A-Z]/g,'');
+  const n=cipher.length; const pattern=[]; let r=0, dir=1;
+  for(let i=0;i<n;i++){ pattern.push(r); r+=dir; if(r===0||r===rails-1) dir*=-1; }
+  const counts=Array(rails).fill(0); pattern.forEach(p=>counts[p]++);
+  const rows=[]; let k=0; for(let i=0;i<rails;i++){ rows[i]=cipher.slice(k,k+counts[i]).split(''); k+=counts[i]; }
+  const idx=Array(rails).fill(0); let out=''; for(const p of pattern){ out+=rows[p][idx[p]++]; }
+  return out;
+}
+
+// --- 9. COLUMNAR ---
+function keyOrder(key){
+  key = key.toUpperCase().replace(/[^A-Z]/g,'');
+  const pairs = [...key].map((ch,i)=>({ch,i}));
+  pairs.sort((a,b)=> a.ch===b.ch ? a.i-b.i : a.ch<b.ch? -1:1);
+  return pairs.map(p=>p.i);
+}
+function colEncrypt(text, key){
+  text = text.toUpperCase().replace(/[^A-Z]/g,'');
+  const order = keyOrder(key), cols = order.length; if(!cols) return text;
+  const rows = Math.ceil(text.length/cols);
+  const grid = Array.from({length:rows},()=>Array(cols).fill('X'));
+  let k=0; for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ grid[r][c]= text[k++]||'X'; }}
+  let out=''; for(const c of order){ for(let r=0;r<rows;r++){ out+=grid[r][c]; }}
+  return out;
+}
+function colDecrypt(cipher, key){
+  cipher = cipher.toUpperCase().replace(/[^A-Z]/g,'');
+  const order = keyOrder(key), cols=order.length; if(!cols) return cipher;
+  const rows = Math.ceil(cipher.length/cols);
+  const grid = Array.from({length:rows},()=>Array(cols).fill(''));
+  let k=0; for(const c of order){ for(let r=0;r<rows;r++){ grid[r][c]=cipher[k++]||''; }}
+  let out=''; for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ out+=grid[r][c]; }}
+  return out;
+}
+</script>
+
+</body>
+</html>
