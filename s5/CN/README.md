@@ -20,7 +20,7 @@ mindmap
         A1.2(LSP Construction & Flooding)
       A2[Distance Vector Routing (DVR)]
         A2.1(Count-to-Infinity Problem)
-          A2.1.1(Solution: Split Horizon/Poisoned Reverse)
+          A2.1.1(Solution: Split Horizon / Poisoned Reverse)
         A2.2(Bellman-Ford Equation - Numerical)
         A2.3(Optimality Principle / Sink Tree)
       A3[Classification]
@@ -44,7 +44,7 @@ mindmap
           B2.1.1(Bandwidth, Delay, Jitter, Loss)
         B2.2(Techniques)
           B2.2.1(Scheduling (e.g., Fair Queuing))
-          B2.2.2(Traffic Shaping (Leaky/Token Bucket))
+          B2.2.2(Traffic Shaping (Leaky / Token Bucket))
     C(Network Structure)
       C1[Subnet Types (Comparison)]
         C1.1(Datagram Subnet)
