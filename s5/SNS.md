@@ -942,8 +942,8 @@ The security issues with DNS are primarily focused on **integrity** and **redire
 # Module 4
 [Notes](https://drive.google.com/file/d/1i3f6TXVt48WO2N3zFso5NCRlhz2P0_Fx/view?usp=drive_link)
 ## ✍️ Principles of Cryptography (8 Marks)
-
-**Principles of Cryptography are the guidelines for designing secure systems using cryptographic primitives.** The following points summarize them:
+[Refer Module One CIA+N-R](#module-1)
+~~ **Principles of Cryptography are the guidelines for designing secure systems using cryptographic primitives.** The following points summarize them:
 
 1. **Building Blocks:**  
    Cryptographic primitives are the basic building blocks of security systems (e.g., hash functions, encryption).
@@ -967,7 +967,7 @@ The security issues with DNS are primarily focused on **integrity** and **redire
    Most vulnerabilities arise not from weak primitives but from poor protocol design or buggy implementation.
 
 8. **Analogy Principle:**  
-   Just as programmers use established languages instead of inventing new ones, cryptographers should rely on proven primitives.
+   Just as programmers use established languages instead of inventing new ones, cryptographers should rely on proven primitives.~~
 
 ## Cryptographic Primitives (8 Marks)
 Cryptographic Primitives includes:
