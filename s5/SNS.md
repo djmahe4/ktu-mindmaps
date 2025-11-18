@@ -218,7 +218,7 @@ It answers these questions:
         │                 │                       │             │                       │
  Space Division     Time Division           (no further)   DATAGRAM PACKET     VIRTUAL CIRCUIT PACKET
  (Separate physical   (Share path using                         (Connectionless)    (Connection-oriented)
-   crosspoints)       time slots)                                            │
+   crosspoints)       time slots)                                                              │
         │                 │                                                    ├───────────────┬───────────────┐
         │                 │                                                    │               │               │
    Crossbar Switch     TDM / TSI / TDM Bus                                 SVC             PVC
