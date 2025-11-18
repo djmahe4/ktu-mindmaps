@@ -1,10 +1,207 @@
-**SNS**<br>
+ **SNS** - Summary Notes for Cyber Security Fundamentals
+===================================
 [Mod1](#module-1)<br><br>
 [Mod2](#module-2)<br><br>
 [Mod3](#module-3)<br><br>
 [Mod4](#module-4)<br><br>
 [Mod5](#module-5)<br><br>
 
+# Module 1
+[Notes](https://drive.google.com/file/d/12ld9F4Yr3rCvaWzahgxggS_mMjrz2CKy/view?usp=drive_link)
+- ARP and its Types: (P-1, Extremely High Priority)
+- DHCP Working (DORA) and Usage: (P-2, Extremely High Priority)
+- Network Security Principles and Policies: (H-1, High Priority)
+- Switching Techniques: (H-3, High Priority)
+- CIA Triangle / Security Services: (H-2, H-5, High Priority short notes/definitions)
+## ARP (Address Resolution Protocol) – Super Simple & Thorough Explanation  
+
+#### 1. What is ARP in One Line?
+- ARP is the “phonebook” of a local network that converts a known IP address (Layer 3) into the unknown MAC address (Layer 2) so that devices can actually talk to each other inside the same LAN.
+
+#### 2. Why do we even need ARP?
+- IP address = Logical address (like your house number + street name) → changes when you move.
+- MAC address = Physical address (burnt into NIC, like your fingerprint) → never changes.
+- Ethernet frames can ONLY be sent using MAC addresses, not IP addresses.
+- So when PC-A wants to send data to PC-B in the same LAN, it knows PC-B’s IP but NOT its MAC → ARP solves this.
+
+#### 3. How Normal ARP Works (Step-by-Step – Easy to Visualise)
+1. PC-A wants to send packet to 192.168.1.10.
+2. PC-A checks its ARP cache (local phonebook). If MAC is there → use it.
+3. If not found → PC-A broadcasts an ARP Request:
+   - “Who has 192.168.1.10? Tell 192.168.1.5” (broadcast to everyone in LAN)
+4. Only the device with 192.168.1.10 replies (unicast):
+   - “192.168.1.10 is at MAC 00:1A:2B:3C:4D:5E”
+5. PC-A updates its ARP cache and sends the actual data frame using that MAC.
+
+
+#### 4. Types of ARP (4 Types You Must Know)
+
+| Type          | Full Name                        | Direction                     | Purpose / When Used                                                                                   | Mnemonic / Memory Hook                                    |
+|---------------|----------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| Normal ARP    | Address Resolution Protocol      | IP → MAC                      | Most common. Finds MAC when you know the IP inside the same LAN.                                       | “Regular ARP = IP to MAC” (Forward direction            |
+| Reverse ARP   | Reverse Address Resolution Protocol (RARP) | MAC → IP               | Old/obsolete. Used by diskless workstations or BoOTP to ask “What is my IP?” when they only know their MAC. | “Reverse = MAC to IP” (backward arrow)                    |
+| Proxy ARP     | Proxy ARP                        | IP → MAC (on behalf of another) | Router answers ARP requests for devices in a different subnet so they appear to be in the same LAN. Used in legacy setups or to hide subnetting. | “Proxy = Someone else answers for you” (like a secretary) |
+| Inverse ARP   | Inverse Address Resolution Protocol (InARP) | MAC → IP (on NBMA networks) | Used mainly in Frame-Relay/ATM. When you already have a virtual circuit (know MAC/DLCI), InARP asks “What IP is at the other end?” | “Inverse = Opposite of normal ARP on non-broadcast links” |
+
+Quick Mnemonic for all four (story method):  
+Imagine you are at a party (LAN):
+
+- Normal ARP → You shout “Who has phone number 555-1234?” → person replies with name.
+- Reverse ARP → You only know your name, shout “My name is Bond, what’s my phone number?” (old diskless machines).
+- Proxy ARP → Your friend (router) shouts on behalf of someone in another room.
+- Inverse ARP → You are on a private call (Frame-Relay DLCI), you already have the line open, you ask “By the way, what’s your phone number?”
+
+#### 5. Mindmap Style Summary (Text Version)
+
+```
+                        ARP Family
+                            │
+        ┌───────────────────┼────────────────────┐
+        │                   │                    │
+    Normal ARP          Reverse ARP           Proxy ARP           Inverse ARP
+   (IP → MAC)           (MAC → IP)           (Router answers)     (MAC/DLCI → IP)
+  Most common           Obsolete (RARP)      Hides subnetting      Frame-Relay/ATM
+  LAN broadcast         Diskless stations     Legacy networks       NBMA networks
+```
+## DHCP (Dynamic Host Configuration Protocol) – Full Explanation  
+(Super Easy + Memorable + Exam-Ready)
+
+#### 1. Why Was DHCP Invented? (The Problem It Solves)
+**DHCP = Automatic IP Address Distributor**  
+It removes manual work, prevents conflicts, saves IPs, and makes network scalable.
+
+**Main Reasons We Use DHCP**
+- Automatic IP assignment (no manual config)
+- Prevents IP conflict (two devices same IP)
+- Centralised control (admin decides range, lease time)
+- Saves public IPv4 addresses (reuses when device leaves)
+- Gives extra info: Gateway, DNS, subnet mask in one go
+
+**Mnemonic**: DHCP = “Don’t Have to Configure IPs Please!”
+
+#### 2. How DHCP Actually Works – The Famous DORA Process  
+(4 Steps – 4 Messages – 4 Letters = DORA)
+
+| Step | Message Name | From → To          | Type         | What Happens                                                                 | Mnemonic |
+|------|--------------|--------------------|--------------|-------------------------------------------------------------------------------|----------|
+| 1    | DHCP Discover| Client → Broadcast | Broadcast    | New device shouts: “Is there any DHCP server? I need an IP!” (src 0.0.0.0, dst 255.255.255.255) | D = Discover (I’m new!) |
+| 2    | DHCP Offer   | Server → Broadcast | Broadcast    | Server replies: “Yes! I can give you 192.168.1.100, here are gateway/DNS too” | O = Offer (Here’s a gift) |
+| 3    | DHCP Request | Client → Broadcast | Broadcast    | Client shouts again: “Okay everyone, I accept the offer from this server!”   | R = Request (I want it!) |
+| 4    | DHCP Ack     | Server → Client    | Unicast      | Server confirms: “Cool, 192.168.1.100 is yours for 24 hours (lease)”         | A = Acknowledge (Done!) |
+
+**DORA = Discover → Offer → Request → Ack**  
+Best mnemonic ever: “DORA went to discover a new home, got an offer, requested it, and finally got acknowledgement!”
+
+#### 4. Important Extra Concepts
+
+| Concept            | Meaning                                                                                 | Memory Hook                                    |
+|--------------------|-----------------------------------------------------------------------------------------|------------------------------------------------|
+| Lease Time         | How long the IP is “rented” (e.g., 24 hrs). When 50% expires → client starts renewing   | “Lease = Rent, not buy”                        |
+| DHCP Relay Agent   | Router that forwards DHCP messages between subnets (so you don’t need server in every VLAN) | “Relay = Postman between floors”               |
+| DHCP Reservation  | Admin says “This MAC will always get this fixed IP” (useful for printers, servers)     | “VIP seat booking”                             |
+| Source IP in Discover/Offer | Client uses 0.0.0.0, Server uses its own IP                                           | “No home yet → 0.0.0.0”                        |
+| Ports Used         | UDP 67 (server), UDP 68 (client)                                                       | 67-68 = “Server listens 67, Client shouts 68”  |
+
+#### 5. Quick Revision Table (Memorise in 20 Seconds)
+
+| Message   | Sent By   | Destination      | Broadcast/Unicast | Purpose                          |
+|-----------|-----------|------------------|-------------------|----------------------------------|
+| Discover  | Client    | 255.255.255.255  | Broadcast         | I need IP!                       |
+| Offer     | Server    | 255.255.255.255  | Broadcast         | Here is an IP for you            |
+| Request   | Client    | 255.255.255.255  | Broadcast         | I accept your offer              |
+| Ack       | Server    | Client’s new IP  | Unicast           | Confirmed, use it                |
+## Principles of Network Security + Network Security Policies  
+
+#### 1. The 7 Core Principles of Network Security (CIA + Extra 4)
+
+| # | Principle          | Simple Meaning                                                                                 | Real-Life Example                                   | Mnemonic Word / Hook                                 |
+|---|--------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------|------------------------------------------------------|
+| 1 | **Confidentiality**| Only sender & receiver can read the message. No one else!                                     | Sending a love letter in a sealed envelope          | C = “Classified / Secret”                            |
+| 2 | **Integrity**      | Message arrives exactly as it was sent. No tampering!                                          | Bank transfer amount must not change on the way     | I = “Intact / No change”                             |
+| 3 | **Authentication** | Prove you are really YOU (not an imposter)                                                     | Logging in with username + password / OTP           | A = “Are you really you?”                            |
+| 4 | **Non-Repudiation**| Sender cannot deny “I never sent that!”                                                       | Digital signature on an email                       | N = “No denying”                                     |
+| 5 | **Access Control** | Right people get right level of access (role-based)                                            | HR can see salaries, interns cannot                 | A = “Admission only for authorized”                  |
+| 6 | **Availability**  | System & data must be usable when needed (no DoS, no crash)                                    | Website must be up 24×7 for customers               | A = “Always Available”                               |
+| 7 | **Ethics & Law**   | Respect privacy, ownership, accuracy, legality                                                 | Don’t collect data without permission (GDPR)       | E = “Ethical & Legal”                                |
+
+**Best Mnemonic for all 7**:  
+**“CIA-NAAA-E”**  
+→ **C**onfidentiality **I**ntegrity **A**uthentication – **N**on-repudiation **A**ccess control **A**vailability **A**vailability (wait no)  
+Better one → **“CIA Never Allows Anyone Entry”**  
+C – Confidentiality  
+I – Integrity  
+A – Authentication  
+N – Non-repudiation  
+A – Access control  
+A – Availability  
+E – Ethics & Law
+
+#### 2. Mindmap Style Summary of the 7 Principles
+
+```
+                Network Security Principles
+                            │
+            ┌───────────────┴───────────────┐
+            │               │               │
+      Confidentiality   Integrity      Availability: (Redundancy, DDoS protection)
+                                             
+            │               │               │
+            └──────┬────────┴───────┬───────┘
+                   │                │
+             Non-Repudiation    Access Control
+             (Digital Sign)     (RBAC, ACL)
+                   │                │
+                   └──────┬─────────┘
+                          │
+                   Authentication:  (Encryption, Hashing, Password/2FA)     
+                          │
+                     Ethics & Law
+                (Privacy, Accuracy, Ownership)
+```
+
+#### 3. What is a Network Security Policy? (Simple Definition)
+A **written document** that acts like the “Rule Book” or “Constitution” of your organization’s network.
+
+It answers these questions:
+- Who can access what?
+- What is allowed and what is forbidden?
+- How will we enforce the rules?
+- What happens if someone breaks the rules?
+
+#### 4. Goals of a Good Network Security Policy
+| Goal                                    | Why it matters                                      |
+|-----------------------------------------|-----------------------------------------------------|
+| Keep malicious outsiders OUT            | Block hackers, malware, ransomware                  |
+| Control risky insiders                  | Employees clicking bad links, sharing passwords     |
+| Define clear rules for everyone         | No confusion → better compliance                    |
+| Least privilege principle               | Give only the access needed for the job             |
+| Be enforceable technically              | Rules must match firewall, NAC, SIEM settings       |
+| Regular review & update                 | Threats change every year                           |
+
+#### 5. Typical Contents of a Network Security Policy (Checklist)
+
+| Section                          | Example Rules                                            |
+|----------------------------------|----------------------------------------------------------|
+| Acceptable Use Policy            | No torrent, no personal Gmail on work PC                 |
+| Password Policy                  | Minimum 12 chars, change every 90 days                   |
+| Remote Access Policy             | Only via VPN + MFA                                       |
+| Data Classification             | Public / Internal / Confidential / Top Secret           |
+| Bring Your Own Device (BYOD)    | Must have antivirus, company can wipe if lost           |
+| Incident Response                | Who to call if ransomware hits                           |
+| Email & Web Filtering            | Block phishing sites, no forwarding customer data        |
+| Physical Security                | Server room locked, no tailgating                        |
+
+#### 6. Quick Memory Table (Revise in 20 Seconds)
+
+| Principle          | Protects Against                          | Tool/Example                     |
+|--------------------|-------------------------------------------|----------------------------------|
+| Confidentiality    | Eavesdropping                             | Encryption (HTTPS, VPN)          |
+| Integrity          | Tampering                                 | Hashing, Digital Signature      |
+| Authentication     | Impersonation                             | Password, Biometrics, MFA        |
+| Non-Repudiation    | Denial by sender                          | Digital Signature                |
+| Access Control     | Unauthorized access                       | RBAC, ACL, NAC                   |
+| Availability       | DoS, ransomware                           | Redundancy, backups              |
+| Ethics & Law       | Legal trouble, privacy breach             | GDPR, company policy             |
 # Module 2
 [Notes](https://drive.google.com/file/d/1GNo3bUxvDeV99IoI3Dp7w7vGRCX75fVm/view?usp=drive_link)
 - **Linux Security Advantage**:	Why Linux is considered a less attractive target for security attacks?	Highest recurring 6-mark question. Secures 6 marks regardless of which question (Q13 or Q14) you attempt.
@@ -12,7 +209,316 @@
 - **General/System Hardening**:	Describe the general process of Linux Hardening / Explain the different types of system hardening techniques.	Covers the core 8-mark component for Q13 and often overlaps with Q14(a).
 - **Windows Safe Operations**:	How can you ensure the safe operations of a Windows workstation?	Key 8-mark component for Q14.
 
+## WHY LINUX IS CONSIDERED A LESS ATTRACTIVE TARGET FOR ATTACKERS
+| # | Reason (Simple Explanation)                                                                 | Why It Makes Linux Less Attractive to Mass Attackers                     | Mnemonic |
+|---|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|----------|
+| 1 | **Tiny desktop market share** (~3–4% globally vs Windows 75%+)                             | Malware authors want maximum profit → write once, infect millions of Windows PCs | “Market share = Money share” |
+| 2 | **No single dominant version/distribution** (Ubuntu, Fedora, Debian, Arch, Kali, etc.)     | One ransomware/exploit rarely works across all distros without changes      | “Fragmented = Hard to hit everyone” |
+| 3 | **Users rarely run as root/admin by default** (sudo asks password every time)              | Even if malware runs, it has limited privileges → less damage             | “Least privilege by design” |
+| 4 | **Open-source code → vulnerabilities found and patched very fast**                         | Community + companies fix bugs in hours/days (vs Microsoft’s monthly cycle) | “Many eyes make bugs shallow” |
+| 5 | **Package managers with signed repositories** (apt, dnf, pacman)                            | Almost impossible to trick users into running fake .exe-style malware     | “Only trusted software enters” |
+| 6 | **Strict file permissions & access control by default** (SELinux/AppArmor often enabled)   | Malware can’t easily overwrite system files or escalate privileges        | “Everything locked down from birth” |
+| 7 | **Most Linux desktops are custom-hardened** (servers especially)                            | Sysadmins apply the 34-point hardening checklist (pages 32–34) → very small attack surface | “Hardened culture” |
+## STEPS TO FOLLOW BEFORE CONNECTING A WORKSTATION TO ANY NETWORK  
 
+| Step | Action (What + Why)                                                                 | Reference from Module 2                                      | Quick Tip / Tool                                      |
+|------|-------------------------------------------------------------------------------------|--------------------------------------------------------------|-------------------------------------------------------|
+| 1    | **P**erform fresh / clean installation of OS                                       | Clean installation wipes old malware/leftovers              | Use official ISO + clean installation (page 13)       |
+| 2    | **U**pdate the OS completely (all patches, service packs)                         | Unpatched software = #1 vulnerability (endpoint hardening)  | Windows Update → “Check for updates” till no more     |
+| 3    | **R**emove all unnecessary software, drivers, and services                        | OS hardening rule #1 (page 4)                                | Disable auto-start bloatware, games, toolbars         |
+| 4    | **E**nable and configure Secure Boot + TPM                                         | OS hardening (page 4) + Windows safety (page 14-15)          | BIOS → Secure Boot = Enabled, TPM 2.0 activated      |
+| 5    | **B**itLocker (Windows) or LUKS/dm-crypt (Linux) full-disk encryption             | OS & server hardening – encrypt HDD/SSD                      | Turn on BitLocker with 256-bit AES + TPM + PIN        |
+| 6    | **A**pply official security baseline (CIS or Microsoft baseline)                  | Security baselines (page 16) + CIS/NIST standards (page 8)   | Download CIS benchmark or Microsoft Security Baseline and apply via GPO/script |
+| 7    | **S**et strong local Administrator password + rename/disable built-in Admin      | Default/hardcoded passwords are dangerous (page 6)           | 20+ characters, random                               |
+| 8    | **E**nable and properly configure Windows Defender Firewall (or iptables/ufw)    | Windows Defender Firewall + network hardening                | Block inbound by default, allow only required ports  |
+| 9    | **L**aunch and fully update Microsoft Defender Antivirus / third-party AV         | Built-in antivirus (page 2) + real-time protection           | Turn on real-time + cloud protection                  |
+|10    | **I**mplement strong password policy + enable account lockout after 5-10 fails   | Server & endpoint hardening                                  | Local Policy → Password must meet complexity         |
+|11    | **N**ever leave default/hard-coded passwords anywhere                             | Top weakness listed multiple times (page 6)                  | Scan with tools like LAPS or built-in checks          |
+|12    | **K**ill unnecessary open ports and services                                      | Network & OS hardening – disable unused ports/services       | netstat -an / ss -tuln ; disable via services.msc    |
+|13    | **L**ogging – enable detailed auditing and forward logs to central server (optional but gold standard) | Good hardening checklist (page 8)                            | Event Viewer → enable success/failure auditing        |
+|14    | **I**nstall only required applications (custom/minimal install)                   | Application hardening + reduce attack surface                | Custom installation, not “Typical/Full”               |
+|15    | **K**ick-off final full system scan + vulnerability scan (optional but recommended) | Vulnerability scanning (security testing, page 21)          | Microsoft Defender offline scan or Nessus/OpenVAS     |
+
+After step 15 → **NOW** you may physically plug the Ethernet cable or connect to Wi-Fi.
+
+#### Bonus Quick 7-Step Version (Most Examiners Accept This)
+If you are short on time, memorize this shortened version (still covers 95% marks):
+
+1. Clean OS install  
+2. Fully patch OS + firmware  
+3. Enable full-disk encryption (BitLocker/LUKS)  
+4. Apply CIS/Microsoft security baseline  
+5. Enable & configure firewall + antivirus  
+6. Remove unnecessary software/services/accounts  
+7. Change all default passwords → full scan → connect
+## BIOS SECURITY + COMPUTER LOCKS + xlock & vlock  
+
+#### Mindmap (Draw this – 60-second recall guaranteed)
+
+```
+                PHYSICAL & LOW-LEVEL SECURITY
+                               │
+           ┌───────────────────┴───────────────────┐
+   Physical Locks                BIOS Security                Console Locks
+           │                           │                            │
+   ┌───────┴───────┐          ┌────────┴────────┐        ┌──────┴──────┐
+Case lock   Cable lock   Boot Password   Default   xlock       vlock
+(PC)        (Kensington) (Most BIOS)     Password  (X display) (Virtual consoles)
+                         (EEPROM on SPARC)  Danger!
+```
+
+#### Detailed Breakdown – Simple + Mnemonic + Real Use
+
+| Feature              | What It Does (Simple)                                      | Strength Level       | How Attacker Can Bypass                     | Mnemonic                    |
+|----------------------|--------------------------------------------------------------------|----------------------|---------------------------------------------|-----------------------------|
+| **Computer Case Locks** | Key on front → locks case opening or sometimes keyboard/mouse ports | Low-Medium           | Cheap locks – just break plastic or pick   | “Case = Don’t touch inside” |
+| **Cable / Kensington Lock** | Steel cable + padlock through hole at back (most laptops & PCs)   | Medium               | Cut cable with bolt cutter (takes 10 sec)   | “Cable = Chain the dog”     |
+| **BIOS Boot Password** | Asks password before even showing boot menu                      | Medium               | 1. Reset CMOS jumper/battery<br>2. Many BIOS have **default backdoor passwords** (Google “BIOS model + master password”) | “BIOS = Gatekeeper before OS” |
+| **SPARC / Sun EEPROM Password** | Same idea but on Solaris/SPARC machines                           | Medium-High          | Still resettable if attacker opens case     | Same as above               |
+| **xlock**            | Locks your **X11 graphical desktop** (GUI) – asks your user password to unlock | High (if strong password) | Kill X or boot to console                   | “xlock = Lock the screen”   |
+| **vlock**            | Locks **virtual consoles** (Ctrl+Alt+F1 to F6) – can lock one or all | Very High            | Very hard to bypass without reboot          | “vlock = Lock the terminals” |
+
+#### Critical Warning You MUST Remember for Exams
+- **Never fully trust BIOS passwords alone**  
+  → Easy to reset by removing CMOS battery or using jumper  
+  → Many manufacturers left **default master passwords** (e.g., AMI, Award, Phoenix all have famous backdoors)
+
+#### Best Mnemonic Story (Memorize in 20 seconds)
+Imagine someone breaks into your room at night:
+
+1. First they try to open the **case** → stopped by case lock  
+2. They try to steal the whole PC → stopped by **cable lock**  
+3. They try to boot from USB to hack → stopped by **BIOS password**  
+4. They finally boot Linux and reach your desktop → **xlock** asks your password  
+5. They switch to text console (Ctrl+Alt+F3) → **vlock** still asks password  
+
+## PATCHES – Complete Reverse-Engineered Notes  
+
+#### One-Line Definition  
+“A **patch** is a piece of software designed to update, fix bugs, close security holes, or improve a program or its data.”
+
+#### Why Patches Exist (3 Main Reasons – Memorize this triangle)
+```
+          Improve Performance
+                 /   \
+                /     \
+               /       \
+        Fix Bugs     Close Security Holes
+```
+
+#### Mindmap of ALL Patch Types & Variants (Draw this once → never forget)
+
+```
+                        PATCHES
+                          │
+          ┌───────────────┴───────────────┐
+   How they are delivered      Size / Purpose      Special Names
+          │                            │                 │
+   ┌──────┴──────┐              ┌──────┴──────┐   ┌──────┴───────┐
+Binary     Source Code    Small       Large     Hotfix   Service Pack   etc.
+ Patches     Patches       Patches    Patches
+
+```
+
+#### Detailed Table + Simple Explanation + Mnemonic + Real-World Example
+
+| Type / Variant          | Explanation (Simple)                                      | Who Uses It Most?          | Mnemonic / Example                              |
+|-------------------------|------------------------------------------------------------|----------------------------|-------------------------------------------------|
+| **Binary Patches**      | Ready-to-run executable files (no source code needed)     | Closed-source (Microsoft, Adobe) | “Binary = Black-box fix” → Windows Update .exe |
+| **Source Code Patches** | Text “diff” files – you compile yourself                  | Open-source (Linux, Apache) | “Diff = Do It Yourself” → git patch files      |
+| **Large Patches**       | Too big to call “patch” → renamed                         | Everyone                   | Service Packs, Software Updates                 |
+| **Hotfix / QFE**        | Single urgent fix for one critical problem                | Microsoft, enterprises     | “Hot = Emergency surgery” → KBxxxxxxx          |
+| **Point Release**       | Minor version (e.g., 10.1.2 → 10.1.3) – bug fixes only    | All software               | “Point = Tiny step forward”                     |
+| **Security Patch**      | Specifically closes a vulnerability                       | EVERYONE (most important)  | “Security = Plug the hole before hacker enters”|
+| **Service Pack (SP)**   | Huge bundle of all patches + some features               | Microsoft, older Windows  | “SP = Big Christmas gift of fixes”              |
+| **Program Temporary Fix (PTF)** | IBM’s name for a single or group of fixes          | IBM mainframes             | Old-school name                                 |
+| **Unofficial Patches**  | Made by third parties (community or security researchers)| Games, abandoned software  | “Unofficial = Fan rescue”                       |
+| **Monkey Patches**      | Live code change in running program (no restart)          | Python/Ruby developers     | “Monkey = Sneaky runtime edit”                 |
+| **Hot Patching / Live Patching** | Apply patch without reboot/restart                | Linux kernel, critical servers | “Hot = Fix while engine is running”            |
+
+#### Exam Gold Lines (Direct from Document)
+- “Patches may be permanent or temporary”
+- “Security patches are the primary method of fixing security vulnerabilities in software”
+- “Patch management is part of vulnerability management”
+- Hot patching = “application of patches without shutting down and restarting the system”
+- Monkey patching = “extending or modifying a program locally… affects only the running instance”
+## TYPES OF SOFTWARE INSTALLATION – Complete Reverse-Engineered Notes  
+(From MOD 2 SNS.pdf – Structured for Quick Learning & 100% Recall)
+
+#### Core Concept in One Line  
+“Installation = Making a program ready to run by copying files, setting configurations, creating shortcuts, etc.
+
+#### Mindmap of All 8 Types (Easy to Visualize & Memorize)
+
+```
+                   TYPES OF INSTALLATION
+                             │
+        ┌────────────────────┼────────────────────┐
+   User Interaction       Automation         Special Cases
+        │                    │                    │
+   ┌────┴────┐          ┌────┴────┐          ┌────┴────┐
+Custom   Attended    Silent   Unattended    Headless   Scheduled   Clean   Network
+```
+
+#### Detailed Table + Simple Explanation + Mnemonic + When to Use
+
+| Type                  | User Present? | User Interaction Needed? | Shows Messages/Windows? | Best Used For                          | Mnemonic Phrase                          |
+|-----------------------|---------------|--------------------------|--------------------------|----------------------------------------|------------------------------------------|
+| 1. Custom             | Yes           | Yes (a lot)              | Yes                      | Save disk space, install only needed parts | “Customer chooses”                       |
+| 2. Attended           | Yes           | Yes                      | Yes (wizard)             | Normal home/office Windows installs    | “Attend = you sit and click Next”       |
+| 3. Silent             | Yes or No     | No                       | No messages at all       | Background installs, user doesn’t see   | “Silent = invisible ninja”               |
+| 4. Unattended         | No            | No (pre-answered)        | Usually none             | Mass deployment (100s of PCs)          | “Unattended = no human babysitting”      |
+| 5. Headless           | No            | No                       | No monitor needed        | Servers in data centers, remote install| “Headless = no head (no screen)”         |
+| 6. Scheduled/Automated| No            | No                       | Can be silent            | Night-time updates, when PC is free    | “Scheduled = set timer and sleep”        |
+| 7. Clean              | Yes/No        | Depends                  | Depends                  | Fresh OS or when old version causes issues | “Clean = wipe everything first”       |
+| 8. Network            | Yes/No        | Minimal                  | Depends                  | Corporate environments, site licenses  | “Network = install from server/share”    |
+
+#### One-Word Difference You Must Remember
+- Silent → hides messages but can still need user present  
+- Unattended → no user needed at all (answer file or switches given in advance)  
+- Headless → no monitor attached (used with unattended for servers)
+
+#### Mnemonic Story to Memorize All 8 Types in Order
+Imagine you are installing software on 1000 computers:
+
+1. First PC → you sit and pick only needed components → Custom  
+2. Second PC → you sit and click Next-Next-Finish → Attended  
+3. Third PC → you start it and go for coffee (nothing shows) → Silent  
+4. Fourth to hundredth → you go home, script runs alone → Unattended  
+5. Hundred-first is a server in dark rack with no screen → Headless  
+6. At 2 AM when everyone sleeps → Scheduled/Automated  
+7. One PC had old broken version → you wipe disk first → Clean  
+8. All 1000 PCs pull files from central server → Network
+## ALL TYPES OF HARDENING – Complete Reverse-Engineered Notes  
+(From MOD 2 SNS.pdf – Structured for Deep Learning & Memorization)
+
+#### Core Concept of Hardening (Simple Definition)
+- **Hardening = Reducing the "attack surface"**  
+  → Make it as small and tough as possible so attackers have fewer doors/windows to break in.
+
+Mnemonic: **"HARDEN"**  
+H → Remove unnecessary stuff  
+A → Add strong authentication  
+R → Restrict access/permissions  
+D → Disable unused services/ports  
+E → Encrypt everything important  
+N → Keep updated (patches)
+
+#### Mindmap of ALL Types of Hardening (Hierarchical)
+
+```
+                    SYSTEM HARDENING (Main Goal: Reduce Attack Surface)
+                               │
+        ┌──────────────────────┼──────────────────────┐
+        ▼                      ▼                      ▼
+Application          Operating System            Server
+Hardening               Hardening               Hardening
+        │                      │                      │
+        ▼                      ▼                      ▼
+Endpoint              Database                Network
+Hardening             Hardening              Hardening
+```
+
+#### Detailed Breakdown – Each Type Explained Simply + Key Techniques + Mnemonic
+
+1. **Application Hardening**  
+   “Make individual apps tougher than a tank”  
+   Key Techniques:
+   - Auto-patch apps (1st & 3rd party)
+   - Firewalls + Antivirus + Anti-malware
+   - Encrypt data inside the app
+   - Use Intel SGX CPUs
+   - Password manager (e.g., LastPass)
+   - IPS / IDS
+   Mnemonic: **APP** → Auto-Patch + Protect + Prevent
+
+2. **Operating System (OS) Hardening**  
+   “Strip the OS naked – remove everything not needed”  
+   Key Techniques:
+   - Remove unnecessary drivers/services
+   - Encrypt HDD/SSD
+   - Enable & configure Secure Boot
+   - Strong access permissions
+   - Limit user accounts
+   Mnemonic: **OS** → Only Secure stuff stays
+
+3. **Server Hardening**  
+   “Servers hold the crown jewels – lock them down hardest”  
+   Key Techniques:
+   - Keep OS & software updated
+   - Remove non-compliant 3rd-party apps
+   - Strong complex passwords + policy
+   - Lock accounts after failed logins
+   - Disable USB at boot
+   - Multi-Factor Authentication (MFA)
+   - Self-encrypting drives / AES
+   - Firmware resilience + memory encryption
+   Mnemonic: **SERVER** → Super Encrypted, Very Regularly patched
+
+4. **Endpoint Hardening** (Desktops, Laptops, Phones)  
+   “Every endpoint is a potential door for attackers”  
+   Common Weaknesses (must fix):
+   - Default/hardcoded passwords
+   - Plain-text credentials
+   - Unpatched software/firmware
+   - Poor BIOS/firewall config
+   - Unencrypted traffic/data
+   - Weak privileged access controls
+   Mnemonic: **ENDPOINT** → Every New Device Protects Only Its Network Traffic
+
+5. **Database Hardening**  
+   “Databases store the real treasure – triple-lock them”  
+   3 Main Processes:
+   1. Limit user privileges (RBAC)
+   2. Disable unnecessary services/functions
+   3. Encrypt data (in-transit + at-rest)
+   Key Techniques:
+   - Restrict admin powers
+   - Patch DBMS regularly
+   - Lock accounts on suspicious logins
+   - Strong complex DB passwords
+   Mnemonic: **DB** → Don’t Be generous with privileges
+
+6. **Network Hardening**  
+   “Secure the roads between all systems”  
+   Two main ways:
+   - Intrusion Prevention System (IPS)
+   - Intrusion Detection System (IDS)
+   Key Techniques:
+   - Secure & configure firewalls properly
+   - Audit network rules & privileges
+   - Disable unused protocols/ports
+   - Encrypt all network traffic
+   - Disable unused network services/devices
+   Mnemonic: **NET** → No Extra Traffic
+
+#### Quick Comparison Table (Memorize this!)
+
+| Type               | Main Target                  | #1 Thing to Do                     | Best Standard |
+|--------------------|------------------------------|------------------------------------|----------------|
+| Application        | Individual apps              | Auto-patch + encrypt data          | CIS / Vendor   |
+| OS                 | Windows/Linux kernel         | Remove unnecessary + Secure Boot   | CIS / NIST     |
+| Server             | Web/DB/File servers          | MFA + disable USB + encrypt drives| CIS Server     |
+| Endpoint           | Laptops/Desktops/Mobiles     | Change defaults + patch            | CIS Endpoint   |
+| Database           | MySQL, Oracle, SQL Server…   | RBAC + encrypt at-rest & transit   | CIS DB         |
+| Network            | Firewalls, routers, switches | Close unused ports + encrypt       | CIS Network    |
+
+#### Famous Hardening Standards (You MUST remember these 3)
+1. **NIST** – National Institute of Standards & Technology (USA govt)
+2. **CIS** – Center for Internet Security (has ready benchmarks for everything)
+3. **Microsoft Security Baselines** – for Windows environments
+
+Mnemonic for standards: **NCM** → NIST, CIS, Microsoft
+
+#### Universal Hardening Checklist (Applies to almost everything)
+- Strong passwords + regular change  
+- Remove/disable unnecessary drivers/services/software  
+- Auto-updates ON  
+- Limit user access (least privilege)  
+- Log everything + review logs  
+- Encrypt disks & network traffic  
+- Use MFA wherever possible  
+- Patch, patch, patch!
 
 # Module 3
 [Notes](https://drive.google.com/file/d/1l170U_HYZHeohgADOaMU6ZnXxKU5Yv8x/view?usp=drive_link)
