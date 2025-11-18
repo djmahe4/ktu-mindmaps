@@ -202,6 +202,74 @@ It answers these questions:
 | Access Control     | Unauthorized access                       | RBAC, ACL, NAC                   |
 | Availability       | DoS, ransomware                           | Redundancy, backups              |
 | Ethics & Law       | Legal trouble, privacy breach             | GDPR, company policy             |
+## Switching Techniques – FINAL COMPLETE VERSION  
+
+#### 1. Complete Mindmap / Hierarchy (Text Version)
+
+```
+                          SWITCHING TECHNIQUES
+                                   │
+        ┌──────────────────────────┼──────────────────────────┐
+        │                          │                          │
+   CIRCUIT SWITCHING         MESSAGE SWITCHING         PACKET SWITCHING
+   (Dedicated path)          (Store whole msg)        (Divide into packets)
+        │                                                       │
+        ├─────────────────┬───────────────────────┐             ├───────────────────────┐
+        │                 │                       │             │                       │
+ Space Division     Time Division           (no further)   DATAGRAM PACKET     VIRTUAL CIRCUIT PACKET
+ (Separate physical   (Share path using                         (Connectionless)    (Connection-oriented)
+   crosspoints)       time slots)                                            │
+        │                 │                                                    ├───────────────┬───────────────┐
+        │                 │                                                    │               │               │
+   Crossbar Switch     TDM / TSI / TDM Bus                                 SVC             PVC
+                                                                      (Switched VC)   (Permanent VC)
+                                                                   Setup & tear down   Pre-configured by ISP
+```
+
+#### 2. Virtual Circuit Packet Switching – Two Sub-Types (Page 29 notes)
+
+| Sub-Type                  | Full Name                        | How Path is Created                     | When Used                                      | Example                          | Mnemonic                              |
+|---------------------------|----------------------------------|-----------------------------------------|------------------------------------------------|----------------------------------|----------------------------------------|
+| **SVC**                   | Switched Virtual Circuit         | Dynamically created when needed (call request + call accept packets) | Temporary connections (like normal phone call) | ATM banking networks             | “S for Switched = On-demand booking”  |
+| **PVC**                   | Permanent Virtual Circuit        | Pre-configured by service provider, always exists | Long-term links between offices/branches       | ISP connecting two company sites | “P for Permanent = Lifetime booking” |
+
+#### 3. Ultimate Comparison Table (Everything in One Place)
+
+| Feature                         | Circuit (General) | Space Division | Time Division | Message       | Datagram Packet      | Virtual Circuit (General) | SVC           | PVC           |
+|---------------------------------|-------------------|----------------|---------------|---------------|----------------------|---------------------------|---------------|---------------|
+| Dedicated Path                  | Yes               | Yes (physical) | Yes (time slot) | No            | No                   | Yes (logical)             | Yes (temp)    | Yes (permanent)|
+| Connection Setup Required       | Yes               | Yes            | Yes           | No            | No                   | Yes                       | Yes           | No            |
+| Path Fixed for Whole Session    | Yes               | Yes            | Yes           | No            | No                   | Yes                       | Yes           | Yes           |
+| Packets Follow Same Route       | N/A               | N/A            | N/A           | N/A           | No                   | Yes                       | Yes           | Yes           |
+| Order Guaranteed                | Yes               | Yes            | Yes           | Yes           | No                   | Yes                       | Yes           | Yes           |
+| Bandwidth Wastage if Idle       | High              | High           | High          | None          | None                 | None                      | None          | None          |
+| Delay                           | Low after setup   | Very low       | Tiny          | Very high     | Low                  | Low                       | Low           | Low           |
+| Technology/Example              | Telephone         | Crossbar       | Digital PSTN  | Old telegram  | Internet (UDP)       | ATM, Frame Relay, MPLS    | ATM calls     | Leased lines  |
+| Store & Forward                 | No                | No             | No            | Yes (full msg)| Yes (per packet)     | Yes (per packet)          | Yes           | Yes           |
+
+#### 4. Best Mnemonics to Memorize Forever
+
+**Overall Three Main Techniques**  
+- **C**ircuit → “C for Complete dedicated Circuit” (like marriage hall fully booked)  
+- **M**essage → “M for Mail” (entire letter stored at every post office)  
+- **P**acket → “P for Parcel” (break into small packets)
+
+**Packet Sub-types**  
+- Datagram → “Date + Gram” → free to go anywhere, no commitment (connectionless)  
+- Virtual Circuit → “Virtual Marriage” → fixed route for whole session  
+  - SVC → “Switched Virtual Call” → dial-up marriage (temporary)  
+  - PVC → “Permanent Virtual Connection” → arranged marriage (always there)
+
+**Circuit Sub-types**  
+- Space Division → “Separate rooms for each couple” (crossbar)  
+- Time Division → “One dance floor, couples take turns” (TDM)
+
+#### 5. One-Liner Summary (Perfect for Last-Minute Revision)
+
+“Circuit = dedicated path (Space = separate wires, Time = time slots);  
+Message = whole message stored everywhere;  
+Packet = broken into packets → Datagram (no fixed path) vs Virtual Circuit (fixed logical path → SVC = temporary, PVC = permanent)”
+
 # Module 2
 [Notes](https://drive.google.com/file/d/1GNo3bUxvDeV99IoI3Dp7w7vGRCX75fVm/view?usp=drive_link)
 - **Linux Security Advantage**:	Why Linux is considered a less attractive target for security attacks?	Highest recurring 6-mark question. Secures 6 marks regardless of which question (Q13 or Q14) you attempt.
@@ -942,8 +1010,8 @@ The security issues with DNS are primarily focused on **integrity** and **redire
 # Module 4
 [Notes](https://drive.google.com/file/d/1i3f6TXVt48WO2N3zFso5NCRlhz2P0_Fx/view?usp=drive_link)
 ## ✍️ Principles of Cryptography (8 Marks)
-[Refer Module One CIA+N-R](#module-1)
-<s> **Principles of Cryptography are the guidelines for designing secure systems using cryptographic primitives.** The following points summarize them:
+
+**Principles of Cryptography are the guidelines for designing secure systems using cryptographic primitives.** The following points summarize them:
 
 1. **Building Blocks:**  
    Cryptographic primitives are the basic building blocks of security systems (e.g., hash functions, encryption).
@@ -967,7 +1035,7 @@ The security issues with DNS are primarily focused on **integrity** and **redire
    Most vulnerabilities arise not from weak primitives but from poor protocol design or buggy implementation.
 
 8. **Analogy Principle:**  
-   Just as programmers use established languages instead of inventing new ones, cryptographers should rely on proven primitives.</s>
+   Just as programmers use established languages instead of inventing new ones, cryptographers should rely on proven primitives.
 
 ## Cryptographic Primitives (8 Marks)
 Cryptographic Primitives includes:
