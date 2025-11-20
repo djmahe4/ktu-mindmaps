@@ -138,8 +138,6 @@ If n = PRIME p                   If any n (gcd(a,n)=1)
 | Euler’s          | gcd(a,n)=1                 | a^{φ(n)} ≡1 (mod n)        | “Coprime → φ(n) power =1”    |
 
 ## Module 2
-Here’s a complete, easy-to-learn, structured reverse-engineered note for **Module 1 – Basics of Security and Traditional Cryptosystems** using simple language, bullet points, mnemonics, and mind-map style grouping so you can memorize everything quickly and thoroughly.
-
 ### 1. OSI Security Architecture – The 3 Pillars (Mnemonic: ASM)
 - **A**ttacks → What the enemy does
 - **S**ervices → What protection we want
@@ -216,11 +214,13 @@ Cryptology = Both together
 
 **Caesar Cipher (Shift by 3)**
 - Formula: C = (P + k) mod 26   → k = 3 usually
+- Decryption: P = (C − k) mod 26
 - Only 26 possible keys → brute-force in seconds
 - Mnemonic: “Julius Caesar shifted 3”
 
 **Playfair Cipher (5×5 matrix, digraphs)**
 - Keyword → fill matrix → I/J together
+- Rectangle rule for digraphs: selected letter row and other letter column
 - Rules (Mnemonic: RRCD)
   1. Repeat letter → insert X
   2. Same Row → right (wrap)
@@ -230,19 +230,54 @@ Cryptology = Both together
 **Vigenère Cipher (Polyalphabetic king)**
 - Use repeating keyword
 - Cᵢ = (Pᵢ + Kᵢ) mod 26
+- Dᵢ = (Cᵢ − Kᵢ) mod 26
 - Stronger than monoalphabetic because same letter can become different
 
 **Hill Cipher (Matrix multiplication)**
 - Uses m×m key matrix
 - C = K × P (mod 26)
+- Decryption uses K⁻¹
 - Hides single-letter frequency completely
+**Affine Cipher (Mathematical substitution)**
+- C = (aX + b) mod 26
+- D = a⁻¹(C − b) mod 26
 
 #### B. Transposition Ciphers (Rearrange letters)
 - No substitution, just permutation
 - Types:
   - Keyless (Rail Fence)
+    - Rail Fence (zig-zag)
+        - Write message in zig-zag pattern across rows
+        - example: "HELLO WORLD" with 3 rails<br>
+          H   L   O  O  L<br>
+           E L W R D<br>
+        - Read row-wise: "HLOOL ELWRD"
+    - Columnar (fixed columns)
+      - Write message in rows of fixed length, read columns
+      - example: "HELLO WORLD" with 3 rails<br>
+          H   O   R<br>
+          E   L   W<br>
+          L   D   L<br>
+          O<br>
+        - Read row-wise: "HOR ELWLD LO"
   - Keyed (columnar)
+    - Use keyword to determine column order (write indexes and then follow the key order)
+    - example: Keyword "ZEBRA" (order 5,2,3,4,1)<br>
+          Z E B R A<br>
+          H E L L O<br>
+          W O R L D<br>
+        - Read columns in keyword order: "OHLWELRLD"
   - Double transposition (very strong classical)
+    - example: First transpose with keyword1, then with keyword2
+        - Keyword1: "CIPHER"<br>
+          C I P H E R<br>
+          H E L L O W<br>
+          O R L D X X<br>
+        - Then transpose again with Keyword2: "KEYWORD"<br>
+          K E Y W O R D<br>
+          H L L O W H E<br>
+          O R L D X X<br>
+        - Final ciphertext after both transpositions is: "HLLOWHEORL DXX"
 
 ### Full Mind-Map Summary (Visualise this)
 
