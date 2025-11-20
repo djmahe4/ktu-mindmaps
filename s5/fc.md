@@ -1,4 +1,9 @@
 # FC
+[Mod1](#module-1)<br><br>
+[Mod2](#module-2)<br><br>
+[Mod3](#module-3)<br><br>
+[Mod4](#module-4)<br><br>
+[Mod5](#module-5)<br><br>
 ## Module 1
 ### Fermat’s Little Theorem & Euler’s Theorem – Complete Mastery Notes  
 (With Mindmap, Mnemonics, Proofs & 15 Solved Problems)
