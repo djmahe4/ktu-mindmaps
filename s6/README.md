@@ -1,10 +1,10 @@
 ## 📝 Semester Syllabus To-Do List
 
 **[CD](#cst-302-compiler-design)**<br><br>
-**[IOT](#cgt-304-iot-&-smart-computing)**<br><br>
+**[IOT](#cgt-304-iot-and-smart-computing)**<br><br>
 **[AAD](#cst-306-algorithm-analysis-and-design)**<br><br>
 **[EH](#cgt-312-ethical-hacking)**<br><br>
-**[IEFT](#hut-300-industrial-economics-&-foreign-trade)**<br><br>
+**[IEFT](#hut-300-industrial-economics-and-foreign-trade)**<br><br>
 **[CCW](#cgt-308-comprehensive-course-work)**<br><br>
 ---
 ### CST 302 Compiler Design
@@ -35,7 +35,7 @@
 
 ---
 
-### CGT 304 IOT & Smart Computing
+### CGT 304 IOT and Smart Computing
 
 * **Module 1 (Overview of Internet of Things)**
     * [ ] Define IoT, conceptual framework, and architectural view.
@@ -117,7 +117,7 @@
 
 ---
 
-### HUT 300 Industrial Economics & Foreign Trade
+### HUT 300 Industrial Economics and Foreign Trade
 
 * **Module 1 (Basic Concepts and Demand and Supply Analysis)**
     * [ ] Understand Scarcity, choice, basic economic problems, PPC, and types of firms.
