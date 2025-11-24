@@ -4,6 +4,91 @@
 [Mod3](#module-3)<br><br>
 [Mod4](#module-4)<br><br>
 [Mod5](#module-5)<br><br>
+## Module 4
+
+### I. HIGH PRIORITY CORE TOPICS (PILLAR 2)
+
+**Focus: SCM, Version Management, and Cost Estimation (Likely Q18/Q14)**
+
+#### A. Software Configuration Management (SCM)
+
+SCM is the discipline of controlling changes to software artifacts throughout the lifecycle to maintain integrity and consistency.
+
+| Concept | Key Points to Remember | Mnemonics/Tips |
+| :--- | :--- | :--- |
+| **Definition (Part A/B)** | Set of policies, processes, and tools for managing changing software systems. Ensures that all versions are identified, tracked, and accessible. | SCM ensures **integrity, traceability, and accountability.** |
+| **SCM Activities (Part B)** | Four fundamental activities required for managing a changing system: | **V S C R** (Very Secure Configuration Repository) |
+| 1. **V**ersion Control | Tracks multiple versions of components; prevents different developers from overwriting each other's work. | *Key Feature:* Branching and Merging. |
+| 2. **S**ystem Building | The process of assembling, compiling, and linking components (including external libraries and configuration files) to create an executable system. | Output is the executable system. |
+| 3. **C**hange Management | Tracks and manages change requests (from customers/developers). Includes analyzing impact, costing, and deciding if/when changes are implemented. | Decision-making process. |
+| 4. **R**elease Management | Preparing the software for external distribution to customers/users (System Release). Includes planning functionality and organizing software distribution. | Connects development to customer use. |
+
+#### B. Cost Estimation Models (COCOMO)
+
+| Concept | Key Study Points (Part B) | Mnemonics/Tips |
+| :--- | :--- | :--- |
+| **Techniques (Part A)** | 1. **Expert Judgment:** Relying on the experience/intuition of professionals. (Quick but subjective). 2. **Algorithmic Cost Modelling:** Using mathematical formulas (like COCOMO) based on size and complexity. (Systematic but relies on accurate inputs). | **E.J.** (Expert Judgment) is **Q.S.** (Quick/Subjective). |
+| **COCOMO Model (Part B)** | **Constructive Cost Model.** Uses inputs like estimated size (KLOC) and cost drivers (M) to predict Effort (Person-Months) and time. | Formula Core: **$Effort = A \times (\text{Size})^B \times \prod(\text{EAF})$** (A, B are constants, EAF is Effort Adjustment Factor/M). |
+| **Problems of Algorithmic Models (Q17/Q18 context)** | 1. **Inaccurate Input:** Hard to estimate size (KLOC) accurately early on. 2. **Subjective Multipliers (M):** Factors like complexity, reliability, and team experience are subjective. 3. **Lack of Adaptability:** Doesn't handle dynamic projects or frequently changing requirements well. | **S I M** (Size, Input, Multipliers are problems) |
+
+#### C. Factors Affecting Software Pricing (Part A/B)
+
+Pricing is determined by costs plus profit, but is heavily influenced by external factors.
+
+| Factor | Explanation |
+| :--- | :--- |
+| **Contractual Terms** | If the developer retains source code ownership (for reuse), the price might be lower. |
+| **Cost Estimate Uncertainty** | If estimates are uncertain (risky), the organization adds a contingency margin, increasing the price. |
+| **Financial Health** | Companies in financial distress might lower the price (pricing to win) to ensure cash flow, accepting lower profit. |
+| **Market Opportunity** | A company might quote a low price to enter a new market segment, hoping for higher profits later via experience/new products. |
+| **Requirements Volatility** | If requirements are expected to change frequently, the initial price may be low, but high prices will be charged for later changes. |
+
+***
+
+### II. MEDIUM/HIGH PRIORITY TOPICS (PILLAR 1 & CROSS-MODULE)
+
+**Focus: Part A (3 Marks) Definitions & Part B Plan-Driven Concepts (Likely Q17)**
+
+#### A. Risk Management
+
+| Concept | Key Study Points (Part A) | Mnemonics/Tips |
+| :--- | :--- | :--- |
+| **Risk Definition (Part A)** | An uncertainty (event or condition) that, if it occurs, has a negative effect on project objectives (scope, schedule, quality, cost). | Risk is **Uncertainty + Loss.** |
+| **Types of Risk (Part A)** | 1. **P**roject Risk (Affects budget/schedule, e.g., scope creep, staff turnover). 2. **T**echnical Risk (Affects quality/delivery, e.g., design complexity, unreliable component). 3. **B**usiness Risk (Affects organizational viability, e.g., new competitor, market change). | **PTB** (Project, Technical, Business) |
+| **Risk Management Process (Part B - Q17 Focus)** | The process involves four main steps: | **I A P M** (I Am Project Manager) |
+| | 1. **I**dentification (Brainstorm potential risks). 2. **A**nalysis (Assess probability and impact/severity). 3. **P**lanning (Mitigation/Contingency strategies: Avoidance, Minimization, Contingency). 4. **M**onitoring (Tracking risks continuously). | Diagram: Cyclical flow is often required for 7M. |
+
+#### B. Project Planning and Scheduling
+
+| Concept | Key Study Points (Part A/B) | Mnemonics/Tips |
+| :--- | :--- | :--- |
+| **Fundamental Project Management Activities (Part A)** | Activities required to execute and control the project successfully: | **P P R M** (People Plan, Risk Manage) |
+| | 1. **P**roject **P**lanning (Scheduling, estimation). 2. **P**eople **M**anagement (Team leadership, motivation). 3. **R**isk Management (Anticipating failures). 4. **R**eporting & **M**onitoring (Tracking progress and communication). | |
+| **Critical Path (Part B - Q17 focus)** | The longest sequence of dependent activities in a project network that determines the earliest time the project can be completed. Tasks on the critical path have zero slack. | Delaying a Critical Path task delays the *entire project*. |
+| **Plan-Driven Development (Part B)** | Process is planned in detail upfront (like Waterfall). Decisions are made early. High control, high documentation, but low flexibility to change. | Contrast this with Agile (high flexibility, incremental). |
+
+#### C. Agile Management
+
+| Concept | Key Study Points (Part A) | Mnemonics/Tips |
+| :--- | :--- | :--- |
+| **SCRUM Framework (Part A/B)** | An agile framework focusing on iterative development through fixed-length cycles (Sprints). | Define Roles (PO, SM, Team) and Artifacts (Backlogs). |
+| **Role of Backlogs/Sprints (Part A)** | 1. **Product Backlog:** Prioritized list of all requirements/features. (The "What"). 2. **Sprint Backlog:** Subset of tasks chosen from the Product Backlog for the current Sprint. (The "How much in this cycle"). | Sprint = Time-boxed iteration (2-4 weeks). |
+| **Kanban/Lean Approaches (Part B - Q17 focus)** | **Kanban:** Focuses on flow and limiting Work-In-Progress (WIP) using visual boards. **Lean:** Philosophy focused on maximizing customer value while minimizing waste. | Lean Principles: Eliminate waste, Amplify learning, Decide late, Deliver fast, Empower team, Build integrity, Optimize the whole. |
+
+***
+
+## 📊 Summary of Topic Frequency and Priority
+
+| Topic | Primary Question Type | Frequency (QPs) | Priority for Exam Focus |
+| :--- | :--- | :--- | :--- |
+| **SCM Definition & Activities** | Part B (10M), Part A (3M) | 4/6 | **P1 (Master for Part B)** |
+| **COCOMO / Algorithmic Models** | Part B (7M), Part A (3M) | 4/6 | **P1 (Master for Part B)** |
+| **Risk Management Process** | Part B (7M/10M) | 3/6 | **P2 (Study basics for Q17, but skip if prioritizing Q18)** |
+| **Risk Categories/Types** | Part A (3M) | 5/6 | **P1 (Must know for Part A)** |
+| **Project Management Activities** | Part A (3M) | 5/6 | **P1 (Must know for Part A)** |
+| **SCRUM (Backlogs/Sprints)** | Part A (3M) | 4/6 | **P1 (Must know for Part A)** |
+| **Pricing Factors** | Part A (3M) | 3/6 | **P2 (Medium)** |
+| **Critical Path / Scheduling** | Part B (7M) | 2/6 | P3 (Skippable for Part B strategy) |
 ## Module 5
 
 ### **I. High-Priority Core Concepts (Master First)**
