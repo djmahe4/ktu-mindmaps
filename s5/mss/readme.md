@@ -77,7 +77,7 @@ Pricing is determined by costs plus profit, but is heavily influenced by externa
 
 ***
 
-## 📊 Summary of Topic Frequency and Priority
+### 📊 Summary of Topic Frequency and Priority
 
 | Topic | Primary Question Type | Frequency (QPs) | Priority for Exam Focus |
 | :--- | :--- | :--- | :--- |
