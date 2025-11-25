@@ -6,17 +6,11 @@
 [Mod5](#module-5)<br><br>
 ## Module 3
 
-### Part B Strategy: Process Focus (Q16)
-
-Since you only need to answer one 14-mark question (Q15 or Q16), a strong strategy is to **master the Process, Evolution, and Modern Practices (Q16 topics)**. This allows you to skip the heavy technical calculations and detailed diagrams often required in Q15 (like Basis Path Testing or complex Integration Diagrams).
-
----
-
-## I. Cluster 1: Software Verification Fundamentals (High Priority)
+### I. Cluster 1: Software Verification Fundamentals (High Priority)
 
 These are fundamental concepts necessary for answering both comparison questions (Part A) and detail questions (Part B).
 
-### 1. White Box vs. Black Box Testing
+#### 1. White Box vs. Black Box Testing
 
 This is the most recurring comparison topic.
 
@@ -28,11 +22,11 @@ This is the most recurring comparison topic.
 | **Goal** | Ensure all independent paths are executed and internal errors are found. | Verify the system meets the specifications/requirements. |
 | **Techniques** | Basis Path Testing, Loop Testing, Data Flow Testing. | Equivalence Partitioning (EP), Boundary Value Analysis (BVA), Orthog. |
 
-> #### 💡 Mnemonic Tip:
+> ##### 💡 Mnemonic Tip:
 > *   **W**hite Box sees the **W**orks (internal logic).
 > *   **B**lack Box sees the **B**ehavior (user function).
 
-### 2. Black Box Techniques (EP and BVA)
+#### 2. Black Box Techniques (EP and BVA)
 
 These are commonly asked for definition and comparison in Q15 (Part B) or Part A.
 
@@ -43,10 +37,10 @@ These are commonly asked for definition and comparison in Q15 (Part B) or Part A
     *   **Definition:** Focuses on testing values exactly *at*, *just above*, and *just below* the edge (boundary) of equivalence partitions.
     *   **Goal:** Errors frequently cluster at the boundaries of input ranges. BVA is a high-yield method for finding these edge-case bugs.
 
-> #### 💡 Mnemonic Tip:
+> ##### 💡 Mnemonic Tip:
 > **B**VA targets the **B**oundaries (edges).
 
-### 3. System Testing Variants
+#### 3. System Testing Variants
 
 System testing verifies the complete, integrated system. (High Priority - Part A)
 
@@ -58,15 +52,15 @@ System testing verifies the complete, integrated system. (High Priority - Part A
 
 ---
 
-## II. Cluster 2: Quality Reviews and Processes (High Priority for Q16)
+### II. Cluster 2: Quality Reviews and Processes (High Priority for Q16)
 
 These are key process-centric topics frequently asked in the detailed Part B questions.
 
-### 1. Formal Technical Review (FTR)
+#### 1. Formal Technical Review (FTR)
 
 A structured software quality control activity performed by a team to uncover errors and ensure compliance with standards.
 
-#### FTR Process Steps (Recurring Question)
+##### FTR Process Steps (Recurring Question)
 The process is formal and sequential:
 
 1.  **P**lanning (Set objectives, select team).
@@ -76,16 +70,16 @@ The process is formal and sequential:
 5.  **R**eviewing Outcome (Decision on major/minor revisions; action items assigned).
 6.  **F**ollow-up and Closure (Author fixes defects; verification ensures resolution).
 
-> #### 💡 Mnemonic Tip (The FTR Meeting Flow):
+> ##### 💡 Mnemonic Tip (The FTR Meeting Flow):
 > **P**lease **P**repare **C**offee, **R**ecorder **R**eads **F**indings.
 
-#### Objectives of FTR (Part A & B)
+##### Objectives of FTR (Part A & B)
 *   Uncover errors early (function, logic, implementation).
 *   Verify compliance with requirements and standards.
 *   Achieve uniform software development style.
 *   Promote knowledge transfer and team training.
 
-### 2. Test Documentation
+#### 2. Test Documentation
 
 Essential for planning, tracking, resource management, and transparency. (Medium Priority)
 
@@ -99,20 +93,20 @@ Essential for planning, tracking, resource management, and transparency. (Medium
 
 ---
 
-## III. Cluster 3: Evolution, Maintenance & Modern Practices (High Priority for Q16)
+### III. Cluster 3: Evolution, Maintenance & Modern Practices (High Priority for Q16)
 
-### 1. Software Maintenance
+#### 1. Software Maintenance
 
 Maintenance occurs after delivery to adapt or correct the software. (High Priority - Part A)
 
-> #### 💡 Mnemonic Tip (Types of Maintenance): **CAPP**
+> ##### 💡 Mnemonic Tip (Types of Maintenance): **CAPP**
 
 1.  **C**orrective Maintenance: Fixing defects, bugs, and errors found after deployment (e.g., fixing a crash).
 2.  **A**daptive Maintenance: Modifying the software to cope with changes in the operating environment (OS, hardware, new libraries).
 3.  **P**erfective Maintenance: Improving performance, functionality, or usability based on user feedback or optimization opportunities (adding a new feature).
 4.  **P**reventive Maintenance: Proactive changes (like **Refactoring**) to improve reliability and maintainability, slowing down system degradation.
 
-### 2. Software Evolution Process
+#### 2. Software Evolution Process
 
 Describes how software adapts over time to meet changing needs. (Medium Priority)
 
@@ -123,7 +117,7 @@ Describes how software adapts over time to meet changing needs. (Medium Priority
 4.  **Change Implementation:** Modifying the code and documentation (includes program understanding).
 5.  **System Release:** Distributing the new version to customers.
 
-### 3. CI/CD/CD and DevOps
+#### 3. CI/CD/CD and DevOps
 
 Automating the software pipeline to increase speed and reliability. (High Priority)
 
@@ -134,11 +128,11 @@ Automating the software pipeline to increase speed and reliability. (High Priori
 | **Continuous Delivery (CD)** | Extends CI; code changes are validated, packaged, and kept in a *deployable state* at any time. | **Key Feature:** Ready for production, but **deployment requires manual approval**. |
 | **Continuous Deployment (CD)** | Extends Continuous Delivery; every change that passes the automated pipeline is **automatically deployed to production.** | **Key Feature:** No manual approval step; fully automated release cycle. |
 
-### 4. Open Source Licensing
+#### 4. Open Source Licensing
 
 Defines the legal rights and restrictions for using, modifying, and distributing open-source code. (High Priority - Q15a or Part A)
 
-> #### 💡 Mnemonic Tip: Licensing Types
+> ##### 💡 Mnemonic Tip: Licensing Types
 
 | License | Philosophy | Core Rule / Restriction |
 | :--- | :--- | :--- |
@@ -148,7 +142,7 @@ Defines the legal rights and restrictions for using, modifying, and distributing
 
 ---
 
-## 🗺️ Module 3 Mind Map for Memorization
+### 🗺️ Module 3 Mind Map for Memorization
 
 Use this structure to connect concepts visually:
 
@@ -176,7 +170,6 @@ mindmap
       Integration Testing (M)
         Top-Down (Uses Stubs)
         Bottom-Up (Uses Drivers)
-
     Quality Assurance & Review
       Formal Technical Review (FTR) (H)
         Process Steps (P-P-C-R-R-F)
@@ -187,22 +180,19 @@ mindmap
         Traceability Matrix
         Purpose (Tracking/Transparency)
       Post Mortem Evaluation (PME)
-
     Evolution & Modern Practices
       Software Maintenance (H)
         Types
-          (C) Corrective
-          (A) Adaptive
-          (P) Perfective
-          (P) Preventive
+          Corrective (C)
+          Adaptive (A)
+          Perfective (P)
+          Preventive (P)
         Evolution Process (Change Analysis/Implementation)
         Refactoring vs Re-engineering
-
       DevOps (H)
-        CI (Continuous Integration)
-        CD (Continuous Delivery - Manual Approval)
-        CD (Continuous Deployment - Auto to Prod)
-
+        Continuous Integration (CI)
+        Continuous Delivery (CD - Manual Approval)
+        Continuous Deployment (CD - Auto to Prod)
       Licensing (H)
         GPL (Strong Copyleft)
         LGPL (Weak Copyleft/Libraries)
