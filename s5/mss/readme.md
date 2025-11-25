@@ -151,83 +151,82 @@ mindmap
   root((Module 3: Verification & Evolution))
 
     Testing Strategies
-        Black Box Testing (BB)
-            Focus: Functional (No internal code)
-            Techniques
-                Equivalence Partitioning (EP)
-                Boundary Value Analysis (BVA)
-            Comparison
-                BB vs WB (High-level)
+      Black Box Testing - BB
+        Focus: Functional - No internal code
+        Techniques
+          Equivalence Partitioning - EP
+          Boundary Value Analysis - BVA
+        Comparison
+          BB vs WB - High-level
         
-        White Box Testing (WB)
-            Focus: Internal Code Logic
-            Techniques
-                Basis Path Testing (Medium)
-                Loop Testing
-            Basis Path Process
-                1. Flow Graph
-                2. Cyclomatic Complexity
-                3. Independent Paths
-                4. Test Cases
+      White Box Testing - WB
+        Focus: Internal Code Logic
+        Techniques
+          Basis Path Testing - Medium
+          Loop Testing
+        Basis Path Process
+          1. Flow Graph
+          2. Cyclomatic Complexity
+          3. Independent Paths
+          4. Test Cases
         
-        System Testing (High)
-            Functional Testing
-            Performance (Stress/Load)
-            Security Testing
-            Acceptance (UAT, OAT)
+      System Testing - High
+        Functional Testing
+        Performance - Stress/Load
+        Security Testing
+        Acceptance - UAT, OAT
 
-        Integration Testing (Medium)
-            Top-Down (Uses Stubs)
-            Bottom-Up (Uses Drivers)
+      Integration Testing - Medium
+        Top-Down - Uses Stubs
+        Bottom-Up - Uses Drivers
 
     Quality Assurance & Review
-        Formal Technical Review (FTR) (High)
-            Process (P–P–C–R–R–F)
-                1. Planning
-                2. Preparation
-                3. Conduct Meeting
-                4. Review/Note Issues
-                5. Rework
-                6. Follow-Up
-            Objectives
-                Error Detection
-                Standard Compliance
+      Formal Technical Review - FTR - High
+        Process - P–P–C–R–R–F
+          1. Planning
+          2. Preparation
+          3. Conduct Meeting
+          4. Review/Note Issues
+          5. Rework
+          6. Follow-Up
+        Objectives
+          Error Detection
+          Standard Compliance
         
-        Review Comparison
-            FTR vs Informal (Low)
+      Review Comparison
+        FTR vs Informal - Low
 
-        Test Documentation (Medium)
-            Test Plan
-            Traceability Matrix
-            Purpose
-                Tracking
-                Transparency
+      Test Documentation - Medium
+        Test Plan
+        Traceability Matrix
+        Purpose
+          Tracking
+          Transparency
         
-        Post-Mortem Evaluation (PME)
+      Post-Mortem Evaluation - PME
 
     Evolution & Modern Practices
-        Software Maintenance (High)
-            Types (C–A–P–P)
-                Corrective
-                Adaptive
-                Perfective
-                Preventive
-            Evolution Process
-                Change Analysis
-                Implementation
-            Concepts
-                Refactoring vs Re-engineering
+      Software Maintenance - High
+        Types - C–A–P–P
+          Corrective
+          Adaptive
+          Perfective
+          Preventive
+        Evolution Process
+          Change Analysis
+          Implementation
+        Concepts
+          Refactoring vs Re-engineering
         
-        DevOps (High)
-            Continuous Integration (CI)
-            Continuous Delivery (CD – Manual Approval)
-            Continuous Deployment (CD – Automatic to Prod)
+      DevOps - High
+        Continuous Integration - CI
+        Continuous Delivery - CD – Manual Approval
+        Continuous Deployment - CD – Automatic to Prod
         
-        Licensing (High)
-            GPL (Strong Copyleft)
-            LGPL (Weak Copyleft – Libraries)
-            BSD (Permissive)
-
+      Licensing - High
+        GPL - Strong Copyleft
+        LGPL - Weak Copyleft – Libraries
+        BSD - Permissive
 ```
 ## Module 4
 
