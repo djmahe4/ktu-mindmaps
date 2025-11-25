@@ -843,7 +843,12 @@ mindmap
         ISO Standards
           ISO 9001(QMS for Compliance)
           ISO 9126 → ISO/IEC 25010
-            6 Attributes[Functionality\nReliability\nUsability\nEfficiency\nMaintainability\nPortability]
+            Functionality
+            Reliability
+            Usability
+            Efficiency
+            Maintainability
+            Portability
 
     Process Improvement (SPI)
       SPI Cycle (5 Steps)
