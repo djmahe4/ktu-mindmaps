@@ -816,41 +816,61 @@ Use this simplified mind map to recall the relationships between the high-priori
 
 ```mermaid
 mindmap
-  root((Module 5: Quality, Process, Arch.))
+  root((Module 5\nQuality, Process & Architecture))
     Software Quality
-        SQA (Oversight/Infrastructure)
-            Elements (SRT-ECR)
-            How Achieved (Methods, Mgmt, QC, SQA)
-        Quality Models
-            CMMI (Process Maturity)
-                Levels (IMDQO)
-            ISO Standards (QMS Certification)
-                ISO 9001 (Compliance)
-                ISO 9126 (Attributes: Functionality, Reliability, etc.)
+      SQA (Software Quality Assurance)
+        Role[Oversight & Infrastructure]
+        Elements(SRT-ECR Mnemonic)
+          Standards
+          Reviews
+          Testing
+          Error/defect collection & analysis
+          Change management
+          Risk management
+        How Achieved
+          Methods & Tools
+          Project Management
+          Quality Control (QC)
+          SQA Activities
+      Quality Models
+        CMMI (Capability Maturity Model Integration)
+          5 Levels(IMDQO)
+            Initial
+            Managed
+            Defined
+            Quantitatively Managed
+            Optimizing
+        ISO Standards
+          ISO 9001(QMS for Compliance)
+          ISO 9126 → ISO/IEC 25010
+            6 Attributes[Functionality\nReliability\nUsability\nEfficiency\nMaintainability\nPortability]
+
     Process Improvement (SPI)
-        SPI Process (5 Steps)
-            1. Assessment (Find Gap)
-            2. Education (Train)
-            3. Selection (Choose Model)
-            4. Installation (Implement)
-            5. Evaluation (Measure ROI/Tune)
+      SPI Cycle (5 Steps)
+        1. Assessment (Find Gaps)
+        2. Education & Training
+        3. Selection (Choose Model/Framework)
+        4. Installation / Implementation
+        5. Evaluation (Measure ROI & Tune)
+
     Microservices Architecture
-        Design Principles
-            Low Coupling (Decouple for independent deployment)
-            High Cohesion (Single Responsibility Focus)
-        Characteristics
-            Self-Contained (Own Data)
-            Independently Deployable
-            Polyglot (Implementation Independent)
-        Communication
-            Synchronous (REST)
-            Asynchronous (Choreography/Events)
+      Design Principles
+        Low Coupling(Independent Deployment)
+        High Cohesion(Single Responsibility)
+      Key Characteristics
+        Self-Contained (Own Database)
+        Independently Deployable
+        Technology / Language Independent (Polyglot)
+      Communication Styles
+        Synchronous[REST / HTTP]
+        Asynchronous[Event-Driven\nChoreography / Orchestration]
+        
     Technology Trends (Deployment)
-        Cloud Services (Features: Elasticity, Scalability)
-            IaaS (VMs, You manage OS)
-            PaaS (Platform, You manage App)
-            SaaS (Software, Vendor manages all)
-        Virtualization
-            VMs (Heavy, Separate OS)
-            Containers (Lightweight, Shared Kernel)
+      Cloud Computing Models
+        IaaS(Infrastructure as a Service\nYou manage OS + App)
+        PaaS(Platform as a Service\nYou manage only App)
+        SaaS(Software as a Service\nVendor manages everything)
+      Virtualization vs Containerization
+        Virtual Machines(Heavy\nFull OS per VM)
+        Containers(Lightweight\nShared Host Kernel\nDocker, Kubernetes)
 ```
