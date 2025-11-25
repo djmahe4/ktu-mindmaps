@@ -854,5 +854,3 @@ mindmap
             VMs (Heavy, Separate OS)
             Containers (Lightweight, Shared Kernel)
 ```
-
-```
