@@ -636,6 +636,65 @@ Pricing is determined by costs plus profit, but is heavily influenced by externa
 | **SCRUM (Backlogs/Sprints)** | Part A (3M) | 4/6 | **P1 (Must know for Part A)** |
 | **Pricing Factors** | Part A (3M) | 3/6 | **P2 (Medium)** |
 | **Critical Path / Scheduling** | Part B (7M) | 2/6 | P3 (Skippable for Part B strategy) |
+
+### Mindmap
+```mermaid
+mindmap
+  root((Module 4\nQuick Revision))
+    HIGH PRIORITY CORE(Pillar 2 → Q18/Q14)
+      SCM(Software Configuration Management)
+        Definition["Set of policies, processes & tools\nEnsures integrity, traceability, accountability"]
+        Activities(V S C R → Very Secure Configuration Repository)
+          Version Control["Tracks versions\nBranching & Merging"]
+          System Building["Assemble + Compile + Link → Executable"]
+          Change Management["Track requests → Impact analysis → Approve"]
+          Release Management["Prepare & distribute to customers"]
+      COCOMO(Cost Estimation)
+        Techniques
+          Expert Judgment["Quick but Subjective\n(E.J. is Q.S.)"]
+          Algorithmic["Systematic but input-dependent"]
+        Formula["Effort = A × (KLOC)^B × ∏EAF"]
+        Problems(S I M)
+          Size estimation inaccurate early
+          Input data subjective
+          Multipliers subjective
+      Pricing Factors(Software Pricing)
+        Contractual terms (retain code → lower price)
+        Cost uncertainty → add contingency
+        Financial distress → price to win
+        Market opportunity → low entry bid
+        Requirements volatility → low initial + high change fees
+
+    MEDIUM/HIGH PRIORITY(Pillar 1 & Cross → Part A 3M + Q17)
+      Risk Management
+        Definition["Uncertainty + Negative impact\non objectives"]
+        Types(P T B)
+          Project Risk (budget/schedule)
+          Technical Risk (quality/delivery)
+          Business Risk (organisational)
+        Process(I A P M → I Am Project Manager)
+          Identification
+          Analysis["Probability × Impact"]
+          Planning["Avoid / Minimize / Transfer / Accept"]
+          Monitoring(Cyclical)
+      Project Planning & Scheduling
+        Activities(P P R M)
+          Project Planning
+          People Management
+          Risk Management
+          Reporting & Monitoring
+        Critical Path["Longest path → Zero slack\nDelay = whole project delay"]
+        Plan-Driven["Upfront detailed planning\nHigh control, low flexibility\nvs Agile"]
+      Agile Management
+        SCRUM
+          Roles[PO | Scrum Master | Dev Team]
+          Product Backlog["Prioritised WHAT"]
+          Sprint Backlog["HOW MUCH this sprint"]
+          Sprint["Fixed 2–4 weeks"]
+        Kanban/Lean
+          Kanban["Visual board + Limit WIP"]
+          Lean 7 Principles["Eliminate waste\nAmplify learning\nDecide late\nDeliver fast\nEmpower team\nBuild integrity\nOptimize whole"]
+```
 ## Module 5
 
 ### **I. High-Priority Core Concepts (Master First)**
