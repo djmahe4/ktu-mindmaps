@@ -4,6 +4,148 @@
 [Mod3](#module-3)<br><br>
 [Mod4](#module-4)<br><br>
 [Mod5](#module-5)<br><br>
+
+## Module 1
+
+### 🎯 1. Part A Core Concepts (Priority 1)
+
+These concepts are essential for the 3-mark questions (Q1, Q2) and form the foundation for Part B.
+
+#### A. Essential Attributes of Good Software (QP1 A1, QP5 A1)
+
+| Attribute | Simple Explanation | Mnemonics: M D E A |
+| :--- | :--- | :--- |
+| **M**aintainability | Easy to adapt to changing requirements and fix errors. (Crucial for evolution). | **M**y |
+| **D**ependability & Security | Trustworthy; reliable, safe, and secure (no physical/economic damage upon failure). | **D**og |
+| **E**fficiency | Does not waste system resources (memory, processing time). Includes responsiveness. | **E**ats |
+| **A**cceptability / Usability | Understandable, usable, and compatible with other systems by its intended users. | **A**pples |
+
+#### B. Software Engineering Ethics (QP1 A1, QP3 B11a)
+
+Professional software engineers must uphold these standards of honesty and integrity.
+
+| Ethical Point | Core Responsibility | Mnemonics: C C I C |
+| :--- | :--- | :--- |
+| **C**onfidentiality | Respecting the confidentiality of clients/employers. | **C**an |
+| **C**ompetence | Do not misrepresent your skill level; only accept work within your abilities. | **C**ode |
+| **I**ntellectual Property (IP) | Awareness of patents and copyright; protecting client/employer IP. | **I**n |
+| **C**omputer Misuse | Do not use technical skills to misuse others' computers (e.g., spreading malware). | **C**++ |
+
+#### C. Fundamental Process Activities
+
+All software processes include four basic activities: **S D V E**
+
+1.  **S**pecification (Requirements Engineering): Defining *what* the system must do and constraints (Q11 Focus).
+2.  **D**evelopment (Design & Implementation): Designing *how* the system works and coding it.
+3.  **V**alidation (Testing): Checking that the software meets the specification and user expectations.
+4.  **E**volution (Maintenance): Modifying the software to reflect changing needs and environments.
+
+---
+
+### 2. Traditional Models (Q11 Focus)
+
+#### A. Waterfall Model: Stages and Applicability (QP1 B11b, QP4 B11a)
+
+The Waterfall model follows a linear, sequential path.
+
+| Stage (R D I T M) | Focus/Goal | Max Effort Phase |
+| :--- | :--- | :--- |
+| **R**equirements Definition | Detailed collection and documentation of all functional/non-functional requirements (SRS). | **M**aintenance (Often 50%+ of cost) |
+| **D**esign (System & Software) | Defines system architecture, components, interfaces, and data structures. | |
+| **I**mplementation (Coding) | Translating design into executable code (includes Unit Testing). | |
+| **T**esting (Integration & System) | Integrating units and verifying that the full system meets requirements. | |
+| **M**aintenance | Correcting errors, adapting to new environments, and adding new features. | |
+
+**Applicability (Situations where Waterfall is only appropriate):**
+
+1.  **Well-Defined Requirements:** Requirements are fixed, well-understood, and highly unlikely to change (e.g., embedded systems).
+2.  **Small/Simple Projects:** Limited complexity where scope can be clearly defined upfront.
+3.  **Critical Systems:** Systems requiring extensive upfront analysis and documentation for safety/security analysis (e.g., medical devices, aerospace).
+
+---
+
+#### B. Spiral Model: Risk Focus (QP2 B11b, QP4 B12a)
+
+The Spiral model is an evolutionary, risk-driven approach suitable for complex projects.
+
+**The Four Quadrants (P R E E):**
+
+1.  **P**lanning (Objective Setting): Define objectives, alternatives, and constraints.
+2.  **R**isk Analysis & Reduction: Identify, assess, and mitigate technical and management risks (often involving Prototyping).
+3.  **E**ngineering: Develop and validate the software increment (Design, Code, Test).
+4.  **E**valuation & Review: Review progress with stakeholders and plan the next spiral cycle.
+
+**Key Trick for Exam:** If a case study mentions **high risk, unclear requirements, or evolving technology**, the **Spiral Model** is the correct answer.
+
+---
+
+### 3. Agile and Incremental (Q12 Focus - HIGH PRIORITY)
+
+#### A. Incremental Model Advantages (QP2 A1, QP6 B12a)
+
+Incremental development delivers the system in small, functional versions (increments).
+
+**Advantages over Waterfall (R F C C):**
+
+1.  **R**educed Cost of Change: Changes only affect the current or future increments, significantly lowering rework costs.
+2.  **F**aster Time to Market: Core functionality is delivered early, providing business value sooner (especially critical for e-commerce/business systems).
+3.  **C**ustomer Feedback: Continuous feedback is gathered from working software, leading to better validation than relying on paper documents.
+4.  **C**ontinuous Risk Reduction: Highest priority/risky components are developed and tested first.
+
+#### B. Principles of Agile Software Development (Agile Manifesto) (QP4 B11b)
+
+The principles guide the iterative approach, prioritizing people and responsiveness over processes and planning.
+
+| Theme | Key Principles | Simple Check |
+| :--- | :--- | :--- |
+| **Delivery & Feedback** | **Working software** over comprehensive documentation. **Customer collaboration** over contract negotiation. | Deliver tangible value often. |
+| **Change** | **Welcome changing requirements**, even late in development. | Be flexible; adaptation is valued. |
+| **Team & Communication**| Build projects around **motivated individuals**. **Face-to-face** communication is most effective. **Self-organizing** teams. | Trust the team and talk directly. |
+| **Quality & Pace** | Continuous attention to **technical excellence and good design** (Refactoring). Maintain a **sustainable pace**. **Simplicity** (maximizing work not done). | Keep the code clean and the pace steady. |
+
+#### C. Agile Development Techniques (Q12 Focus)
+
+These practices support the quality and collaboration mandated by the Agile principles.
+
+| Technique | Definition | Relevance / Benefit (Q12) |
+| :--- | :--- | :--- |
+| **Pair Programming** | Two developers work at one workstation (Driver writes code, Navigator reviews it constantly). | **Enhanced Quality** (immediate review reduces bugs). **Knowledge Sharing** (shared codebase understanding). **Continuous Feedback.** |
+| **Refactoring** | Restructuring existing code *internally* to improve maintainability, simplicity, or readability, **without changing its external functionality**. | **Reduces Technical Debt** (prevents code degradation). **Continuous Improvement** (maintains system health). **Easier Feature Addition** (flexible codebase). |
+
+---
+
+### 4. Module 1 Mind Map
+
+```mermaid
+mindmap
+  root((Module 1: Software Process & Agile))
+    A(Professional SE Fundamentals)
+      A1[Software Attributes: MDEA]
+      A2[SE Ethics: Confidentiality, Competence, IP, Misuse]
+      A3[Process Activities: Specify, Develop, Validate, Evolve]
+    B(Traditional Models - Q11 Focus)
+      B1[Waterfall Model]
+        B1.1(Linear, Sequential)
+        B1.2(Stages: R D I T M)
+        B1.3(Applicability: Fixed/Critical Requirements)
+      B2[Spiral Model (Boehm)]
+        B2.1(Core: Risk-Driven & Iterative)
+        B2.2(4 Quadrants: Planning, Risk Analysis, Engineering, Evaluation)
+        B2.3(Applicability: High Risk, Complex Projects)
+    C(Agile & Incremental - Q12 Focus)
+      C1[Incremental Development]
+        C1.1(Deliver working software in versions)
+        C1.2(Advantages: Early Value, Lower Change Cost, Feedback)
+      C2[Agile Manifesto Principles]
+        C2.1(Value Working Software & Collaboration)
+        C2.2(Welcome Change)
+        C2.3(Focus on Individuals & Sustainable Pace)
+      C3[Agile Techniques]
+        C3.1(Pair Programming)
+          C3.1.1(Benefit: Quality, Knowledge Sharing)
+        C3.2(Refactoring)
+          C3.2.1(Benefit: Reduces Tech Debt, Maintainability)
+```
 ## Module 2
 
 ### I. HIGH PRIORITY DEFINITIONS (PART A FOCUS)
@@ -102,9 +244,9 @@ A Use Case describes a system's behavior in response to an **Actor** (user or ex
 
 ---
 
-## 🧠 LEARNING & MEMORY TOOLS (MODULE 2)
+### 🧠 LEARNING & MEMORY TOOLS (MODULE 2)
 
-### Mind Map Visualization
+#### Mind Map Visualization
 
 Visualize Module 2 split into two pillars: **Requirements** and **Design**.
 
@@ -178,7 +320,7 @@ graph TD
     classDef arch     fill:#9b59b6, color:white
 ```
 
-### Advanced Mnemonics
+#### Advanced Mnemonics
 
 | Topic | Mnemonic | Use |
 | :--- | :--- | :--- |
