@@ -120,31 +120,31 @@ These practices support the quality and collaboration mandated by the Agile prin
 mindmap
   root((Module 1: Software Process & Agile))
     A(Professional SE Fundamentals)
-      A1[Software Attributes: MDEA]
-      A2[SE Ethics: Confidentiality, Competence, IP, Misuse]
-      A3[Process Activities: Specify, Develop, Validate, Evolve]
+      A1(Software Attributes: MDEA)
+      A2(SE Ethics: Confidentiality, Competence, IP, Misuse)
+      A3(Process Activities: Specify, Develop, Validate, Evolve)
     B(Traditional Models - Q11 Focus)
-      B1[Waterfall Model]
-        B1.1(Linear, Sequential)
-        B1.2(Stages: R D I T M)
-        B1.3(Applicability: Fixed/Critical Requirements)
-      B2[Spiral Model (Boehm)]
-        B2.1(Core: Risk-Driven & Iterative)
-        B2.2(4 Quadrants: Planning, Risk Analysis, Engineering, Evaluation)
-        B2.3(Applicability: High Risk, Complex Projects)
+      B1(Waterfall Model)
+        B1a(Linear, Sequential)
+        B1b(Stages: R D I T M)
+        B1c(Applicability: Fixed/Critical Requirements)
+      B2(Spiral Model - Boehm)
+        B2a(Core: Risk-Driven & Iterative)
+        B2b(4 Quadrants: Planning, Risk Analysis, Engineering, Evaluation)
+        B2c(Applicability: High Risk, Complex Projects)
     C(Agile & Incremental - Q12 Focus)
-      C1[Incremental Development]
-        C1.1(Deliver working software in versions)
-        C1.2(Advantages: Early Value, Lower Change Cost, Feedback)
-      C2[Agile Manifesto Principles]
-        C2.1(Value Working Software & Collaboration)
-        C2.2(Welcome Change)
-        C2.3(Focus on Individuals & Sustainable Pace)
-      C3[Agile Techniques]
-        C3.1(Pair Programming)
-          C3.1.1(Benefit: Quality, Knowledge Sharing)
-        C3.2(Refactoring)
-          C3.2.1(Benefit: Reduces Tech Debt, Maintainability)
+      C1(Incremental Development)
+        C1a(Deliver working software in versions)
+        C1b(Advantages: Early Value, Lower Change Cost, Feedback)
+      C2(Agile Manifesto Principles)
+        C2a(Value Working Software & Collaboration)
+        C2b(Welcome Change)
+        C2c(Focus on Individuals & Sustainable Pace)
+      C3(Agile Techniques)
+        C3a(Pair Programming)
+          C3a1(Benefit: Quality, Knowledge Sharing)
+        C3b(Refactoring)
+          C3b1(Benefit: Reduces Tech Debt, Maintainability)
 ```
 ## Module 2
 
