@@ -149,54 +149,85 @@ Use this structure to connect concepts visually:
 ```mermaid
 mindmap
   root((Module 3: Verification & Evolution))
+
     Testing Strategies
-      Black Box (BB)
-        Functional focus
-        Techniques
-          Equivalence Partitioning (EP)
-          Boundary Value Analysis (BVA)
-        BB vs WB (Comparison - H)
-      White Box (WB)
-        Internal Code focus
-        Techniques
-          Basis Path Testing (M)
-          Loop Testing
-        Basis Path Process (Steps)
-      System Testing (H)
-        Functional Testing
-        Performance (Stress/Load)
-        Security Testing
-        Acceptance (UAT/OAT)
-      Integration Testing (M)
-        Top-Down (Uses Stubs)
-        Bottom-Up (Uses Drivers)
+        Black Box Testing (BB)
+            Focus: Functional (No internal code)
+            Techniques
+                Equivalence Partitioning (EP)
+                Boundary Value Analysis (BVA)
+            Comparison
+                BB vs WB (High-level)
+        
+        White Box Testing (WB)
+            Focus: Internal Code Logic
+            Techniques
+                Basis Path Testing (Medium)
+                Loop Testing
+            Basis Path Process
+                1. Flow Graph
+                2. Cyclomatic Complexity
+                3. Independent Paths
+                4. Test Cases
+        
+        System Testing (High)
+            Functional Testing
+            Performance (Stress/Load)
+            Security Testing
+            Acceptance (UAT, OAT)
+
+        Integration Testing (Medium)
+            Top-Down (Uses Stubs)
+            Bottom-Up (Uses Drivers)
+
     Quality Assurance & Review
-      Formal Technical Review (FTR) (H)
-        Process Steps (P-P-C-R-R-F)
-        Objectives (Error detection, Compliance)
-      Review Comparison (FTR vs Informal) (L)
-      Test Documentation (M)
-        Test Plan
-        Traceability Matrix
-        Purpose (Tracking/Transparency)
-      Post Mortem Evaluation (PME)
+        Formal Technical Review (FTR) (High)
+            Process (P–P–C–R–R–F)
+                1. Planning
+                2. Preparation
+                3. Conduct Meeting
+                4. Review/Note Issues
+                5. Rework
+                6. Follow-Up
+            Objectives
+                Error Detection
+                Standard Compliance
+        
+        Review Comparison
+            FTR vs Informal (Low)
+
+        Test Documentation (Medium)
+            Test Plan
+            Traceability Matrix
+            Purpose
+                Tracking
+                Transparency
+        
+        Post-Mortem Evaluation (PME)
+
     Evolution & Modern Practices
-      Software Maintenance (H)
-        Types
-          Corrective (C)
-          Adaptive (A)
-          Perfective (P)
-          Preventive (P)
-        Evolution Process (Change Analysis/Implementation)
-        Refactoring vs Re-engineering
-      DevOps (H)
-        Continuous Integration (CI)
-        Continuous Delivery (CD - Manual Approval)
-        Continuous Deployment (CD - Auto to Prod)
-      Licensing (H)
-        GPL (Strong Copyleft)
-        LGPL (Weak Copyleft/Libraries)
-        BSD (Permissive/Minimal Restriction)
+        Software Maintenance (High)
+            Types (C–A–P–P)
+                Corrective
+                Adaptive
+                Perfective
+                Preventive
+            Evolution Process
+                Change Analysis
+                Implementation
+            Concepts
+                Refactoring vs Re-engineering
+        
+        DevOps (High)
+            Continuous Integration (CI)
+            Continuous Delivery (CD – Manual Approval)
+            Continuous Deployment (CD – Automatic to Prod)
+        
+        Licensing (High)
+            GPL (Strong Copyleft)
+            LGPL (Weak Copyleft – Libraries)
+            BSD (Permissive)
+
 ```
 ## Module 4
 
