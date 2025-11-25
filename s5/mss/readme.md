@@ -110,69 +110,72 @@ Visualize Module 2 split into two pillars: **Requirements** and **Design**.
 
 ```mermaid
 graph TD
-    %% Root
-    M2["🚀 CST-309 MODULE 2\nRequirements Engineering & Software Design\n(28 Marks = Q13 + Q14)"]:::root
+    M2["🚀 CST-309 MODULE 2<br>Requirements Engineering & Software Design<br><b>28 Marks = Q13 + Q14</b>"]:::root
 
-    M2 --> REQ["REQUIREMENTS ENGINEERING\n🎯 Q13 - 14 Marks\nMaster E-A-S-V-M + SRS Qualities"]:::req
-    M2 --> DES["SOFTWARE DESIGN\n🎯 Q14 - 14 Marks\nDesign Principles + Architectural Styles"]:::des
+    M2 --> REQ["REQUIREMENTS ENGINEERING<br>🎯 Q13 Focus (14 Marks)<br>E-A-S-V-M + SRS Qualities"]:::req
+    M2 --> DES["SOFTWARE DESIGN<br>🎯 Q14 Focus (14 Marks)<br>Principles + Architecture"]:::des
 
-    %% ==================== REQUIREMENTS SIDE (Left) ====================
-    REQ --> PROC["1. Requirements Process\nE - A - S - V - M\n(EASy Validation & Management)"]:::box
-    REQ --> TYPES["2. Requirement Types\nFunctional vs Non-Functional"]:::box
-    REQ --> TOOLS["3. User Modeling Tools\nPersonas → Scenarios → User Stories"]:::box
-    REQ --> SRS["4. Good SRS = VCCTT\nVery Careful Customers Trust Testing"]:::srs
-    REQ --> VAL["5. Validation Techniques\n(R-P-T)"]:::box
+    %% ─────────────────── REQUIREMENTS SIDE ───────────────────
+    REQ --> PROC["1. Requirements Process<br><b>E-A-S-V-M</b><br>EASy Validation & Management"]:::proc
+    REQ --> TYPES["2. Requirement Types<br>Functional vs Non-Functional"]:::branch
+    REQ --> TOOLS["3. User Modeling Tools<br>Personas → Scenarios → User Stories"]:::branch
+    REQ --> SRS["4. Good SRS Qualities<br><b>V-C-C-T-T</b><br>Very Careful Customers Trust Testing"]:::srs
+    REQ --> VAL["5. Validation Techniques<br>R-P-T"]:::branch
 
-    PROC --> E1["Elicitation\nInterviews, Surveys, Observation"]
-    PROC --> A1["Analysis\nConflict resolution, Prioritization"]
-    PROC --> S1["Specification\n→ SRS Document"]
-    PROC --> V1["Validation\nCheck with stakeholders"]
-    PROC --> M1["Management\nTraceability + Change Control"]
+    PROC --> E1["Elicitation<br>Interviews, Surveys,<br>Observation"]:::leaf
+    PROC --> A1["Analysis<br>Conflict resolution,<br>Prioritization"]:::leaf
+    PROC --> S1["Specification<br>→ SRS Document"]:::leaf
+    PROC --> V1["Validation<br>Reviews + Prototyping"]:::leaf
+    PROC --> M1["Management<br>Traceability + Change Control"]:::leaf
 
-    TYPES --> FR["Functional Requirements\nWHAT the system must DO\n(e.g., Login, Calculate salary)"]:::fr
-    TYPES --> NFR["Non-Functional Requirements\nHOW WELL it performs\nP-S-R-U-M\nPerformance | Security | Reliability\nUsability | Maintainability"]:::nfr
+    TYPES --> FR["Functional Requirements<br>WHAT the system does<br>e.g., Login, Generate Report"]:::fr
+    TYPES --> NFR["Non-Functional Requirements<br>HOW WELL it performs<br><b>P-S-R-U-M</b><br>Performance | Security | Reliability<br>Usability | Maintainability"]:::nfr
 
-    TOOLS --> PER["Personas\n'Fictional user with goals'\n→ John, 35, Accountant"]
-    TOOLS --> SCE["Scenarios\nStory: 'John logs in to submit report...'"]
-    TOOLS --> UST["User Stories\nAs a <role>, I want <goal>\nso that <benefit>"]
-    TOOLS --> TM["Traceability Matrix\nReq ID ↔ Design ↔ Code ↔ Test"]
+    TOOLS --> PER["Personas<br>Fictional user archetype"]:::leaf
+    TOOLS --> SCE["Scenarios<br>Narrative story of interaction"]:::leaf
+    TOOLS --> UST["User Stories<br>As a «role»<br>I want «goal»<br>so that «benefit»"]:::leaf
+    TOOLS --> TM["Traceability Matrix<br>Req ↔ Design ↔ Code ↔ Test"]:::leaf
 
-    VAL --> REV["Reviews / Inspections"]
-    VAL --> PRO["Prototyping"]
-    VAL --> TC["Test-Case Generation\n(Can’t test → Bad requirement!)"]
+    VAL --> REV["Requirements Reviews"]:::leaf
+    VAL --> PRO["Prototyping"]:::leaf
+    VAL --> TCG["Test-Case Generation<br>(Hard to test = Bad requirement!)"]:::leaf
 
-    SRS --> VCCTT["V → Valid\nC → Complete\nC → Consistent\nT → Testable/Verifiable\nT → Traceable"]:::srs
+    SRS --> VCCTT["V → Valid<br>C → Complete<br>C → Consistent<br>T → Testable<br>T → Traceable"]:::srsdetail
 
-    %% ==================== DESIGN SIDE (Right) ====================
-    DES --> PRIN["1. Core Design Principles\nA-M-C-C-E"]:::box
-    DES --> ARCH["2. Architectural Styles\n(Must know any 3–4)"]:::box
-    DES --> USEC["3. Use Case Diagram Elements"]:::box
+    %% ─────────────────── DESIGN SIDE ───────────────────
+    DES --> PRIN["1. Core Design Principles<br><b>A-M-C-C-E</b>"]:::branch
+    DES --> ARCH["2. Architectural Styles<br>(Know any 4)"]:::branch
+    DES --> UC["3. Use Case Diagram"]:::branch
 
-    PRIN --> ABS["Abstraction\nShow only what’s needed"]
-    PRIN --> MOD["Modularity\nBreak into modules"]
-    PRIN --> COH["Cohesion = HIGH\nOne module → One job"]:::good
-    PRIN --> COU["Coupling = LOW\nModules independent"]:::good
-    PRIN --> ENC["Encapsulation\nData + Behavior together"]
+    PRIN --> ABS["Abstraction<br>Hide details"]:::leaf
+    PRIN --> MOD["Modularity<br>Divide system"]:::leaf
+    PRIN --> COH["Cohesion → <b>HIGH</b><br>Single responsibility"]:::good
+    PRIN --> COU["Coupling → <b>LOW</b><br>Loose dependencies"]:::good
+    PRIN --> ENC["Encapsulation<br>Data + Behavior"]:::leaf
 
-    ARCH --> L1["Layered (N-tier)\nPresentation → Business → Data\nBest for maintainability"]
-    ARCH --> L2["Client-Server\nClient requests → Server responds\nScalable, centralized data"]
-    ARCH --> L3["Pipe-and-Filter\nData → Filter1 → Filter2 → ...\n(e.g., Compilers, Unix pipes)"]
-    ARCH --> L4["Microservices\nSmall, independent services\nEach has own database → Deploy separately"]
+    ARCH --> LAY["Layered (n-tier)<br>Presentation → Business → Data"]:::arch
+    ARCH --> CS["Client-Server<br>Scalable, centralized data"]:::arch
+    ARCH --> PF["Pipe-and-Filter<br>Data transformation chain"]:::arch
+    ARCH --> MS["Microservices<br>Independent deploy + own DB"]:::arch
 
-    USEC --> ACT["Actor → Stick Figure"]
-    USEC --> UC["Use Case → Oval"]
-    USEC --> BOX["System Boundary → Rectangle"]
-    USEC --> REL["«include» | «extend» | Generalization"]
+    UC --> ACT["Actor → 🧑‍💼 Stick Figure"]:::leaf
+    UC --> USE["Use Case → Oval"]:::leaf
+    UC --> BOX["System Boundary → Box"]:::leaf
+    UC --> REL["«include» | «extend»"]:::leaf
 
-    %% ==================== Styling (Big & Clear) ====================
-    classDef root fill:#2E86AB, color:white, stroke:#fff, font-size:18px
-    classDef req fill:#A23B72, color:white, stroke:#fff, font-size:16px
-    classDef des fill:#F18F01, color:white, stroke:#fff, font-size:16px
-    classDef box fill:#3B3B3B, color:white, stroke:#fff, stroke-width:2px
-    classDef srs fill:#1D7324, color:white, stroke:#fff
-    classDef fr fill:#107896, color:white
-    classDef nfr fill:#C73E1D, color:white
-    classDef good fill:#16a085, color:white, font-weight:bold
+    %% ─────────────────── STYLING (All nodes clearly visible) ───────────────────
+    classDef root     fill:#1a5276, color:white, stroke:#fff, stroke-width:4px
+    classDef req      fill:#8e44ad, color:white, stroke:#fff
+    classDef des      fill:#e67e22, color:white, stroke:#fff
+    classDef proc     fill:#c0392b, color:white, stroke:#fff
+    classDef branch   fill:#2c3e50, color:white, stroke:#fff
+    classDef srs      fill:#27ae60, color:white, stroke:#fff
+    classDef srsdetail fill:#229954, color:white
+    classDef leaf     fill:#34495e, color:white, stroke:#95a5a6
+    classDef fr       fill:#2980b9, color:white
+    classDef nfr      fill:#d35400, color:white
+    classDef good     fill:#16a085, color:white, font-weight:bold
+    classDef arch     fill:#9b59b6, color:white
 ```
 
 ### Advanced Mnemonics
