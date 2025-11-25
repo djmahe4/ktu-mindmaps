@@ -110,68 +110,69 @@ Visualize Module 2 split into two pillars: **Requirements** and **Design**.
 
 ```mermaid
 graph TD
-    M2["CST-309 MODULE 2<br>Requirements Engineering & Software Design"] 
-    M2 ==> REQ["REQUIREMENTS ENGINEERING<br><b>(Q13 - 14 Marks)</b>"]
-    M2 ==> DES["SOFTWARE DESIGN<br><b>(Q14 - 14 Marks)</b>"]
+    %% Root
+    M2["🚀 CST-309 MODULE 2\nRequirements Engineering & Software Design\n(28 Marks = Q13 + Q14)"]:::root
 
-    %% === REQUIREMENTS BRANCH ===
-    REQ ==> PROC["1. Requirements Process<br><b>E-A-S-V-M</b>"]
-    REQ ==> TYPES["2. Requirement Types"]
-    REQ ==> TOOLS["3. User-Centered Tools"]
-    REQ ==> QUALITY["4. Good SRS Qualities<br><b>V-C-C-T-T</b>"]
-    REQ ==> VALID["5. Validation Techniques"]
+    M2 --> REQ["REQUIREMENTS ENGINEERING\n🎯 Q13 - 14 Marks\nMaster E-A-S-V-M + SRS Qualities"]:::req
+    M2 --> DES["SOFTWARE DESIGN\n🎯 Q14 - 14 Marks\nDesign Principles + Architectural Styles"]:::des
 
-    PROC --> E["Elicitation<br>(Gather needs)"]
-    PROC --> A["Analysis<br>(Resolve conflicts)"]
-    PROC --> S["Specification<br>→ SRS Document"]
-    PROC --> V["Validation<br>(Reviews, Prototype, Tests)"]
-    PROC --> M["Management<br>(Traceability + Change Control)"]
+    %% ==================== REQUIREMENTS SIDE (Left) ====================
+    REQ --> PROC["1. Requirements Process\nE - A - S - V - M\n(EASy Validation & Management)"]:::box
+    REQ --> TYPES["2. Requirement Types\nFunctional vs Non-Functional"]:::box
+    REQ --> TOOLS["3. User Modeling Tools\nPersonas → Scenarios → User Stories"]:::box
+    REQ --> SRS["4. Good SRS = VCCTT\nVery Careful Customers Trust Testing"]:::srs
+    REQ --> VAL["5. Validation Techniques\n(R-P-T)"]:::box
 
-    TYPES --> FR["Functional Requirements<br>'WHAT the system does'<br>→ Features & Behaviors"]
-    TYPES --> NFR["Non-Functional Requirements<br>'HOW WELL it performs'<br>→ P-S-R-U-M<br>Performance, Security,<br>Reliability, Usability, Maintainability"]
+    PROC --> E1["Elicitation\nInterviews, Surveys, Observation"]
+    PROC --> A1["Analysis\nConflict resolution, Prioritization"]
+    PROC --> S1["Specification\n→ SRS Document"]
+    PROC --> V1["Validation\nCheck with stakeholders"]
+    PROC --> M1["Management\nTraceability + Change Control"]
 
-    TOOLS --> P["Personas<br>Fictional user archetype"]
-    TOOLS --> SCEN["Scenarios<br>Story of Persona using system"]
-    TOOLS --> US["User Stories<br>As a [role], I want [goal]<br>so that [benefit]"]
-    TOOLS --> TM["Traceability Matrix<br>Req ↔ Design ↔ Code ↔ Test"]
+    TYPES --> FR["Functional Requirements\nWHAT the system must DO\n(e.g., Login, Calculate salary)"]:::fr
+    TYPES --> NFR["Non-Functional Requirements\nHOW WELL it performs\nP-S-R-U-M\nPerformance | Security | Reliability\nUsability | Maintainability"]:::nfr
 
-    QUALITY --> VCCTT["Very Careful Customers<br>Trust Testing<br>→ Valid | Complete | Consistent<br>| Testable | Traceable"]
+    TOOLS --> PER["Personas\n'Fictional user with goals'\n→ John, 35, Accountant"]
+    TOOLS --> SCE["Scenarios\nStory: 'John logs in to submit report...'"]
+    TOOLS --> UST["User Stories\nAs a <role>, I want <goal>\nso that <benefit>"]
+    TOOLS --> TM["Traceability Matrix\nReq ID ↔ Design ↔ Code ↔ Test"]
 
-    VALID --> REV["Requirements Reviews"]
-    VALID --> PROT["Prototyping"]
-    VALID --> TCG["Test-Case Generation<br>(Hard to test = Bad req!)"]
+    VAL --> REV["Reviews / Inspections"]
+    VAL --> PRO["Prototyping"]
+    VAL --> TC["Test-Case Generation\n(Can’t test → Bad requirement!)"]
 
-    %% === DESIGN BRANCH ===
-    DES ==> PRINCIPLES["1. Core Design Principles<br><b>A-M-C-C-E</b>"]
-    DES ==> ARCH["2. Architectural Styles<br>(Know any 4)"]
-    DES ==> UC["3. Use Case Modeling"]
+    SRS --> VCCTT["V → Valid\nC → Complete\nC → Consistent\nT → Testable/Verifiable\nT → Traceable"]:::srs
 
-    PRINCIPLES --> ABS["Abstraction<br>Hide complexity"]
-    PRINCIPLES --> MOD["Modularity<br>Divide into modules"]
-    PRINCIPLES --> COH["Cohesion → <b>HIGH</b><br>One responsibility"]
-    PRINCIPLES --> COU["Coupling → <b>LOW</b><br>Minimize dependencies"]
-    PRINCIPLES --> ENC["Encapsulation<br>Data + Methods together"]
+    %% ==================== DESIGN SIDE (Right) ====================
+    DES --> PRIN["1. Core Design Principles\nA-M-C-C-E"]:::box
+    DES --> ARCH["2. Architectural Styles\n(Must know any 3–4)"]:::box
+    DES --> USEC["3. Use Case Diagram Elements"]:::box
 
-    ARCH --> LAY["Layered (n-tier)<br>Presentation → Business → Data<br>→ High maintainability"]
-    ARCH --> CS["Client-Server<br>Clients request, Server responds<br>→ Centralized data, Scalable"]
-    ARCH --> PF["Pipe-and-Filter<br>Data flows through filters<br>→ Unix pipes, Compilers"]
-    ARCH --> MS["Microservices<br>Small, independent services<br>own DB → Independent deploy"]
+    PRIN --> ABS["Abstraction\nShow only what’s needed"]
+    PRIN --> MOD["Modularity\nBreak into modules"]
+    PRIN --> COH["Cohesion = HIGH\nOne module → One job"]:::good
+    PRIN --> COU["Coupling = LOW\nModules independent"]:::good
+    PRIN --> ENC["Encapsulation\nData + Behavior together"]
 
-    UC --> ACT["Actor<br>External entity → Stick figure"]
-    UC --> USECASE["Use Case<br>System function → Oval"]
-    UC --> BOUND["System Boundary → Box"]
-    UC --> REL["Relationships<br>«include», «extend»"]
+    ARCH --> L1["Layered (N-tier)\nPresentation → Business → Data\nBest for maintainability"]
+    ARCH --> L2["Client-Server\nClient requests → Server responds\nScalable, centralized data"]
+    ARCH --> L3["Pipe-and-Filter\nData → Filter1 → Filter2 → ...\n(e.g., Compilers, Unix pipes)"]
+    ARCH --> L4["Microservices\nSmall, independent services\nEach has own database → Deploy separately"]
 
-    %% Styling for quick visual distinction
-    classDef req fill:#A23B72, color:white, stroke:#fff
-    classDef des fill:#F18F01, color:white, stroke:#fff
-    classDef highlight fill:#C73E1D, color:white
-    classDef quality fill:#1D7324, color:white
+    USEC --> ACT["Actor → Stick Figure"]
+    USEC --> UC["Use Case → Oval"]
+    USEC --> BOX["System Boundary → Rectangle"]
+    USEC --> REL["«include» | «extend» | Generalization"]
 
-    class REQ,PROC,TYPES,TOOLS,QUALITY,VALID req
-    class DES,PRINCIPLES,ARCH,UC des
-    class QUALITY,VCCTT quality
-    class PROC highlight
+    %% ==================== Styling (Big & Clear) ====================
+    classDef root fill:#2E86AB, color:white, stroke:#fff, font-size:18px
+    classDef req fill:#A23B72, color:white, stroke:#fff, font-size:16px
+    classDef des fill:#F18F01, color:white, stroke:#fff, font-size:16px
+    classDef box fill:#3B3B3B, color:white, stroke:#fff, stroke-width:2px
+    classDef srs fill:#1D7324, color:white, stroke:#fff
+    classDef fr fill:#107896, color:white
+    classDef nfr fill:#C73E1D, color:white
+    classDef good fill:#16a085, color:white, font-weight:bold
 ```
 
 ### Advanced Mnemonics
