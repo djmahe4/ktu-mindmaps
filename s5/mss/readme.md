@@ -4,6 +4,183 @@
 [Mod3](#module-3)<br><br>
 [Mod4](#module-4)<br><br>
 [Mod5](#module-5)<br><br>
+## Module 2
+
+### I. HIGH PRIORITY DEFINITIONS (PART A FOCUS)
+
+These concepts are vital for 3-mark questions and as components of 14-mark answers.
+
+| Concept | Definition & Key Features | Mnemonic/Tip |
+| :--- | :--- | :--- |
+| **Functional Requirements (FR)** | Define ***what*** the system must do. Specific services, features, and behaviors (e.g., *The system must allow users to log in*). | **F**eatures = **F**unctional (What?) |
+| **Non-Functional Requirements (NFR)** | Define ***how well*** the system performs. Constraints and quality attributes (Performance, Security, Reliability, Usability). Often affect the entire system architecture. | **N**ow **F**ine (How well?). **P**erformance, **S**ecurity, **R**eliability. |
+| **Personas** | Fictional, generalized user representatives (e.g., "John, the Data Analyst"). Used to understand user goals, motivations, and pain points, driving user-centric design. | **P**eople **R**epresent **G**oals (**P**ersona $\rightarrow$ **R**epresents **G**oals). |
+| **Scenarios** | Narrative stories describing how a Persona interacts with the system to achieve a specific goal in a specific context. Used for identifying usability issues. | **S**tories **S**how **I**nteractions. |
+| **User Stories** | Short, simple requirement descriptions from the user's perspective. Format: "As a [role], I want [action] so that [benefit]." | The core agile requirement format. |
+| **Traceability Matrix** | A document linking requirements IDs to their corresponding design elements, code modules, and test cases. Ensures comprehensive coverage and simplifies impact analysis. | **T**racking **D**esign, **C**ode, **T**ests. |
+| **Software Component** | A modular, self-contained, and reusable unit of functionality with well-defined interfaces. The key building block in modern software architecture. | Modular **B**uilding **B**lock. |
+
+***
+
+### II. CLUSTER 1: REQUIREMENTS PROCESS & SPECIFICATION (Q13 Focus)
+
+#### 1. The Generic Requirements Engineering Process (E-A-S-V-M)
+
+This sequence is the foundation. Master the steps and their purpose.
+
+| Step | Activity | Goal / Output | Mnemonic |
+| :--- | :--- | :--- | :--- |
+| **1. Elicitation** | Gathering information from stakeholders (interviews, observation, prototyping). | Discover all needs (functional & non-functional). | **E**very |
+| **2. Analysis** | Modeling (UML diagrams) and resolving conflicts/ambiguities. | Refined, consistent, and clear requirements. | **A**nalyst |
+| **3. Specification** | Documenting the final requirements formally. | Software Requirements Specification (SRS). | **S**hould |
+| **4. Validation** | Checking documented requirements against stakeholder expectations (reviews, test generation). | Correctness, completeness, and realism. | **V**alidate |
+| **5. Management** | Tracking and controlling changes (versioning, prioritization, traceability). | Maintain integrity throughout the project lifecycle. | **M**anagement |
+
+#### 2. Requirements Validation Techniques
+
+Validation checks that you are building **the right product**.
+
+*   **Requirements Reviews:** Systematic analysis of the SRS by a team to check for errors and inconsistencies.
+*   **Prototyping:** Developing an executable model to get user feedback early on system behavior.
+*   **Test-Case Generation:** Designing acceptance tests based on requirements. If a test is hard to design, the requirement is likely flawed (i.e., not verifiable).
+
+#### 3. Characteristics of a Good SRS Document
+*(Often asked in Part A or as a subset of Q13)*
+
+*   **V**alid: Reflects the real needs of the user.
+*   **C**omplete: Includes all necessary functions and constraints.
+*   **C**onsistent: No conflicts or contradictions between requirements.
+*   **T**estable (Verifiable): Possible to design tests to prove the requirement is met.
+*   **T**raceable: Can be linked back to its source (stakeholder need) and forward to design/code.
+
+***
+
+### III. CLUSTER 2: DESIGN & USER MODELING (Q14 Focus)
+
+#### 1. Core Design Concepts (A-M-C-C)
+
+Design concepts ensure the system structure is robust, maintainable, and scalable.
+
+| Concept | Explanation | Aim (High/Low) |
+| :--- | :--- | :--- |
+| **Abstraction** | Simplification; focusing on essential features while hiding complex internal details. | N/A |
+| **Modularity** | Dividing the system into named, discrete components or modules. | High |
+| **Cohesion** | Measures how strongly related the internal elements within a single module are. | **HIGH** (Module focuses on one, related function). |
+| **Coupling** | Measures the degree of interdependence between different modules. | **LOW** (Modules can be modified independently). |
+| **Encapsulation** | Bundling data (attributes) and methods (behavior) into a single unit (like a class) and protecting internal state. | N/A |
+
+#### 2. Architectural Styles
+*(Explaining 3-4 styles is usually sufficient for a 6-7 mark question)*
+
+1.  **Layered Architecture:**
+    *   **Structure:** Organized into distinct layers (e.g., Presentation $\rightarrow$ Business Logic $\rightarrow$ Data Access).
+    *   **Interaction:** Layers communicate only with the adjacent layer below them.
+    *   **Benefit:** Excellent Separation of Concerns, highly maintainable.
+2.  **Client-Server Architecture:**
+    *   **Structure:** System split into service *requesters* (Clients) and service *providers* (Servers).
+    *   **Interaction:** Client sends requests; Server processes, stores data, and returns results.
+    *   **Benefit:** Centralized control, resource sharing, easy scalability (add more clients/servers).
+3.  **Data Flow / Pipe-and-Filter Architecture:**
+    *   **Structure:** Data is transformed sequentially by a series of processing units (**Filters**), connected by **Pipes**.
+    *   **Interaction:** Output of one filter is input to the next.
+    *   **Benefit:** Reusability, easy to add/remove transformation steps.
+4.  **Microservices Architecture:**
+    *   **Structure:** Application is a collection of small, independent, loosely coupled services. Each service manages its own data.
+    *   **Interaction:** Services communicate via lightweight protocols (e.g., HTTP/API gateway).
+    *   **Benefit:** Independent deployment, improved fault isolation, high scalability.
+
+#### 3. Use Cases / Use Case Diagram
+
+A Use Case describes a system's behavior in response to an **Actor** (user or external system) to achieve a goal.
+
+| Element | Description | Symbol |
+| :--- | :--- | :--- |
+| **Actor** | An external entity interacting with the system (Human, Hardware, or another System). | Stick Figure |
+| **Use Case** | A specific functionality or goal achieved through interaction. | Oval |
+| **System Boundary** | Defines the scope of the system being modeled (What's in/out). | Box |
+| **Relationships** | Links between actors and use cases (Association, Include, Extend). | Lines/Arrows |
+
+---
+
+## 🧠 LEARNING & MEMORY TOOLS (MODULE 2)
+
+### Mind Map Visualization
+
+Visualize Module 2 split into two pillars: **Requirements** and **Design**.
+
+```mermaid
+graph TD
+    M2["CST-309 MODULE 2<br>Requirements Engineering & Software Design"] 
+    M2 ==> REQ["REQUIREMENTS ENGINEERING<br><b>(Q13 - 14 Marks)</b>"]
+    M2 ==> DES["SOFTWARE DESIGN<br><b>(Q14 - 14 Marks)</b>"]
+
+    %% === REQUIREMENTS BRANCH ===
+    REQ ==> PROC["1. Requirements Process<br><b>E-A-S-V-M</b>"]
+    REQ ==> TYPES["2. Requirement Types"]
+    REQ ==> TOOLS["3. User-Centered Tools"]
+    REQ ==> QUALITY["4. Good SRS Qualities<br><b>V-C-C-T-T</b>"]
+    REQ ==> VALID["5. Validation Techniques"]
+
+    PROC --> E["Elicitation<br>(Gather needs)"]
+    PROC --> A["Analysis<br>(Resolve conflicts)"]
+    PROC --> S["Specification<br>→ SRS Document"]
+    PROC --> V["Validation<br>(Reviews, Prototype, Tests)"]
+    PROC --> M["Management<br>(Traceability + Change Control)"]
+
+    TYPES --> FR["Functional Requirements<br>'WHAT the system does'<br>→ Features & Behaviors"]
+    TYPES --> NFR["Non-Functional Requirements<br>'HOW WELL it performs'<br>→ P-S-R-U-M<br>Performance, Security,<br>Reliability, Usability, Maintainability"]
+
+    TOOLS --> P["Personas<br>Fictional user archetype"]
+    TOOLS --> SCEN["Scenarios<br>Story of Persona using system"]
+    TOOLS --> US["User Stories<br>As a [role], I want [goal]<br>so that [benefit]"]
+    TOOLS --> TM["Traceability Matrix<br>Req ↔ Design ↔ Code ↔ Test"]
+
+    QUALITY --> VCCTT["Very Careful Customers<br>Trust Testing<br>→ Valid | Complete | Consistent<br>| Testable | Traceable"]
+
+    VALID --> REV["Requirements Reviews"]
+    VALID --> PROT["Prototyping"]
+    VALID --> TCG["Test-Case Generation<br>(Hard to test = Bad req!)"]
+
+    %% === DESIGN BRANCH ===
+    DES ==> PRINCIPLES["1. Core Design Principles<br><b>A-M-C-C-E</b>"]
+    DES ==> ARCH["2. Architectural Styles<br>(Know any 4)"]
+    DES ==> UC["3. Use Case Modeling"]
+
+    PRINCIPLES --> ABS["Abstraction<br>Hide complexity"]
+    PRINCIPLES --> MOD["Modularity<br>Divide into modules"]
+    PRINCIPLES --> COH["Cohesion → <b>HIGH</b><br>One responsibility"]
+    PRINCIPLES --> COU["Coupling → <b>LOW</b><br>Minimize dependencies"]
+    PRINCIPLES --> ENC["Encapsulation<br>Data + Methods together"]
+
+    ARCH --> LAY["Layered (n-tier)<br>Presentation → Business → Data<br>→ High maintainability"]
+    ARCH --> CS["Client-Server<br>Clients request, Server responds<br>→ Centralized data, Scalable"]
+    ARCH --> PF["Pipe-and-Filter<br>Data flows through filters<br>→ Unix pipes, Compilers"]
+    ARCH --> MS["Microservices<br>Small, independent services<br>own DB → Independent deploy"]
+
+    UC --> ACT["Actor<br>External entity → Stick figure"]
+    UC --> USECASE["Use Case<br>System function → Oval"]
+    UC --> BOUND["System Boundary → Box"]
+    UC --> REL["Relationships<br>«include», «extend»"]
+
+    %% Styling for quick visual distinction
+    classDef req fill:#A23B72, color:white, stroke:#fff
+    classDef des fill:#F18F01, color:white, stroke:#fff
+    classDef highlight fill:#C73E1D, color:white
+    classDef quality fill:#1D7324, color:white
+
+    class REQ,PROC,TYPES,TOOLS,QUALITY,VALID req
+    class DES,PRINCIPLES,ARCH,UC des
+    class QUALITY,VCCTT quality
+    class PROC highlight
+```
+
+### Advanced Mnemonics
+
+| Topic | Mnemonic | Use |
+| :--- | :--- | :--- |
+| **Qualities of a Good SRS** | **V**ery **C**areful **C**ustomers **T**rust **T**esting | **V**alid, **C**omplete, **C**onsistent, **T**estable, **T**raceable. |
+| **Design Hierarchy (Best Practices)** | **A**lways **H**ave **L**ow **C**oupling | **A**bstract, **H**igh Cohesion, **L**ow Coupling. |
+| **Microservice Characteristics**| **I**n **L**ondon, **D**eploy **B**usiness **I**ndependently | **I**mplementation-independent, **L**ightweight, **D**eployable, **B**usiness-oriented, **I**ndependently deployable. |
 ## Module 3
 
 ### I. Cluster 1: Software Verification Fundamentals (High Priority)
