@@ -174,3 +174,154 @@ graph LR
     style T3 fill:#a0a,stroke:#333
     style T4 fill:#f5a,stroke:#333
 ```
+This guide reverse-engineers the essential knowledge from Module 2 (Hazard, Vulnerability, and Risk Assessment) of MCN301, focusing on clarity, memorization, and high-priority topics.
+
+---
+
+## MODULE 2
+
+### PRIORITY 1: VULNERABILITY (CORE CONCEPT)
+
+Vulnerability (V) is the characteristic or circumstance that makes a person, community, or asset susceptible to the damaging effects of a hazard. It is the **lack of capacity** to cope.
+
+#### 1. Types of Vulnerability (P-S-E-E)
+
+| Type | Focus Area | Example | Mnemonic |
+| :--- | :--------- | :------ | :------- |
+| **Physical (P)** | Built environment (Design, Structure, Location). | Homes built on low-lying ground; use of weak materials (e.g., mud walls). | **P**hysical = **P**roperty/Place |
+| **Social (S)** | Socio-economic status, education, marginalized groups (Age, Gender, Literacy). | Elderly people or children who cannot move quickly during a flood. | **S**ocial = **S**ociety/Status |
+| **Economic (E)** | Financial status, assets, livelihoods (Ability to recover financially). | Low-income farmers whose only income source is destroyed by drought. | **E**conomic = **E**arning/Expenses |
+| **Environmental (E)** | Natural resources, ecosystem health (Degradation, depletion). | Deforestation on hill slopes leading to high risk of landslides. | **E**nvironmental = **E**cology/Earth |
+
+**Memory Tip (Mnemonic):** **P**lease **S**ave **E**arth's **E**nvironment (P-S-E-E).
+
+#### 2. Vulnerability Assessment Approaches
+
+Assessment is the quantification (measuring the degree of loss) of vulnerability.
+
+1.  **Qualitative:** Uses expert judgment and descriptive terms (High, Moderate, Low). **Relies heavily on perception.**
+2.  **Semi-Quantitative:** Uses indices or scoring (0 to 1, or 0 to 100). Provides a relative ranking, but results are dimensionless.
+3.  **Quantitative (Analytical/Empirical):** Uses mathematical models and historical data to predict specific damage amounts (e.g., using **Vulnerability Curves**).
+
+*   **Key Tool:** **Vulnerability Curves:** Plot the relationship between **Hazard Intensity** (e.g., wind speed) and **Damage Data** (e.g., percentage of property value lost).
+
+---
+
+### PRIORITY 2: DISASTER RISK ASSESSMENT (DRA)
+
+DRA is the process of identifying, analyzing, and evaluating the risk of a potential disaster.
+
+**Core Concept:** **Risk = Hazard (H) x Vulnerability (V) x Exposure (E)**
+
+#### 1. Two Main Components (The Core Structure)
+
+1.  **Risk Analysis:** Using information to **estimate** the risk.
+2.  **Risk Evaluation:** Using judgment to **decide** how to manage the risk (Mitigation, Transfer, Acceptance).
+
+#### 2. Risk Analysis Steps (The Process)
+
+This is the standard flow for a Part B 14-mark question.
+
+| Step | Action |
+| :--- | :----- |
+| 1. **Hazard Identification (H ID)** | Determine what hazards exist in the area (e.g., flood, earthquake, cyclone). |
+| 2. **Hazard Assessment (H A)** | Determine the characteristics (magnitude, frequency, duration) of identified hazards. |
+| 3. **Exposure / Elements at Risk (E)**| Identify what assets are present and exposed to the hazard (People, Buildings, Infrastructure). |
+| 4. **Vulnerability Assessment (V A)** | Determine how susceptible the exposed assets are to damage (P-S-E-E). |
+| 5. **Risk Estimation (R E)** | Calculate the potential losses (often monetized or in terms of lives lost). |
+
+**Memory Tip (Mnemonic for Steps 1-5):**
+**H**ow **H**eavy **E**very **V**ulcan **R**ocks.
+
+#### 3. Contemporary Approaches to Risk Assessment
+
+Modern approaches must address the complexity of modern society and interconnected systems.
+
+1.  **Multi-Hazard:** Assessing risks from *multiple types of hazards* (e.g., assessing a coastal area for both cyclones and tsunamis).
+2.  **Multi-Sectoral:** Hazards impact different sectors (e.g., health, agriculture, transport). Assessment must cover all impacted sectors.
+3.  **Multi-Level:** Assessing risk at different scales (National, Regional, Local/Community levels).
+4.  **Multi-Stakeholder:** Involving all relevant groups (Individuals, Businesses, NGOs, Authorities) in the assessment process.
+
+**Memory Tip (Mnemonic):** **M**any **M**ethods **M**ake **M**anagement (4 M’s).
+
+---
+
+### PRIORITY 3: HAZARD MAPPING
+
+Hazard mapping is the graphical representation of hazard characteristics (location, magnitude, frequency) on a map.
+
+#### 1. Significance/Applications
+
+Hazard maps are essential planning tools:
+
+*   **Awareness:** They show the population where the danger zones are.
+*   **Spatial Planning:** Used to define hazard zones for communal development plans and building regulations.
+*   **Risk Reduction:** Helps in localizing and dimensioning protective measures (e.g., flood walls).
+*   **Emergency Planning:** Indicates where the biggest risks are and helps prepare rescue routes.
+
+#### 2. Data Requirements & Sources
+
+| Characteristic | Explanation | Sources (The 3 B.R.F.) |
+| :------------- | :---------- | :---------------------- |
+| **Spatial** | Location, distribution, dimension. | 1. **B**ase Maps (Topographic layers, roads, water bodies). |
+| **Temporal** | Duration and speed of onset. | 2. **R**emotely Sensed Images (Satellite data). |
+| **Magnitude** | Intensity or severity of the hazard event. | 3. **F**ield Data (GPS, surveys, Total Station). |
+
+**Memory Tip (Mnemonic for Data Sources):** **B**uy **R**aw **F**ish (Base, Remote, Field).
+
+#### 3. Hazard Mapping Approaches
+
+1.  **GIS Mapping:** Uses Geographic Information Systems (software) to arrange high volumes of data and model hazards in 3D.
+2.  **Participatory Mapping:** Integrates **local knowledge** and community input into the map production process, ensuring the data is relevant to those affected.
+
+---
+
+### PRIORITY 4: HAZARDS
+
+A Hazard (H) is a situation that has the **potential** to cause harm or damage.
+
+**Key Distinction:** **Hazard** is the threat (the potential flood). **Disaster** is the realization of the risk (the flood hitting the vulnerable town).
+
+#### 1. Classification based on Origin (The Types)
+
+1.  **Geological:** Earth processes (Earthquakes, Volcanic activity, Tsunamis, Landslides).
+2.  **Hydro-meteorological:** Atmospheric/Oceanographic/Hydrological processes (Cyclones, Floods, Drought, Heatwaves, Thunderstorms).
+3.  **Biological:** Organic origin/vectors (Epidemics, Pandemics, Locust plagues).
+4.  **Anthropogenic (Man-made):** Induced by human activity (Technological failures, Nuclear accidents, Socio-natural hazards).
+
+#### 2. States of Hazard (D.A.A.)
+
+1.  **Dormant:** Potential threat exists, but currently not affecting people (e.g., a riverbank that might flood someday).
+2.  **Armed:** The hazard is developing and likely to pose a threat (e.g., a cyclone moving toward the coast).
+3.  **Active:** The hazard is striking the habitat; it is now a disaster.
+
+---
+
+## 🧠 Module 2 Conceptual Mind Map (Textual Representation)
+
+```mermaid
+graph TD
+    A[Module 2: Risk Assessment] --> B(Core Formula: R = H x V x E)
+    
+    B --> C{HAZARDS (H)}
+    C --> C1(Geological, Hydromet, Biological, Anthropogenic)
+    
+    B --> D{VULNERABILITY (V)}
+    D --> D1(Types: P-S-E-E)
+    D1 --> D2(Assessment: Qualitative, Quantitative, Curves)
+    
+    B --> E{EXPOSURE (E)}
+    E --> E1(People, Property, Infrastructure)
+    
+    A --> F{DISASTER RISK ASSESSMENT (DRA)}
+    F --> F1(Phase 1: Risk Analysis - Estimation)
+    F1 --> F2(Phase 2: Risk Evaluation - Decision Making)
+    
+    F1 --> F3(DRA Steps: H ID -> H A -> E -> V A -> R E)
+    F --> F4(Approaches: Multi-H, Multi-Sect, Multi-Level, Multi-Stakeholder)
+
+    A --> G{HAZARD MAPPING}
+    G --> G1(Data: Spatial, Temporal, Magnitude)
+    G --> G2(Sources: Base Maps, Remote Sensing, Field Data)
+    G --> G3(Uses: Planning, Awareness, Risk Reduction)
+```
