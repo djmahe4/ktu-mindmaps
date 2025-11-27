@@ -158,7 +158,7 @@ graph TD
     class A risk
     class B,C,D drivers
     class F capacity
-
+```
 #### Mindmap 2: Atmosphere Layers (T S M T)
 
 ```mermaid
