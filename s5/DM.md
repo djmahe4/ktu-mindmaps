@@ -1,4 +1,9 @@
-
+# DM
+[Mod1](#module-1)<br><br>
+[Mod2](#module-2)<br><br>
+[Mod3](#module-3)<br><br>
+[Mod4](#module-4)<br><br>
+[Mod5](#module-5)<br><br>
 ## MODULE 1
 
 ### I. HIGH PRIORITY: DISASTER RISK REDUCTION FRAMEWORK (DRR/DRM)
