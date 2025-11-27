@@ -703,3 +703,194 @@ graph TD
     E --> E3[Assessment: Analyze Desired vs. Existing Capacity]
     E --> E4["Avoid Gaps: Focus on Assets<br>Use Self-Assessment"]
 ```
+This study guide provides thoroughly reverse-engineered notes for Module 5, focusing on highly tested concepts using simple language, mnemonics, and structured learning techniques.
+
+---
+
+## MODULE 5
+
+### 🎯 HIGH PRIORITY 1: The Sendai Framework for Disaster Risk Reduction (SFDRR)
+
+SFDRR (2015-2030) is the global blueprint for reducing disaster losses. This topic is consistently the heaviest weighted (often 10–14 marks).
+
+#### A. The Four Priorities for Action (The Pillars)
+
+**Learning Mnemonic: U G I P** (You Gyp—or **U**nderstand **G**overnance, **I**nvest, **P**repare)
+
+1.  **U: Understanding Disaster Risk**
+    *   **Concept:** We must base all decisions on clear knowledge of hazards, vulnerabilities, and exposure.
+    *   **Action:** Conduct risk assessments, use hazard mapping, and share disaster information widely.
+
+2.  **G: Strengthening Disaster Risk Governance**
+    *   **Concept:** Ensure the right institutions, laws, and policies (like the DM Act 2005) are in place to manage risk effectively across all sectors.
+    *   **Action:** Define clear roles and responsibilities for all levels of government and stakeholders.
+
+3.  **I: Investing in Disaster Risk Reduction for Resilience**
+    *   **Concept:** Shift spending from *post-disaster response* to *prevention and mitigation*.
+    *   **Action:** Public and private investment in structural (e.g., dams) and non-structural (e.g., early warning systems) measures.
+
+4.  **P: Enhancing Disaster Preparedness for Effective Response & "Build Back Better"**
+    *   **Concept:** Be ready for the disaster and ensure that recovery efforts improve resilience.
+    *   **Action:** Strengthen Early Warning Systems (EWS), conduct drills, and integrate DRR measures into reconstruction projects.
+    *   *Trick:* "Build Back Better" means reconstruction must make infrastructure safer than it was before the disaster.
+
+#### B. The Seven Global Targets (Goals by 2030)
+
+**Learning Mnemonic: M A E I S C W** (Focus on 4 Reductions, 3 Increases)
+
+| Mnemonic | Target Type | Goal |
+| :--- | :--- | :--- |
+| **M** | Reduce Loss | Substantially reduce global disaster **M**ortality (deaths). |
+| **A** | Reduce Loss | Substantially reduce the number of **A**ffected people. |
+| **E** | Reduce Loss | Reduce direct disaster **E**conomic loss (in relation to GDP). |
+| **I** | Reduce Loss | Substantially reduce damage to critical **I**nfrastructure (hospitals, schools). |
+| **S** | Increase Capacity | Substantially increase countries with national/local DRR **S**trategies. |
+| **C** | Increase Capacity | Substantially enhance international **C**ooperation for developing countries. |
+| **W** | Increase Capacity | Increase availability of multi-hazard Early **W**arning Systems (**W**arnings). |
+
+---
+
+### 🎯 HIGH PRIORITY 2: National Disaster Management Policy (NPDM)
+
+The NPDM (2009) is India's operational policy document.
+
+#### A. Core Shift (The Guiding Philosophy)
+
+1.  **Old Approach:** Relief-centric (reactive, focusing only on aid after the disaster).
+2.  **NPDM Approach:** **Holistic, Proactive, Multi-Disaster Oriented, and Technology-Driven.**
+
+#### B. Key Objectives of NPDM
+
+**Learning Mnemonic: M A I S T E R**
+
+1.  **M: Mainstreaming:** Integrating disaster management into the **developmental planning** process.
+2.  **A: Awareness/Culture:** Promoting a culture of **prevention and preparedness** at all levels.
+3.  **I: Institutional Framework:** Establishing strong **institutional and techno-legal frameworks** (compliance regime).
+4.  **S: Sustainability:** Encouraging mitigation measures based on environmental **sustainability** and traditional wisdom.
+5.  **T: Transparency:** Bringing in **transparency and accountability** through community and local body involvement.
+6.  **E: Efficient Mechanism:** Ensuring **efficient mechanisms** for risk identification, assessment, and monitoring.
+7.  **R: Response/Relief:** Ensuring efficient response and relief with a **caring approach** towards vulnerable sections.
+
+---
+
+### 🎯 HIGH PRIORITY 3: Institutional & Legal Framework in India
+
+#### A. DM Act, 2005 (The Legislation)
+
+*   **Definition:** The **legal and statutory foundation** for disaster management in India.
+*   **Key Provision:** Mandates the creation of a clear institutional hierarchy (NDMA, SDMA, DDMA) across National, State, and District levels.
+*   **Mindset:** It enforces a **proactive and comprehensive mindset**, moving away from pure response.
+
+#### B. The Institutional Hierarchy
+
+| Body | Leader/Head | Primary Responsibility/Focus |
+| :--- | :--- | :--- |
+| **NDMA** (National Authority) | **Prime Minister** | Lays down **National Policies and Guidelines** (The boss). |
+| **NEC** (National Executive Committee) | **Union Home Secretary** | Prepares the **National Plan** and monitors implementation. |
+| **SDMA** (State Authority) | **Chief Minister** | Lays down State-level policies and plans (following NDMA guidelines). |
+| **DDMA** (District Authority) | **District Collector/Magistrate** | The primary body for **planning, coordinating, and implementation** at the ground level. |
+
+#### C. Role of Supporting Bodies
+
+1.  **NIDM (National Institute of Disaster Management):**
+    *   **Role:** Capacity Building. Focuses on **training, research, and documentation** for DM professionals.
+2.  **NDRF (National Disaster Response Force):**
+    *   **Role:** Specialized force for prompt and professional **response and search & rescue** operations (natural and CBRN disasters).
+
+#### D. Role of Local Governments (Q9, B19b)
+
+Local governments (Panchayats, Municipalities) are critical for implementation.
+
+*   They ensure **implementation** of plans at the village/ward level.
+*   They are the **first responders** to a crisis.
+*   They aid in local **capacity building** and resource mobilization.
+*   They help in identifying and registering local **vulnerabilities**.
+
+---
+
+### 🎯 HIGH PRIORITY 4: Common Disaster Types in India
+
+Knowing 3-4 examples for each category, along with a definition, is essential (3 marks, or 7 marks for detail).
+
+#### A. Natural Disasters (Mnemonic: C F E L T)
+
+1.  **Cyclones:** Rotating severe low-pressure systems over warm seas.
+    *   *Area:* Coastal regions (Bay of Bengal is highly prone).
+2.  **Floods:** Overtopping of banks by water (riverine) or inundation due to excessive rainfall/storm surges (coastal).
+    *   *Cause:* Heavy monsoon, silted rivers (Ganga, Brahmaputra).
+3.  **Earthquakes:** Sudden movement of the earth's crust.
+    *   *Area:* Himalayan region, North East, Gujarat (Seismic Zone V).
+4.  **Landslides:** Mass movement of rock/soil down a slope.
+    *   *Area:* Himalayas, Western Ghats, Nilgiris.
+5.  **Tsunamis:** Series of large waves caused by a major water displacement (usually underwater earthquake > 7.0 magnitude).
+    *   *Area:* Coastal areas (e.g., 2004 event affected Andaman & Nicobar, Tamil Nadu).
+
+#### B. Man-Made Disasters
+
+*   **Definition:** Disasters resulting from human-induced factors (negligence, error, intent, or system failure).
+*   **Examples:**
+    1.  **Industrial/Chemical Disasters:** Accidents involving hazardous materials (e.g., leak, explosion). *Example: Bhopal Gas Tragedy.*
+    2.  **Road/Rail Accidents:** Major transportation system failures leading to large-scale casualties.
+    3.  **Stampedes:** Sudden, panic-driven rush of a crowd leading to suffocation and trampling. *Common at large religious gatherings.*
+    4.  **Fire Disasters:** Large-scale accidental or intentional fires.
+
+---
+
+## 🧠 Module 5 Mind Map for Memorization
+
+Use this structure to recall the main concepts and their associated lists.
+
+```mermaid
+mindmap
+  root((MODULE 5: DISASTER MANAGEMENT IN INDIA))
+    
+    1. SFDRR (Global Policy)
+        Priorities (U G I P)
+            Understand Risk
+            Governance
+            Invest in DRR
+            Preparedness ("Build Back Better")
+        Targets (M A E I S C W)
+            Reduce Mortality, Affected, Economic Loss, Infrastructure Damage
+            Increase Strategies, Cooperation, Warnings
+            
+    2. NPDM (National Policy)
+        Shift in Approach
+            From: Relief-Centric
+            To: Proactive, Holistic, Tech-Driven
+        Objectives (M A I S T E R)
+            Mainstreaming DM
+            Awareness/Culture
+            Institutional Framework
+            Sustainability
+            Transparency
+            Efficient Mechanisms
+            
+    3. Institutional & Legal Framework
+        Legal Basis
+            DM Act, 2005 (Statutory Framework)
+            
+        Hierarchy (N E S D)
+            NDMA (PM, Policy)
+            NEC (Home Sec, National Plan)
+            SDMA (CM, State Plan)
+            DDMA (Collector, Implementation)
+            
+        Supporting Bodies
+            NDRF (Response Force)
+            NIDM (Capacity Building/Training)
+            Local Govt. (Implementation/First Responder)
+
+    4. Disaster Types in India
+        Natural (C F E L T)
+            Cyclones
+            Floods
+            Earthquakes
+            Landslides
+            Tsunamis
+        Man-Made
+            Industrial/Chemical
+            Transportation Accidents
+            Stampedes
+            Fire
+```
