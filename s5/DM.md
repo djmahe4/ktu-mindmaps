@@ -247,11 +247,12 @@ Modern approaches must address the complexity of modern society and interconnect
 4.  **Multi-Stakeholder:** Involving all relevant groups (Individuals, Businesses, NGOs, Authorities) in the assessment process.
 5.   **Qualitative:** Uses expert judgment and descriptive terms (High, Moderate, Low). **Relies heavily on perception.**
 6.   **Semi-Quantitative:** Uses indices or scoring (0 to 1, or 0 to 100). Provides a relative ranking, but results are dimensionless.
-7.   **Quantitative (Analytical/Empirical):** Uses mathematical models and historical data to predict specific damage amounts (e.g., using **Vulnerability Curves**).
+7.   **Quantitative (Analytical/Empirical):**
    - Probability
    - Economic risk
      - Probable maximum Loss
-     - Economic risk
+     - Loss Exceedance Curve
+     - Average anual loss
    - Population risk
      - Individual
      - Societal
