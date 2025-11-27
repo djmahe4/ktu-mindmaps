@@ -199,9 +199,13 @@ Vulnerability (V) is the characteristic or circumstance that makes a person, com
 
 Assessment is the quantification (measuring the degree of loss) of vulnerability.
 
-1.  **Qualitative:** Uses expert judgment and descriptive terms (High, Moderate, Low). **Relies heavily on perception.**
-2.  **Semi-Quantitative:** Uses indices or scoring (0 to 1, or 0 to 100). Provides a relative ranking, but results are dimensionless.
-3.  **Quantitative (Analytical/Empirical):** Uses mathematical models and historical data to predict specific damage amounts (e.g., using **Vulnerability Curves**).
+- Empirical
+   - Analysis of observed damage
+   - Expert opinion
+   - Score assignment
+- Analytical
+     - Simple: Computer based methods from geo engg.
+     - Detailed 
 
 *   **Key Tool:** **Vulnerability Curves:** Plot the relationship between **Hazard Intensity** (e.g., wind speed) and **Damage Data** (e.g., percentage of property value lost).
 
@@ -241,6 +245,16 @@ Modern approaches must address the complexity of modern society and interconnect
 2.  **Multi-Sectoral:** Hazards impact different sectors (e.g., health, agriculture, transport). Assessment must cover all impacted sectors.
 3.  **Multi-Level:** Assessing risk at different scales (National, Regional, Local/Community levels).
 4.  **Multi-Stakeholder:** Involving all relevant groups (Individuals, Businesses, NGOs, Authorities) in the assessment process.
+5.   **Qualitative:** Uses expert judgment and descriptive terms (High, Moderate, Low). **Relies heavily on perception.**
+6.   **Semi-Quantitative:** Uses indices or scoring (0 to 1, or 0 to 100). Provides a relative ranking, but results are dimensionless.
+7.   **Quantitative (Analytical/Empirical):** Uses mathematical models and historical data to predict specific damage amounts (e.g., using **Vulnerability Curves**).
+   - Probability
+   - Economic risk
+        - Probable maximum Loss
+        - Economic risk
+   - Population risk
+        - Individual
+        - Societal
 
 **Memory Tip (Mnemonic):** **M**any **M**ethods **M**ake **M**anagement (4 M’s).
 
