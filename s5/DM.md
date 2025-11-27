@@ -483,7 +483,7 @@ Use this structured map to visualize the connections between the core concepts.
 
 ```mermaid
 mindmap
-  root((MCN 301: DISASTER RISK MANAGEMENT (DRM)))
+  root((Module 3))
     Strategy((P M R R: The DRM Cycle))
       Mitigation
         Prevention & Mitigation
