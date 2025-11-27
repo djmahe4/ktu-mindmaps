@@ -340,3 +340,190 @@ graph TD
     G --> G2["Sources: Base Maps, Remote Sensing, Field Data"]
     G --> G3["Uses: Planning, Awareness, Risk Reduction"]
 ```
+This set of notes is reverse-engineered from the frequent questions in Module 3 of MCN 301, focusing on clarity, structure, and memory techniques.
+
+---
+
+## MCN 301 MODULE 3: DISASTER RISK MANAGEMENT
+
+Module 3 focuses on the Disaster Risk Management (DRM) framework, which is a continuous cycle of planning, coordination, and actions designed to reduce vulnerabilities and build resilience.
+
+### I. HIGH PRIORITY TOPIC 1: THE DRM CYCLE & CORE ELEMENTS
+
+**(Most Frequent Question: Explain the Core Elements/Framework of DRM)**
+
+The DRM framework is a **systematic process** used to implement strategies to lessen the adverse impact of hazards.
+
+#### 1. The Four DRM Phases (The Cycle)
+The cycle is often visualized as four stages, focusing on the timing relative to a disaster event:
+
+| Phase | Timing | Primary Goal | Focus Area |
+| :--- | :--- | :--- | :--- |
+| **P**revention / **M**itigation | Before the event (Long-term) | Eliminate/reduce the root causes of risk. | Land use planning, structural works (dams). |
+| **P**reparedness | Before the event (Short-term) | Ensure effective response capacity when the event occurs. | Early warning, evacuation plans, SOPs. |
+| **R**esponse / **R**elief | During/Immediately After | Save lives, reduce suffering, and meet basic subsistence needs. | Search & Rescue (S&R), First Aid, Provision of food/shelter. |
+| **R**ecovery / **R**econstruction | After the event (Long-term) | Restore normal living conditions and build back better. | Economic rehabilitation, reconstruction of infrastructure. |
+
+> **🔥 Mnemonic for Phases:**
+> **P M**ust **R R**ecover (Prevention/Mitigation, Preparedness, Response/Relief, Recovery/Reconstruction).
+
+#### 2. Core Elements of DRM (The Operational Steps)
+
+1.  **Risk Identification and Assessment:**
+    *   Determine the nature, origin, and characteristics of the hazard.
+    *   Analyze the region's **Vulnerability** (susceptibility) and **Exposure** (what assets are at risk).
+
+2.  **Application of Risk Reduction Measures (Mitigation):** (See Topic 2 below)
+    *   Planning and implementing structural (e.g., building dams) and non-structural (e.g., legislation) interventions.
+
+3.  **Disaster Preparedness & Emergency Management:**
+    *   Actions taken in advance (e.g., warnings, evacuation).
+
+4.  **Recovery/Reconstruction:**
+    *   Post-disaster actions to restore affected populations and infrastructure.
+
+---
+
+### II. HIGH PRIORITY TOPIC 2: MITIGATION MEASURES
+
+**(Most Frequent Question: Explain the types of disaster mitigation measures.)**
+
+Mitigation aims to **reduce the risk** of death, injury, and economic loss by decreasing both hazard likelihood and risk consequence.
+
+#### 1. Objectives of Mitigation (LPR)
+
+*   **L**ikelihood Reduction (e.g., building sea walls to reduce flood chance).
+*   **P**repare and enforce structural measures (building codes).
+*   **R**isk Consequence Reduction (reducing the impact via resilience).
+
+#### 2. Types of Mitigation Measures
+
+**A. Structural Mitigation (The HARD Measures)**
+These involve permanent physical construction and engineering to resist hazards.
+
+*   **Engineering Works:** Constructing dams, embankments, sea defense walls.
+*   **Infrastructure:** Designing roads, railways, and bridges to withstand hazard forces (e.g., wind, seismic activity).
+*   **Building Codes:** Enforcing hazard-resistant designs (e.g., earthquake-resistant construction).
+*   **Retrofitting:** Strengthening existing structures that suffered minor damage in previous events.
+
+**B. Non-Structural Mitigation (The SOFT Measures)**
+These involve policies, laws, awareness, and administrative changes.
+
+*   **L**and Use Zoning and Regulation: Avoiding construction on hill slopes or flood plains.
+*   **A**wareness and Education: Informing the public about local risks and safety procedures.
+*   **C**rop Planning: Advising farmers to grow crops resistant to drought or floods.
+*   **P**olicies and Legislation: Implementing robust building regulations and environmental protection laws.
+
+> **💡 Learning Technique: Concept Contrast**
+> *   **Structural:** Is it built? (Yes: Hard/Structural)
+> *   **Non-Structural:** Is it a rule or a plan? (Yes: Soft/Non-Structural)
+
+---
+
+### III. HIGH PRIORITY TOPIC 3: DISASTER RESPONSE & RELIEF
+
+**(Most Frequent Questions: Define 'relief' and explain its principles; Describe different types of disaster responses.)**
+
+#### 1. Definition and Rationale of Response & Relief
+
+*   **Response:** The stage immediately after a disaster, operationalizing plans to save lives.
+*   **Relief:** Provision of assistance (food, shelter, medical care) to meet the basic subsistence needs of the affected population, typically immediate and short-term.
+
+#### 2. Objectives of Response (The 5 L's)
+
+1.  **L**imiting casualties.
+2.  **L**ife Support: Restoring essential life support systems (water/power).
+3.  **L**iability Mitigation: Mitigating further damage and loss.
+4.  **L**owering Hardship: Alleviating immediate suffering (relief).
+5.  **L**aying Foundation for recovery.
+
+#### 3. Core Disaster Response Actions
+
+1.  **Search and Rescue (S&R):** Identifying and extracting survivors, often involving specialized teams and aerial searches if transport networks are damaged.
+2.  **Medical Care / First Aid:** Providing immediate care (First Aid) and rapid transportation of the seriously injured (Emergency Medical Care).
+3.  **Relief Aid Distribution:** Targeted provision of food, water, clothing, and temporary shelter.
+4.  **Damage Assessment:** Rapidly calculating the loss of life, injury, and damage to public/private property to prioritize resource allocation.
+5.  **Coordination:** Setting up a unified command structure and a control room (manned 24/7) to manage multiple agencies (NGOs, government, military).
+6.  **Public Health Support:** Ensuring sanitation, clean water, and managing mass casualties to prevent secondary health hazards (epidemics).
+
+#### 4. Principles Guiding Relief (Humanitarian Charter)
+
+These principles ensure that aid is delivered effectively and ethically:
+
+> **🔥 Mnemonic: HINZU VU**
+> 1.  **H**umanity (Alleviate suffering).
+> 2.  **I**mpartiality (Aid based on need, not race/religion/politics).
+> 3.  **N**eutrality (Do not take sides in conflicts).
+> 4.  **I**ndependence (National Societies maintain autonomy).
+> 5.  **V**oluntary Service (Service without expectation of gain).
+> 6.  **U**nity (Only one Red Cross/Red Crescent society per country).
+> 7.  **U**niversality (Movement is worldwide).
+
+---
+
+### IV. HIGH PRIORITY TOPIC 4: INTERNATIONAL RELIEF ORGANIZATIONS
+
+**(Frequent Question: Discuss the role of international relief organizations.)**
+
+These organizations provide global support, funding, coordination, and technical expertise in DRR and response.
+
+> **🔥 Mnemonic for Key Organizations:**
+> **W OW U I** (World Bank, OCHA, WHO, UNDP, IFRC)
+
+| Organization | Key Role / Function |
+| :--- | :--- |
+| **UN-OCHA** (UN Office for Coordination of Humanitarian Affairs) | **Coordination:** Strengthens the UN's response to disasters, ensuring coherent action among various actors. |
+| **UNDP** (UN Development Programme) | **Capacity Building & Recovery:** Focuses on poverty reduction, crisis prevention, and supports local governments in needs assessment and capacity building (long-term focus). |
+| **IFRC** (International Federation of Red Cross/Red Crescent) | **Frontline Response & Relief:** Largest humanitarian organization. Provides immediate relief and combines relief with development work. Guided by the HINZU VU principles. |
+| **WHO** (World Health Organization) | **Health & Standards:** Directing/coordinating authority for health. Provides technical support and manages medical emergencies arising from disasters. |
+| **World Bank** | **Funding & Finance:** International financial institution providing loans to developing countries for large-scale disaster management projects (Mitigation, Early Warning Systems). |
+
+---
+
+## MCN 301 MODULE 3: MEMORIZATION MIND MAP
+
+Use this structured map to visualize the connections between the core concepts.
+
+```mermaid
+mindmap
+  root((MCN 301: DISASTER RISK MANAGEMENT (DRM)))
+    Strategy(P M R R: The DRM Cycle)
+      Mitigation(1. Prevention & Mitigation)
+        Structural Measures(Hard Engineering)
+          - Dams & Embankments
+          - Hazard-Resistant Building Codes
+          - Retrofitting Existing Buildings
+        Non-Structural Measures(Soft Policy)
+          - Land Use Zoning (Avoid Flood Plains)
+          - Public Awareness Campaigns
+          - Crop Planning
+          - Legislation
+      Preparedness(2. Planning Beforehand)
+        - Early Warning Systems
+        - Evacuation Plans
+        - Standard Operating Procedures (SOPs)
+        - Inventory of Resources (Equipment, Personnel)
+      Response(3. Immediate Action)
+        Actions
+          - Search and Rescue (S&R)
+          - Medical Care / First Aid
+          - Damage Assessment
+          - Coordination (Unified Command)
+        Relief(Provision of Basic Needs)
+          Principles(HINZU VU)
+            - Humanity
+            - Impartiality
+            - Neutrality
+            - Independence
+            - Universality
+      Recovery(4. Post-Disaster Restoration)
+        - Reconstruction of Infrastructure
+        - Economic Rehabilitation (Livelihoods)
+        - Building Back Better (Integrating Mitigation)
+    Institutions(International Support: W O W U I)
+      - OCHA (Coordination)
+      - UNDP (Development & Capacity Building)
+      - IFRC (Frontline Relief)
+      - WHO (Health Standards)
+      - World Bank (Funding)
+```
