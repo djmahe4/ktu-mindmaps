@@ -483,50 +483,49 @@ Use this structured map to visualize the connections between the core concepts.
 
 ```mermaid
 mindmap
-  root(MCN 301: DISASTER RISK MANAGEMENT (DRM))
-
-    Strategy (P M R R: The DRM Cycle)
+  root((MCN 301: DISASTER RISK MANAGEMENT (DRM)))
+    Strategy((P M R R: The DRM Cycle))
       Mitigation
-        1. Prevention & Mitigation
-        Structural Measures (Hard Engineering)
-          Dams & Embankments
-          Hazard-Resistant Building Codes
-          Retrofitting Existing Buildings
-        Non-Structural Measures (Soft Policy)
-          Land Use Zoning (Avoid Flood Plains)
-          Public Awareness Campaigns
-          Crop Planning
-          Legislation
+        Prevention & Mitigation
+          Structural Measures (Hard Engineering)
+            Dams & Embankments
+            Hazard-Resistant Building Codes
+            Retrofitting Existing Buildings
+          Non-Structural Measures (Soft Policy)
+            Land Use Zoning (Avoid Flood Plains)
+            Public Awareness Campaigns
+            Crop Planning
+            Legislation
       Preparedness
-        2. Planning Beforehand
-        Early Warning Systems
-        Evacuation Plans
-        Standard Operating Procedures (SOPs)
-        Inventory of Resources (Equipment, Personnel)
+        Planning Beforehand
+          Early Warning Systems
+          Evacuation Plans
+          Standard Operating Procedures (SOPs)
+          Inventory of Resources (Equipment, Personnel)
       Response
-        3. Immediate Action
-        Actions
-          Search and Rescue (S&R)
-          Medical Care / First Aid
-          Damage Assessment
-          Coordination (Unified Command)
-        Relief (Provision of Basic Needs)
-          Principles (HINZU VU)
-            Humanity
-            Impartiality
-            Neutrality
-            Independence
-            Universality
+        Immediate Action
+          Actions
+            Search and Rescue (S&R)
+            Medical Care / First Aid
+            Damage Assessment
+            Coordination (Unified Command)
+          Relief (Provision of Basic Needs)
+            Principles (HINZU VU)
+              Humanity
+              Impartiality
+              Neutrality
+              Independence
+              Universality
       Recovery
-        4. Post-Disaster Restoration
-        Reconstruction of Infrastructure
-        Economic Rehabilitation (Livelihoods)
-        Building Back Better (Integrating Mitigation)
-
-    Institutions (International Support: W O W U I)
+        Post-Disaster Restoration
+          Reconstruction of Infrastructure
+          Economic Rehabilitation (Livelihoods)
+          Building Back Better (Integrating Mitigation)
+    Institutions((International Support: W O W U I))
       OCHA (Coordination)
       UNDP (Development & Capacity Building)
       IFRC (Frontline Relief)
       WHO (Health Standards)
       World Bank (Funding)
+
 ```
