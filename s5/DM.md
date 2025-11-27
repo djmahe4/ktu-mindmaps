@@ -485,23 +485,22 @@ Use this structured map to visualize the connections between the core concepts.
 mindmap
   root((Module 3))
     Strategy((P M R R: The DRM Cycle))
-      Mitigation
-        Prevention & Mitigation
-          Structural Measures (Hard Engineering)
-            Dams & Embankments
-            Hazard-Resistant Building Codes
-            Retrofitting Existing Buildings
-          Non-Structural Measures (Soft Policy)
-            Land Use Zoning (Avoid Flood Plains)
-            Public Awareness Campaigns
-            Crop Planning
-            Legislation
       Preparedness
         Planning Beforehand
           Early Warning Systems
           Evacuation Plans
           Standard Operating Procedures (SOPs)
           Inventory of Resources (Equipment, Personnel)
+      Prevention & Mitigation
+       Structural Measures (Hard Engineering)
+         Dams & Embankments
+         Hazard-Resistant Building Codes
+         Retrofitting Existing Buildings
+       Non-Structural Measures (Soft Policy)
+         Land Use Zoning (Avoid Flood Plains)
+         Public Awareness Campaigns
+         Crop Planning
+         Legislation
       Response
         Immediate Action
           Actions
