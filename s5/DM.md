@@ -250,11 +250,11 @@ Modern approaches must address the complexity of modern society and interconnect
 7.   **Quantitative (Analytical/Empirical):** Uses mathematical models and historical data to predict specific damage amounts (e.g., using **Vulnerability Curves**).
    - Probability
    - Economic risk
-        - Probable maximum Loss
-        - Economic risk
+     - Probable maximum Loss
+     - Economic risk
    - Population risk
-        - Individual
-        - Societal
+     - Individual
+     - Societal
 
 **Memory Tip (Mnemonic):** **M**any **M**ethods **M**ake **M**anagement (4 M’s).
 
