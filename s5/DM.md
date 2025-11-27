@@ -356,13 +356,13 @@ The cycle is often visualized as four stages, focusing on the timing relative to
 
 | Phase | Timing | Primary Goal | Focus Area |
 | :--- | :--- | :--- | :--- |
-| **R**esponse / **R**elief | During/Immediately After | Save lives, reduce suffering, and meet basic subsistence needs. | Search & Rescue (S&R), First Aid, Provision of food/shelter. |
 | **R**ecovery / **R**econstruction | After the event (Long-term) | Restore normal living conditions and build back better. | Economic rehabilitation, reconstruction of infrastructure. |
+| **R**esponse / **R**elief | During/Immediately After | Save lives, reduce suffering, and meet basic subsistence needs. | Search & Rescue (S&R), First Aid, Provision of food/shelter. |
 | **P**revention / **M**itigation | Before the event (Long-term) | Eliminate/reduce the root causes of risk. | Land use planning, structural works (dams). |
 | **P**reparedness | Before the event (Short-term) | Ensure effective response capacity when the event occurs. | Early warning, evacuation plans, SOPs. |
 
 > **🔥 Mnemonic for Phases:**
-> **P M**ust **R R**ecover (Prevention/Mitigation, Preparedness, Response/Relief, Recovery/Reconstruction).
+> **RR**ecover**P PM**ust   (Prevention/Mitigation, Preparedness, Response/Relief, Recovery/Reconstruction).
 
 #### 2. Core Elements of DRM (The Operational Steps)
 
