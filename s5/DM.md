@@ -301,27 +301,27 @@ A Hazard (H) is a situation that has the **potential** to cause harm or damage.
 
 ```mermaid
 graph TD
-    A[Module 2: Risk Assessment] --> B(Core Formula: R = H x V x E)
+    A["Module 2: Risk Assessment"] --> B["Core Formula: R = H x V x E"]
     
-    B --> C{HAZARDS (H)}
-    C --> C1(Geological, Hydromet, Biological, Anthropogenic)
+    B --> C{"HAZARDS (H)"}
+    C --> C1["Geological, Hydromet, Biological, Anthropogenic"]
     
-    B --> D{VULNERABILITY (V)}
-    D --> D1(Types: P-S-E-E)
-    D1 --> D2(Assessment: Qualitative, Quantitative, Curves)
+    B --> D{"VULNERABILITY (V)"}
+    D --> D1["Types: P-S-E-E"]
+    D1 --> D2["Assessment: Qualitative, Quantitative, Curves"]
     
-    B --> E{EXPOSURE (E)}
-    E --> E1(People, Property, Infrastructure)
+    B --> E{"EXPOSURE (E)"}
+    E --> E1["People, Property, Infrastructure"]
     
-    A --> F{DISASTER RISK ASSESSMENT (DRA)}
-    F --> F1(Phase 1: Risk Analysis - Estimation)
-    F1 --> F2(Phase 2: Risk Evaluation - Decision Making)
+    A --> F{"DISASTER RISK ASSESSMENT (DRA)"}
+    F --> F1["Phase 1: Risk Analysis - Estimation"]
+    F1 --> F2["Phase 2: Risk Evaluation - Decision Making"]
     
-    F1 --> F3(DRA Steps: H ID -> H A -> E -> V A -> R E)
-    F --> F4(Approaches: Multi-H, Multi-Sect, Multi-Level, Multi-Stakeholder)
+    F1 --> F3["DRA Steps: H ID -> H A -> E -> V A -> R E"]
+    F --> F4["Approaches: Multi-H, Multi-Sect, Multi-Level, Multi-Stakeholder"]
 
-    A --> G{HAZARD MAPPING}
-    G --> G1(Data: Spatial, Temporal, Magnitude)
-    G --> G2(Sources: Base Maps, Remote Sensing, Field Data)
-    G --> G3(Uses: Planning, Awareness, Risk Reduction)
+    A --> G{"HAZARD MAPPING"}
+    G --> G1["Data: Spatial, Temporal, Magnitude"]
+    G --> G2["Sources: Base Maps, Remote Sensing, Field Data"]
+    G --> G3["Uses: Planning, Awareness, Risk Reduction"]
 ```
