@@ -340,11 +340,8 @@ graph TD
     G --> G2["Sources: Base Maps, Remote Sensing, Field Data"]
     G --> G3["Uses: Planning, Awareness, Risk Reduction"]
 ```
-This set of notes is reverse-engineered from the frequent questions in Module 3 of MCN 301, focusing on clarity, structure, and memory techniques.
 
----
-
-## MCN 301 MODULE 3: DISASTER RISK MANAGEMENT
+## MODULE 3
 
 Module 3 focuses on the Disaster Risk Management (DRM) framework, which is a continuous cycle of planning, coordination, and actions designed to reduce vulnerabilities and build resilience.
 
