@@ -117,32 +117,47 @@ Cyclones are a fundamental atmospheric process, often asked as a differentiation
 
 ```mermaid
 graph TD
-    A[Disaster Risk (R)] --> B(Hazard H);
-    A --> C(Vulnerability V);
-    A --> D(Exposure E);
-    A --> E(Capacity C);
+    A[Disaster Risk (R)] --> B[Hazard (H)]
+    A --> C[Vulnerability (V)]
+    A --> D[Exposure (E)]
+    A --> F[Capacity (C)]
 
-    style A fill:#f9f,stroke:#333
-    style B fill:#ffd,stroke:#333
-    style C fill:#ffd,stroke:#333
-    style D fill:#ffd,stroke:#333
-    style E fill:#ccf,stroke:#333
+    style A fill:#ffebee,stroke:#c62828,stroke-width:3px,color:#b71c1c
+    style B fill:#fff3e0,stroke:#ef6c00
+    style C fill:#fff3e0,stroke:#ef6c00
+    style D fill:#fff3e0,stroke:#ef6c00
+    style F fill:#e8f5e8,stroke:#2e7d32
 
-    B --> B1(Natural);
-    B --> B2(Man-made);
+    B --> B1[Natural<br/>(earthquake, flood, storm, etc.)]
+    B --> B2[Man-made<br/>(industrial accident, conflict, etc.)]
 
-    C --> C1(Physical);
-    C --> C2(Social/Economic);
+    C --> C1[Physical<br/>(weak buildings, poor infrastructure)]
+    C --> C2[Social/Economic<br/>(poverty, marginalisation, inequality)]
 
-    E --> E1(People);
-    E --> E2(Assets);
+    D --> D1[People]
+    D --> D2[Assets<br/>(houses, crops, infrastructure)]
+    D --> D3[Critical systems<br/>(hospitals, lifelines)]
 
-    E --> E3(Systems);
+    F --> F1[Coping capacity]
+    F --> F2[Adaptive capacity]
+    F --> F3[Transformative capacity]
 
-    subgraph DRR Goal
-        R -- Reduce/Manage --> G1(Resilience);
-        R -- Reduce/Manage --> G2(DRR/DRM);
+    subgraph DRR Goals
+        direction TB
+        G1[Build Resilience]
+        G2[Reduce Disaster Risk]
+        G3[Effective Disaster Risk Management (DRM)]
+        A -.->|Reduce/Manage| G1
+        A -.->|Reduce/Manage| G2
+        A -.->|Reduce/Manage| G3
     end
+
+    classDef risk fill:#ffebee,stroke:#c62828,stroke-width:3px
+    classDef drivers fill:#fff3e0,stroke:#ef6c00
+    classDef capacity fill:#e8f5e8,stroke:#2e7d32
+    class A risk
+    class B,C,D drivers
+    class F capacity
 ```
 
 #### Mindmap 2: Atmosphere Layers (T S M T)
