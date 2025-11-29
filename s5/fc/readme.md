@@ -1,6 +1,6 @@
-# FC (Fundamentals of Computing)
+# FC (Foundations of Cryptography)
 
-This folder contains study materials for Fundamentals of Computing.
+This folder contains study materials for Foundations of Cryptography.
 
 ## Contents
 

@@ -6,9 +6,9 @@ This folder contains study materials for KTU Semester 5 subjects.
 
 - `CN/` - Computer Networks
 - `flat/` - Formal Languages and Automata Theory (FLAT)
-- `fc/` - Fundamentals of Computing
+- `fc/` - Foundations of Cryptography
 - `mss/` - Modeling and Simulation of Systems (MSS)
-- `DM.md` - Discrete Mathematics
+- `DM.md` - Disaster Management
 - `SNS.md` - Signals and Systems
-- `fc.md` - Fundamentals of Computing notes
+- `fc.md` - Foundations of Cryptography notes
 - `ip-add.html` - IP Addressing notes
