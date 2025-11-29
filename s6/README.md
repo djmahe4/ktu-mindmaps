@@ -153,5 +153,5 @@
     * [ ] Operating Systems (CST206)
     * [ ] Database Management Systems (CST204)
     * [ ] Computer Networks (CST303)
-    * [ ] Applied Cryptography (CCT307)
+    * [ ] Foundations of Cryptography (CGT307)
 * [ ] **Refer to Textbooks** of the respective core courses.
