@@ -153,10 +153,10 @@ If the exam asks **"Show the parsing steps for string id + id"**, use this stack
 ```mermaid
 graph LR
     Input[Input String] --> Match{Match Top of Stack?}
-    Match -- Yes --> Pop[Pop Stack & Advance Input]
-    Match -- No --> Table[Lookup Table M[A, a]]
-    Table -- Found Rule --> Push[Push RHS to Stack]
-    Table -- Empty Cell --> Error[Syntax Error]
+    Match --> |Yes| Pop[Pop Stack & Advance Input]
+    Match --> |No| Table["Lookup Table M[A, a]"]
+    Table --> |Found Rule| Push[Push RHS to Stack]
+    Table --> |Empty Cell| Error[Syntax Error]
     Pop --> Done{Stack Empty?}
     Push --> Match
 ```
