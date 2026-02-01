@@ -92,3 +92,87 @@ When solving a 10-14 mark question, follow this exact order:
 4.  **Compute FOLLOW:** Start from the Start Symbol ($\$$).
 5.  **Build Table:** Rows = Non-terminals, Columns = Terminals.
 6.  **Verify LL(1):** Explicitly state: "Since there are no multiple entries, the grammar is LL(1)."
+
+This is the most common 10–14 mark question in **Module 2**. We will solve the classic **Arithmetic Expression Grammar**, as it covers every single rule (Left Recursion, FIRST/FOLLOW, and Table Construction).
+
+---
+
+## 🧠 Worked Solution: LL(1) Analysis
+**Question:** Check if the following grammar is LL(1) and construct the parsing table:
+$E \rightarrow E + T \mid T$
+$T \rightarrow T * F \mid F$
+$F \rightarrow ( E ) \mid \text{id}$
+
+---
+
+### Step 1: Eliminate Left Recursion
+The grammar is **Left Recursive** (e.g., $E \rightarrow E + T$). We must fix it before calculating FIRST/FOLLOW.
+
+**Modified Grammar ($G'$):**
+1. $E \rightarrow T E'$
+2. $E' \rightarrow + T E' \mid \epsilon$
+3. $T \rightarrow F T'$
+4. $T' \rightarrow * F T' \mid \epsilon$
+5. $F \rightarrow ( E ) \mid \text{id}$
+
+---
+
+### Step 2: Calculate FIRST and FOLLOW Sets
+*Rules applied: FIRST looks forward at the first terminal; FOLLOW looks at what comes after the non-terminal in the RHS.*
+
+| Non-Terminal | FIRST | FOLLOW |
+| :--- | :--- | :--- |
+| **E** | { (, id } | { $, ) } |
+| **E'** | { +, $\epsilon$ } | { $, ) } |
+| **T** | { (, id } | { +, $, ) } |
+| **T'** | { *, $\epsilon$ } | { +, $, ) } |
+| **F** | { (, id } | { *, +, $, ) } |
+
+---
+
+### Step 3: Construct the LL(1) Parsing Table
+To fill the table, for rule $A \rightarrow \alpha$:
+1. Place the rule under columns in $FIRST(\alpha)$.
+2. If $\epsilon \in FIRST(\alpha)$, place the rule under columns in $FOLLOW(A)$.
+
+| NT | id | + | * | ( | ) | $ |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **E** | $E \rightarrow TE'$ | | | $E \rightarrow TE'$ | | |
+| **E'** | | $E' \rightarrow +TE'$ | | | $E' \rightarrow \epsilon$ | $E' \rightarrow \epsilon$ |
+| **T** | $T \rightarrow FT'$ | | | $T \rightarrow FT'$ | | |
+| **T'** | | $T' \rightarrow \epsilon$ | $T' \rightarrow *FT'$ | | $T' \rightarrow \epsilon$ | $T' \rightarrow \epsilon$ |
+| **F** | $F \rightarrow \text{id}$ | | | $F \rightarrow (E)$ | | |
+
+**Result:** Since no cell has multiple entries, the grammar is **LL(1)**.
+
+---
+
+### Step 4: Logic Flow of a Predictive Parser
+If the exam asks **"Show the parsing steps for string id + id"**, use this stack-based logic:
+
+```mermaid
+graph LR
+    Input[Input String] --> Match{Match Top of Stack?}
+    Match -- Yes --> Pop[Pop Stack & Advance Input]
+    Match -- No --> Table[Lookup Table M[A, a]]
+    Table -- Found Rule --> Push[Push RHS to Stack]
+    Table -- Empty Cell --> Error[Syntax Error]
+    Pop --> Done{Stack Empty?}
+    Push --> Match
+```
+
+---
+
+### 📝 Common Mistakes to Avoid (Exam Checklist)
+1.  **Forgetting $\$$ in FOLLOW:** The Start Symbol ($E$) **always** includes $\$$ in its FOLLOW set.
+2.  **The $\epsilon$ Rule:** When applying a rule like $E' \rightarrow \epsilon$, you don't look at $FIRST(\epsilon)$. You look at **FOLLOW(E')** to decide where to put it in the table.
+3.  **Retracting in FOLLOW:** When calculating $FOLLOW(T)$, and you see $E \rightarrow TE'$, you must include everything in $FIRST(E')$ **except $\epsilon$**. Since $E'$ can be $\epsilon$, you also must include **FOLLOW(E)**.
+4.  **Terminals in Table:** Ensure the columns only contain Terminals ($id, +, *, (, ), \$$) and rows only contain Non-Terminals ($E, E', T, T', F$).
+
+---
+
+### 💡 Pro-Tip for Part B:
+If the question asks to **"Prove the grammar is LL(1)"**, follow these three steps:
+1.  Construct the Table.
+2.  Point to the table and state: *"For every entry $M[A, a]$, there is at most one production."*
+3.  (Optional but impressive) Mention that $FIRST(A \rightarrow \alpha)$ and $FIRST(A \rightarrow \beta)$ are disjoint.
