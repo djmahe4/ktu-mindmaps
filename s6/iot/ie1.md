@@ -104,20 +104,45 @@ IoT systems modify the classical 7-layer OSI model for simplicity and efficiency
 
 ---
 
-### 5. Architectural View of IoT (CISCO Model)
-CISCO’s reference model comprises **seven levels (tiers)** to depict how data moves from the physical world to business processes.
+### 5. Explain the Architectural View of IoT (5-Layer Model)
 
+While the Cisco model has 7 layers, the most widely accepted "Business-oriented" architectural view consists of 5 layers. This model moves from physical data collection to high-level business logic.
+
+#### **The 5-Layer Architecture Diagram**
 ```mermaid
 graph TD
-    L7[Level 7: Collaboration & Processes - People & Business]
-    L6[Level 6: Application - Reporting, Analysis, Control]
-    L5[Level 5: Data Abstraction - Aggregation & Access]
-    L4[Level 4: Data Accumulation - Storage]
-    L3[Level 3: Edge Computing - Data Element Analysis]
-    L2[Level 2: Connectivity - Communication & Processing]
-    L1[Level 1: Physical Devices - Sensors, Machines, Nodes]
-    L7 --- L6 --- L5 --- L4 --- L3 --- L2 --- L1
+    L5[<b>Layer 5: Business Layer</b><br/>Business Models, Privacy, Data Analytics] 
+    L4[<b>Layer 4: Application Layer</b><br/>Smart Homes, Healthcare, Intelligent Transport]
+    L3[<b>Layer 3: Middleware Layer</b><br/>Service Management, Storage, Processing]
+    L2[<b>Layer 2: Network Layer</b><br/>Transmission, Processing, Connectivity]
+    L1[<b>Layer 1: Perception Layer</b><br/>Physical Objects, Sensors, RFID]
+
+    L5 --- L4 --- L3 --- L2 --- L1
+    style L1 fill:#f9f,stroke:#333
+    style L5 fill:#bbf,stroke:#333
 ```
+
+#### **Detailed Breakdown of Layers:**
+
+1.  **Perception Layer (Physical Layer):**
+    *   **Function:** This is the "sensing" layer. It identifies objects and gathers information from the physical world.
+    *   **Components:** Sensors (temperature, proximity), RFID tags, and actuators. It converts physical parameters into digital data.
+
+2.  **Network Layer (Processing Layer):**
+    *   **Function:** Responsible for transferring the data collected by the perception layer to the processing system. It handles "processing" in terms of routing and transmission.
+    *   **Components:** 3G/4G/5G, Wi-Fi, Bluetooth, ZigBee, and Gateways.
+
+3.  **Middleware Layer:**
+    *   **Function:** Acts as a bridge between the network and applications. It manages services, makes decisions based on data, and stores information in databases.
+    *   **Importance:** It allows different "things" to communicate even if they use different protocols.
+
+4.  **Application Layer:**
+    *   **Function:** This layer delivers specific services to the end-user. It defines the various applications in which the IoT can be deployed.
+    *   **Examples:** Smart Home interfaces, Smart Grids, and Wearable health monitoring apps.
+
+5.  **Business Layer:**
+    *   **Function:** This is the "top-level" management. It manages the whole IoT system, including business models, user privacy, and high-level big data analytics.
+    *   **Goal:** It helps in creating graphs, flowcharts, and reports to make business decisions based on the data received from lower layers.
 
 ---
 
