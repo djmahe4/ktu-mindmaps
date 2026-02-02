@@ -151,3 +151,67 @@ When the Lexical Analyzer finds a match, it performs specific actions:
 | **Number** | `3.14` | `digit+ ( . digit+ )?` | Return (`NUM`, `value`) |
 
 ---
+
+## Phases of compiler (example)
+
+### 1. The Compilation Trace: `a = b + c * 10`
+
+| Phase | Input | Output (Intermediate Representation) |
+| :--- | :--- | :--- |
+| **1. Lexical Analysis** | `a = b + c * 10` | Tokens: `<id,1> <=> <id,2> <+> <id,3> <*> <num,10>` |
+| **2. Syntax Analysis** | Token Stream | **Syntax Tree:** (Multiplication is deeper than addition due to precedence) |
+| **3. Semantic Analysis** | Syntax Tree | **Annotated Tree:** Adds `inttofloat` conversion for the number `10` |
+| **4. Intermediate Code Gen** | Annotated Tree | **Three-Address Code (TAC):** <br> `t1 = inttofloat(10)` <br> `t2 = id3 * t1` <br> `t3 = id2 + t2` <br> `id1 = t3` |
+| **5. Code Optimization** | TAC | **Optimized TAC:** <br> `t1 = id3 * 10.0` <br> `id1 = id2 + t1` |
+| **6. Code Generation** | Optimized TAC | **Assembly Code:** <br> `LDF R2, id3` (Load Float) <br> `MULF R2, R2, #10.0` <br> `LDF R1, id2` <br> `ADDF R1, R1, R2` <br> `STF id1, R1` (Store Float) |
+
+---
+
+### 2. Mermaid Diagram: Visualizing the Flow
+This diagram illustrates the input/output relationship between the phases.
+
+```mermaid
+graph TD
+    %% Source Input
+    Source([Source: a = b + c * 10]) --> Lex
+    
+    %% Lexical Phase
+    subgraph "Front End (Analysis)"
+    Lex[Lexical Analyzer] -- "Tokens: id1, =, id2, +, id3, *, 10" --> Syn[Syntax Analyzer]
+    
+    %% Syntax Tree Visualization
+    Syn -- "Syntax Tree" --> Sem[Semantic Analyzer]
+    end
+    
+    %% Semantic Detail
+    Sem -- "Annotated Tree (Type Checked)" --> ICG[Intermediate Code Gen]
+    
+    %% Back End
+    subgraph "Back End (Synthesis)"
+    ICG -- "t1 = id3 * 10.0 <br> id1 = id2 + t1" --> Opt[Code Optimizer]
+    Opt -- "Optimized 3-Address Code" --> Gen[Code Generator]
+    end
+    
+    %% Final Output
+    Gen --> Target([Target: Assembly Code])
+
+    %% Side Components
+    SymbolTable[(Symbol Table)] <--> Lex
+    SymbolTable <--> Syn
+    SymbolTable <--> Sem
+    SymbolTable <--> ICG
+    SymbolTable <--> Opt
+    SymbolTable <--> Gen
+```
+
+---
+
+### 3. Key Details to Include for Full Marks:
+
+1.  **Lexical Phase**: Mention that `id1`, `id2`, and `id3` are pointers to the **Symbol Table** entries for `a`, `b`, and `c`.
+2.  **Syntax Phase**: Explain that the tree structure enforces **Operator Precedence** (multiplication happens before addition).
+    *   *Visual Tip:* In your hand-drawn diagram, put the `*` node lower than the `+` node.
+3.  **Semantic Phase**: Highlight **Type Conversion**. Since `a, b, c` are floats, the compiler must convert the integer `10` to `10.0` so the math works.
+4.  **Intermediate Code (TAC)**: Use the `t1, t2, t3` notation. It stands for "temporary variables."
+5.  **Optimization**: Show that you reduced the number of steps (e.g., combining the `inttofloat` conversion into the multiplication line).
+6.  **Code Generation**: Mention that this phase deals with **Registers** (R1, R2) and specific machine instructions (LDF/MULF).
