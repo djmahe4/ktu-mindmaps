@@ -73,7 +73,6 @@ Using this extended logic, let's solve the specific problems from your paper:
 | **$c = k$** | $p = -1$ | $\Theta(n^k \log \log n)$ |
 | **$c < k$** | $p \ge 0$ | $\Theta(n^k \log^p n)$ |
 
-To complete your cheat sheet, here are the sections for **Substitution Method** (Guess & Prove) and **Recursion Tree Method**, including a diagram for the complex case found in your exam paper (Question 3, Module 1).
 
 ---
 
@@ -201,3 +200,78 @@ To solve the diagram in Question 8:
 1.  **Leaves** always have BF = 0.
 2.  Work bottom-up.
 3.  **Example:** If a node has a left child of height 2 and a right child of height 0, $BF = 2 - 0 = 2$ (**Imbalance: Left-Heavy**). Requires a Right Rotation.
+
+---
+
+### 1. AVL Insertion Logic
+**Step 1:** Perform standard **BST Insertion** (smaller to the left, larger to the right).  
+**Step 2:** Start from the newly inserted node and travel **upwards** to the root, updating the Height and **Balance Factor (BF)** of each ancestor.  
+**Step 3:** Find the first node where $BF$ is not $-1, 0, 1$. This is the **Critical Node (A)**.  
+**Step 4:** Identify the "Insertion Path" from the Critical Node to the new node and apply the corresponding rotation.
+
+#### **The Four Rotation Cases**
+| Case | Cause | Rotation Required |
+| :--- | :--- | :--- |
+| **LL (Left-Left)** | New node in **L**eft subtree of **L**eft child | **Single Right** Rotation |
+| **RR (Right-Right)** | New node in **R**ight subtree of **R**ight child | **Single Left** Rotation |
+| **LR (Left-Right)** | New node in **R**ight subtree of **L**eft child | **Double:** Left Rotate child, then Right Rotate parent |
+| **RL (Right-Left)** | New node in **L**eft subtree of **R**ight child | **Double:** Right Rotate child, then Left Rotate parent |
+
+**Visual Aid (Single vs. Double):**
+```mermaid
+graph TD
+    subgraph Single_Right_LL
+    A1((Crit)) --- B1((Child)) --- C1((New))
+    end
+    subgraph Double_LR
+    A2((Crit)) --- B2((Child)) --- C2((New))
+    style C2 fill:#f96
+    end
+```
+
+---
+
+### 2. AVL Deletion Logic
+Deletion is more complex because one rotation might cause an imbalance further up the tree.
+
+**Step 1: Standard BST Deletion**
+*   **Case 1 (Leaf):** Simply remove the node.
+*   **Case 2 (One Child):** Replace node with its child.
+*   **Case 3 (Two Children):** Replace node with its **Inorder Successor** (smallest in right subtree) or **Inorder Predecessor** (largest in left subtree). Then delete that successor/predecessor node.
+
+**Step 2: Re-balancing**
+*   Retrace the path from the deleted node's parent up to the root.
+*   At each node, check the Balance Factor.
+*   If $|BF| > 1$, perform rotations. **Note:** Unlike insertion, deletion may require multiple rotations as you move toward the root.
+
+---
+
+### 3. Cheat Sheet Summary for Exam Questions
+
+#### **Q: How is AVL different from BST?**
+1.  **Balance:** AVL is strictly balanced ($|BF| \le 1$); BST can be skewed.
+2.  **Performance:** AVL search is always $O(\log n)$; BST search can be $O(n)$ in worst case.
+3.  **Complexity:** AVL requires extra space for BF and extra time for rotations during insertion/deletion.
+
+#### **Q: Rules for Deleting from AVL? (Q3, Module 2)**
+1.  Use BST deletion rules.
+2.  Update BF from the parent of the physically removed node upwards.
+3.  If a node becomes unbalanced ($BF = 2$ or $-2$):
+    *   If $BF(\text{Child}) \ge 0$, use **Single Rotation**.
+    *   If $BF(\text{Child}) < 0$, use **Double Rotation**.
+4.  Continue checking BFs until the root is reached.
+
+#### **Q: Advantages of Height-Balanced Trees? (Q2b, Module 2)**
+1.  **Guaranteed $O(\log n)$** for Search, Insert, and Delete.
+2.  **Prevents Worst-Case:** Avoids the "linked-list" behavior of skewed BSTs.
+3.  **Predictable Performance:** Highly efficient for databases and memory-resident sets.
+
+---
+
+### Quick Check: Balance Factor (BF) Calculation
+*   Height of a **Leaf** node = $0$ (or $1$ depending on textbook convention; use $0$ if height of root is $0$).
+*   Height of a **Null** child = $-1$.
+*   **$BF = \text{Height(Left Subtree)} - \text{Height(Right Subtree)}$**
+    *   $BF > 0$: Left-Heavy.
+    *   $BF < 0$: Right-Heavy.
+    *   $BF = 0$: Perfectly Balanced.
