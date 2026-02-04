@@ -73,10 +73,83 @@ Using this extended logic, let's solve the specific problems from your paper:
 | **$c = k$** | $p = -1$ | $\Theta(n^k \log \log n)$ |
 | **$c < k$** | $p \ge 0$ | $\Theta(n^k \log^p n)$ |
 
-#### **B. Iteration Method**
-Repeatedly substitute the recurrence into itself until a pattern emerges (usually a geometric series).
-*   *Example:* $T(n) = 2T(n/2) + n$ solves to **$O(n \log n)$** (standard Merge Sort complexity).
+To complete your cheat sheet, here are the sections for **Substitution Method** (Guess & Prove) and **Recursion Tree Method**, including a diagram for the complex case found in your exam paper (Question 3, Module 1).
 
+---
+
+### 1. Substitution Method (Mathematical Induction)
+This method is used to prove a bound by guessing the form of the solution and then using induction to find the constants.
+
+**Steps:**
+1.  **Guess:** Based on the Master Theorem or experience, guess the complexity (e.g., $T(n) \le cn^2$).
+2.  **Assumption:** Assume the guess holds for all $k < n$ (e.g., $T(n/2) \le c(n/2)^2$).
+3.  **Substitution:** Plug the assumption into the original recurrence.
+4.  **Proof:** Show that $T(n) \le c \cdot (\text{guessed function})$ for a specific constant $c > 0$.
+
+**Example from Paper ($T(n) = 2T(n/2) + n$):**
+*   **Guess:** $T(n) \le cn \log n$.
+*   **Substitute:** $T(n) \le 2(c \frac{n}{2} \log \frac{n}{2}) + n$
+*   **Solve:** $T(n) \le cn (\log n - \log 2) + n \implies cn \log n - cn + n$.
+*   **Condition:** For $T(n) \le cn \log n$ to be true, $-cn + n$ must be $\le 0$, which is true if **$c \ge 1$**.
+
+---
+
+### 2. Recursion Tree Method
+This is a visual way to sum the work done at each level of the recursion. It is best for recurrences that don't fit the standard Master Theorem.
+
+**Steps:**
+1.  **Root:** Write the non-recursive part ($f(n)$) as the root.
+2.  **Expand:** Branch out into sub-problems.
+3.  **Level Sum:** Calculate the total work done at each horizontal level.
+4.  **Height:** Determine the depth of the tree (when the sub-problem size reduces to 1).
+5.  **Total:** Sum of (Work per level $\times$ Number of levels) + Leaf costs.
+
+**Diagram for Q3: $T(n) = T(n/3) + T(2n/3) + n$**
+This is an asymmetrical tree. The longest path determines the height.
+
+```mermaid
+graph TD
+    n((n)) -- n/3 --- n3((n/3))
+    n -- 2n/3 --- 2n3((2n/3))
+    
+    n3 -- n/9 --- n9((n/9))
+    n3 -- 2n/9 --- 2n9((2n/9))
+    
+    2n3 -- 2n/9 --- 2n9b((2n/9))
+    2n3 -- 4n/9 --- 4n9((4n/9))
+
+    style n fill:#f9f,stroke:#333
+```
+
+**Analysis of the Tree above:**
+*   **Level 0 Cost:** $n$
+*   **Level 1 Cost:** $n/3 + 2n/3 = \mathbf{n}$
+*   **Level 2 Cost:** $n/9 + 2n/9 + 2n/9 + 4n/9 = \mathbf{n}$
+*   **General Pattern:** Every level sums to $n$.
+*   **Height ($h$):** The longest branch follows $(2/3)^h \cdot n = 1$. This gives $h = \log_{3/2} n$.
+*   **Total Work:** $n \times \text{height} = n \log_{3/2} n \approx \mathbf{O(n \log n)}$.
+
+---
+
+### 3. Iteration Method (Q1b, Q2b)
+Unlike the tree, you expand the formula mathematically until you find a series.
+
+**Example ($T(n) = 2T(n/2) + 2$):**
+1.  $T(n) = 2[2T(n/4) + 2] + 2 = 4T(n/4) + 4 + 2$
+2.  $T(n) = 4[2T(n/8) + 2] + 4 + 2 = 8T(n/8) + 8 + 4 + 2$
+3.  **$k$-th iteration:** $2^k T(n/2^k) + \sum_{i=1}^{k} 2^i$
+4.  Stop when $n/2^k = 1 \implies k = \log_2 n$.
+5.  **Result:** $n T(1) + (2^{\log n + 1} - 2) \approx n + 2n \approx \mathbf{O(n)}$.
+
+---
+
+### Comparison Table for Cheat Sheet
+| Method | Best Use Case | Risk |
+| :--- | :--- | :--- |
+| **Master Theorem** | Standard forms $aT(n/b) + f(n)$ | Doesn't work for $T(n-1)$ or mixed fractions. |
+| **Recursion Tree** | Visualizing work distribution | Can get messy with asymmetrical branches. |
+| **Iteration** | Simple linear recurrences | High chance of algebraic errors in the series. |
+| **Substitution** | Proving a guess is correct | Requires a good initial guess. |
 ---
 
 ### 3. AVL Trees (Height-Balanced Trees)
