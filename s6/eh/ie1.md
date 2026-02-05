@@ -78,41 +78,38 @@ Organizations must follow specific security standards:
 4.  **FISMA:** Framework for securing federal (government) information and assets.
 5.  **Cyber Security Enhancement Act:** Mandates life sentences for hackers who "recklessly" endanger lives.
 6.  **SPY ACT:** Prohibits unauthorized remote control of computers and keystroke logging.
-   
-**10. Ethical Hacking Process (Managerial/Policy side)**
 
-### **1. Performing Reconnaissance (Footprinting)**
-This is the first pre-attack phase. It is a systematic attempt to locate, gather, and record information about the target.
-*   **Goal:** To create a blueprint or map of an organization’s network and systems.
-*   **Passive Reconnaissance:** Gathering information without direct interaction (e.g., searching public records, news releases, or social media).
-*   **Active Reconnaissance:** Directly interacting with the target (e.g., making phone calls to the help desk or technical department).
-*   **Information Gathered:** Domain names, IP addresses, network blocks, and system architecture.
 
-### **2. Scanning and Enumeration**
-In this phase, the hacker uses technical tools to gather more detailed intelligence on the target's systems and applications.
-*   **Scanning:** The active step of attempting to connect to systems to elicit a response. Tools like **Nmap** are used to map open ports.
-*   **Enumeration:** Gathering in-depth information such as open shares, user account information, and software versions (banner grabbing).
-*   **Objective:** To identify the "live" systems and specific vulnerabilities that can be exploited.
+### **10 The Ethical Hacker’s Process (Management & Security Framework)**
 
-### **3. Gaining Access**
-This is one of the most important steps. The attacker moves from simply probing the network to actually attacking it.
-*   **Levels of Access:** Access can be gained at the Operating System (OS) level, Application level, or Network level.
-*   **Methods:** Finding vulnerabilities in web server software, exploiting open wireless access points, or using captured credentials.
+The ethical hacker plays a key role in the security process by moving beyond just "hacking" and into securing the infrastructure. This methodology is broken down into these five key steps:
 
-### **4. Escalation of Privilege**
-Once initial access is gained, the hacker tries to move from a standard user to a higher security context (Administrative or Root access).
-*   **Goal:** To obtain complete control over the system.
-*   **Techniques:** Leveraging bugs or vulnerabilities in applications or the OS to bypass protections.
-*   **Examples:** Password cracking, buffer overflows, and session hijacking.
+**1. Assessment**
+*   This is the initial phase where the actual technical work happens.
+*   It includes performing **Ethical Hacking**, **Penetration Testing**, and other hands-on security tests to identify the organization's strengths and weaknesses.
 
-### **5. Maintaining Access**
-The attacker tries to stay in the system as long as possible to gather information while remaining stealthy to avoid detection.
-*   **Stealth:** The hacker must remain hidden from administrators.
-*   **Tools:** Using **Rootkits**, which are sets of tools that mask the hacker's presence and activity.
-*   **Activity:** Uploading, downloading, or manipulating data and using the owned system to launch further attacks on other networks.
+**2. Policy Development**
+*   Once the assessment is done, the focus shifts to management.
+*   Security policies are developed based on the organization's specific goals and mission.
+*   The primary focus is placed on protecting the organization’s **critical assets** identified during the assessment.
 
-### **6. Covering Tracks and Placing Backdoors**
-The final phase involves hiding the malicious activity and ensuring future access.
-*   **Covering Tracks:** Overwriting server, system, and application logs to remove evidence that might lead to prosecution. 
-*   **Hiding Files:** Using techniques like hidden directories or Alternate Data Streams (ADS).
-*   **Backdoors:** Creating hidden entry points that allow the hacker to re-enter the computer at will in the future.
+**3. Implementation**
+*   In this phase, the actual "defenses" are built.
+*   The ethical hacker helps in building **technical, operational, and managerial controls**.
+*   This includes configuring hardware (like firewalls) and software to secure key assets and data.
+
+**4. Training**
+*   Since humans are often the weakest link, employees must be educated.
+*   Staff are trained on how to follow the newly developed security policies.
+*   They are also taught how to configure and interact with key security controls, such as **Intrusion Detection Systems (IDS)** and firewalls.
+
+**5. Audit**
+*   Security is not a one-time event; it requires periodic reviews.
+*   Auditing involves checking the controls that were put in place to ensure they are providing good security.
+*   Certain regulations (like **HIPAA**) specifically require that these audits be done **yearly**.
+
+---
+
+**Key Distinction for the Exam:**
+*   **The Attacker's Process (Section 1.6):** The 6 technical steps (Recon, Scanning, Access, etc.).
+*   **The Ethical Hacker's Process (Section 1.7):** The 5 management steps (Assessment, Policy, Implementation, Training, Audit) used to "do no harm" and actually protect the company.
