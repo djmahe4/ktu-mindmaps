@@ -116,3 +116,31 @@ The ethical hacker plays a key role in the security process by moving beyond jus
 **Key Distinction for the Exam:**
 *   **The Attacker's Process (Section 1.6):** The 6 technical steps (Recon, Scanning, Access, etc.).
 *   **The Ethical Hacker's Process (Section 1.7):** The 5 management steps (Assessment, Policy, Implementation, Training, Audit) used to "do no harm" and actually protect the company.
+
+
+### **Part 1: 3-Mark Questions**
+
+| Topic | PDF Module | Page Number |
+| :--- | :--- | :--- |
+| **1. CIA (Confidentiality, Integrity, Availability)** | Module 1 | Page 1 |
+| **2. Nmap (Network Mapper)** | Module 2 | Page 7 |
+| **3. Traceroute (Technical process/TTL)** | Module 2 | Pages 3–4 |
+| **4. Ethical Hacking Process (5 Steps)** | Module 1 | Page 16 |
+
+---
+
+### **Part 2: 7-Mark Questions**
+
+| Topic | PDF Module | Page Number |
+| :--- | :--- | :--- |
+| **1. Attacker’s Process (The 6 Technical Phases)** | Module 1 | Pages 12–15 |
+| **2. Reconnaissance (Active vs. Passive)** | Module 1 | Page 13 |
+| **3. Security Testing (Goals, Focus Areas, Advantages)** | Module 1 | Pages 2–4 |
+| **4. Penetration Testing (Definition and Phase 3)** | Module 1 | Page 3 |
+| **5. Footprinting (Definition, Tools, Advantages)** | Module 2 | Pages 1–2 |
+| **6. Identification of Open Ports (Nmap, Netstat, Wireshark)** | Module 2 | Page 7 |
+| **7. Ethical and Legality (How to be ethical/Legal rules)** | Module 1 | Pages 9–10 |
+| **8. Locate Network Range (ARIN & Traceroute)** | Module 2 | Page 3 |
+| **9. Identify Active Machines (Ping, War Dialing, etc.)** | Module 2 | Page 5 |
+| **10. International Standards & Laws (All 8 Laws)** | Module 1 | Pages 11–12 |
+| **11. Ethical Hacker's Process (5 Management Steps)** | Module 1 | Page 16 |
