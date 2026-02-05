@@ -69,15 +69,18 @@ Ethical hacking must be conducted legally and professionally:
     *   **Ping:** Sends ICMP Echo Requests to see if a machine responds.
     *   **War Dialers:** Scanning telephone numbers for modems (legacy).
     *   **Port Scanning:** Part of the larger process to find "live" systems.
+---
 
-**9. International Standards (Module 1)**
-Organizations must follow specific security standards:
-1.  **PCI-DSS:** For organizations handling credit/debit card information.
-2.  **ISO/IEC 27001:** Requirements for an Information Security Management System (ISMS).
-3.  **HIPAA:** Protects the privacy of health information.
-4.  **FISMA:** Framework for securing federal (government) information and assets.
-5.  **Cyber Security Enhancement Act:** Mandates life sentences for hackers who "recklessly" endanger lives.
-6.  **SPY ACT:** Prohibits unauthorized remote control of computers and keystroke logging.
+### **9. All 8 Legal/International Standards (For a 7-Mark Answer)**
+To get full marks, you should list all eight from your PDF:
+1.  **PCI-DSS:** For debit/credit card data security.
+2.  **ISO/IEC 27001:2013:** For Information Security Management Systems.
+3.  **HIPAA:** For protecting healthcare and patient information.
+4.  **FISMA:** For securing federal (government) information resources.
+5.  **Cyber Security Enhancement Act & SPY ACT:** Mandates life sentences for reckless endangerment; prohibits unauthorized remote control and keylogging.
+6.  **Federal Managers Financial Integrity Act (FMFIA):** Ensures financial assets are protected against waste, loss, or misappropriation.
+7.  **Freedom of Information Act (FOIA):** Makes organization info public; used for legal reconnaissance.
+8.  **Privacy Act 1974:** Prevents government agencies from sharing personal info without consent.
 
 
 ### **10 The Ethical Hacker’s Process (Management & Security Framework)**
