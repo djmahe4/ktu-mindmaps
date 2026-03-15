@@ -57,15 +57,24 @@ graph TD
 **Mermaid visualization** (shows reference-by-index):
 
 ```mermaid
-graph LR
-    0["+ a b"] --> 2["+ (0) c"]
-    0 --> 3["* (0) (1)"]
-    1["+ b c"] --> 3
-    3 --> 4["* (3) (2)"]
-    2 --> 4
+graph TD
+    subgraph "Statement List (Reorderable)"
+        S100["100 → 20"] --> S101["101 → 21"] --> S102["102 → 22"] --> S103["103 → 23"] --> S104["104 → 24"]
+    end
 
-    classDef instr fill:#fff3cd,stroke:#664d03;
-    class 0,1,2,3,4 instr;
+    subgraph "Triples Table (Fixed)"
+        T20["20: + a b"] --> T22["22: + (20) c"]
+        T20 --> T23["23: * (20) (21)"]
+        T21["21: + b c"] --> T23
+        T23 --> T24["24: * (23) (22)"]
+    end
+
+    S100 -.-> T20
+    S101 -.-> T21
+    S102 -.-> T22
+    S103 -.-> T23
+    S104 -.-> T24
+
 ```
 
 #### 3. Indirect Triples (Exam favorite for showing optimization)
@@ -95,14 +104,14 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Statement List (Reorderable)"
-        S100[100 → 20] --> S101[101 → 21] --> S102[102 → 22] --> S103[103 → 23] --> S104[104 → 24]
+        S100["100 → 20"] --> S101["101 → 21"] --> S102["102 → 22"] --> S103["103 → 23"] --> S104["104 → 24"]
     end
 
     subgraph "Triples Table (Fixed)"
-        T20[20: + a b] --> T22[22: + (20) c]
-        T20 --> T23[23: * (20) (21)]
-        T21[21: + b c] --> T23
-        T23 --> T24[24: * (23) (22)]
+        T20["20: + a b"] --> T22["22: + (20) c"]
+        T20 --> T23["23: * (20) (21)"]
+        T21["21: + b c"] --> T23
+        T23 --> T24["24: * (23) (22)"]
     end
 
     S100 -.-> T20
