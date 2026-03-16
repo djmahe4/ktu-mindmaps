@@ -1,165 +1,140 @@
-**Module 3 Part B – Quick Master/Revise Notes**
+This response provides the detailed step-by-step solutions for all **Part B** questions across Modules 3, 4, and 5 from the provided documents.
 
-**1. LR(0) items**  
-All possible dotted productions (items) from the grammar:  
-S' → .S | S.  
-S → .L=R | L.=R | L=R.  
-S → .R | R.  
-L → .*R | *.R | *R.  
-L → .id | id.  
-R → .L | L.  
+---
 
-**2. Canonical LR(0) collection + prove not SLR(1)**  
-States (I0–I9):  
-- I0: S'→.S, S→.L=R, S→.R, L→.*R, L→.id, R→.L  
-- I1: S'→S.  
-- I2: S→L.=R, R→L. ← **conflict here**  
-- I3: S→R.  
-- I4: L→*.R, R→.L, L→.*R, L→.id  
-- I5: L→id.  
-- I6: S→L=.R, R→.L, L→.*R, L→.id  
-- I7: L→*R.  
-- I8: R→L.  
-- I9: S→L=R.  
+### **Module 3: Part B Solutions**
 
-**Proof not SLR(1):** In I2 there is a reduce item (R→L.) **and** shift on =.  
-FOLLOW(R) contains = (because S→L=R puts = in FOLLOW(L) and R→L puts FOLLOW(L) in FOLLOW(R)).  
-So SLR table puts both **shift** and **reduce** on = → shift-reduce conflict. Hence not SLR(1).
+**1. Construct the LR(0) items for the grammar:**
+*Augmented Grammar:* $S' \to S, S \to L=R, S \to R, L \to *R, L \to id, R \to L$.
+The LR(0) items are all possible "dotted" productions:
+*   $S' \to .S, S' \to S.$
+*   $S \to .L=R, S \to L.=R, S \to L=.R, S \to L=R.$
+*   $S \to .R, S \to R.$
+*   $L \to .*R, L \to *.R, L \to *R.$
+*   $L \to .id, L \to id.$
+*   $R \to .L, R \to L.$
 
-**3. Shift-reduce parser for abbcde**  
-Stack | Input | Action  
----|---|---  
-$ | abbcde$ | shift a  
-$a | bbcde$ | shift b  
-$ab | bcde$ | reduce A→b → $aA  
-$aA | bcde$ | shift b  
-$aAb | cde$ | shift c  
-$aAbc | de$ | reduce A→Abc → $aA  
-$aA | de$ | shift d  
-$aAd | e$ | reduce B→d → $aAB  
-$aAB | e$ | shift e  
-$aABe | $ | reduce S→aABe → $S  
-$S | $ | accept  
+**2. Canonical LR(0) collection and SLR(1) proof:**
+*Grammar:* $S \to L=R | R$, $L \to *R | id$, $R \to L$.
+*Key State ($I_2$):* $\text{GOTO}(I_0, L)$ results in:
+$S \to L.=R$
+$R \to L.$
+*Conflict:* In $I_2$, there is a **Shift-Reduce conflict**. The parser can shift on '=' (because of $S \to L.=R$) or reduce (because of $R \to L.$).
+*SLR(1) Proof:* In an SLR(1) table, the reduction $R \to L$ is placed in all columns of $FOLLOW(R)$. Since $S \to L=R$, '=' is in $FOLLOW(L)$. Because $R \to L$, $FOLLOW(R)$ also contains '='. Thus, state $I_2$ has both a shift and a reduce action on the same symbol '='. **Therefore, it is not SLR(1).**
 
-**4. Prove grammar S→(S)|a is LR(0)**  
-Augmented states:  
-I0: S'→.S, S→.(S), S→.a  
-I1: S→a. (pure reduce)  
-I2: S→(.S), S→.(S), S→.a (only shifts)  
-I3: S'→S. (accept)  
-I4: S→(S.) (only shift on ))  
-I5: S→(S). (pure reduce)  
-**No state has both reduce item + shift item or two reduce items** → LR(0) grammar.
+**3. Shift-Reduce Parser for $abbcde$:**
+Grammar: $S \to aABe, A \to Abc | b, B \to d$.
 
-**5. Main actions in shift-reduce parser**  
-- **Shift**: push next input symbol onto stack  
-- **Reduce**: pop |RHS| symbols, push LHS  
-- **Accept**: stack has start symbol + $  
-- **Error**: no action possible  
+| Stack | Input | Action |
+| :--- | :--- | :--- |
+| \$ | abbcde\$ | Shift **a** |
+| \$a | bbcde\$ | Shift **b** |
+| \$ab | bcde\$ | Reduce $A \to b$ |
+| \$aA | bcde\$ | Shift **b** |
+| \$aAb | cde\$ | Shift **c** |
+| \$aAbc | de\$ | Reduce $A \to Abc$ |
+| \$aA | de\$ | Shift **d** |
+| \$aAd | e\$ | Reduce $B \to d$ |
+| \$aAB | e\$ | Shift **e** |
+| \$aABe | \$ | Reduce $S \to aABe$ |
+| \$S | \$ | **Accept** |
 
-**6. Conflicts in LR(0) parsing**  
-- **Shift-reduce**: state has A→α.aβ and B→γ. (e.g., I2 of Q2 above)  
-- **Reduce-reduce**: state has A→α. and B→β. (example: S→a, A→a, B→a)  
+**4. Prove whether $S \to (S) | a$ is LR(0):**
+Constructing states:
+*   $I_0: S' \to .S, S \to .(S), S \to .a$
+*   $I_1: S' \to S.$ (Accept)
+*   $I_2: S \to a.$ (Pure reduction)
+*   $I_3: S \to (.S), S \to .(S), S \to .a$
+*   $I_4: S \to (S.)$
+*   $I_5: S \to (S).$ (Pure reduction)
+**Result:** No state contains both a shift and a reduce item, nor two reduce items. Hence, it is **LR(0)**.
 
-**7. Handle pruning**  
-Handle = RHS of a production that can be reduced.  
-Sentence: aaabbb  
-Handles in order of reduction:  
-aaabbb → aa**A**bbb  (handle: 3rd a)  
-aa**A**bbb → a**A**bbb   (handle: 2nd a + A)  
-aA b**b**b → aA b**B**b   (handle: 4th b)  
-aA **bB**b → aA **B**b     (handle: 3rd b + B)  
-a**A B b** → **S**          (handle: entire a A B b)
+**5. Main actions in a Shift-Reduce Parser:**
+*   **Shift:** Moves the next input symbol onto the stack.
+*   **Reduce:** When a handle is on top of the stack, it is replaced by the LHS of the corresponding production.
+*   **Accept:** Successful completion when the stack contains the start symbol and input is empty.
+*   **Error:** Triggered if no shift or reduce action is possible.
 
-**Module 4 Part B – Quick Master/Revise Notes**
+**6. LR(0) Conflicts with Example:**
+*   **Shift-Reduce Conflict:** Occurs when a state has a completed production ($A \to \alpha.$) and a production that wants to shift ($B \to \beta.a\gamma$). *Example:* $S \to L.=R$ and $R \to L.$ (from Q2).
+*   **Reduce-Reduce Conflict:** Occurs when a state has two completed productions ($A \to \alpha.$ and $B \to \beta.$). *Example:* $S \to a, A \to a, B \to a$. The parser doesn't know whether to reduce to $A$ or $B$.
 
-**1. Bottom-up evaluation of (3*5)–2 using desk-calculator SDD**  
-SDD rules (synthesized .val):  
-expr → expr + term {expr.val = expr1.val + term.val}  
-expr → expr – term {expr.val = expr1.val – term.val}  
-term → term * factor {term.val = term1.val * factor.val}  
-factor → (expr) {factor.val = expr.val}  
-factor → digit {factor.val = digit.lexval}  
+**7. Handle Pruning for $aaabbb$:**
+$S \to aABb, A \to aA | a, B \to bB | b$
+1. $aaabbb \to aaAbbb$ (Handle: 3rd '$a$', $A \to a$)
+2. $aaAbbb \to aAbbb$ (Handle: '$aA$', $A \to aA$)
+3. $aAbbb \to aABbb$ (Handle: 2nd '$b$', $B \to b$)
+4. $aABbb \to aABb$ (Handle: '$bB$', $B \to bB$)
+5. $aABb \to S$ (Handle: '$aABb$', $S \to aABb$)
 
-Steps (reductions compute val on stack):  
-- 3 → factor.val=3  
-- 3 * 5 → term.val=15  
-- (15) → expr.val=15  
-- 15 – 2 → expr.val=13  
+---
 
-**2. Evaluate (3+5/2)*(2+4/3) + annotated parse tree**  
-Value = (3 + 2.5) × (2 + 1.333) = 5.5 × 3.333 ≈ 18.333  
-Annotated tree (bottom-up .val):  
-- 5/2 = 2.5  
-- 3+2.5 = 5.5  
-- 4/3 = 1.333  
-- 2+1.333 = 3.333  
-- 5.5 * 3.333 = 18.333 (root)  
+### **Module 4: Part B Solutions**
 
-**3. Three-address code representations**  
-- **Quadruples**  
-(+, a, b, t1)  
-(+, b, c, t2)  
-(+, a, b, t3)  
-(+, t3, c, t4)  
-(*, t1, t2, t5)  
-(*, t5, t4, t6)  
+**1. Bottom-up evaluation for $(3*5)-2$:**
+Using a standard desk calculator SDD ($E \to E-T | T$, $T \to T*F | F$, $F \to digit$):
+1. $3$ is reduced to $F.val=3$, then $T.val=3$.
+2. $5$ is reduced to $F.val=5$.
+3. $T*F \to T.val = 3 * 5 = 15$.
+4. $T \to E.val = 15$.
+5. $2$ is reduced to $T.val=2$.
+6. $E-T \to E.val = 15 - 2 = 13$.
 
-- **Triples**  
-0: + a b  
-1: + b c  
-2: + a b  
-3: + (2) c  
-4: * (0) (1)  
-5: * (4) (3)  
+**2. Evaluate $(3+5/2)*(2+4/3)$ with Annotated Parse Tree:**
+*   **Left Term:** $3 + (5/2) = 3 + 2.5 = 5.5$
+*   **Right Term:** $2 + (4/3) = 2 + 1.33 = 3.33$
+*   **Result:** $5.5 * 3.33 = 18.315$
+*(The tree would show nodes for each operation with their calculated `.val` attributes attached to the non-terminals).*
 
-- **Indirect triples** (pointers to above triples).
+**3. Three-address code (Triple and Quadruple) for $(a+b)*(b+c)*(a+b+c)$:**
+*Quadruples:*
+1. $(+, a, b, t1)$
+2. $(+, b, c, t2)$
+3. $(+, a, b, t3)$
+4. $(+, t3, c, t4)$
+5. $(*, t1, t2, t5)$
+6. $(*, t5, t4, t6)$
 
-**4. DAG for T1=a+b, T2=a–b, T3=T1*T2, T4=T1–T3, T5=T4+T3**  
-Nodes:  
-- a, b (leaves)  
-- + (T1)  
-- – (T2)  
-- * (T3, children T1 & T2)  
-- – (T4, children T1 & T3)  
-- + (T5, children T4 & T3)  
-(Common subexpressions T1 & T3 are shared.)
+**4. DAG for $T1=a+b, T2=a-b, T3=T1*T2, T4=T1-T3, T5=T4+T3$:**
+The Directed Acyclic Graph (DAG) identifies $T1$ and $T3$ as shared sub-nodes:
+*   Leaves: $a, b$
+*   $N1 (+): a, b \implies T1$
+*   $N2 (-): a, b \implies T2$
+*   $N3 (*): N1, N2 \implies T3$
+*   $N4 (-): N1, N3 \implies T4$
+*   $N5 (+): N4, N3 \implies T5$
 
-**5. Syntax tree & DAG for e := (a*b) + (c-d)*(a*b)**  
-**Syntax tree**: assignment node, left=e, right= + node with left=(a*b), right= *( (c-d), (a*b) ) – two separate (a*b) subtrees.  
-**DAG**: same but single shared node for (a*b) → common subexpression eliminated.
+**5. Syntax Tree vs. DAG for $e := (a*b) + (c-d) * (a*b)$:**
+*   **Syntax Tree:** Will have two separate subtrees for $(a*b)$.
+*   **DAG:** The node for $(a*b)$ is created once, and both the left side of '+' and the right side of the second '*' will point to this same single node, eliminating redundancy.
 
-**6. Static vs Heap allocation**  
-- **Static**: fixed at compile time (globals, static locals). Fast, no runtime overhead, but no recursion/dynamic size.  
-- **Heap**: runtime (malloc/new). Flexible for arrays/objects, but slower, fragmentation, needs garbage collection.
+**6. Static vs. Heap Allocation:**
+*   **Static Allocation:** Memory for data is allocated at compile-time. Used for global variables. It is fast but does not support recursion or dynamic data sizes.
+*   **Heap Allocation:** Memory is allocated/deallocated at runtime (e.g., `malloc` in C). It allows for dynamic data structures (linked lists, trees) but involves overhead for management and garbage collection.
 
-**Module 5 Part B – Quick Master/Revise Notes**
+---
 
-**1. Loop optimisation techniques**  
-- **Code motion** (loop-invariant): move x=5*y out of while(i<n){x=5*y; …}  
-- **Strength reduction**: i*4 → i<<2 (or incremental pointer)  
-- **Induction variable elimination**: remove extra counters  
-- **Loop unrolling**: duplicate body, reduce branch overhead.
+### **Module 5: Part B Solutions**
 
-**2. Code optimisation techniques**  
-- Local (within block): common subexpr, dead-code elim, constant folding  
-- Global (across blocks): data-flow analysis  
-- Loop optimisations (above)  
-- Peephole (small patterns)  
-- Machine-dependent (register allocation).
+**1. Loop Optimization Techniques:**
+*   **Code Motion:** Moving loop-invariant code outside the loop.
+*   **Induction Variable Elimination:** Replacing complex expressions with simpler ones using loop counters.
+*   **Strength Reduction:** Replacing expensive operations (like multiplication) with cheaper ones (like addition) inside a loop.
+*   **Loop Unrolling:** Reducing loop overhead by increasing the number of operations per iteration.
 
-**3. Function-preserving transformations**  
-(Do not change program meaning)  
-- Common subexpression elimination  
-- Dead-code elimination  
-- Copy propagation  
-- Constant folding/propagation  
-- Algebraic simplification (x+0 → x).
+**2. Code Optimization Techniques:**
+*   **Local Optimization:** Within a basic block (e.g., constant folding).
+*   **Global Optimization:** Across multiple basic blocks using data-flow analysis.
+*   **Peephole Optimization:** Examining a short sequence of target instructions and replacing them with faster ones.
 
-**4. Needs for optimisation phase**  
-- Faster execution  
-- Smaller code size  
-- Better register/cache use  
-- Produce efficient code automatically.
+**3. Function-Preserving Transformations:**
+*   **Common Sub-expression Elimination:** Removing redundant calculations.
+*   **Dead Code Elimination:** Removing code that is never executed or whose result is never used.
+*   **Copy Propagation:** Replacing uses of a variable with its assigned value to enable further optimization.
+*   **Constant Folding:** Evaluating expressions with constant values at compile-time (e.g., $3 + 4$ becomes $7$).
 
-**Revision Tip**: Focus on **I2 conflict** (Module 3), **handle sequence** (Q7), **DAG sharing** (Module 4), and **loop-invariant + strength reduction** (Module 5). These repeat in exams. Revise once with these notes → you’re set!
+**4. Needs for Optimization Phase:**
+*   **Execution Speed:** To make the program run faster.
+*   **Memory Efficiency:** To reduce the code footprint or data memory usage.
+*   **Power Consumption:** Crucial for mobile and embedded systems.
+*   **Resource Utilization:** Better management of CPU registers and cache.
