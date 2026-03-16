@@ -15,12 +15,12 @@ The LR(0) items are all possible "dotted" productions:
 *   $R \to .L, R \to L.$
 
 **2. Canonical LR(0) collection and SLR(1) proof:**
-*Grammar:* $S \to L=R | R$, $L \to *R | id$, $R \to L$.
-*Key State ($I_2$):* $\text{GOTO}(I_0, L)$ results in:
-$S \to L.=R$
-$R \to L.$
-*Conflict:* In $I_2$, there is a **Shift-Reduce conflict**. The parser can shift on '=' (because of $S \to L.=R$) or reduce (because of $R \to L.$).
-*SLR(1) Proof:* In an SLR(1) table, the reduction $R \to L$ is placed in all columns of $FOLLOW(R)$. Since $S \to L=R$, '=' is in $FOLLOW(L)$. Because $R \to L$, $FOLLOW(R)$ also contains '='. Thus, state $I_2$ has both a shift and a reduce action on the same symbol '='. **Therefore, it is not SLR(1).**
+*Grammar:* $S \to L=R | R$, $L \to *R | id$, $R \to L$. <br>
+*Key State ($I_2$):* $\text{GOTO}(I_0, L)$ results in:<br>
+$S \to L.=R$<br>
+$R \to L.$<br>
+*Conflict:* In $I_2$, there is a **Shift-Reduce conflict**. The parser can shift on '=' (because of $S \to L.=R$) or reduce (because of $R \to L.$).<br>
+*SLR(1) Proof:* In an SLR(1) table, the reduction $R \to L$ is placed in all columns of $FOLLOW(R)$. Since $S \to L=R$, '=' is in $FOLLOW(L)$. Because $R \to L$, $FOLLOW(R)$ also contains '='. <br>Thus, state $I_2$ has both a shift and a reduce action on the same symbol '='. **Therefore, it is not SLR(1).**
 
 **3. Shift-Reduce Parser for $abbcde$:**
 Grammar: $S \to aABe, A \to Abc | b, B \to d$.
