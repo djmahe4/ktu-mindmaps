@@ -117,9 +117,20 @@ The time complexity of Strassen's matrix multiplication algorithm is O(n^log₂(
 <summary>View Diagram</summary>
 
 ```mermaid
-graph LR
-    A[Naive Multiplication: O n^3] --> B[Strassen's: O n^2.81]
-    B --> C[Faster for Large Matrices]
+graph TD
+    A[Start] --> B(List all edges and weights)
+    B --> C(Sort edges ascending by weight)
+    C --> D{Check next edge u,v}
+    
+    D -- "No Cycle" --> E[Add to MST & Union Sets]
+    D -- "Forms Cycle" --> F[Discard Edge]
+    
+    E --> G{V-1 edges found?}
+    F --> G
+    
+    G -- No --> D
+    G -- Yes --> H[End]
+
 ```
 
 </details>
@@ -220,13 +231,17 @@ The complexity of Kruskal's algorithm is O(E log E) or O(E log V), where E is th
 graph TD
     A[Start] --> B(List all edges and weights)
     B --> C(Sort edges ascending by weight)
-    C --> D{Check next edge u,v:}
-    D -- Forms Cycle? -- No --> E[Add to MST & Union Sets]
-    D -- Forms Cycle? -- Yes --> F[Discard Edge]
-    E --> G{V-1 edges found?}
+    C --> D{Check next edge u,v}
+    
+    D -- "No" --> E[Add to MST & Union Sets]
+    D -- "Yes" --> F[Discard Edge]
+    
+    E --> G{"V-1 edges found?"}
     F --> G
+    
     G -- No --> D
     G -- Yes --> H[End]
+
 ```
 
 </details>
