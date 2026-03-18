@@ -72,24 +72,27 @@ Where:
 
 This condition means that the firm is getting the maximum possible output for a given cost, or producing a given output at the minimum possible cost, by efficiently allocating its expenditure between labor and capital.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Producer's Equilibrium] --> B[Tangent point of Isoquant and Iso-cost Line]
-    B --> C{Minimum Cost for Given Output OR Maximum Output for Given Cost}
-    C --> D[Slope of Isoquant = Slope of Iso-cost Line]
-    D --> E[MRTS = PL/PK]
+    A["Producer's Equilibrium"] --> B["Tangent point of Isoquant and Iso-cost Line"]
+    B --> C["Minimum Cost for Given Output OR Maximum Output for Given Cost"]
+    C --> D["Slope of Isoquant = Slope of Iso-cost Line"]
+    D --> E["MRTS = PL/PK"]
 
-    subgraph Diagram
+    subgraph "Diagram"
         direction LR
-        P1(Input L) --- P2(Input K)
-        P1 -.-> I1(Isoquant Q1)
-        P1 -.-> I2(Isoquant Q2)
+        P1("Input L") --- P2("Input K")
+        P1 -.-> I1("Isoquant Q1")
+        P1 -.-> I2("Isoquant Q2")
         P2 -.-> I1
         P2 -.-> I2
-        IC1(Iso-cost C1) --- IC2(Iso-cost C2)
-        IC2 --- IC3(Iso-cost C3)
-        IC1 --- IC_Optimal(Optimal Iso-cost)
-        I_Optimal(Optimal Isoquant Q2) --- Tangent(Tangent Point E)
+        IC1("Iso-cost C1") --- IC2("Iso-cost C2")
+        IC2 --- IC3("Iso-cost C3")
+        IC1 --- IC_Optimal("Optimal Iso-cost")
+        I_Optimal("Optimal Isoquant Q2") --- Tangent("Tangent Point E")
 
         style IC_Optimal fill:#acf,stroke:#333,stroke-width:2px,color:#000
         style I_Optimal fill:#fcc,stroke:#333,stroke-width:2px,color:#000
@@ -97,23 +100,21 @@ graph TD
 
         subgraph Graph
             direction LR
-            L_axis[Labor (L)]
-            K_axis[Capital (K)]
+            L_axis["Labor (L)"]
+            K_axis["Capital (K)"]
 
             IsoQ1["Q1"] --- IsoQ2["Q2 (Higher Output)"] --- IsoQ3["Q3"]
             IsoC1["C1"] --- IsoC2["C2 (Optimal Cost)"] --- IsoC3["C3"]
 
-            K_axis -- "Y-axis" --> Graph
-            L_axis -- "X-axis" --> Graph
-
-            IsoQ2 --- OptimalPoint(E)
+            IsoQ2 --- OptimalPoint("E")
             IsoC2 --- OptimalPoint
 
-            OptimalPoint --- |MRTS = PL/PK| Condition
+            OptimalPoint --- |"MRTS = PL/PK"| EqCondition("Equilibrium Condition")
         end
     end
-
 ```
+</details>
+
 **Explanation of Diagram:**
 *   The x-axis represents Labor (L) and the y-axis represents Capital (K).
 *   `IsoQ1`, `IsoQ2`, `IsoQ3` are isoquants, showing different levels of output. `Q2` represents a higher output level than `Q1`.
@@ -132,61 +133,63 @@ In the short run, at least one factor of production is fixed (typically capital)
 *   **Average Total Cost (ATC):** ATC = TC / Output or AFC + AVC. It is also U-shaped, lying above the AVC curve. The minimum point of ATC occurs after the minimum point of AVC.
 *   **Marginal Cost (MC):** MC is the additional cost incurred to produce one more unit of output. It intersects both the AVC and ATC curves at their respective minimum points and is also U-shaped.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Short-Run Cost Curves] --> B{Fixed Factors: Capital, Variable Factors: Labor, Raw Materials}
-    B --> C[TFC: Horizontal Line]
-    B --> D[TVC: Starts from Origin, increases initially at decreasing, then increasing rate]
-    B --> E[TC: Starts from TFC, parallel to TVC]
-    B --> F[AFC: Declines continuously]
-    B --> G[AVC: U-shaped]
-    B --> H[ATC: U-shaped, lies above AVC]
-    B --> I[MC: U-shaped, intersects AVC & ATC at their minimums]
+    A["Short-Run Cost Curves"] --> B{"Fixed Factors: Capital, Variable Factors: Labor, Raw Materials"}
+    B --> C["TFC: Horizontal Line"]
+    B --> D["TVC: Starts from Origin, increases initially at decreasing, then increasing rate"]
+    B --> E["TC: Starts from TFC, parallel to TVC"]
+    B --> F["AFC: Declines continuously"]
+    B --> G["AVC: U-shaped"]
+    B --> H["ATC: U-shaped, lies above AVC"]
+    B --> I["MC: U-shaped, intersects AVC & ATC at their minimums"]
 
-    subgraph Short-Run Cost Curves Diagram
+    subgraph "Short-Run Cost Curves Diagram"
         direction LR
-        Output_X[Output]
-        Cost_Y[Cost]
+        Output_X["Output"]
+        Cost_Y["Cost"]
 
-        curve_AFC(AFC)
-        curve_AVC(AVC)
-        curve_ATC(ATC)
-        curve_MC(MC)
+        curve_AFC("AFC")
+        curve_AVC("AVC")
+        curve_ATC("ATC")
+        curve_MC("MC")
 
         Cost_Y --- curve_MC
         Cost_Y --- curve_ATC
         Cost_Y --- curve_AVC
         Cost_Y --- curve_AFC
         
-        curve_MC --> |Intersects AVC and ATC at their minimum| Interaction
+        curve_MC --> |"Intersects AVC and ATC at their minimum"| mc_interaction("Equilibrium Point")
 
         style curve_MC fill:#fff,stroke:#a33,stroke-width:2px,color:#000
         style curve_ATC fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style curve_AVC fill:#fff,stroke:#33a,stroke-width:2px,color:#000
         style curve_AFC fill:#fff,stroke:#aaa,stroke-width:1px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            Q_axis[Output]
-            C_axis[Cost]
+            Q_axis["Output"]
+            C_axis["Cost"]
 
             line_MC["MC"]
             line_ATC["ATC"]
             line_AVC["AVC"]
             line_AFC["AFC"]
 
-            C_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
-
             line_MC --- line_AVC
             line_MC --- line_ATC
             line_ATC --- line_AVC --- line_AFC
             
-            MinAVC_Point(Min AVC) --- |MC intersects AVC| line_MC
-            MinATC_Point(Min ATC) --- |MC intersects ATC| line_MC
+            MinAVC_Point("Min AVC") --- |"MC intersects AVC"| line_MC
+            MinATC_Point("Min ATC") --- |"MC intersects ATC"| line_MC
         end
     end
 ```
+</details>
+
 **Explanation of Short-Run Diagram:**
 *   The Y-axis represents Cost, and the X-axis represents Output.
 *   **AFC** declines continuously as fixed costs are spread over more units.
@@ -199,23 +202,26 @@ In the long run, all factors of production are variable. Firms can change the sc
 *   **Long-Run Average Cost (LRAC):** The LRAC curve shows the minimum average cost of producing any given level of output when all inputs are variable. It is derived as the envelope of all possible short-run average total cost (SRATC) curves. The LRAC is typically U-shaped due to economies and diseconomies of scale.
 *   **Long-Run Marginal Cost (LRMC):** The LRMC curve shows the additional cost of producing one more unit of output in the long run when all inputs are variable. It intersects the LRAC curve at its minimum point.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Long-Run Cost Curves] --> B{All Factors Variable, No Fixed Costs}
-    B --> C[LRAC: Envelope of SRATC curves, U-shaped due to economies/diseconomies of scale]
-    B --> D[LRMC: Intersects LRAC at its minimum]
+    A["Long-Run Cost Curves"] --> B{"All Factors Variable, No Fixed Costs"}
+    B --> C["LRAC: Envelope of SRATC curves, U-shaped due to economies/diseconomies of scale"]
+    B --> D["LRMC: Intersects LRAC at its minimum"]
 
-    subgraph Long-Run Cost Curves Diagram
+    subgraph "Long-Run Cost Curves Diagram"
         direction LR
-        Output_X[Output]
-        Cost_Y[Cost]
+        Output_X["Output"]
+        Cost_Y["Cost"]
 
-        SRATC1(SRATC1)
-        SRATC2(SRATC2)
-        SRATC3(SRATC3)
+        SRATC1("SRATC1")
+        SRATC2("SRATC2")
+        SRATC3("SRATC3")
 
-        LRAC_Curve(LRAC)
-        LRMC_Curve(LRMC)
+        LRAC_Curve("LRAC")
+        LRMC_Curve("LRMC")
 
         Cost_Y --- LRMC_Curve
         Cost_Y --- LRAC_Curve
@@ -223,8 +229,8 @@ graph TD
         Cost_Y --- SRATC2
         Cost_Y --- SRATC3
 
-        LRAC_Curve --> |Envelope of SRATCs| Construction
-        LRMC_Curve --> |Intersects LRAC at minimum| Interaction
+        LRAC_Curve --> |"Envelope of SRATCs"| lrac_env("Long-Run Curve Construction")
+        LRMC_Curve --> |"Intersects LRAC at minimum"| lrmc_intersect("Equilibrium Point")
 
         style LRMC_Curve fill:#fff,stroke:#a33,stroke-width:2px,color:#000
         style LRAC_Curve fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
@@ -232,10 +238,10 @@ graph TD
         style SRATC2 fill:#fff,stroke:#888,stroke-dasharray: 5 5,stroke-width:1px,color:#000
         style SRATC3 fill:#fff,stroke:#888,stroke-dasharray: 5 5,stroke-width:1px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            Q_axis[Output]
-            C_axis[Cost]
+            Q_axis["Output"]
+            C_axis["Cost"]
 
             sratc1["SRATC1"]
             sratc2["SRATC2"]
@@ -243,19 +249,18 @@ graph TD
             lr_ac["LRAC"]
             lr_mc["LRMC"]
 
-            C_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
-
             sratc1 --- sratc2 --- sratc3
             lr_ac --- lr_mc
             
-            lr_ac --- |Envelops| sratc1
-            lr_ac --- |Envelops| sratc2
-            lr_ac --- |Envelops| sratc3
-            lr_mc --- |Intersects LRAC at Min| lr_ac
+            lr_ac --- |"Envelops"| sratc1
+            lr_ac --- |"Envelops"| sratc2
+            lr_ac --- |"Envelops"| sratc3
+            lr_mc --- |"Intersects LRAC at Min"| lr_ac
         end
     end
 ```
+</details>
+
 **Explanation of Long-Run Diagram:**
 *   The LRAC curve is tangent to the various short-run ATC curves (SRATC1, SRATC2, SRATC3) at their minimum points only when the LRAC is at its own minimum. At other points, LRAC is tangent to a point on the SRATC curves, but not necessarily at their minimums.
 *   The LRAC is U-shaped because as the firm increases its scale of operations, it initially experiences **economies of scale** (costs per unit fall), then **constant returns to scale**, and eventually **diseconomies of scale** (costs per unit rise).
@@ -308,69 +313,71 @@ In the short run, a firm under perfect competition can earn supernormal profits,
 *   **Normal Profits:** If `P = ATC` at the equilibrium output, the firm earns normal profits (covering all costs, including implicit costs).
 *   **Losses:** If `P < ATC` but `P ≥ AVC` at the equilibrium output, the firm incurs losses but continues to produce to cover at least its variable costs. If `P < AVC`, the firm will shut down to minimize losses.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Perfect Competition Short-Run Equilibrium] --> B{Firm is Price Taker: P = MR = AR}
-    B --> C[Profit Max. Condition: MR = MC]
-    C --> D{If P > ATC: Supernormal Profit}
-    C --> E{If P = ATC: Normal Profit}
-    C --> F{If P < ATC but P >= AVC: Loss, continues production}
-    C --> G{If P < AVC: Shut Down}
+    A["Perfect Competition Short-Run Equilibrium"] --> B{"Firm is Price Taker: P = MR = AR"}
+    B --> C["Profit Max. Condition: MR = MC"]
+    C --> D{"If P > ATC: Supernormal Profit"}
+    C --> E{"If P = ATC: Normal Profit"}
+    C --> F{"If P < ATC but P >= AVC: Loss, continues production"}
+    C --> G{"If P < AVC: Shut Down"}
 
-    subgraph Diagram: Short-Run Profit
+    subgraph "Diagram: Short-Run Profit"
         direction LR
-        Output_X[Quantity]
-        CostPrice_Y[Cost/Price]
+        Output_X["Quantity"]
+        CostPrice_Y["Cost/Price"]
 
-        MarketPrice(P=MR=AR)
-        MC_Curve(MC)
-        ATC_Curve(ATC)
-        AVC_Curve(AVC)
+        MarketPrice("P=MR=AR")
+        MC_Curve("MC")
+        ATC_Curve("ATC")
+        AVC_Curve("AVC")
 
         CostPrice_Y --- MarketPrice
         CostPrice_Y --- MC_Curve
         CostPrice_Y --- ATC_Curve
         CostPrice_Y --- AVC_Curve
 
-        MarketPrice --- EquilibriumPoint(E)
+        MarketPrice --- EquilibriumPoint("E")
         MC_Curve --- EquilibriumPoint
-        ATC_Curve --- ProfitArea(P > ATC)
-        AVC_Curve --- ShutDownPoint(P >= AVC)
+        ATC_Curve --- ProfitArea("P > ATC")
+        AVC_Curve --- ShutDownPoint("P >= AVC")
 
         style MarketPrice fill:#fff,stroke:#33a,stroke-width:2px,color:#000
         style MC_Curve fill:#fff,stroke:#a33,stroke-width:2px,color:#000
         style ATC_Curve fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style AVC_Curve fill:#fff,stroke:#888,stroke-width:1px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            Q_axis[Quantity]
-            CP_axis[Cost/Price]
+            Q_axis["Quantity"]
+            CP_axis["Cost/Price"]
 
             p_mr_ar["P=MR=AR"]
             mc["MC"]
             atc["ATC"]
             avc["AVC"]
 
-            CP_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
-
             mc --- p_mr_ar
             atc --- p_mr_ar
             avc --- p_mr_ar
 
-            Equilibrium_Q(Qe) --- |MC=MR| p_mr_ar
-            Equilibrium_Price(Pe) --- |P=MR=AR| p_mr_ar
+            Equilibrium_Q("Qe") --- |"MC=MR"| p_mr_ar
+            Equilibrium_Price("Pe") --- |"P=MR=AR"| p_mr_ar
             
-            p_mr_ar --> |Above ATC| ProfitRect
+            p_mr_ar --> |"Above ATC"| ProfitRect("Supernormal Profit Area")
             ProfitRect --- atc
             ProfitRect --- Equilibrium_Q
             
-            atc --- |U-shaped| mc
-            avc --- |U-shaped| mc
+            atc --- |"U-shaped"| mc
+            avc --- |"U-shaped"| mc
         end
     end
 ```
+</details>
+
 **Explanation of Short-Run Profit Diagram:**
 *   The horizontal line `P=MR=AR` represents the market price the firm takes.
 *   The firm produces at `Qe` where `MC` intersects `MR` (and thus `P`).
@@ -382,28 +389,31 @@ In the long run, the freedom of entry and exit of firms ensures that all firms i
 *   If firms are incurring losses in the short run, some firms will exit the industry. This decreases market supply, drives up the market price, and reduces losses for remaining firms until they earn normal profits (`P = ATC`).
 *   Therefore, in long-run equilibrium, a perfectly competitive firm produces at the output level where `P = MR = MC = minimum LRAC = minimum SRATC`. This is the most efficient point of production.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Perfect Competition Long-Run Equilibrium] --> B{Free Entry/Exit ensures Normal Profit}
-    B --> C[Condition: P = MR = MC = min LRAC = min SRATC]
-    C --> D{No Supernormal Profit, No Losses}
+    A["Perfect Competition Long-Run Equilibrium"] --> B{"Free Entry/Exit ensures Normal Profit"}
+    B --> C["Condition: P = MR = MC = min LRAC = min SRATC"]
+    C --> D{"No Supernormal Profit, No Losses"}
 
-    subgraph Diagram: Long-Run Normal Profit
+    subgraph "Diagram: Long-Run Normal Profit"
         direction LR
-        Output_X[Quantity]
-        CostPrice_Y[Cost/Price]
+        Output_X["Quantity"]
+        CostPrice_Y["Cost / Price"]
 
-        MarketPrice(P=MR=AR)
-        MC_Curve(MC)
-        ATC_Curve(ATC)
-        LRAC_Curve(LRAC)
+        MarketPrice("P=MR=AR")
+        MC_Curve("MC")
+        ATC_Curve("ATC")
+        LRAC_Curve("LRAC")
 
         CostPrice_Y --- MarketPrice
         CostPrice_Y --- MC_Curve
         CostPrice_Y --- ATC_Curve
         CostPrice_Y --- LRAC_Curve
 
-        MarketPrice --- EquilibriumPoint(E)
+        MarketPrice --- EquilibriumPoint("E")
         MC_Curve --- EquilibriumPoint
         ATC_Curve --- EquilibriumPoint
         LRAC_Curve --- EquilibriumPoint
@@ -413,31 +423,30 @@ graph TD
         style ATC_Curve fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style LRAC_Curve fill:#fff,stroke:#888,stroke-width:1px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            Q_axis[Quantity]
-            CP_axis[Cost/Price]
+            Q_axis["Quantity"]
+            CP_axis["Cost/Price"]
 
             p_mr_ar["P=MR=AR"]
             mc["MC"]
             atc["ATC"]
             lr_ac["LRAC"]
 
-            CP_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
-
             mc --- p_mr_ar
             atc --- p_mr_ar
             lr_ac --- p_mr_ar
 
-            Equilibrium_Q(Qe) --- |MC=MR=ATC=LRAC=P| p_mr_ar
-            Equilibrium_Price(Pe) --- |P=MR=AR| p_mr_ar
+            Equilibrium_Q("Qe") --- |"MC=MR=ATC=LRAC=P"| p_mr_ar
+            Equilibrium_Price("Pe") --- |"P=MR=AR"| p_mr_ar
             
-            mc --> |Intersects ATC/LRAC at Min| atc
+            mc --> |"Intersects ATC/LRAC at Min"| atc
             atc --- lr_ac
         end
     end
 ```
+</details>
+
 **Explanation of Long-Run Normal Profit Diagram:**
 *   The market price `P=MR=AR` is tangent to the minimum point of both the short-run average total cost (ATC) and long-run average cost (LRAC) curves.
 *   The firm produces at `Qe` where `P = MR = MC = min ATC = min LRAC`. This indicates both productive efficiency (producing at the lowest possible cost) and allocative efficiency (P=MC).
@@ -510,27 +519,30 @@ The kinked demand curve model is an important explanation for price rigidity in 
 *   **Marginal Revenue Curve:** Because of the kink in the demand curve, the marginal revenue (MR) curve has a discontinuous gap or a vertical "break" directly below the kink. This gap exists between `MR1` and `MR2`.
 *   **Price Rigidity:** Due to this vertical gap in the MR curve, the marginal cost (MC) curve can fluctuate within this gap without affecting the equilibrium price `P0` and quantity `Q0`. As long as the MC curve intersects the MR curve within this discontinuous segment, the firm will have no incentive to change its price or output. This explains why prices tend to be stable in oligopolistic markets.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Kinked Demand Curve Model] --> B{Explains Price Rigidity in Oligopoly}
-    B --> C{Assumption 1: Rivals DO NOT follow price increases}
-    C --> D[Result: Demand above kink is Elastic]
-    B --> E{Assumption 2: Rivals DO follow price decreases}
-    E --> F[Result: Demand below kink is Inelastic]
-    D & F --> G[Demand Curve is Kinked at Prevailing Price]
-    G --> H[MR Curve has a Discontinuous Gap]
-    H --> I[MC can fluctuate within gap without changing P/Q -> Price Rigidity]
+    A["Kinked Demand Curve Model"] --> B{"Explains Price Rigidity in Oligopoly"}
+    B --> C{"Assumption 1: Rivals DO NOT follow price increases"}
+    C --> D["Result: Demand above kink is Elastic"]
+    B --> E{"Assumption 2: Rivals DO follow price decreases"}
+    E --> F["Result: Demand below kink is Inelastic"]
+    D & F --> G["Demand Curve is Kinked at Prevailing Price"]
+    G --> H["MR Curve has a Discontinuous Gap"]
+    G --> I["MC can fluctuate within gap without changing P/Q -> Price Rigidity"]
 
-    subgraph Kinked Demand Curve Diagram
+    subgraph "Kinked Demand Curve Diagram"
         direction LR
-        Output_X[Quantity]
-        PriceCost_Y[Price/Cost]
+        Output_X["Quantity"]
+        PriceCost_Y["Price / Cost"]
 
-        Demand_Upper(d)
-        Demand_Lower(D)
-        MR_Upper(MR1)
-        MR_Lower(MR2)
-        MC_Curve(MC)
+        Demand_Upper("d")
+        Demand_Lower("D")
+        MR_Upper("MR1")
+        MR_Lower("MR2")
+        MC_Curve("MC")
 
         PriceCost_Y --- Demand_Upper
         PriceCost_Y --- Demand_Lower
@@ -538,13 +550,13 @@ graph TD
         PriceCost_Y --- MR_Lower
         PriceCost_Y --- MC_Curve
 
-        Demand_Upper --> |Prevailing Price P0| KinkPoint(K)
+        Demand_Upper --> |"Prevailing Price P0"| KinkPoint("K")
         Demand_Lower --> KinkPoint
         
-        KinkPoint --> |Prevailing Quantity Q0| EquilibriumOutput(Q0)
+        KinkPoint --> |"Prevailing Quantity Q0"| EquilibriumOutput("Q0")
 
-        MR_Upper --> |Discontinuity| MR_Lower
-        MC_Curve --> |Intersects within MR gap| Stability
+        MR_Upper --> |"Discontinuity"| MR_Lower
+        MC_Curve --> |"Intersects within MR gap"| McStability("Price Stability")
 
         style Demand_Upper fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style Demand_Lower fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
@@ -553,33 +565,32 @@ graph TD
         style MC_Curve fill:#fff,stroke:#33a,stroke-width:2px,color:#000
         style KinkPoint fill:#0f0,stroke:#333,stroke-width:2px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            Q_axis[Quantity]
-            PC_axis[Price/Cost]
+            Q_axis["Quantity"]
+            PC_axis["Price/Cost"]
 
             Demand_d["d"]
             Demand_D["D"]
             MR1["MR1"]
             MR2["MR2"]
-            MC["MC"]
+            MC_node["MC"]
             
-            PC_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
-
-            Demand_d --- KinkP(P0)
+            Demand_d --- KinkP("P0")
             KinkP --- Demand_D
             
-            MR1 --- Gap(Vertical Gap)
+            MR1 --- Gap("Vertical Gap")
             Gap --- MR2
 
-            KinkP --- |P0| PointP0
-            Q0_Point(Q0) --- |Q0| PointQ0
+            KinkP --- |"P0"| PointP0("P0 Price Level")
+            Q0_Point("Q0") --- |"Q0"| PointQ0("Q0 Quantity Level")
             
-            MC --- |Intersects Gap| Gap
+            MC_node --- |"Intersects Gap"| Gap
         end
     end
 ```
+</details>
+
 **Explanation of Diagram:**
 *   The demand curve `DD'` is kinked at the prevailing price `P0` and quantity `Q0`.
 *   The upper segment (`d`) is flatter (more elastic), reflecting that a price increase by one firm is not followed by rivals.
@@ -682,71 +693,73 @@ The law of variable proportion can be divided into three distinct stages based o
 *   **Reason:** Excessive use of the variable factor relative to the fixed factor. The variable factor starts to hinder production rather than helping it (e.g., too many workers getting in each other's way).
 *   **Rationality:** A rational producer will never operate in Stage III because by removing some units of the variable input, total output can be increased while simultaneously reducing costs.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Law of Variable Proportion] --> B{Short Run: One Fixed, One Variable Input}
-    B --> C[Stage I: Increasing Returns]
-    C --> D[TP increases at increasing rate, MP rises, AP rises]
-    D --> E[Ends when MP = AP (AP max)]
-    C --> F[Irrational to produce]
+    A["Law of Variable Proportion"] --> B{"Short Run: One Fixed, One Variable Input"}
+    B --> C["Stage I: Increasing Returns"]
+    C --> D["TP increases at increasing rate, MP rises, AP rises"]
+    D --> E["Ends when MP = AP (AP max)"]
+    C --> F["Irrational to produce"]
 
-    B --> G[Stage II: Diminishing Returns]
-    G --> H[TP increases at decreasing rate, MP declines, AP declines]
-    H --> I[Ends when MP = 0 (TP max)]
-    G --> J[Rational to produce]
+    B --> G["Stage II: Diminishing Returns"]
+    G --> H["TP increases at decreasing rate, MP declines, AP declines"]
+    H --> I["Ends when MP = 0 (TP max)"]
+    G --> J["Rational to produce"]
 
-    B --> K[Stage III: Negative Returns]
-    K --> L[TP declines, MP is negative, AP declines]
-    L --> M[Irrational to produce]
+    B --> K["Stage III: Negative Returns"]
+    K --> L["TP declines, MP is negative, AP declines"]
+    L --> M["Irrational to produce"]
 
-    subgraph Diagram: Law of Variable Proportion
+    subgraph "Diagram: Law of Variable Proportion"
         direction LR
-        VariableInput_X[Units of Variable Input (e.g., Labor)]
-        Output_Y[Total Product (TP), Average Product (AP), Marginal Product (MP)]
+        VariableInput_X["Units of Variable Input (e.g., Labor)"]
+        Output_Y["Total Product (TP), Average Product (AP), Marginal Product (MP)"]
 
-        Curve_TP(TP)
-        Curve_AP(AP)
-        Curve_MP(MP)
+        Curve_TP("TP")
+        Curve_AP("AP")
+        Curve_MP("MP")
 
         Output_Y --- Curve_TP
         Output_Y --- Curve_AP
         Output_Y --- Curve_MP
 
-        Curve_TP --> |Maximum at End of Stage II| MaxTP
-        Curve_AP --> |Intersects MP at Max AP (End of Stage I)| MaxAP
-        Curve_MP --> |Intersects X-axis at End of Stage II (MP=0)| MPZero
+        Curve_TP --> |"Maximum at End of Stage II"| MaxTP("TP Max")
+        Curve_AP --> |"Intersects MP at Max AP (End of Stage I)"| MaxAP("AP Max")
+        Curve_MP --> |"Intersects X-axis at End of Stage II (MP=0)"| MPZero("MP Zero")
 
         style Curve_TP fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style Curve_AP fill:#fff,stroke:#33a,stroke-width:2px,color:#000
         style Curve_MP fill:#fff,stroke:#a33,stroke-width:2px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            L_axis[Variable Input]
-            P_axis[Output]
+            L_axis["Variable Input"]
+            P_axis["Output"]
 
             TP_line["TP"]
             AP_line["AP"]
             MP_line["MP"]
 
-            P_axis -- "Y-axis" --> Graph
-            L_axis -- "X-axis" --> Graph
-
             TP_line --- MP_line
             TP_line --- AP_line
 
-            Intersection1(L1) --- |MP=AP, AP max| AP_line
-            Intersection2(L2) --- |MP=0, TP max| MP_line
+            Intersection1("L1") --- |"MP=AP, AP max"| AP_line
+            Intersection2("L2") --- |"MP=0, TP max"| MP_line
 
-            RectStage1(Stage I) --- |Increasing Returns| Intersection1
-            RectStage2(Stage II) --- |Diminishing Returns| Intersection2
-            RectStage3(Stage III) --- |Negative Returns|
+            RectStage1("Stage I") --- |"Increasing Returns"| Intersection1
+            RectStage2("Stage II") --- |"Diminishing Returns"| Intersection2
+            RectStage3("Stage III") --- |"Negative Returns"| Stage3Point("Stage III Output")
             
-            L_axis --- |L1| Intersection1
-            L_axis --- |L2| Intersection2
+            L_axis --- |"L1"| Intersection1
+            L_axis --- |"L2"| Intersection2
         end
     end
 ```
+</details>
+
 **Explanation of Diagram:**
 *   The X-axis represents the units of the variable input (e.g., labor).
 *   The Y-axis represents the output (Total Product, Average Product, Marginal Product).
@@ -776,70 +789,78 @@ Break-even analysis is a financial tool used to determine the point at which tot
     `BEP (Units) = Fixed Costs / Contribution Margin per Unit`
 *   **In Sales Revenue:** `BEP (Revenue) = Fixed Costs / Contribution Margin Ratio`
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Break-Even Analysis] --> B{Determine point where Total Revenue = Total Cost}
-    B --> C[No Profit, No Loss]
-    C --> D[Identify Key Components]
-    D --> D1[Fixed Costs (FC)]
-    D --> D2[Variable Costs (VC)]
-    D --> D3[Selling Price per Unit (P)]
-    D --> D4[Contribution Margin (P - VC)]
-    D --> D5[Total Revenue (P * Q)]
-    D --> D6[Total Cost (FC + VC * Q)]
+    A["Break-Even Analysis"] --> B{"Determine point where Total Revenue = Total Cost"}
+    B --> C["No Profit, No Loss"]
+    C --> D["Identify Key Components"]
+    D --> D1["Fixed Costs (FC)"]
+    D --> D2["Variable Costs (VC)"]
+    D --> D3["Selling Price per Unit (P)"]
+    D --> D4["Contribution Margin (P - VC)"]
+    D --> D5["Total Revenue (P * Q)"]
+    D --> D6["Total Cost (FC + VC * Q)"]
 
-    B --> E[Calculations]
-    E --> E1[BEP in Units = FC / (P - VC per Unit)]
-    E --> E2[BEP in Revenue = FC / Contribution Margin Ratio]
+    B --> E["Calculations"]
+    E --> E1["BEP in Units = FC / (P - VC per Unit)"]
+    E --> E2["BEP in Revenue = FC / Contribution Margin Ratio"]
 
-    subgraph Break-Even Chart
+    subgraph "Break-Even Chart"
         direction LR
-        Quantity_X[Quantity of Output]
-        CostRevenue_Y[Cost/Revenue]
+        Quantity_X["Quantity of Output"]
+        CostRevenue_Y["Cost / Revenue"]
 
-        FixedCost_Line(Fixed Cost)
-        TotalCost_Line(Total Cost)
-        TotalRevenue_Line(Total Revenue)
+        FixedCost_Line("Fixed Cost")
+        TotalCost_Line("Total Cost")
+        TotalRevenue_Line("Total Revenue")
 
         CostRevenue_Y --- FixedCost_Line
         CostRevenue_Y --- TotalCost_Line
         CostRevenue_Y --- TotalRevenue_Line
 
-        FixedCost_Line --> |Horizontal| Y_Intercept_FC
-        TotalCost_Line --> |Starts from FC, slopes up| Y_Intercept_FC
-        TotalRevenue_Line --> |Starts from Origin, slopes up| Origin
+        FixedCost_Line --> |"Horizontal"| Y_Intercept_FC
+        TotalCost_Line --> |"Starts from FC, slopes up"| Y_Intercept_FC
+        TotalRevenue_Line --> |"Starts from Origin, slopes up"| Origin
 
-        Intersection(Break-Even Point) --- TotalRevenue_Line
+        Intersection("Break-Even Point") --- TotalRevenue_Line
         Intersection --- TotalCost_Line
+
+        ProfitArea("Profit Region")
+        LossArea("Loss Region")
+
+        ProfitArea --- |"TR > TC"| TotalRevenue_Line
+        LossArea --- |"TR < TC"| TotalCost_Line
 
         style FixedCost_Line fill:#fff,stroke:#888,stroke-width:1px,color:#000
         style TotalCost_Line fill:#fff,stroke:#a33,stroke-width:2px,color:#000
         style TotalRevenue_Line fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style Intersection fill:#0f0,stroke:#333,stroke-width:2px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            Q_axis[Quantity]
-            CR_axis[Cost/Revenue]
+            Q_axis["Quantity"]
+            CR_axis["Cost/Revenue"]
 
             FC_line["Fixed Cost"]
             TC_line["Total Cost"]
             TR_line["Total Revenue"]
 
-            CR_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
-
             FC_line --- TC_line
             TR_line --- TC_line
 
-            BEP_Point(Break-Even Point) --- |TR = TC| TR_line
-            BEP_Point --- |TR = TC| TC_line
+            BEP_Point("Break-Even Point") --- |"TR = TC"| TR_line
+            BEP_Point --- |"TR = TC"| TC_line
             
-            Profit_Area(Profit) --- |TR > TC|
-            Loss_Area(Loss) --- |TR < TC|
+            Profit_Area("Profit Area (TR > TC)")
+            Loss_Area("Loss Area (TR < TC)")
         end
     end
 ```
+</details>
+
 **Explanation of Diagram:**
 *   The X-axis represents the Quantity of Output, and the Y-axis represents Cost/Revenue.
 *   **Fixed Cost Line:** A horizontal line because fixed costs remain constant regardless of output.
@@ -915,31 +936,34 @@ Graphically, the expansion path is derived by connecting the tangency points of 
 *   **Constant Input Price Ratio:** The slope of the iso-cost lines (ratio of input prices) remains constant along a given expansion path, as the firm is assumed to face fixed input prices.
 *   **Optimal Input Mix:** Each point on the expansion path represents the most efficient (least-cost) way to produce that specific level of output.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Expansion Path] --> B{Locus of Producer's Equilibrium Points}
-    B --> C{As Output Increases, Given Constant Input Prices}
-    C --> D[Connects Tangency Points of Isoquants & Iso-cost Lines]
-    D --> E[Shows Optimal Input Mix for Each Output Level]
+    A["Expansion Path"] --> B{"Locus of Producer's Equilibrium Points"}
+    B --> C{"As Output Increases, Given Constant Input Prices"}
+    C --> D["Connects Tangency Points of Isoquants & Iso-cost Lines"]
+    D --> E["Shows Optimal Input Mix for Each Output Level"]
 
     subgraph Expansion Path Diagram
         direction LR
-        Capital_Y[Capital (K)]
-        Labor_X[Labor (L)]
+        Capital_Y["Capital (K)"]
+        Labor_X["Labor (L)"]
 
-        IsoQ1(Q1)
-        IsoQ2(Q2)
-        IsoQ3(Q3)
+        IsoQ1("Q1")
+        IsoQ2("Q2")
+        IsoQ3("Q3")
 
-        IsoC1(C1)
-        IsoC2(C2)
-        IsoC3(C3)
+        IsoC1("C1")
+        IsoC2("C2")
+        IsoC3("C3")
 
-        Eq1(E1)
-        Eq2(E2)
-        Eq3(E3)
+        Eq1("E1")
+        Eq2("E2")
+        Eq3("E3")
 
-        ExpansionPath_Line(Expansion Path)
+        ExpansionPath_Line("Expansion Path")
 
         Capital_Y --- IsoQ1
         Capital_Y --- IsoQ2
@@ -958,7 +982,7 @@ graph TD
         IsoQ3 --- Eq3
         IsoC3 --- Eq3
 
-        Eq1 --> ExpansionPath_Line
+        Eq1 --> ExpansionPath_Line("Expansion Path")
         Eq2 --> ExpansionPath_Line
         Eq3 --> ExpansionPath_Line
 
@@ -973,29 +997,26 @@ graph TD
         style Eq3 fill:#0f0,stroke:#333,stroke-width:2px,color:#000
         style ExpansionPath_Line fill:#fff,stroke:#a33,stroke-width:2px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
-            L_axis[Labor]
-            K_axis[Capital]
+            L_axis["Labor"]
+            K_axis["Capital"]
 
             isoq1["Q1"]
             isoq2["Q2"]
             isoq3["Q3"]
             isoc1["C1"]
-            isoc2["C2"]
+            isoc2["C3"]
             isoc3["C3"]
             exp_path["Expansion Path"]
 
-            K_axis -- "Y-axis" --> Graph
-            L_axis -- "X-axis" --> Graph
-
-            isoq1 --- eq1_point(E1)
+            isoq1 --- eq1_point("E1")
             isoc1 --- eq1_point
 
-            isoq2 --- eq2_point(E2)
+            isoq2 --- eq2_point("E2")
             isoc2 --- eq2_point
 
-            isoq3 --- eq3_point(E3)
+            isoq3 --- eq3_point("E3")
             isoc3 --- eq3_point
 
             exp_path --- eq1_point
@@ -1003,7 +1024,9 @@ graph TD
             exp_path --- eq3_point
         end
     end
-```**Explanation of Diagram:**
+```
+</details>
+**Explanation of Diagram:**
 *   The X-axis represents Labor (L) and the Y-axis represents Capital (K).
 *   `Q1`, `Q2`, `Q3` are isoquants representing increasing levels of output.
 *   `C1`, `C2`, `C3` are iso-cost lines, with `C3` representing a higher total cost than `C2`, and `C2` higher than `C1`. The slopes of these lines are the same, reflecting constant input prices.
@@ -1052,24 +1075,27 @@ A monopolist, like any other firm, aims to maximize profits. Profit maximization
     *   **Loss:** If `Pm < ATC` but `Pm >= AVC` at Qm, the monopolist incurs losses (but might continue producing in the short run). If `Pm < AVC`, the monopolist will shut down.
     *   **Normal Profit:** If `Pm = ATC` at Qm, the monopolist earns normal profits (less common for a monopoly, but possible if costs are high or demand is weak).
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Monopolist's Equilibrium] --> B{Single Seller, Price Maker, Barriers to Entry}
-    B --> C[Profit Max. Condition: MR = MC]
-    C --> D[Determine Quantity (Qm) where MR intersects MC]
-    D --> E[Determine Price (Pm) from Demand Curve at Qm]
-    E --> F[Compare Pm with ATC to determine Profit/Loss]
-    F --> F1{If Pm > ATC: Supernormal Profit}
-    F --> F2{If Pm = ATC: Normal Profit}
-    F --> F3{If Pm < ATC: Loss (if Pm >= AVC)}
+    A["Monopolist's Equilibrium"] --> B{"Single Seller, Price Maker, Barriers to Entry"}
+    B --> C["Downwards Sloping Demand (AR) and MR Curves"]
+    C --> D["Profit Max. Condition: MR = MC"]
+    D --> E["Determine Quantity (Qm) where MR intersects MC"]
+    E --> F["Determine Price (Pm) from Demand Curve at Qm"]
+    F --> F1{"If Pm > ATC: Supernormal Profit"}
+    F --> F2{"If Pm = ATC: Normal Profit"}
+    F --> F3{"If Pm < ATC: Loss (if Pm >= AVC)"}
 
-    subgraph Monopoly Equilibrium Diagram
+    subgraph "Monopoly Equilibrium Diagram"
         direction LR
-        Output_X[Quantity]
-        PriceCost_Y[Price/Cost]
+        Output_X["Quantity"]
+        PriceCost_Y["Price / Cost"]
 
-        Demand_Curve(Demand/AR)
-        MR_Curve(MR)
+        Demand_Curve("Demand / AR")
+        MR_Curve("MR")
         MC_Curve(MC)
         ATC_Curve(ATC)
 
@@ -1078,14 +1104,14 @@ graph TD
         PriceCost_Y --- MC_Curve
         PriceCost_Y --- ATC_Curve
 
-        MR_Curve --> |Intersects MC| EquilibriumPoint(E)
+        EquilibriumPoint("E") --> |"Intersects MC"| MR_Curve
         MC_Curve --> EquilibriumPoint
 
-        EquilibriumPoint --> |Determine Qm| Qm_Point(Qm)
-        Qm_Point --> |Up to Demand Curve| PricePoint(Pm)
+        EquilibriumPoint --> |"Determine Qm"| Qm_Point("Qm")
+        Qm_Point --> |"Up to Demand Curve"| PricePoint("Pm")
         PricePoint --> Demand_Curve
 
-        Qm_Point --> |Up to ATC Curve| ATC_at_Qm(ATC @ Qm)
+        Qm_Point --> |"Up to ATC Curve"| ATC_at_Qm("ATC @ Qm")
         ATC_Curve --> ATC_at_Qm
 
         style Demand_Curve fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
@@ -1098,28 +1124,25 @@ graph TD
 
         subgraph Graph
             direction LR
-            Q_axis[Quantity]
-            PC_axis[Price/Cost]
+            Q_axis["Quantity"]
+            PC_axis["Price/Cost"]
 
             demand_ar["Demand (AR)"]
             mr["MR"]
-            mc["MC"]
-            atc["ATC"]
-
-            PC_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
+            mc_node["MC"]
+            atc_node["ATC"]
 
             demand_ar --- mr
-            mc --- atc
+            mc_node --- atc_node
 
-            mr --- |Intersects MC at Qe| Qe_point(Qm)
-            mc --- Qe_point
+            mr --- |"Intersects MC at Qe"| Qe_point("Qm")
+            mc_node --- Qe_point
 
-            demand_ar --- |Price at Qe is Pe| Pe_point(Pm)
+            demand_ar --- |"Price at Qe is Pe"| Pe_point("Pm")
 
-            atc --- |ATC at Qe is ACe| ACe_point(ATC@Qm)
+            atc_node --- |"ATC at Qe is ACe"| ACe_point("ATC@Qm")
 
-            Profit_Area(Profit) --- Pe_point
+            Profit_Area("Profit") --- Pe_point
             Profit_Area --- ACe_point
             Profit_Area --- Qe_point
             
@@ -1128,6 +1151,8 @@ graph TD
         end
     end
 ```
+</details>
+
 **Explanation of Diagram:**
 *   The X-axis represents Quantity and the Y-axis represents Price/Cost.
 *   The `Demand (AR)` curve is downward sloping. The `MR` curve lies below the demand curve.
@@ -1195,31 +1220,38 @@ Adding the foreign sector (Rest of the World) introduces:
 **Equilibrium Condition:** For the economy to be in equilibrium, total leakages must equal total injections:
 `S + T + M = I + G + X`
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    subgraph Circular Flow of Income (Four Sector)
+    subgraph "Circular Flow of Income (Four Sector)"
         direction LR
-        H[Households] -- &gt; Factor Services -- &gt; F(Firms)
-        F -- &gt; Goods & Services -- &gt; H
-        F -- &gt; Factor Payments -- &gt; H
-        H -- &gt; Consumption Expenditure -- &gt; F
+        H("Households")
+        F("Firms")
+        G("Government")
+        FI("Financial Institutions")
+        ROW("Rest of the World")
 
-        H -- &gt; Savings -- &gt; FI(Financial Institutions)
-        FI -- &gt; Investment -- &gt; F
+        H --- |"Factor Services"| F
+        F --- |"Factor Payments"| H
+        H --- |"Consumption Exp."| F
+        F --- |"Goods & Services"| H
 
-        H -- &gt; Taxes -- &gt; G(Government)
-        F -- &gt; Taxes -- &gt; G
-        G -- &gt; Government Expenditure -- &gt; H
-        G -- &gt; Government Expenditure -- &gt; F
+        H --- |"Savings"| FI
+        FI --- |"Investment"| F
 
-        H -- &gt; Imports -- &gt; ROW(Rest of the World)
-        F -- &gt; Exports -- &gt; ROW
-        ROW -- &gt; Receipts from Exports -- &gt; F
-        ROW -- &gt; Payments for Imports -- &gt; H
+        H --- |"Taxes"| G
+        F --- |"Taxes"| G
+        G --- |"Govt. Expenditure"| H
+        G --- |"Govt. Expenditure"| F
 
-        style H fill:#fcc,stroke:#333,stroke-width:2px,color:#000
-        style F fill:#acf,stroke:#333,stroke-width:2px,color:#000
-        style G fill:#ccf,stroke:#333,stroke-width:2px,color:#000
+        H --- |"Imports"| ROW
+        F --- |"Exports"| ROW
+
+        style H fill:#f9f,stroke:#333,stroke-width:2px,color:#000
+        style F fill:#9ff,stroke:#333,stroke-width:2px,color:#000
+        style G fill:#ff9,stroke:#333,stroke-width:2px,color:#000
         style FI fill:#cfc,stroke:#333,stroke-width:2px,color:#000
         style ROW fill:#ffc,stroke:#333,stroke-width:2px,color:#000
 
@@ -1242,6 +1274,9 @@ graph TD
         linkStyle 13 stroke:#f00,stroke-width:1px,fill:none;
     end
 ```
+
+</details>
+
 **Explanation of Diagram:**
 *   **Households (H)** provide factor services (labor, land, capital, entrepreneurship) to **Firms (F)**. In return, Firms make factor payments (wages, rent, interest, profit) to Households.
 *   Households use this income to make consumption expenditure on goods and services provided by Firms. Firms receive this as revenue. (These are the core inner money and real flows).
@@ -1284,42 +1319,45 @@ In the short run, a firm under monopolistic competition behaves much like a mono
     *   If `Ps = ATC` at `Qs`, the firm earns **normal profits**.
     *   If `Ps < ATC` but `Ps ≥ AVC` at `Qs`, the firm incurs **losses** but continues to operate.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Monopolistic Competition Short-Run Equilibrium] --> B{Product Differentiation gives some market power}
-    B --> C[Firm faces downward-sloping Demand (AR)]
-    C --> D[MR curve lies below AR]
-    D --> E[Profit Max. Condition: MR = MC]
-    E --> F[Determine Quantity (Qs) where MR intersects MC]
-    F --> G[Determine Price (Ps) from Demand Curve at Qs]
-    G --> H[If Ps > ATC: Supernormal Profit]
+    A["Monopolistic Competition Short-Run Equilibrium"] --> B{"Product Differentiation gives some market power"}
+    B --> C["Firm faces downward-sloping Demand (AR)"]
+    C --> D["MR curve lies below AR"]
+    D --> E["Profit Max. Condition: MR = MC"]
+    E --> F["Determine Quantity (Qs) where MR intersects MC"]
+    F --> G["Determine Price (Ps) from Demand Curve at Qs"]
+    G --> H{"If Ps > ATC: Supernormal Profit"}
 
-    subgraph Short-Run Profit Diagram
+    subgraph "Short-Run Profit Diagram"
         direction LR
-        Output_X[Quantity]
-        PriceCost_Y[Price/Cost]
+        Output_X["Quantity"]
+        PriceCost_Y["Price / Cost"]
 
-        Demand_AR(Demand/AR)
-        MR_Curve(MR)
-        MC_Curve(MC)
-        ATC_Curve(ATC)
+        Demand_Curve("Demand / AR")
+        MR_Curve("MR")
+        MC_Curve("MC")
+        ATC_Curve("ATC")
 
-        PriceCost_Y --- Demand_AR
+        PriceCost_Y --- Demand_Curve
         PriceCost_Y --- MR_Curve
         PriceCost_Y --- MC_Curve
         PriceCost_Y --- ATC_Curve
 
-        MR_Curve --> |Intersects MC| EquilibriumPoint(E)
+        MR_Curve --> |"Intersects MC"| EquilibriumPoint("E")
         MC_Curve --> EquilibriumPoint
 
-        EquilibriumPoint --> |Determine Qs| Qs_Point(Qs)
-        Qs_Point --> |Up to Demand Curve| PricePoint(Ps)
-        PricePoint --> Demand_AR
+        EquilibriumPoint --> |"Determine Qs"| Qs_Point("Qs")
+        Qs_Point --> |"Up to Demand Curve"| PricePoint("Ps")
+        PricePoint --> Demand_Curve
 
-        Qs_Point --> |Up to ATC Curve| ATC_at_Qs(ATC @ Qs)
+        Qs_Point --> |"Up to ATC Curve"| ATC_at_Qs("ATC @ Qs")
         ATC_Curve --> ATC_at_Qs
 
-        style Demand_AR fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
+        style Demand_Curve fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
         style MR_Curve fill:#fff,stroke:#a33,stroke-width:2px,color:#000
         style MC_Curve fill:#fff,stroke:#33a,stroke-width:2px,color:#000
         style ATC_Curve fill:#fff,stroke:#888,stroke-width:1px,color:#000
@@ -1327,38 +1365,37 @@ graph TD
         style PricePoint fill:#f00,stroke:#333,stroke-width:2px,color:#000
         style ATC_at_Qs fill:#ff0,stroke:#333,stroke-width:2px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
             Q_axis[Quantity]
-            PC_axis[Price/Cost]
+            PC_axis["Price/Cost"]
 
             demand_ar["Demand (AR)"]
             mr["MR"]
-            mc["MC"]
-            atc["ATC"]
-
-            PC_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
+            mc_curve_node["MC"]
+            atc_curve_node["ATC"]
 
             demand_ar --- mr
-            mc --- atc
+            mc_curve_node --- atc_curve_node
 
-            mr --- |Intersects MC at Qs| Qs_point(Qs)
-            mc --- Qs_point
+            mr --- |"Intersects MC at Qs"| Qs_point("Qs")
+            mc_curve_node --- Qs_point
 
-            demand_ar --- |Price at Qs is Ps| Ps_point(Ps)
+            demand_ar --- |"Price at Qs is Ps"| Ps_point("Ps")
 
-            atc --- |ATC at Qs is ACs| ACs_point(ATC@Qs)
+            atc_curve_node --- |"ATC at Qs is ACs"| ACs_point("ATC @ Qs")
 
-            Profit_Area(Profit) --- Ps_point
-            Profit_Area --- ACs_point
-            Profit_Area --- Qs_point
+            Profit_Area_Rect("Supernormal Profit Area") --- Ps_point
+            Profit_Area_Rect --- ACs_point
+            Profit_Area_Rect --- Qs_point
             
             Ps_point --- Qs_point
             ACs_point --- Qs_point
         end
     end
 ```
+</details>
+
 **Explanation of Short-Run Diagram:**
 *   Similar to monopoly, the firm finds `Qs` where `MR = MC`.
 *   Price `Ps` is set on the demand curve at `Qs`.
@@ -1373,71 +1410,59 @@ In the long run, the freedom of entry and exit plays a crucial role.
 *   **Exit of Firms:** If firms are incurring losses, some will exit the market. This will cause the demand curve for the remaining firms to shift to the right and become less elastic.
 *   **Result:** This process of entry and exit continues until all firms in the industry earn only **normal profits**. In long-run equilibrium, the demand (AR) curve for each firm becomes tangent to its Average Total Cost (ATC) curve. At this tangency point, `P = ATC`, and also `MR = MC`.
 
+<details>
+<summary>View Diagram</summary>
+
 ```mermaid
 graph TD
-    A[Monopolistic Competition Long-Run Equilibrium] --> B{Free Entry/Exit ensures Normal Profit}
-    B --> C[If SR Profit: New firms enter, demand for existing firms shifts left, becomes more elastic]
-    C --> D[If SR Loss: Firms exit, demand for remaining firms shifts right, becomes less elastic]
-    D --> E[Process continues until Demand (AR) curve is tangent to ATC curve]
-    E --> F[Condition: P = ATC and MR = MC]
-    F --> G[Only Normal Profits earned]
+    A["Monopolistic Competition Long-Run Equilibrium"] --> B{"Free Entry/Exit ensures Normal Profit"}
+    B --> C["If SR Profit: New firms enter, demand for existing firms shifts left, becomes more elastic"]
+    C --> D["If SR Loss: Firms exit, demand for remaining firms shifts right, becomes less elastic"]
+    D --> E["Process continues until Demand (AR) curve is tangent to ATC curve"]
+    E --> F["Condition: P = ATC and MR = MC"]
+    F --> G["Only Normal Profits earned"]
 
-    subgraph Long-Run Normal Profit Diagram
+    subgraph "Long-Run Normal Profit Diagram"
         direction LR
-        Output_X[Quantity]
-        PriceCost_Y[Price/Cost]
+        Output_X["Quantity"]
+        PriceCost_Y["Price / Cost"]
 
-        Demand_AR(Demand/AR)
-        MR_Curve(MR)
-        MC_Curve(MC)
-        ATC_Curve(ATC)
+        Demand_Curve("Demand / AR")
+        MR_Curve("MR")
+        MC_Curve("MC")
+        ATC_Curve("ATC")
 
-        PriceCost_Y --- Demand_AR
+        PriceCost_Y --- Demand_Curve
         PriceCost_Y --- MR_Curve
         PriceCost_Y --- MC_Curve
-        PriceCost_Y --- ATC_Curve
-
-        MR_Curve --> |Intersects MC| EquilibriumPoint(E)
-        MC_Curve --> EquilibriumPoint
-
-        EquilibriumPoint --> |Determine QL| QL_Point(QL)
-        QL_Point --> |Up to Demand Curve & ATC Curve| PricePoint(PL)
-        PricePoint --> Demand_AR
-        PricePoint --> ATC_Curve
-
-        style Demand_AR fill:#fff,stroke:#3a3,stroke-width:2px,color:#000
-        style MR_Curve fill:#fff,stroke:#a33,stroke-width:2px,color:#000
-        style MC_Curve fill:#33a,stroke:#33a,stroke-width:2px,color:#000
-        style ATC_Curve fill:#fff,stroke:#888,stroke-width:2px,color:#000
         style EquilibriumPoint fill:#0f0,stroke:#333,stroke-width:2px,color:#000
         style PricePoint fill:#f00,stroke:#333,stroke-width:2px,color:#000
 
-        subgraph Graph
+        subgraph "Graph"
             direction LR
             Q_axis[Quantity]
-            PC_axis[Price/Cost]
+            PC_axis["Price/Cost"]
 
             demand_ar["Demand (AR)"]
             mr["MR"]
-            mc["MC"]
-            atc["ATC"]
-
-            PC_axis -- "Y-axis" --> Graph
-            Q_axis -- "X-axis" --> Graph
+            mc_curve_node["MC"]
+            atc_curve_node["ATC"]
 
             demand_ar --- mr
-            mc --- atc
+            mc_curve_node --- atc_curve_node
 
-            mr --- |Intersects MC at QL| QL_point(QL)
-            mc --- QL_point
+            mr --- |"Intersects MC at QL"| QL_point("QL")
+            mc_curve_node --- QL_point
 
-            demand_ar --- |Price at QL is PL, where AR is tangent to ATC| PL_point(PL)
-            atc --- PL_point
+            demand_ar --- |"Price at QL is PL, where AR is tangent to ATC"| PL_point("PL")
+            atc_curve_node --- PL_point
             
             PL_point --- QL_point
         end
     end
 ```
+</details>
+
 **Explanation of Long-Run Diagram:**
 *   The `Demand (AR)` curve is tangent to the `ATC` curve at output `QL` and price `PL`.
 *   At this tangency point, `PL = ATC`, meaning the firm earns only normal profits.
