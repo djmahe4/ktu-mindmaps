@@ -152,6 +152,6 @@
     * [ ] Data Structures (CST201)
     * [ ] Operating Systems (CST206)
     * [ ] Database Management Systems (CST204)
-    * [ ] Computer Networks (CST303)
-    * [ ] Foundations of Cryptography (CGT307)
+    * [ ] Computer Organization And Architecture
+    * [ ] Formal Languages And Automata Theory
 * [ ] **Refer to Textbooks** of the respective core courses.
