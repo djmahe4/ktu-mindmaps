@@ -226,3 +226,187 @@ Code Optimization
    └── Global → Loops + Procedures
 ```
 
+## Code gen
+
+### 2. Code Generation – Core Concepts (Reverse Engineered)
+
+**What is Code Generation?**  
+The **final phase** of the compiler.  
+It takes **optimized intermediate code** (usually 3-address code) and produces **target machine code** (assembly or binary) that can run on the actual hardware.
+
+**Goal:** Generate correct, efficient target code (fast + small size).
+
+---
+
+### 3. Issues in the Design of a Code Generator (Most Asked)
+
+**6 Major Issues** (Learn in order):
+
+1. **Input to Code Generator**  
+   - Intermediate Representation (3-address code, quadruples, DAG, etc.)  
+   - Symbol table information (type, width, address)
+
+2. **Target Program**  
+   - Absolute machine code → fixed memory, fast but inflexible  
+   - Relocatable machine code → can be linked  
+   - Assembly language → easier to generate  
+   **Mnemonic:** ARA (Absolute, Relocatable, Assembly)
+
+3. **Memory Management**  
+   - Mapping names → addresses (using symbol table width)  
+   - Relative addressing for instructions
+
+4. **Instruction Selection**  
+   - Choosing best machine instructions for IR statements  
+   - Depends on: IR level, instruction set (RISC/CISC), quality needed  
+   **Example:**  
+   `x = y + z`  
+   Poor: MOV y,R0; ADD z,R0; MOV R0,x  
+   Better: Use INC if available
+
+5. **Register Allocation**  
+   - Registers are fastest storage  
+   - Two sub-problems:  
+     - **Register Allocation** → which values stay in registers?  
+     - **Register Assignment** → which specific register?  
+   **Key Problem:** Limited registers
+
+6. **Evaluation Order**  
+   - Order of computing sub-expressions affects register usage  
+   - Optimal order is NP-complete → solved partially by optimization
+
+---
+
+### 4. Target Machine (Simple Model used in your notes)
+
+- Byte-addressable, 4 bytes/word  
+- n general-purpose registers: R0, R1, ..., Rn-1  
+- Two-address instructions: `op source, destination`  
+- Important addressing modes (memorize with costs):
+
+| Mode              | Form       | Added Cost | Mnemonic |
+|-------------------|------------|------------|----------|
+| Register          | R          | 0          | Free     |
+| Absolute          | M          | 1          | Memory   |
+| Indexed           | c(R)       | 1          | Index    |
+| Indirect Register | *R         | 0          | Indirect |
+| Immediate         | #C         | 1          | Const    |
+
+**Instruction Cost Rule:**  
+**Cost = 1 (base) + cost of source + cost of destination**
+
+---
+
+### 5. Simple Code Generator (Most Important for Exams)
+
+#### Tools Used:
+- **Register Descriptor**: What is currently in each register?
+- **Address Descriptor**: Where is the current value of a name (register/memory)?
+
+#### Code Generation Algorithm (Step-by-Step)
+
+For every 3-address statement `x := y op z`:
+
+1. Call **getreg()** → find location **L** for result
+2. Get location of **y** (prefer register) → generate `MOV y', L` if needed
+3. Generate `op z', L`
+4. Update descriptors:
+   - x is now in L
+   - If y or z have **no next use** and **not live** → free their registers
+
+#### getreg() Function (Very Important)
+
+**Rules (in priority order):**
+
+1. If **y** is already in a register **R** → use that R (for `y op z`)
+2. Else if there is a free (empty) register **R** → use it
+3. Else choose a register **R** that requires **minimum load/store**:
+   - Spill (MOV R, M) the value if needed
+   - Prefer register whose value is **not live** or has **no next use**
+
+**Mnemonic for getreg:** **Y → Free → Cheap** (Y already in reg → Free reg → Cheapest spill)
+
+---
+
+### 6. Example: Generating Code for Assignment
+
+**Statement:** `d := (a-b) + (a-c) + (a-c)`  
+(Assume d is live at end)
+
+**3-Address Code:**
+```
+t := a - b
+u := a - c
+v := t + u
+d := v + u
+```
+
+**Step-by-step Code Generation** (from your PDF):
+
+| Statement       | Code Generated                  | Register Descriptor          | Address Descriptor          |
+|-----------------|---------------------------------|------------------------------|-----------------------------|
+| (initial)       | -                               | All empty                    | -                           |
+| t := a - b      | MOV a, R0<br>SUB b, R0         | R0 = t                       | t in R0                     |
+| u := a - c      | MOV a, R1<br>SUB c, R1         | R0=t, R1=u                   | t in R0, u in R1            |
+| v := t + u      | ADD R1, R0                     | R0=v, R1=u                   | v in R0, u in R1            |
+| d := v + u      | ADD R1, R0<br>MOV R0, d        | R0=d                         | d in R0 (and memory)        |
+
+**Total Cost:** Very efficient (reused R0 cleverly)
+
+---
+
+### 7. Practice Questions Mastery
+
+**Q: Explain code motion with example**  
+**Answer:**  
+Code motion (loop-invariant code motion) moves code that computes the **same value** every iteration **outside** the loop.
+
+**Example:**
+```pascal
+for i = 1 to 100
+    x := 25 * a;     // loop invariant
+    y := x + z;
+```
+
+**Optimized:**
+```pascal
+x := 25 * a;         // moved outside
+for i = 1 to 100
+    y := x + z;
+```
+
+**Mnemonic:** “Invariant → Out” (loop invariant code → move out)
+
+**Q: Code-improving transformations on Basic Block**  
+**Structure Preserving:**
+- Common Subexpression Elimination (CSE)
+- Copy Propagation
+- Dead Code Elimination
+- Constant Folding
+- Strength Reduction
+- Interchange independent statements
+
+**Algebraic:**
+- x + 0 = x, x * 1 = x, etc.
+
+**Q: Role of Register & Address Descriptor**  
+- **Register Descriptor**: Tracks **what value** is in **each register** (updated after every instruction)
+- **Address Descriptor**: Tracks **where** the current value of a **variable** is (register or memory)
+
+They work together so the code generator knows whether to generate MOV or not.
+
+---
+
+### 8. Quick Revision Mindmap for Code Generation Phase
+
+```mermaid
+flowchart TD
+    A[Intermediate Code + Symbol Table] --> B[Code Generator]
+    B --> C[Issues: ITMIRE]
+    C --> D[Target Program: ARA]
+    D --> E[Simple Code Generator]
+    E --> F[Register & Address Descriptors]
+    F --> G[getreg Function]
+    G --> H[Code Generation Algorithm]
+    H --> I[Target Machine Code]
+```
