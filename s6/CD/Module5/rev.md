@@ -18,6 +18,7 @@ It is the process of transforming the code (source / intermediate / target) to m
 **Need for Optimization:**
 - Compiler-generated code is usually not perfect
 - Hand optimization is tedious and error-prone
+- Programmer doesnt know machine level details
 - Modern CPUs (pipelining, caches) need optimized code
 - Improves reusability & maintainability
 
