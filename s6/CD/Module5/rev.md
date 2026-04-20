@@ -284,13 +284,13 @@ It takes **optimized intermediate code** (usually 3-address code) and produces *
 - Two-address instructions: `op source, destination`  
 - Important addressing modes (memorize with costs):
 
-| Mode              | Form       | Added Cost | Mnemonic |
-|-------------------|------------|------------|----------|
-| Register          | R          | 0          | Free     |
-| Absolute          | M          | 1          | Memory   |
-| Indexed           | c(R)       | 1          | Index    |
-| Indirect Register | *R         | 0          | Indirect |
-| Immediate         | #C         | 1          | Const    |
+| Mode                     | Form          | Added Cost | Mnemonic |
+|--------------------------|---------------|------------|----------|
+| Register                 | R             | 0          | Free     |
+| Absolute                 | M             | 1          | Memory   |
+| Indexed                  | c(R)          | 1          | Index    |
+| Indirect Register        | *R            | 0          | Indirect |
+| Indirect Indexed         | *c(R)         | 1          | Const    |
 
 **Instruction Cost Rule:**  
 **Cost = 1 (base) + cost of source + cost of destination**
