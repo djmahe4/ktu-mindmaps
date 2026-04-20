@@ -258,7 +258,7 @@ It takes **optimized intermediate code** (usually 3-address code) and produces *
 
 4. **Instruction Selection**  
    - Choosing best machine instructions for IR statements  
-   - Depends on: IR level, instruction set (RISC/CISC), quality needed  
+   - Depends on: IR level, nature of instruction set architecture, quality of the generated code .
    **Example:**  
    `x = y + z`  
    Poor: MOV y,R0; ADD z,R0; MOV R0,x  
