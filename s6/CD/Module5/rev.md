@@ -303,28 +303,106 @@ It takes **optimized intermediate code** (usually 3-address code) and produces *
 - **Register Descriptor**: What is currently in each register?
 - **Address Descriptor**: Where is the current value of a name (register/memory)?
 
-#### Code Generation Algorithm (Step-by-Step)
+### Code Generation Algorithm (Simple Code Generator) – 14 Marks
 
-For every 3-address statement `x := y op z`:
+**Introduction**  
+The **simple code generator** converts optimized **three-address intermediate code** (from a basic block) into target machine code (usually assembly). It efficiently uses registers to reduce memory access.  
 
-1. Call **getreg()** → find location **L** for result
-2. Get location of **y** (prefer register) → generate `MOV y', L` if needed
-3. Generate `op z', L`
-4. Update descriptors:
-   - x is now in L
-   - If y or z have **no next use** and **not live** → free their registers
+Two important **data structures** are maintained:  
+- **Register Descriptor**: Tells what variables are currently stored in each register (initially all registers are empty).  
+- **Address Descriptor**: Tells the current location (register or memory) of each variable/name.
 
-#### getreg() Function (Very Important)
+**Main Components**:
+- Register & Address Descriptors  
+- **getreg()** Function (heart of register allocation)  
+- Code Generation Algorithm (step-by-step for each statement `x := y op z`)
 
-**Rules (in priority order):**
+#### 1. getreg() Function (Very Important – Explain with Steps)
 
-1. If **y** is already in a register **R** → use that R (for `y op z`)
-2. Else if there is a free (empty) register **R** → use it
-3. Else choose a register **R** that requires **minimum load/store**:
-   - Spill (MOV R, M) the value if needed
-   - Prefer register whose value is **not live** or has **no next use**
+**Purpose**: Selects a suitable location **L** (preferably a register) to store the result of computation `y op z`.
 
-**Mnemonic for getreg:** **Y → Free → Cheap** (Y already in reg → Free reg → Cheapest spill)
+**Algorithm for getreg(y, z)** (Step-by-Step):
+
+1. **If y is already in a register R** and  
+   - R contains **only y** (no other variables), **and**  
+   - y has **no next use** in the block (and not live on exit),  
+   → **Return R** (reuse the same register). Update address descriptor of y (remove R if needed).
+
+2. **Else**, if there is an **empty (free) register R** available,  
+   → **Return that empty register R**.
+
+3. **Else** (no free register), find an **occupied register R** whose variable can be spilled:  
+   - Choose R that minimizes the cost (spill the one not used soon).  
+   - Generate **store instruction** `MOV R, M` (spill contents to memory) for every memory location M in its address descriptor.  
+   → **Return R** (now freed).
+
+4. **If nothing works** (rare), operate directly on **memory location** (no register).
+
+**Key Rule**: Prefer register over memory. Use **next-use information** to decide spilling (this reduces unnecessary load/store).
+
+**Mnemonic for getreg()**:  
+**"Reuse → Free → Spill → Memory"** (R-F-S-M)
+
+#### 2. Code Generation Algorithm (Step-by-Step)
+
+**Input**: Sequence of three-address statements in a **basic block**.  
+**Output**: Target assembly code.
+
+**For each three-address statement of the form `x := y op z`** (or `x := y` for copy):
+
+1. **Call getreg()** to determine location **L** where the result of `y op z` will be stored. (L is usually a register).
+
+2. **Load y into L** (if not already there):  
+   - Consult **address descriptor** of y to find y' (current location of y).  
+   - Prefer **register** if y is in both memory and register.  
+   - If y is **not already in L**, generate: `MOV y', L`
+
+3. **Perform the operation**:  
+   - Find z' (current location of z) from address descriptor.  
+   - Prefer **register** over memory if z is in both.  
+   - Generate the instruction: `OP z', L`  
+     (Example: `ADD R2, R1` if L = R1)
+
+4. **Update descriptors** for the result **x**:  
+   - Update **address descriptor** of x → now includes L (and remove x from other locations if needed).  
+   - Update **register descriptor** of L → now contains only x.
+
+5. **Free registers if possible** (using next-use info):  
+   - If y and/or z have **no further use** in the block and are not live on exit,  
+     remove them from their register descriptors (register becomes free for reuse).
+
+**Special Case – Copy Statement `x := y`**:
+- Get L = getreg() for x.  
+- If y is not in L, generate `MOV y', L`.  
+- Update descriptors so both x and y point to L (or make x point only to L).
+
+**At the end of the basic block**:
+- For any variable whose value is in a register and needed outside the block (live on exit), generate **store** instruction: `MOV R, M` (store back to memory).
+
+**Example** (Quick to reproduce in exam):  
+Consider statements:  
+`t1 := a + b`  
+`t2 := t1 + c`
+
+Assume registers R0, R1, R2 available.  
+- For t1 := a + b → Load a into R0, b into R1, ADD R1, R0 → t1 in R0  
+- Update descriptors.  
+- For t2 := t1 + c → Reuse R0 (if possible) or use R1, generate ADD, store result.
+
+**Advantages**:
+- Simple and efficient for basic blocks.  
+- Reduces memory accesses using registers.  
+- Uses **next-use** information for smart spilling.
+
+**Disadvantages**:
+- Works only within a basic block (local).  
+- May generate more spills if registers are limited.
+
+**Related Issues in Code Generation Design** (Add 1-2 lines for extra marks):
+- Instruction selection, Register allocation (solved by getreg()), Evaluation order, Memory management, Target language (RISC/CISC/Stack).
+
+**Quick Recall Mnemonic for Whole Algorithm**:  
+**G**etreg → **L**oad y → **O**p z → **U**pdate x → **F**ree unused (GLOUF)
 
 ---
 
@@ -365,16 +443,3 @@ They work together so the code generator knows whether to generate MOV or not.
 
 ---
 
-### 8. Quick Revision Mindmap for Code Generation Phase
-
-```mermaid
-flowchart TD
-    A[Intermediate Code + Symbol Table] --> B[Code Generator]
-    B --> C[Issues: ITMIRE]
-    C --> D[Target Program: ARA]
-    D --> E[Simple Code Generator]
-    E --> F[Register & Address Descriptors]
-    F --> G[getreg Function]
-    G --> H[Code Generation Algorithm]
-    H --> I[Target Machine Code]
-```
