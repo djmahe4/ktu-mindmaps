@@ -357,38 +357,6 @@ d := v + u
 
 ### 7. Practice Questions Mastery
 
-**Q: Explain code motion with example**  
-**Answer:**  
-Code motion (loop-invariant code motion) moves code that computes the **same value** every iteration **outside** the loop.
-
-**Example:**
-```pascal
-for i = 1 to 100
-    x := 25 * a;     // loop invariant
-    y := x + z;
-```
-
-**Optimized:**
-```pascal
-x := 25 * a;         // moved outside
-for i = 1 to 100
-    y := x + z;
-```
-
-**Mnemonic:** “Invariant → Out” (loop invariant code → move out)
-
-**Q: Code-improving transformations on Basic Block**  
-**Structure Preserving:**
-- Common Subexpression Elimination (CSE)
-- Copy Propagation
-- Dead Code Elimination
-- Constant Folding
-- Strength Reduction
-- Interchange independent statements
-
-**Algebraic:**
-- x + 0 = x, x * 1 = x, etc.
-
 **Q: Role of Register & Address Descriptor**  
 - **Register Descriptor**: Tracks **what value** is in **each register** (updated after every instruction)
 - **Address Descriptor**: Tracks **where** the current value of a **variable** is (register or memory)
