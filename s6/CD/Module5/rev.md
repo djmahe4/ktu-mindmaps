@@ -297,13 +297,7 @@ It takes **optimized intermediate code** (usually 3-address code) and produces *
 
 ---
 
-### 5. Simple Code Generator (Most Important for Exams)
-
-#### Tools Used:
-- **Register Descriptor**: What is currently in each register?
-- **Address Descriptor**: Where is the current value of a name (register/memory)?
-
-### Code Generation Algorithm (Simple Code Generator) – 14 Marks
+### 5. Code Generation Algorithm (Simple Code Generator) – 14 Marks
 
 **Introduction**  
 The **simple code generator** converts optimized **three-address intermediate code** (from a basic block) into target machine code (usually assembly). It efficiently uses registers to reduce memory access.  
@@ -432,14 +426,3 @@ d := v + u
 **Total Cost:** Very efficient (reused R0 cleverly)
 
 ---
-
-### 7. Practice Questions Mastery
-
-**Q: Role of Register & Address Descriptor**  
-- **Register Descriptor**: Tracks **what value** is in **each register** (updated after every instruction)
-- **Address Descriptor**: Tracks **where** the current value of a **variable** is (register or memory)
-
-They work together so the code generator knows whether to generate MOV or not.
-
----
-
