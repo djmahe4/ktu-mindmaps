@@ -128,13 +128,13 @@ See the stack/input/action table in pages 5–6. It exactly demonstrates handle 
 - **Mnemonic**: "Operators Decide Order" (like * > + in math).
 
 **Simple Example Table** (from document: `id + id * id`):
-```
-   id   +   *   $
-id  >    >   > 
-+   <    >   < 
-*   <    >   > 
-$   <    <   Accept
-```
+| Symbol | id | + | * | $ |
+|--------|------------|------------|------------|------------|
+| id     | —          | >          | >          | >          |
+| +      | <          | >          | <          | >          |
+| *      | <          | >          | >          | >          |
+| $      | <          | <          | <          | Accept     |
+
 - `id` has highest precedence; `$` lowest.
 
 **Parsing Steps**: Shift when `<` or `=`, reduce when `>`.
