@@ -441,3 +441,75 @@ Heap allocation is used when the LIFO behavior of the stack isn't enough—speci
 | **Recursion** | Not supported  | Supported  | Supported  |
 | **Data Lifetime** | Program execution  | Procedure activation  | Manual/Garbage Collected  |
 | **Typical Use** | Global variables, constants  | Local variables, parameters  | Dynamic arrays, objects  |
+
+## Parsing conflicts
+
+## 1. SLR Parsing Conflicts
+Parsing conflicts occur when the SLR parser is in a state where it cannot decide on a single action based on the current input.
+
+* **Shift-Reduce Conflict:** This occurs when the parser can either **shift** a new token onto the stack or **reduce** a "handle" already on the stack according to a grammar rule. The parser is unsure which path to take.
+* **Reduce-Reduce Conflict:** This is more severe. It happens when the parser has identified a handle on the stack that could be **reduced by two or more different grammar rules**. It essentially doesn't know which production applies.
+
+---
+
+## 2. Synthesized vs. Inherited Attributes
+Attributes are properties attached to grammar symbols.
+
+| Feature | **Synthesized Attributes** | **Inherited Attributes** |
+| :--- | :--- | :--- |
+| **Data Flow** | Flows **bottom-up** from children to parents. | Flows **top-down** or **horizontally** from parent or siblings. |
+| **Evaluation** | Values are computed at a node based on its children. | Values are computed from the parent or sibling nodes in the parse tree. |
+| **Example** | **Simple Desk Calculator:** `L.val = E.val` where the value of `L` is synthesized from the value of its child `E`. | **Type Declaration:** In `int a, b`, the "type" attribute is inherited from the `int` node to the identifiers `a` and `b` . |
+
+
+
+---
+
+## 3. Storage Allocation Strategies
+Compilers use three primary strategies to manage memory during a program's execution .
+
+* **Static Allocation:** Storage for all data objects is laid out at **compile time**. It is efficient but doesn't support recursion because all activations share the same memory bindings.
+* **Stack Allocation:** Runtime storage is organized as a **stack**. **Activation records** (frames) are pushed when a procedure is called and popped when it returns. This is essential for supporting **recursive procedures**.
+* **Heap Allocation:** Used for data objects that may be allocated or deallocated at **any time** during execution. It is necessary for dynamic data structures like linked lists or objects whose size isn't known at compile time.
+
+---
+
+## 4. Three-Address Code (TAC) Representations
+TAC is an intermediate form where each statement has at most three addresses (two operands and one result).
+
+| Representation | **Mechanism** | **Pros/Cons** |
+| :--- | :--- | :--- |
+| **Quadruples** | Uses four fields: `op`, `arg1`, `arg2`, and `result`. | **Pro:** Easy to rearrange for optimization because results are explicit temporary names (e.g., $t_1$). |
+| **Triples** | Uses only three fields: `op`, `arg1`, and `arg2`. Results are referenced by their **position** in the table. | **Con:** Moving an instruction for optimization requires updating all references that point to its position. |
+| **Indirect Triples** | Uses a separate table of **pointers** to a triple table. | **Pro:** Better for optimization than standard triples. To move an instruction, you only need to change the order of the pointers, not the triple table itself . |
+
+---
+
+## 5. Expression Conversion
+Let's convert $$(a+b)*(b+c)*(a+b+c)$$ into intermediate representations.
+
+### **Three-Address Code (TAC)**
+1.  $t_1 = a + b$
+2.  $t_2 = b + c$
+3.  $t_3 = t_1 * t_2$
+4.  $t_4 = t_1 + c$ (Optimized: Using $t_1$ for the $a+b$ part of $a+b+c$)
+5.  $t_5 = t_3 * t_4$
+
+### **Quadruples Implementation** 
+| Line | op | arg1 | arg2 | result |
+| :--- | :--- | :--- | :--- | :--- |
+| (0) | + | a | b | $t_1$ |
+| (1) | + | b | c | $t_2$ |
+| (2) | * | $t_1$ | $t_2$ | $t_3$ |
+| (3) | + | $t_1$ | c | $t_4$ |
+| (4) | * | $t_3$ | $t_4$ | $t_5$ |
+
+### **Triples Implementation** 
+| Index | op | arg1 | arg2 |
+| :--- | :--- | :--- | :--- |
+| (0) | + | a | b |
+| (1) | + | b | c |
+| (2) | * | (0) | (1) |
+| (3) | + | (0) | c |
+| (4) | * | (2) | (3) |
+
