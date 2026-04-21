@@ -311,3 +311,81 @@ Input: **6 * 8 + 5**
 4. 5 → digit.lexval=5 → F.val=5 → T.val=5
 5. E → E + T → E.val = 48 + 5 = 53
 6. L.val = 53
+
+## Intermediate code gen
+
+
+### 1. Why Bother with Intermediate Code?
+Directly translating source code to machine code is like trying to translate ancient Sanskrit directly into modern Emoji—it's messy and inefficient. Intermediate Code (IC) provides:
+* [cite_start]**Retargeting**: You can use the same front-end for different machines by just swapping the back-end[cite: 582].
+* [cite_start]**Optimization**: It's much easier to clean up logic on a machine-independent representation than on raw assembly[cite: 583].
+
+#### [cite_start]Common IC Representations [cite: 584-588]:
+1.  [cite_start]**Syntax Trees**: Condensed version of a parse tree[cite: 595, 598].
+2.  [cite_start]**DAG (Directed Acyclic Graphs)**: Like a syntax tree, but it identifies and "shares" common sub-expressions to save space[cite: 721, 723].
+3.  [cite_start]**Three-Address Code (TAC)**: A sequence of instructions where each has at most three addresses (two operands and one result)[cite: 757, 801].
+
+
+---
+
+### 2. Implementation of Three-Address Code
+[cite_start]When you actually implement TAC in a compiler, you generally use one of three record structures [cite: 842-845]:
+
+| Method | Fields | Key Characteristic |
+| :--- | :--- | :--- |
+| **Quadruples** | `op`, `arg1`, `arg2`, `result` | [cite_start]Uses explicit temporary names (e.g., $t_1, t_2$) in the `result` field[cite: 848]. |
+| **Triples** | `op`, `arg1`, `arg2` | [cite_start]No `result` field; refers to results by their position (index) in the table [cite: 902-904]. |
+| **Indirect Triples** | Table of pointers to triples | A list of pointers to a triple table. [cite_start]Useful for moving code around during optimization[cite: 845]. |
+
+---
+
+### 3. Practical Task: Solving the PYQs
+
+### [2022] Constructing a DAG and TAC
+**Expression**: $a + a * (b + c) + (b + c) * d$
+
+1.  **Identify Common Sub-expressions**: Notice that $(b + c)$ appears twice.
+2.  **Three-Address Code (TAC)**:
+    * $t_1 = b + c$
+    * $t_2 = a * t_1$
+    * $t_3 = a + t_2$
+    * $t_4 = t_1 * d$
+    * $t_5 = t_3 + t_4$
+3.  [cite_start]**DAG Construction**: The DAG will have only one node for $(b + c)$, and both the multiplication nodes for $a * \dots$ and $\dots * d$ will point to that single node[cite: 723].
+
+---
+
+#### [2023] Intermediate Code with Type Conversion
+**Scenario**: `if(a > b) x = a * b else x = a - b` 
+*(Note: $a, x$ are **real**, $b$ is **int**)*
+
+[cite_start]To perform operations between a `real` and an `int`, we must convert the `int` to `real` first[cite: 16].
+
+**TAC with Type Conversion**:
+```text
+100: if a > b goto 103
+101: t1 = intToReal(b)
+102: x = a - t1
+103: goto 106
+104: t2 = intToReal(b)
+105: x = a * t2
+106: ...
+```
+
+---
+
+#### [2024] TAC for a `while` loop
+A `while` loop requires labels to handle the repeated test and the exit jump.
+
+**Example**: `while (i < 10) { i = i + 1; }`
+
+**TAC**:
+```text
+L1: if i < 10 goto L2
+    goto L3
+L2: t1 = i + 1
+    i = t1
+    goto L1
+L3: (exit)
+```
+---
