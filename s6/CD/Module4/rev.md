@@ -317,19 +317,19 @@ Input: **6 * 8 + 5**
 
 ### 1. Why Bother with Intermediate Code?
 Directly translating source code to machine code is like trying to translate ancient Sanskrit directly into modern Emoji—it's messy and inefficient. Intermediate Code (IC) provides:
-* [cite_start]**Retargeting**: You can use the same front-end for different machines by just swapping the back-end[cite: 582].
-* [cite_start]**Optimization**: It's much easier to clean up logic on a machine-independent representation than on raw assembly[cite: 583].
+* **Retargeting**: You can use the same front-end for different machines by just swapping the back-end.
+* **Optimization**: It's much easier to clean up logic on a machine-independent representation than on raw assembly.
 
-#### [cite_start]Common IC Representations [cite: 584-588]:
-1.  [cite_start]**Syntax Trees**: Condensed version of a parse tree[cite: 595, 598].
-2.  [cite_start]**DAG (Directed Acyclic Graphs)**: Like a syntax tree, but it identifies and "shares" common sub-expressions to save space[cite: 721, 723].
-3.  [cite_start]**Three-Address Code (TAC)**: A sequence of instructions where each has at most three addresses (two operands and one result)[cite: 757, 801].
+#### Common IC Representations :
+1.  **Syntax Trees**: Condensed version of a parse tree.
+2.  **DAG (Directed Acyclic Graphs)**: Like a syntax tree, but it identifies and "shares" common sub-expressions to save space.
+3.  **Three-Address Code (TAC)**: A sequence of instructions where each has at most three addresses (two operands and one result).
 
 
 ---
 
 ### 2. Implementation of Three-Address Code
-[cite_start]When you actually implement TAC in a compiler, you generally use one of three record structures [cite: 842-845]:
+When you actually implement TAC in a compiler, you generally use one of three record structures :
 
 | Method            | Fields                                      | Key Characteristic |
 |------------------|----------------------------------------------|--------------------|
@@ -350,7 +350,7 @@ Directly translating source code to machine code is like trying to translate anc
     * $t_3 = a + t_2$
     * $t_4 = t_1 * d$
     * $t_5 = t_3 + t_4$
-3.  [cite_start]**DAG Construction**: The DAG will have only one node for $(b + c)$, and both the multiplication nodes for $a * \dots$ and $\dots * d$ will point to that single node[cite: 723].
+3.  **DAG Construction**: The DAG will have only one node for $(b + c)$, and both the multiplication nodes for $a * \dots$ and $\dots * d$ will point to that single node.
 
 ---
 
@@ -358,7 +358,7 @@ Directly translating source code to machine code is like trying to translate anc
 **Scenario**: `if(a > b) x = a * b else x = a - b` 
 *(Note: $a, x$ are **real**, $b$ is **int**)*
 
-[cite_start]To perform operations between a `real` and an `int`, we must convert the `int` to `real` first[cite: 16].
+To perform operations between a `real` and an `int`, we must convert the `int` to `real` first.
 
 **TAC with Type Conversion**:
 ```text
@@ -388,3 +388,58 @@ L2: t1 = i + 1
 L3: (exit)
 ```
 ---
+## Mem alloc
+
+---
+
+## 1. Static Allocation
+In this strategy, names are bound to storage locations as the program is compiled.
+
+* **Mechanism:** Because bindings don't change at runtime, every time a procedure is activated, its local names are bound to the same physical memory location.
+* **Characteristics:**
+    * **Lifetime:** The lifetime of the data matches the entire execution of the program.
+    * **Persistence:** Values of local names are retained across activations of a procedure.
+* **Limitations:**
+    * **No Recursion:** All activations of a procedure use the same bindings, so recursive calls would overwrite their own data.
+    * **Known Size:** The size of all data objects must be known at compile time.
+    * **No Dynamic Growth:** Data structures cannot be created dynamically.
+
+---
+
+## 2. Stack Allocation
+Stack allocation manages runtime storage as a Last-In, First-Out (LIFO) structure using **Activation Records** (also called frames).
+
+* **Mechanism:** An activation record is pushed onto the stack when a procedure is called and popped when it returns. A register (usually called `top`) marks the top of the stack and is incremented or decremented by the size of the record.
+* **Activation Record Fields:**
+    * **Returned Value:** To pass data back to the caller.
+    * **Actual Parameters:** Supplied by the calling procedure.
+    * **Control/Access Links:** To track the caller and refer to non-local data.
+    * **Saved Machine Status:** Holds the program counter and register values.
+    * **Local Data & Temporaries:** Storage for variables local to that specific execution.
+
+
+
+* **Pros:** Supports **recursion** because each call gets its own fresh activation record.
+* **Cons:** Values of locals are deleted as soon as the activation ends (the record is popped).
+
+---
+
+## 3. Heap Allocation
+Heap allocation is used when the LIFO behavior of the stack isn't enough—specifically when data must outlive the procedure that created it.
+
+* **Mechanism:** It parcels out pieces of contiguous storage as needed. These pieces can be deallocated in any order, which eventually leaves "holes" of free space in the heap.
+* **Characteristics:**
+    * **Flexibility:** Essential for dynamic data structures (like linked lists or trees) and objects of unknown size at compile time.
+    * **Management:** Requires a heap manager to keep track of used and free space.
+* **Typical Layout:** By convention, the **Stack grows down** and the **Heap grows up** into the free memory space between them.
+
+---
+
+## Comparison Summary
+
+| Feature | Static Allocation | Stack Allocation | Heap Allocation |
+| :--- | :--- | :--- | :--- |
+| **Binding Time** | Compile time  | Runtime (on call)  | Runtime (as needed)  |
+| **Recursion** | Not supported  | Supported  | Supported  |
+| **Data Lifetime** | Program execution  | Procedure activation  | Manual/Garbage Collected  |
+| **Typical Use** | Global variables, constants  | Local variables, parameters  | Dynamic arrays, objects  |
