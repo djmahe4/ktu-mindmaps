@@ -331,12 +331,11 @@ Directly translating source code to machine code is like trying to translate anc
 ### 2. Implementation of Three-Address Code
 [cite_start]When you actually implement TAC in a compiler, you generally use one of three record structures [cite: 842-845]:
 
-| Method | Fields | Key Characteristic |
-| :--- | :--- | :--- |
-| **Quadruples** | `op`, `arg1`, `arg2`, `result` | [cite_start]Uses explicit temporary names (e.g., $t_1, t_2$) in the `result` field[cite: 848]. |
-| **Triples** | `op`, `arg1`, `arg2` | [cite_start]No `result` field; refers to results by their position (index) in the table [cite: 902-904]. |
-| **Indirect Triples** | Table of pointers to triples | A list of pointers to a triple table. [cite_start]Useful for moving code around during optimization[cite: 845]. |
-
+| Method            | Fields                                      | Key Characteristic |
+|------------------|----------------------------------------------|--------------------|
+| Quadruples        | op, arg1, arg2, result                      | Uses explicit temporary variables (e.g., t1, t2) to store intermediate results. |
+| Triples           | op, arg1, arg2                              | No explicit result field; results are referred to by their position (index) in the triple table. |
+| Indirect Triples  | op, arg1, arg2 (args use pointer indices)   | A separate pointer table holds indices to triples; operands refer to these indices. The pointer index is obtained from this table, enabling easy reordering without changing the triple table. |
 ---
 
 ### 3. Practical Task: Solving the PYQs
