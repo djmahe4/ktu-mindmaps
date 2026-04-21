@@ -390,9 +390,7 @@ L3: (exit)
 ---
 ## Mem alloc
 
----
-
-## 1. Static Allocation
+### 1. Static Allocation
 In this strategy, names are bound to storage locations as the program is compiled.
 
 * **Mechanism:** Because bindings don't change at runtime, every time a procedure is activated, its local names are bound to the same physical memory location.
@@ -406,7 +404,7 @@ In this strategy, names are bound to storage locations as the program is compile
 
 ---
 
-## 2. Stack Allocation
+### 2. Stack Allocation
 Stack allocation manages runtime storage as a Last-In, First-Out (LIFO) structure using **Activation Records** (also called frames).
 
 * **Mechanism:** An activation record is pushed onto the stack when a procedure is called and popped when it returns. A register (usually called `top`) marks the top of the stack and is incremented or decremented by the size of the record.
@@ -424,7 +422,7 @@ Stack allocation manages runtime storage as a Last-In, First-Out (LIFO) structur
 
 ---
 
-## 3. Heap Allocation
+### 3. Heap Allocation
 Heap allocation is used when the LIFO behavior of the stack isn't enough—specifically when data must outlive the procedure that created it.
 
 * **Mechanism:** It parcels out pieces of contiguous storage as needed. These pieces can be deallocated in any order, which eventually leaves "holes" of free space in the heap.
@@ -435,7 +433,7 @@ Heap allocation is used when the LIFO behavior of the stack isn't enough—speci
 
 ---
 
-## Comparison Summary
+### Comparison Summary
 
 | Feature | Static Allocation | Stack Allocation | Heap Allocation |
 | :--- | :--- | :--- | :--- |
