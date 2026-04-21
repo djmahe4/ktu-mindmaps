@@ -150,3 +150,164 @@ flowchart TD
 - **S** → Synthesized, Sons, Simple (S-attributed)
 - **I** → Inherited, In from above
 - **L** → Left-to-right (L-attributed)
+
+---
+
+## Syntax Directed Translation & Intermediate Code Gen
+
+### 4. Simple Desk Calculator – Classic S-attributed SDD (Memorize this!)
+
+**Grammar + Semantic Rules:**
+
+| Production              | Semantic Rule                     |
+|------------------------|-----------------------------------|
+| L → E n                | L.val = E.val                     |
+| E → E₁ + T             | E.val = E₁.val + T.val            |
+| E → T                  | E.val = T.val                     |
+| T → T₁ * F             | T.val = T₁.val × F.val            |
+| T → F                  | T.val = F.val                     |
+| F → ( E )              | F.val = E.val                     |
+| F → digit              | F.val = digit.lexval              |
+
+**All attributes are synthesized → Pure S-attributed SDD**
+
+**Annotated Parse Tree for 3 * 5 + 4 n** (Bottom-up evaluation)
+
+```mermaid
+flowchart TD
+    L[L.val=19] --> E[E.val=19]
+    E --> E1[E.val=15]
+    E1 --> T1[T.val=15]
+    T1 --> T11[T.val=3]
+    T11 --> F1[F.val=3]
+    F1 --> d1[digit.lexval=3]
+    T1 --> mul[*]
+    T1 --> F2[F.val=5]
+    F2 --> d2[digit.lexval=5]
+    E --> plus[+]
+    E --> T2[T.val=4]
+    T2 --> F3[F.val=4]
+    F3 --> d3[digit.lexval=4]
+    E --> n[n]
+```
+
+**Step-by-step bottom-up computation:**
+1. digit 3 → F.val=3 → T.val=3
+2. digit 5 → F.val=5
+3. T → T * F → T.val = 3 * 5 = 15
+4. digit 4 → F.val=4 → T.val=4
+5. E → E + T → E.val = 15 + 4 = 19
+6. L.val = 19
+
+---
+
+### 5. Inherited Attributes Example (L-attributed style)
+
+**Grammar for multiplication chain (left-recursive removed):**
+
+| Production       | Semantic Rules                          |
+|------------------|-----------------------------------------|
+| T → F T'         | T'.inh = F.val<br>T.val = T'.syn       |
+| T' → * F T₁'     | T₁'.inh = T'.inh × F.val<br>T'.syn = T₁'.syn |
+| T' → ε           | T'.syn = T'.inh                         |
+| F → digit        | F.val = digit.lexval                    |
+
+For input **3 * 5**:
+
+- F.val = 3
+- T'.inh = 3
+- Then * F (5) → next T'.inh = 3 × 5 = 15
+- Finally T'.syn = 15 → T.val = 15
+
+**Key Point:** Inherited attributes flow **down**, synthesized flow **up**.
+
+---
+
+### 6. Dependency Graph & Evaluation Order
+
+- **Dependency Graph**: Shows which attribute depends on which.
+- Edge `c → b` means `b` depends on `c` → evaluate `c` **before** `b`.
+- Use **Topological Sort** for evaluation order.
+- If cycle → impossible to evaluate.
+
+**Mnemonic:** Dependency Graph = "Who needs whom first?" (prerequisites)
+
+---
+
+### 7. Run-Time Environments (Quick Points)
+
+- **Activation**: One execution of a procedure.
+- **Activation Tree**: Shows nested/recursive calls (root = main).
+- **Control Stack**: Tracks live activations (push on call, pop on return).
+- **Storage Organization**:
+  - **Code** (static)
+  - **Static Data** (globals, known at compile time)
+  - **Stack** (activation records, grows down)
+  - **Heap** (dynamic, grows up)
+
+**Activation Record (Frame) Layout (Top to Bottom):**
+1. Returned value
+2. Actual parameters
+3. Optional control link
+4. Optional access link
+5. Saved machine status
+6. Local data
+7. Temporaries
+
+**Allocation Strategies:**
+- **Static**: Fixed at compile time (no recursion)
+- **Stack**: LIFO, perfect for activations
+- **Heap**: For dynamic data, retained across activations
+
+---
+
+### 8. Intermediate Code Generation
+
+**Why Intermediate Code?**
+- Machine-independent optimization
+- Easy retargeting (change only back-end)
+
+**Forms of Intermediate Code:**
+
+1. **Graphical**:
+   - **Syntax Tree** (condensed parse tree, operators as internal nodes)
+   - **DAG** (more compact, shares common subexpressions)
+
+2. **Linear**:
+   - **Postfix** (operators after operands)
+   - **Three-Address Code** (most popular)
+
+**Three-Address Code Example:**
+``` 
+t1 := b * -c
+t2 := t1
+t3 := -c
+t4 := b * t3
+t5 := t2 + t4
+a  := t5
+```
+
+**Representations of Three-Address Code:**
+
+| Representation     | Fields                          | Advantage                     |
+|--------------------|---------------------------------|-------------------------------|
+| **Quadruples**     | op, arg1, arg2, result          | Easy to rearrange             |
+| **Triples**        | op, arg1, arg2 (result = index) | Saves space (no result field) |
+| **Indirect Triples**| List of pointers to triples     | Easier to reorder             |
+
+---
+
+### 9. Practice Question Solved: Annotated Parse Tree for 6 * 8 + 5
+
+**Grammar (same as desk calculator, assume + and *):**
+
+Input: **6 * 8 + 5**
+
+**Step-by-step Annotated Parse Tree (S-attributed):**
+
+1. 6 → digit.lexval=6 → F.val=6 → T.val=6
+2. 8 → digit.lexval=8 → F.val=8
+3. T → T * F → T.val = 6 * 8 = 48
+4. 5 → digit.lexval=5 → F.val=5 → T.val=5
+5. E → E + T → E.val = 48 + 5 = 53
+6. L.val = 53
