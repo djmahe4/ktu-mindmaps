@@ -190,3 +190,104 @@ LR Parsing
 - **Precedence Relations**: `<` = "less" (yield to next), `>` = "greater" (reduce now).
 - **To Memorize Steps**: Repeat the `id * id` example 3 times while drawing the stack table.
 - **Conflict Types**: "SR = Shift or Reduce dilemma; RR = Which Reduce?"
+
+## LR Parsing
+
+## 1. Understanding Bottom-Up Parsing
+Bottom-up parsing constructs a parse tree starting from the leaves (the input string) and working up toward the root (the start symbol). This process is essentially a **rightmost derivation in reverse**.
+
+* **Reduction:** The process of replacing a substring matching a production body with the head of that production.
+* **Handle:** A substring that matches a production body and whose reduction represents one step along the reverse of a rightmost derivation.
+* **Handle Pruning:** The process of obtaining the rightmost derivation in reverse by identifying and reducing handles.
+
+---
+
+## 2. Shift-Reduce Parsing
+This is a common form of bottom-up parsing using a stack and an input buffer.
+
+
+### Primary Actions:
+1.  **Shift:** Move the next input symbol onto the top of the stack.
+2.  **Reduce:** Replace the handle at the top of the stack with the appropriate non-terminal.
+3.  **Accept:** Announce successful parsing completion.
+4.  **Error:** Discover a syntax error and call a recovery routine.
+
+---
+
+## 3. Constructing LR(0) Collections
+LR(0) items and automata form the basis for making shift-reduce decisions.
+
+### The Closure Algorithm
+To compute the **CLOSURE** of a set of items **I**:
+1.  Add every item in **I** to **CLOSURE(I)**.
+2.  If $A \rightarrow \alpha \cdot B\beta$ is in **CLOSURE(I)** and $B \rightarrow \gamma$ is a production, add $B \rightarrow \cdot \gamma$ to **CLOSURE(I)** if it is not already there.
+3.  Repeat until no more items can be added.
+
+### The GOTO Function
+**GOTO(I, X)** defines the transition from state **I** on grammar symbol **X**. it is the closure of the set of all items $A \rightarrow \alpha X \cdot \beta$ such that $A \rightarrow \alpha \cdot X\beta$ is in **I**.
+
+---
+
+## 4. Identifying Parsing Conflicts
+Conflicts occur when the parser cannot decide between actions based on the current stack and lookahead.
+
+* **Shift-Reduce Conflict:** The parser cannot decide whether to shift the next symbol or reduce the current stack content.
+    * *Example:* In a grammar where $A \rightarrow sa$ and $B \rightarrow sab$, if the stack is `$sa` and input is `b`, the parser doesn't know whether to reduce $sa$ to $A$ or shift `b`.
+* **Reduce-Reduce Conflict:** The parser cannot decide which of several productions to use for reduction.
+
+---
+
+
+## 5. Comparative Analysis of LR Variants
+
+The primary difference lies in how they handle **reductions** in the parsing table.
+
+| Parser Type | Item Set Used | Reduction Logic | Complexity |
+| :--- | :--- | :--- | :--- |
+| **SLR** | $LR(0)$ Items  | Reduces $A \rightarrow \alpha$ only for terminals in $FOLLOW(A)$. | Simple and small tables. |
+| **LALR** | $LR(1)$ Items  | Merges $CLR$ states that have identical core items but different lookaheads. | Moderate size; used by tools like Yacc. |
+| **CLR** | $LR(1)$ Items  | Reduces $A \rightarrow \alpha$ only for the specific lookahead attached to the item $[A \rightarrow \alpha \cdot, a]$. | Most powerful but generates very large tables. |
+
+
+
+---
+
+## Subtle Example "Scripts" (Grammar Logic)
+
+To illustrate the differences, let's use a simplified version of the grammar found in your notes: $S \rightarrow CC, C \rightarrow cC | d$.
+
+### 1. SLR (Simple LR)
+The SLR parser builds states using $LR(0)$ items. It does not store lookaheads in the states. Instead, it checks the $FOLLOW$ set during table construction.
+
+**Conceptual Logic:**
+* **State $I_x$:** Contains $C \rightarrow d \cdot$.
+* **Action:** If the next input symbol is in $FOLLOW(C)$, then **Reduce**.
+* **Weakness:** If a symbol is in $FOLLOW(C)$ but cannot actually follow $C$ in this specific context, SLR might trigger an invalid reduction.
+
+### 2. CLR (Canonical LR)
+CLR tracks the specific terminal that **must** follow a production in each state. Items are represented as $[A \rightarrow \alpha \cdot \beta, a]$, where $a$ is the lookahead.
+
+**Conceptual Logic:**
+* **State $I_y$:** Contains $[C \rightarrow d \cdot, c/d]$.
+* **State $I_z$:** Contains $[C \rightarrow d \cdot, \$]$.
+* **Action:** Even though the production is the same ($C \rightarrow d$), CLR keeps these states separate because their lookaheads differ. This prevents premature reductions but explodes the number of states.
+
+### 3. LALR (Look-Ahead LR)
+LALR is the "middle ground." It takes the states from CLR and merges those that have the same "core" (the productions).
+
+**Conceptual Logic:**
+* **Action:** Merge State $I_y$ and State $I_z$ into a single state $I_{yz}$.
+* **Merged Item:** $[C \rightarrow d \cdot, c/d/\$]$.
+* **Result:** The table size becomes as small as SLR, but the parser remains more powerful because it only merges states with the same core items.
+
+
+
+---
+
+## The Hierarchy of Power
+In terms of the class of grammars they can recognize:
+$$SLR < LALR < CLR$$.
+
+While **CLR** is the most powerful, **LALR** is the industry standard for parser generators like **Yacc** or **Bison** because it provides a significant boost in logic over SLR without the massive memory overhead of CLR.
+
+Would you like to see the specific set of items where LALR might encounter a "reduce-reduce" conflict that CLR would avoid?
