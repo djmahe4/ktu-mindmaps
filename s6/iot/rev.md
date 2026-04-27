@@ -903,31 +903,31 @@ Data is the lifeblood of IoT, flowing from devices, through networks, to intelli
 
 ```mermaid
 graph TD
-    subgraph Data Generation & Collection
-        D1[IoT Devices & Wearables] --> D2[Sensors]
-        D1 --> D3[GPS Modules]
+    subgraph "Data Generation & Collection"
+        D1["IoT Devices & Wearables"] --> D2["Sensors"]
+        D1 --> D3["GPS Modules"]
         D1 --> D4["Embedded Systems (e.g., Microcontrollers)"]
     end
 
-    subgraph Data Transmission
-        T1["Local Networks (Bluetooth, Zigbee, Wi-Fi)"] --> T2[Gateways/Smartphones]
+    subgraph "Data Transmission"
+        T1["Local Networks (Bluetooth, Zigbee, Wi-Fi)"] --> T2["Gateways / Smartphones"]
         T2 --> T3["Internet Connectivity (Cellular, DSRC)"]
     end
 
-    subgraph Data Processing & Intelligence
-        P1["Cloud Computing (Data Storage)"] --> P2[Big Data Analytics & Machine Learning]
+    subgraph "Data Processing & Intelligence"
+        P1["Cloud Computing (Data Storage)"] --> P2["Big Data Analytics & Machine Learning"]
         P2 --> P3["IoT Platforms (Device Management, APIs)"]
         P3 --> P4["Application Layer (User Interfaces, Alerts)"]
     end
 
-    subgraph Action & Feedback
-        A1[Actuators] <-- P4
-        A1 <-- P3
+    subgraph "Action & Feedback"
+        A1["Actuators"]
+        P4 --> A1
+        P3 --> A1
     end
 
     D1 --> T1
     T3 --> P1
-    P4 --> A1
     D2 --> A1
 ```
 
