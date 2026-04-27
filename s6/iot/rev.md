@@ -906,18 +906,18 @@ graph TD
     subgraph Data Generation & Collection
         D1[IoT Devices & Wearables] --> D2[Sensors]
         D1 --> D3[GPS Modules]
-        D1 --> D4[Embedded Systems (e.g., Microcontrollers)]
+        D1 --> D4["Embedded Systems (e.g., Microcontrollers)"]
     end
 
     subgraph Data Transmission
-        T1[Local Networks (Bluetooth, Zigbee, Wi-Fi)] --> T2[Gateways/Smartphones]
-        T2 --> T3[Internet Connectivity (Cellular, DSRC)]
+        T1["Local Networks (Bluetooth, Zigbee, Wi-Fi)"] --> T2[Gateways/Smartphones]
+        T2 --> T3["Internet Connectivity (Cellular, DSRC)"]
     end
 
     subgraph Data Processing & Intelligence
-        P1[Cloud Computing (Data Storage)] --> P2[Big Data Analytics & Machine Learning]
-        P2 --> P3[IoT Platforms (Device Management, APIs)]
-        P3 --> P4[Application Layer (User Interfaces, Alerts)]
+        P1["Cloud Computing (Data Storage)"] --> P2[Big Data Analytics & Machine Learning]
+        P2 --> P3["IoT Platforms (Device Management, APIs)"]
+        P3 --> P4["Application Layer (User Interfaces, Alerts)"]
     end
 
     subgraph Action & Feedback
