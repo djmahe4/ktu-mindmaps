@@ -6,7 +6,7 @@ Here's a summary of the important points from the 12 questions, presented concis
 
 ### Summary of Internet of Things (IoT) Concepts
 
-**I. Internet of Things (IoT) Core Concepts**
+#### **I. Internet of Things (IoT) Core Concepts**
 
 *   **Definition:** IoT is a "dynamic global n/w infrastructure" for "physical and virtual things" with "identities" to "communicate data" associated with "users and environments". It involves "collecting, processing, acting on, and storing data" in the "cloud".
 *   **Characteristics:**
@@ -32,7 +32,7 @@ graph TD
     H --> L["Exclusive Pair"];
 ```
 
-**II. IoT Architecture and Frameworks**
+#### **II. IoT Architecture and Frameworks**
 
 *   **Conceptual Framework ("Cisco 7-Level Reference Model"):** A hierarchical model for IoT systems.
     *   "Level 1: Physical Devices and Controllers" ("Sensors, machines, intelligent edge nodes").
@@ -68,7 +68,7 @@ graph TD
     AL --- CM[("IoT Communication Models")];
 ```
 
-**III. M2M Communication & its Relation to IoT**
+#### **III. M2M Communication & its Relation to IoT**
 
 *   **M2M Definition:** "Machine-to-machine communication" is "direct communication between devices" ("wired or wireless") without "human interfacing".
 *   **M2M Architecture Components:** "M2M Devices" -> "M2M Area Network" -> "M2M Gateway" -> "M2M Communication Network" -> "M2M Server" -> "M2M Application".
@@ -101,7 +101,7 @@ graph TD
     MD_IoT[("IoT Definition")] --- M2M_IoT_Diff;
 ```
 
-**IV. IoT Enabling Technologies**
+#### **IV. IoT Enabling Technologies**
 
 *   **Wireless Sensor Networks (WSN):** "Distributed devices with sensors" that "monitor environmental and physical conditions". Consists of "end nodes, routers, and a coordinator" ("gateway to internet").
     *   **Support for IoT:** "Data acquisition at the edge", "distributed monitoring", "coordinator role", "wireless communication" ("IEEE 802.15.4"), "cost-effective and scalable".
@@ -136,7 +136,7 @@ graph TD
     IDB --> OA;
 ```
 
-**V. IoT Applications & Use Cases**
+#### **V. IoT Applications & Use Cases**
 
 *   **Smart Cities:** "Smart Parking", "Smart Lighting", "Smart Roads", "Structural Health Monitoring", "Surveillance", "Emergency Response", "Weather/Air/Noise Monitoring", "Forest Fire/River Flood Detection".
 *   **Home Automation:** "Smart Lighting", "Smart Appliances", "Intrusion Detection", "Smoke/Gas Detectors".
@@ -178,7 +178,7 @@ graph TD
     CIoT --> IoTA;
 ```
 
-**VI. IoT Data Management, Analytics, and Challenges**
+#### **VI. IoT Data Management, Analytics, and Challenges**
 
 *   **IoT Data Sources:** "Sensor data", "machine sensor data", "health and fitness data", "location and tracking data", "retail inventory monitoring data", "actuator feedback", "communication modules", "embedded systems", "smart grid data", "vehicle operations data", "user interactions".
 *   **Data Analytics Approaches:**
@@ -334,14 +334,14 @@ graph TD
 
 ### Key Points Summary:
 
-**I. IoT Communication Fundamentals**
+#### **I. IoT Communication Fundamentals**
 *   **Wireless Communication Benefits:**
     *   "Mobility & Flexibility": Essential for diverse IoT device placements.
     *   "Scalability & Ease of Deployment": Simplifies network expansion without extensive cabling.
     *   "Reduced Cost & Accessibility": Lowers installation/maintenance, enables broad reach.
     *   "Interoperability & Real-time Data Access": Standardized protocols allow seamless data exchange and immediate responses.
 
-**II. Wireless Technologies for IoT**
+#### **II. Wireless Technologies for IoT**
 
 **A. Short-Range Protocols**
 *   **Bluetooth:**
@@ -373,7 +373,7 @@ graph TD
     *   "Global Established Infrastructure" and "Independent Connectivity".
     *   Applications: "Remote Asset Monitoring, Logistics", "Smart City sensors".
 
-**III. Wired/On-board Communication Protocols**
+#### **III. Wired/On-board Communication Protocols**
 
 *   **UART/USART (Universal Asynchronous/Synchronous Receiver/Transmitter):**
     *   "Asynchronous (UART)" with "Start/Stop Bits" and "Baud Rate Dependent" synchronization.
