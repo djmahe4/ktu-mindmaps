@@ -335,11 +335,12 @@ graph TD
 ### Key Points Summary:
 
 #### **I. IoT Communication Fundamentals**
-*   **Wireless Communication Benefits:**
+*   **[Wireless Communication Benefits:](https://github.com/djmahe4/ktu-mindmaps/blob/main/s6/iot/m2.md#1-what-is-wireless-communication-technology-explain-its-benefits-in-iot)**
     *   "Mobility & Flexibility": Essential for diverse IoT device placements.
     *   "Scalability & Ease of Deployment": Simplifies network expansion without extensive cabling.
-    *   "Reduced Cost & Accessibility": Lowers installation/maintenance, enables broad reach.
-    *   "Interoperability & Real-time Data Access": Standardized protocols allow seamless data exchange and immediate responses.
+    *   "Reduced Cost , Accessibility & Reach": Lowers installation/maintenance, enables broad reach.
+    *   "Interoperability & Real-time Data Access and control": Standardized protocols allow seamless data exchange and immediate responses.
+    *   "Support for Diverse Apps": Supports various use cases
 
 #### **II. Wireless Technologies for IoT**
 
