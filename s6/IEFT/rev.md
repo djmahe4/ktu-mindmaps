@@ -24,7 +24,7 @@ Economics is fundamentally about how societies manage their **scarce resources**
 
 These are the fundamental questions every society must answer due to scarcity:
 
-*   **W**hat to produce? (Which goods and services?)
+*   **W**hat to produce and in what quantity? (Which goods and services?)
 *   **H**ow to produce? (Which methods and resources?)
 *   **F**or whom to produce? (Who gets the goods and services?)
 
