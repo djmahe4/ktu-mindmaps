@@ -288,7 +288,7 @@ LALR is the "middle ground." It takes the states from CLR and merges those that 
 | Base Item Type          | LR(0) items                  | LR(1) items                       | Merged LR(1) items                |
 | Lookahead Handling      | Uses FOLLOW sets globally    | Uses explicit lookahead per item  | Uses CLR lookaheads after merging |
 | State Representation    | No lookahead stored          | Lookahead stored in every item    | Lookahead merged from CLR states  |
-| Example Item            | (C \rightarrow d.)           | ([C \rightarrow d., c/d])         | ([C \rightarrow d., c/d/$])       |
+| Example Item | `C → d .` | `[C → d ., c/d]` | `[C → d ., c/d/$]` |
 | Reduction Decision      | Based on FOLLOW(C)           | Based on exact lookahead          | Based on merged lookahead         |
 | Parsing Power           | Weakest                      | Strongest                         | Between SLR and CLR               |
 | Number of States        | Smallest                     | Largest                           | Moderate / near SLR               |
