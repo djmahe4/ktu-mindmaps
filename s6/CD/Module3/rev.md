@@ -280,6 +280,33 @@ LALR is the "middle ground." It takes the states from CLR and merges those that 
 * **Merged Item:** $[C \rightarrow d \cdot, c/d/\$]$.
 * **Result:** The table size becomes as small as SLR, but the parser remains more powerful because it only merges states with the same core items.
 
+## FUll comp
+
+| Feature                 | SLR (Simple LR)              | CLR (Canonical LR)                | LALR (Look-Ahead LR)              |
+| ----------------------- | ---------------------------- | --------------------------------- | --------------------------------- |
+| Full Form               | Simple LR Parser             | Canonical LR Parser               | Look-Ahead LR Parser              |
+| Base Item Type          | LR(0) items                  | LR(1) items                       | Merged LR(1) items                |
+| Lookahead Handling      | Uses FOLLOW sets globally    | Uses explicit lookahead per item  | Uses CLR lookaheads after merging |
+| State Representation    | No lookahead stored          | Lookahead stored in every item    | Lookahead merged from CLR states  |
+| Example Item            | (C \rightarrow d.)           | ([C \rightarrow d., c/d])         | ([C \rightarrow d., c/d/$])       |
+| Reduction Decision      | Based on FOLLOW(C)           | Based on exact lookahead          | Based on merged lookahead         |
+| Parsing Power           | Weakest                      | Strongest                         | Between SLR and CLR               |
+| Number of States        | Smallest                     | Largest                           | Moderate / near SLR               |
+| Table Size              | Small                        | Very Large                        | Compact                           |
+| Memory Usage            | Low                          | Very High                         | Moderate                          |
+| Construction Complexity | Simple                       | Complex                           | Moderate                          |
+| Chances of Conflicts    | High                         | Very Low                          | Lower than SLR                    |
+| Shift-Reduce Conflicts  | More likely                  | Rare                              | Less likely                       |
+| Reduce-Reduce Conflicts | More likely                  | Rare                              | Possible after merging            |
+| Error Detection         | Weak                         | Best                              | Better than SLR                   |
+| Accuracy of Reduction   | Approximate using FOLLOW set | Exact context-sensitive reduction | Nearly exact                      |
+| State Merging           | No merging needed            | No merging                        | Merges same LR(0) cores           |
+| Practical Efficiency    | Fast but less powerful       | Accurate but expensive            | Best practical balance            |
+| Compiler Usage          | Rarely used                  | Rarely used directly              | Widely used                       |
+| Real-world Tools        | Mostly academic              | Research/teaching                 | YACC, GNU Bison                   |
+| Main Weakness           | Invalid reductions possible  | State explosion                   | Merging may introduce conflicts   |
+| Main Strength           | Simplicity                   | Maximum parsing power             | Compact + powerful                |
+
 
 
 ---
