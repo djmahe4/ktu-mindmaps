@@ -1,3 +1,121 @@
+# FLAT
+
+**FLAT – Full Formula Sheet / One-Page Revision**  
+**Master Cheat Sheet for Quick Revision & MCQs**
+
+### 1. Chomsky Hierarchy (Most Important)
+
+```mermaid
+flowchart LR
+    A[Type-3 Regular] --> B[Type-2 CFL]
+    B --> C[Type-1 CSL]
+    C --> D[Type-0 RE]
+    style A fill:#bbf
+```
+
+| Type | Language Class     | Grammar              | Machine                  | Memory              |
+|------|--------------------|----------------------|--------------------------|---------------------|
+| 3    | Regular            | Regular              | FA (DFA/NFA)             | Finite States       |
+| 2    | Context Free       | CFG                  | PDA (DPDA subset)        | 1 Stack             |
+| 1    | Context Sensitive  | CSG                  | LBA                      | Linear Tape         |
+| 0    | Recursively Enumerable | Unrestricted     | Turing Machine           | Unlimited Tape      |
+
+**Mnemonic**: **Regularly Cool Freshers Love Tasty Mangoes** (R-C-C-R)
+
+---
+
+### 2. Closure Properties (Ultra High Weightage)
+
+| Operation          | Regular | CFL     | CSL   | RE      | Recursive |
+|--------------------|---------|---------|-------|---------|-----------|
+| Union              | Yes     | Yes     | Yes   | Yes     | Yes       |
+| Intersection       | Yes     | **No**  | Yes   | Yes     | Yes       |
+| Complement         | Yes     | **No**  | Yes   | **No**  | Yes       |
+| Concatenation      | Yes     | Yes     | Yes   | Yes     | Yes       |
+| Kleene Star        | Yes     | Yes     | Yes   | Yes     | Yes       |
+
+**CFL Mnemonic**: Loves **UCS** (Union, Concat, Star), Hates **IC** (Intersection, Complement)
+
+---
+
+### 3. Language Classification Table
+
+| Language Example                  | Regular | CFL     | CSL   | RE    | Key Reason                     |
+|-----------------------------------|---------|---------|-------|-------|--------------------------------|
+| Last k symbols / Mod-k            | Yes     | -       | -     | -     | Finite memory                  |
+| aⁿbⁿ                              | No      | **Yes** | Yes   | Yes   | Stack matching                 |
+| aⁿbⁿcⁿ                            | No      | No      | **Yes**| Yes   | Linear bounded                 |
+| ww (copy)                         | No      | No      | **Yes**| Yes   | Needs comparison               |
+| wwᴿ (palindrome)                  | No      | **Yes** | Yes   | Yes   | Not DCFL                       |
+| Finite language                   | **Yes** | Yes     | Yes   | Yes   | Always Regular                 |
+
+---
+
+### 4. Machine Power & States
+
+- **NFA → DFA**: Up to **2ⁿ** states (exponential)
+- **Minimal DFA**:
+  - Mod-k → **k states**
+  - kᵗʰ symbol from right → **2ᵏ states**
+  - Even 0s & Even 1s → **4 states**
+- **DPDA** accepts only **DCFL** (proper subset of CFL)
+- **2-Stack PDA** ≡ **TM**
+
+**States Mnemonic**: Last **k** from right = **2ᵏ** (Power of 2)
+
+---
+
+### 5. Pumping Lemmas (Quick Recall)
+
+- **Regular**: `s = xyz`, `|xy| ≤ p`, `|y| ≥ 1` → `xyⁱz`
+- **CFL**: `s = uvxyz`, `|vxy| ≤ p`, `|vy| ≥ 1` → `uvⁱxyⁱz`
+
+---
+
+### 6. Undecidability (Red Flag Topics)
+
+**Undecidable**:
+- Halting Problem
+- TM Equivalence
+- CFG Ambiguity
+- Post Correspondence Problem (PCP)
+
+**Decidable**:
+- Regular & CFL membership (mostly)
+- CSL membership (LBA)
+
+**Mnemonic**: **"HE is Undecidable"** → Halting, Equivalence
+
+---
+
+### 7. Normal Forms & Grammar
+
+- **CNF** (Chomsky): `A → BC | a`
+- **GNF** (Greibach): `A → aα`
+- Linear Grammar: Generates subset of CFL
+
+---
+
+### 8. Quick Decision Flow (Exam Strategy)
+
+1. **Is language finite?** → Regular
+2. **Mod k or last k symbols?** → Regular
+3. **Two equal counts (aⁿbⁿ)?** → CFL (may be DCFL)
+4. **Three equal counts or ww?** → CSL
+5. **Needs unlimited memory?** → TM / RE
+6. **Always halts?** → Recursive
+
+---
+
+**One-Line Golden Rules**
+
+- All finite languages = Regular
+- CFLs not closed under Intersection & Complement
+- Palindromes = CFL but **not DCFL**
+- TM = Most powerful (can simulate everything)
+- Recursive ⊂ RE (proper)
+
+
 ## **FLAT (Formal Languages and Automata Theory) – Chapter 1**  
 **Finite Automata and Regular Sets**  
 **Master Notes for MCQs** (Reverse-engineered from Kerala Notes sample questions)
@@ -533,3 +651,105 @@ flowchart TD
 2. Is Halting Problem decidable? → **No**
 3. Which is more powerful: PDA or LBA? → **LBA**
 4. Are all Recursive languages RE? → **Yes**
+
+
+**FLAT Module 4: Full Revision + Advanced MCQ Techniques + Practice**  
+**Complete FLAT Summary for Acing Exams**
+
+### 1. Ultimate FLAT Hierarchy Mindmap
+
+```mermaid
+flowchart TD
+    A[Chomsky Hierarchy] --> B[Type 3: Regular<br>Finite Automata DFA/NFA]
+    A --> C[Type 2: Context Free<br>PDA / DPDA]
+    A --> D[Type 1: Context Sensitive<br>Linear Bounded Automata LBA]
+    A --> E[Type 0: Recursively Enumerable<br>Turing Machine TM]
+    E --> F[Recursive Decidable<br>Always Halts]
+    subgraph Memory
+    B ---|"Finite States"| B
+    C ---|"Stack"| C
+    D ---|"Linear Tape"| D
+    E ---|"Unlimited Tape"| E
+    end
+```
+
+**Power Order Mnemonic**: **Regular < CFL < CSL < RE** (Type 3 → 0)
+
+---
+
+### 2. Quick Comparison Table (Memorize This!)
+
+| Feature                  | Regular (FA)     | CFL (PDA)           | CSL (LBA)       | RE (TM)          |
+|--------------------------|------------------|---------------------|-----------------|------------------|
+| Memory                   | Finite states    | 1 Stack             | Linear tape     | Unlimited tape   |
+| {a^n b^n}                | No               | Yes (DCFL)          | Yes             | Yes              |
+| {a^n b^n c^n}            | No               | No                  | Yes             | Yes              |
+| {ww}                     | No               | No                  | Yes             | Yes              |
+| {ww^R}                   | No               | Yes (not DCFL)      | Yes             | Yes              |
+| Intersection             | Closed           | Not closed          | Closed          | Closed           |
+| Complement               | Closed           | Not closed          | Closed          | Only if Recursive|
+| Decidability             | Most decidable   | Many decidable      | Decidable       | Many undecidable |
+
+---
+
+### 3. Decision Trees for MCQs (Use in Exam)
+
+**Language Classification Tree**
+
+```mermaid
+flowchart TD
+    Q{String Pattern?} --> A{Equal pairs?}
+    A -->|"2 counts (a^n b^n)"| CFL
+    A -->|"3 counts (a^n b^n c^n)"| CSL
+    A -->|"Copy without reverse (ww)"| CSL
+    A -->|Last k symbols / Mod k| Regular
+    Q --> B{Needs unlimited memory?}
+    B -->|Yes| TM[TM / RE]
+    B -->|Bounded| LBA[CSL]
+```
+
+**Machine Power Tree**
+
+```mermaid
+flowchart TD
+    M{Machine?} --> FA[FA → Regular]
+    M --> PDA[PDA → All CFL]
+    M --> DPDA[DPDA → DCFL only]
+    M --> LBA[LBA → CSL]
+    M --> TM[TM → RE]
+```
+
+---
+
+### 4. High-Yield Topics & Mnemonics
+
+**1. Closure Properties**
+- **Regular**: Almost everything closed (UIC – Union, Intersection, Complement)
+- **CFL**: Loves **UCS** (Union, Concatenation, Star) → Hates Intersection & Complement
+- **RE**: Very friendly (most operations closed)
+
+**2. Pumping Lemmas**
+- Regular: xy^iz (finite memory)
+- CFL: uvxyz (stack memory)
+
+**3. Undecidability**
+- **Halting Problem** = King of Undecidable
+- TM Equivalence, Ambiguity of CFG, PCP → Undecidable
+- Mnemonic: **"HE is Undecidable"** (Halting, Equivalence)
+
+**4. Normal Forms**
+- CNF: A → BC | a
+- GNF: A → aα
+
+---
+
+### 5. Rapid Fire Revision Points
+
+- Every finite language is **Regular**.
+- NFA to DFA → up to **2^n** states.
+- Minimal DFA for mod-k → **k states**.
+- Palindromes → CFL but **not DCFL**.
+- Intersection of two DCFLs → can be undecidable.
+- 2-stack PDA ≡ TM.
+- All Recursive languages are RE, but not vice versa.
+
