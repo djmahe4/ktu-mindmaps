@@ -653,7 +653,7 @@ flowchart TD
 4. Are all Recursive languages RE? → **Yes**
 
 
-**FLAT Module 4: Full Revision + Advanced MCQ Techniques + Practice**  
+## **FLAT Module 4: Full Revision + Advanced MCQ Techniques + Practice**  
 **Complete FLAT Summary for Acing Exams**
 
 ### 1. Ultimate FLAT Hierarchy Mindmap
