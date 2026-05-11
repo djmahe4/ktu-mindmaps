@@ -232,15 +232,20 @@ If L is CFL, then there exists p (pumping length) such that any string s ∈ L w
 
 ```mermaid
 flowchart TD
-    Q{Question?} --> A{Is it CFL?}
-    A -->|Equal counts / Palindrome| YesCFL
-    A -->|a^n b^n c^n or ww| CSL
-    Q --> B{DPDA?}
-    B -->|Palindrome or complex| No
-    B -->|Simple equal a-b| Yes
-    Q --> C{Closure?}
-    C -->|Union/Concat/Star| Closed
-    C -->|Intersection/Complement| Not Closed
+    Q{"Question?"} --> A{"Is it CFL?"}
+
+    A -->|"Equal counts / Palindrome"| YesCFL
+    A -->|"a^n b^n c^n or ww"| CSL
+
+    Q --> B{"DPDA?"}
+
+    B -->|"Palindrome or complex"| No
+    B -->|"Simple equal a-b"| Yes
+
+    Q --> C{"Closure?"}
+
+    C -->|"Union/Concat/Star"| Closed
+    C -->|"Intersection/Complement"| NotClosed
 ```
 
 ---
