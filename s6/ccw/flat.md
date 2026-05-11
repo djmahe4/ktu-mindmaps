@@ -359,14 +359,14 @@ flowchart TD
 ```mermaid
 flowchart TD
     Q{Question?} --> A{What Language?}
-    A -->|a^n b^n c^n| CSL / LBA
-    A -->|ww or complex copy| CSL / TM
-    A -->|Needs unlimited memory| TM / RE
+    A -->|"a^n b^n c^n"| CSL[LBA]
+    A -->|"ww or complex copy"| CSL2[CSL / TM]
+    A -->|"Simple equal a-b"| DCFL[DPDA]
     Q --> B{Decidable?}
-    B -->|Always halts| Recursive
-    B -->|May loop on NO| RE but not Recursive
+    B -->|"Always halts"| Recursive[Recursive]
+    B -->|"May loop on NO"| RE[RE but not Recursive]
     Q --> C{Undecidable Problems}
-    C --> D[Halting, Equivalence, PCP, Ambiguity of CFG]
+    C --> D[Halting Problem<br>TM Equivalence<br>Ambiguity of CFG]
 ```
 
 ---
