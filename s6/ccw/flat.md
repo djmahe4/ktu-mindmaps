@@ -404,3 +404,132 @@ flowchart TD
 **Undecidability Mnemonic**: **"HE is Undecidable"** → **H**alting, **E**quivalence.
 
 ---
+
+## **FLAT Module 3 (Expanded & Deepened)**  
+**Turing Machines, Linear Bounded Automata (LBA), CSL, Recursive & Recursively Enumerable Languages**  
+**Master Notes for MCQs**
+
+### 1. Big Picture Mindmap (Fixed & Improved)
+
+```mermaid
+flowchart TD
+    A[Chomsky Hierarchy] --> B[Type-3: Regular<br>Finite Automata]
+    A --> C[Type-2: CFL<br>Pushdown Automata]
+    A --> D[Type-1: CSL<br>Linear Bounded Automata LBA]
+    A --> E[Type-0: RE Languages<br>Turing Machine TM]
+    E --> F[Recursive Languages<br>Decidable - Always Halts]
+    E --> G[RE but not Recursive<br>Semi-decidable - May Loop]
+    subgraph Power Comparison
+    B --> C --> D --> E
+    end
+```
+
+**Mnemonic for Hierarchy**: **"Regularly Cool Freshers Love Tasty Mangoes"**  
+→ **R**egular (Type 3) → **C**FL (Type 2) → **C**SL (Type 1) → **R**E (Type 0)
+
+---
+
+### 2. Core Concepts – Pointwise (Exam-Focused)
+
+#### **Turing Machine (TM) – The Most Powerful**
+- **Components**: Tape (unlimited), Read/Write Head, States, Transition Function.
+- Can simulate any computer/algorithm.
+- **Accepts RE languages**.
+- **Halting Problem**: Undecidable (classic example).
+
+**Variants have same power** (Very common MCQ):
+- Multi-tape TM
+- Non-deterministic TM
+- Multi-head TM
+- 2-stack PDA ≡ TM
+
+**Mnemonic**: TM = **Unlimited Notebook** – can go back & forth, unlimited space.
+
+#### **Recursive vs Recursively Enumerable (RE)**
+| Property               | Recursive (Decidable)       | RE (Semi-decidable)              |
+|------------------------|-----------------------------|----------------------------------|
+| Halting                | Always halts (Yes/No)       | Halts on Yes, may loop on No     |
+| Complement             | Also Recursive              | May not be RE                    |
+| Closure                | Closed under Complement     | Closed under Union, Intersection |
+
+**Mnemonic**: 
+- **Recursive** = **Reliable Student** → always submits answer (halts).
+- **RE** = **Lazy Student** → submits if correct, disappears if wrong.
+
+#### **Context Sensitive Languages (CSL) & LBA**
+- Accepted by **Linear Bounded Automata** (LBA) → tape length = O(input size).
+- {a^n b^n c^n | n ≥ 1} → Classic CSL (not CFL).
+- {ww | w ∈ {a,b}*} → CSL (not CFL).
+- All CFLs are CSL, but not vice versa.
+
+**Mnemonic**: LBA = **Notebook with fixed pages** (linear in input length).
+
+---
+
+### 3. Important Undecidable Problems (High Weightage)
+- Halting Problem
+- TM Equivalence
+- Whether a CFG is ambiguous
+- Post Correspondence Problem (PCP)
+- Whether two CFLs intersection is empty (in some cases)
+
+**Decision Tree for "Decidable or Not?"**
+
+```mermaid
+flowchart TD
+    Q{Problem?} --> A{For Regular/CFL?}
+    A -->|Yes| Decidable
+    Q --> B{For TM?}
+    B -->|Halting / Equivalence| Undecidable
+    B -->|Membership for fixed TM| Decidable
+    Q --> C{For CSL?}
+    C -->|Most problems| Decidable
+```
+
+---
+
+### 4. Common MCQ Patterns & Tricks
+
+1. **"Which machine accepts?"**
+   - Palindromes → PDA
+   - {a^n b^n c^n} → LBA / TM
+   - Any algorithm → TM
+
+2. **"Power Equivalence"**
+   - NTM = DTM
+   - 2-PDA = TM
+   - LBA accepts CSL
+
+3. **Language Classification**
+   - Needs matching 3 counts → CSL
+   - Needs unlimited comparison → RE
+
+4. **Closure Questions**
+   - RE closed under union, intersection, concatenation.
+   - Recursive closed under complement.
+
+---
+
+### 5. Key Takeaways from Previous Modules Connection
+
+| Concept              | Regular | CFL          | CSL       | RE/TM      |
+|----------------------|---------|--------------|-----------|------------|
+| Memory               | Finite states | Stack     | Linear tape | Unlimited tape |
+| {a^n b^n}            | No      | Yes (DCFL)   | Yes       | Yes        |
+| {a^n b^n c^n}        | No      | No           | Yes       | Yes        |
+| {ww}                 | No      | No           | Yes       | Yes        |
+| Intersection         | Yes     | No           | Yes       | Yes        |
+| Complement           | Yes     | No           | Yes       | Recursive only |
+
+**Story Mnemonic**:  
+"FA has small pockets → PDA has one backpack → LBA has a notebook same size as homework → TM has unlimited paper and can rewrite pages."
+
+---
+
+**Module 3 Complete (Expanded)!** ✅
+
+**Self-Check Questions** (Answer mentally):
+1. Is {a^n b^n c^n} a CFL? → **No**
+2. Is Halting Problem decidable? → **No**
+3. Which is more powerful: PDA or LBA? → **LBA**
+4. Are all Recursive languages RE? → **Yes**
