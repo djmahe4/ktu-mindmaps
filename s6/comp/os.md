@@ -106,4 +106,6 @@ Common in: Priority Scheduling & Shortest Job First.
 | Circular Wait Prevention | Linear Ordering of Resources                      | Best prevention technique                |
 | Thrashing Prevention     | Working set pages in main memory                  | Avoid excessive multiprogramming         |
 | Round Robin              | Fixed Time Quantum                                | Best for interactive systems             |
+|No. of Pages or Frames|⌈ Process Size / Page or Frame Size ⌉|Always use ceiling |
+|Physical Address|(Frame No. × Frame Size) + Offset|Offset = Logical Address mod Page Size|
 
