@@ -116,3 +116,161 @@ flowchart TD
 
 ---
 
+## **FLAT Module 2**  
+**Chapter 2: Context-Free Languages & Pushdown Automata**  
+**Master Notes for MCQs** (Reverse-engineered from Kerala Notes)
+
+### 1. Big Picture Mindmap
+
+```mermaid
+flowchart TD
+    A[Context-Free Languages CFL] --> B[Pushdown Automata PDA]
+    A --> C[Context-Free Grammars CFG]
+    B --> D[Deterministic PDA DPDA vs Non-deterministic PDA]
+    A --> E[Closure Properties]
+    A --> F[Pumping Lemma for CFL]
+    C --> G[Ambiguity]
+    B --> H[Stack Memory]
+    E --> I[Union, Concat, Star = Closed]
+    E --> J[Intersection & Complement = NOT Closed]
+    A --> K[Comparison: Regular < CFL < CSL]
+```
+
+**Core Idea (Simple Language)**:  
+Regular languages = **Finite Memory** (DFA).  
+CFL = **Finite Memory + One Stack** (PDA) → can match pairs, count in limited ways, palindromes, etc.
+
+---
+
+### 2. Key Concepts – Pointwise
+
+#### **Closure Properties of CFL** (Very Important for MCQs)
+- **Closed under**:
+  - Union
+  - Concatenation
+  - Kleene Star
+  - Homomorphism, Inverse Homomorphism
+  - Substitution
+- **NOT Closed under**:
+  - Intersection
+  - Complement
+  - Difference
+
+**Mnemonic**: CFL loves **UCS** (Union, Concat, Star) but hates **IC** (Intersection, Complement).
+
+**MCQ Tip**: If question says "intersection of two CFLs" → answer is **may be CFL** or **CSL**, not always CFL.
+
+#### **DPDA vs PDA** (Most Confusing Topic)
+| Feature                  | PDA (Nondeterministic)      | DPDA (Deterministic)       |
+|--------------------------|-----------------------------|----------------------------|
+| Power                    | Accepts all CFLs            | Accepts only **DCFLs** (proper subset) |
+| Palindromes {ww^R}       | Yes                         | No                         |
+| {a^n b^n}                | Yes                         | Yes                        |
+| Ambiguity                | Can handle                  | More restricted            |
+
+**Mnemonic**: PDA = **Playful** (can guess), DPDA = **Disciplined** (no choice, deterministic).
+
+**Key Examples**:
+- {ww^R} → CFL but **not DCFL**
+- Language of palindromes over {a,b} → not DCFL
+
+#### **Pumping Lemma for CFL** (For proving NOT CFL)
+If L is CFL, then there exists p (pumping length) such that any string s ∈ L with |s| ≥ p can be divided as **s = uvxyz** where:
+- |vxy| ≤ p
+- |vy| ≥ 1
+- For all i ≥ 0, uv^i x y^i z ∈ L
+
+**Simple Trick**: Use **a^n b^n c^n** or **{ww}** to prove not CFL.
+
+---
+
+### 3. Grammar & Language Identification
+
+**Common Languages & Their Types**:
+
+| Language                          | Type          | Accepted by          | Mnemonic                     |
+|-----------------------------------|---------------|----------------------|------------------------------|
+| {a^n b^n | n≥0}                   | DCFL          | DPDA                     | Equal count a-b             |
+| {ww^R | w ∈ {a,b}*}               | CFL (not DCFL)| PDA                      | Mirror / Palindrome         |
+| {a^n b^n c^n | n≥0}               | CSL (not CFL) | LBA                      | Three equal counts          |
+| {a^i b^j c^k | i<j<k}             | Not CFL       | -                        | Pumping kills it            |
+| ww (copy without reverse)         | CSL           | -                        | Hardest among common        |
+
+**From Document (Q03, Q15, Q16)**:
+- L1 = {1^n 0^{n-1} 0^n} → **CSL** (not CFL)
+- L2 = {a^n b^k | n ≤ k ≤ 2n} → **CFL**
+- {ww | w ∈ Σ*} → **CSL, not CFL**
+
+---
+
+### 4. Pushdown Automata Models
+- Two equivalent acceptance methods:
+  1. **By Final State**
+  2. **By Empty Stack**
+
+**Mnemonic**: PDA can "accept by reaching happy state" or "accept by emptying its memory stack".
+
+**Important Fact**:
+- Every CFL has a PDA.
+- Not every CFL has a **DPDA**.
+
+---
+
+### 5. Ambiguity & Normal Forms
+- **Inherently Ambiguous** Language: No unambiguous grammar exists.
+  - Example: {a^n b^n c^m} ∪ {a^n b^m c^m} is inherently ambiguous.
+
+**Normal Forms**:
+- **Chomsky Normal Form (CNF)**: A → BC or A → a
+- **Greibach Normal Form (GNF)**: A → aα (starts with terminal)
+
+**Mnemonic for CNF**: "Clean Normal Form" → Binary or Terminal.
+
+---
+
+### 6. Decision Tree for MCQ Answering
+
+```mermaid
+flowchart TD
+    Q{Question?} --> A{Is it CFL?}
+    A -->|Equal counts / Palindrome| YesCFL
+    A -->|a^n b^n c^n or ww| CSL
+    Q --> B{DPDA?}
+    B -->|Palindrome or complex| No
+    B -->|Simple equal a-b| Yes
+    Q --> C{Closure?}
+    C -->|Union/Concat/Star| Closed
+    C -->|Intersection/Complement| Not Closed
+```
+
+---
+
+### 7. Direct Solutions from Document (Key Questions)
+
+**Q01**: Intersection of two CFLs → **may be CFL** (b) or **always CSL** (d)  
+**Q02**: Union of CFLs = CFL (True). Complement of CFL = CSL (True)  
+**Q07**: Palindromes {wcw^R} and {ww^R} → **not accepted by DPDA**  
+**Q17**: L1 = {a^n b^{2n}}, L2 = {a^n b^{2n}} → Union may not be DCFL  
+**Q18**: Inherently ambiguous examples appear.
+
+---
+
+### 8. Memorization Techniques
+
+**Acronym: PCUG**  
+**P**umping Lemma → prove **not** CFL  
+**C**losure → UCS yes, IC no  
+**U**nion & **G**rammar → CFL power  
+**G** → Greibach / Chomsky
+
+**Story Mnemonic**:  
+"Regular guy has only pockets (finite states). CFL guy has one backpack (stack) — he can match left and right things, but struggles when there are three things to match or copy exactly."
+
+---
+
+**Module 2 Complete!** ✅
+
+**Quick Self-Test** (Try answering):
+1. Is intersection of two CFLs always CFL?  
+2. Can DPDA accept all palindromes?  
+3. Is {a^n b^n c^n} CFL or CSL?
