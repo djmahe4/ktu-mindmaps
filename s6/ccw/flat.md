@@ -279,3 +279,128 @@ flowchart TD
 1. Is intersection of two CFLs always CFL?  
 2. Can DPDA accept all palindromes?  
 3. Is {a^n b^n c^n} CFL or CSL?
+
+## **FLAT Module 3**  
+**Chapter 3: Turing Machines, Modifications, Context-Sensitive Languages (CSL), Recursive & Recursively Enumerable (R.E.) Sets**  
+**Master Notes for MCQs**
+
+### 1. Big Picture Mindmap
+
+```mermaid
+flowchart TD
+    A[Chomsky Hierarchy] --> B[Type 3: Regular → FA]
+    A --> C[Type 2: CFL → PDA]
+    A --> D[Type 1: CSL → LBA Linear Bounded Automata]
+    A --> E[Type 0: RE → Turing Machine TM]
+    E --> F[Recursive = Decidable]
+    E --> G[RE but not Recursive = Semi-decidable]
+    D --> H[CSL: Context Sensitive Grammars]
+    E --> I[TM Variants: Multi-tape, Non-det, etc. = Same Power]
+```
+
+**Core Idea (Simple Analogy)**:  
+- FA = Pocket calculator (limited memory)  
+- PDA = Calculator + one notebook (stack)  
+- **LBA** = Calculator with notebook of size proportional to input  
+- **TM** = Unlimited notebook + can move left/right → most powerful
+
+---
+
+### 2. Chomsky Hierarchy – Quick Recall Table
+
+| Type | Language       | Grammar                  | Machine              | Key Properties                  |
+|------|----------------|--------------------------|----------------------|---------------------------------|
+| 0    | RE             | Unrestricted             | Turing Machine       | Semi-decidable (may loop)      |
+| 1    | CSL            | Context-Sensitive        | Linear Bounded Automata (LBA) | Decidable                      |
+| 2    | CFL            | Context-Free             | Pushdown Automata    | Not closed under intersection  |
+| 3    | Regular        | Regular                  | Finite Automata      | Closed under many ops          |
+
+**Mnemonic**: **3-2-1-0** → Regular → CFL → CSL → RE (power increases as number decreases).
+
+---
+
+### 3. Key Concepts – Pointwise
+
+#### **Turing Machine Basics**
+- TM can simulate any algorithm.
+- **Recursive** (Decidable): TM always halts (yes/no answer).
+- **Recursively Enumerable (RE)**: TM halts on yes instances, may loop on no.
+- **RE but not Recursive**: Halting problem, Post Correspondence Problem (PCP), etc.
+
+**Mnemonic**: Recursive = **Reliable** (always stops). RE = **Optimistic** (may never come back).
+
+#### **Power of Variants** (Common MCQ)
+- Multi-tape TM = Same power as single-tape TM.
+- Non-deterministic TM = Same power as deterministic TM.
+- 2-stack PDA = Equivalent to TM.
+- LBA = Accepts CSL.
+
+**From Document**: Palindromes need PDA, but complex matching needs TM.
+
+#### **Closure Properties**
+- **RE sets**: Closed under Union, Concat, Star, Intersection.
+- **Recursive sets**: Closed under Complement also.
+- CFLs are properly inside CSL which are inside RE.
+
+**Mnemonic for Closure**: RE is very friendly (almost all ops closed). Recursive is even better (adds complement).
+
+#### **Undecidability** (High-weight MCQs)
+- Halting problem is **undecidable**.
+- Equivalence of two TMs is undecidable.
+- Emptiness, finiteness for TM — many are undecidable.
+- Intersection of two DCFLs can encode TM computations → undecidable.
+
+**Simple Trick**: If a problem reduces to "Does TM halt on input?" → **Undecidable**.
+
+---
+
+### 4. Decision Tree for MCQ Answering (Turing Machine Questions)
+
+```mermaid
+flowchart TD
+    Q{Question?} --> A{What Language?}
+    A -->|a^n b^n c^n| CSL / LBA
+    A -->|ww or complex copy| CSL / TM
+    A -->|Needs unlimited memory| TM / RE
+    Q --> B{Decidable?}
+    B -->|Always halts| Recursive
+    B -->|May loop on NO| RE but not Recursive
+    Q --> C{Undecidable Problems}
+    C --> D[Halting, Equivalence, PCP, Ambiguity of CFG]
+```
+
+---
+
+### 5. Important Languages & Their Classes (From Document)
+
+- {a^n b^n c^n} → **CSL** (not CFL)
+- {ww | w ∈ {a,b}*} → **CSL** (not CFL)
+- Valid computations of TM → **CSL**
+- Halting problem → **RE but not Recursive**
+
+---
+
+### 6. Key Solved Patterns from Document
+
+**Q01 (Ch3)**: To evaluate certain languages → needs **Turing Machine** (stack not enough).  
+**Power Comparisons**: 2-stack PDA ≈ TM.  
+**LBA**: Accepts CSL.  
+**TM Modifications**: Multi-tape, non-det, etc., have same power.
+
+**Common Ordering Questions** (e.g., power order):
+- DPDA < PDA < LBA < TM
+
+---
+
+### 7. Memorization Techniques
+
+**Hierarchy Mnemonic**: **"Regularly Cool Freshers Love Tasty Mangoes"**  
+→ Regular → CFL → CSL → RE (Type 3 to 0)
+
+**TM vs Others**:
+- "If it needs to go back and forth or use unlimited space → TM"
+- "If input size bounds the memory → LBA (CSL)"
+
+**Undecidability Mnemonic**: **"HE is Undecidable"** → **H**alting, **E**quivalence.
+
+---
