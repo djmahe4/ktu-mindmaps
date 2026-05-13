@@ -363,6 +363,562 @@ Let's prepare for comparative questions by summarizing key differentiations:
     *   **Function-Preserving:** General improvements to code structure (e.g., removing redundancy, simplifying expressions).
     *   **Loop Optimizations:** Specific techniques to enhance performance within loops, often involving frequency reduction (moving code out of loops, simplifying iteration variables).
 
+As an Expert Pedagogy Designer, I'm here to guide you through the intricate process of **Code Generation** in compiler design. This phase is where the high-level language constructs are finally translated into executable instructions for a specific machine.
+
+---
+
+## Code Generation: From Intermediate Code to Machine Instructions
+
+### 1. Core Principles and Challenges in Code Generation
+
+**Core Principle:** The fundamental goal of code generation is to translate the intermediate representation (IR) of the source program into an equivalent, correct, and efficient sequence of target machine instructions. This involves selecting appropriate machine instructions, deciding which values to keep in registers, and managing memory.
+
+**Challenges:**
+1.  **Instruction Selection:** Which machine instructions should be used to implement an IR operation? There can be many ways, and choosing the most efficient one is complex.
+2.  **Register Allocation:** Deciding which program variables should reside in the CPU's fast registers versus main memory. Registers are limited, but access to them is much faster.
+3.  **Instruction Ordering (Scheduling):** The order of instructions can significantly impact performance, especially in pipelined architectures. Finding an optimal schedule is computationally hard.
+4.  **Addressing Modes:** Effectively utilizing the target machine's various addressing modes (e.g., direct, indirect, indexed) to minimize instruction count and memory accesses.
+5.  **Target Machine Specifics:** Code generation is inherently machine-dependent, requiring knowledge of the target CPU's architecture, instruction set, and peculiarities.
+
+### 2. Issues in the Design of a Code Generator
+
+Designing an effective code generator involves addressing several key issues:
+
+1.  **Input to the Code Generator:**
+    *   **Nature:** The code generator typically receives an intermediate representation (IR) from the front-end and optimizer (e.g., three-address code, quadruples, triples, syntax trees, DAGs).
+    *   **Symbol Table:** Crucially, it also needs the symbol table, which contains information about names (types, scopes, storage allocation) essential for mapping identifiers to memory locations.
+    *   **Quality:** The IR is assumed to be syntactically and semantically correct (errors are handled in earlier phases).
+
+2.  **Target Program:**
+    *   **Form:** The output can take several forms:
+        *   **Absolute Machine Language:** Directly executable, fixed memory locations. Simple for small programs.
+        *   **Relocatable Machine Language:** Allows separate compilation of modules, linked by a linker/loader. Most common for larger projects.
+        *   **Assembly Language:** Easiest for the code generator to produce. Requires an assembler to convert to machine code, offering a human-readable intermediate step and potentially further manual optimization.
+    *   **Quality:** The goal is usually to produce fast and compact code.
+
+3.  **Memory Management:**
+    *   **Mapping:** The code generator works with the front-end to map variable names in the source program to addresses in the target machine's memory.
+    *   **Addressing:** This involves assigning relative addresses within data segments, stack frames, and static data areas, using information from the symbol table (like data type widths).
+
+4.  **Instruction Selection:**
+    *   **Challenge:** Mapping IR operations to the target machine's instruction set. A single IR instruction might translate to one or many machine instructions.
+    *   **Factors:**
+        *   **IR Level:** High-level IRs require more complex mapping. Low-level IRs are closer to machine instructions.
+        *   **Instruction Set Architecture (ISA):** RISC machines (simple, uniform instructions) versus CISC machines (complex, varied instructions) impact selection complexity.
+        *   **Code Quality:** More efficient code often requires sophisticated instruction selection (e.g., using specialized instructions or addressing modes).
+
+5.  **Register Allocation:**
+    *   **Problem:** Deciding which variables or intermediate values should reside in registers. Registers are fast but limited.
+    *   **Sub-problems:**
+        *   **Register Allocation:** Which values should be stored in registers?
+        *   **Register Assignment:** Which *specific* register should hold a chosen value?
+
+6.  **Choice of Evaluation Order:**
+    *   **Impact:** The order in which expressions are evaluated can affect the number of registers needed. Different evaluation orders can lead to different code sequences and register pressure.
+    *   **Complexity:** Finding an optimal evaluation order to minimize register use is an NP-complete problem.
+
+**Mnemonic:** To remember the design issues, think of **I**n **T**arget **M**achines, **I**nstruction **R**ules **E**volve. (Input, Target Program, Memory Management, Instruction Selection, Register Allocation, Evaluation Order).
+
+### 3. Target Language
+
+The **target language** is the language in which the code generator produces the final program. As discussed under "Target Program," it can be:
+
+*   **Absolute Machine Code:** Directly executable binary for a specific CPU.
+*   **Relocatable Machine Code:** Binary code that requires linking with other modules and relocation before execution.
+*   **Assembly Language:** A human-readable textual representation of machine instructions. This is often preferred because:
+    *   It simplifies code generation (the compiler doesn't need to handle exact memory addresses or binary formats).
+    *   It allows for symbolic labels, simplifying jump and call targets.
+    *   It provides a readable output for debugging and potential manual optimization by developers.
+    *   An external assembler then translates it into machine code.
+
+### 4. A Simple Code Generator
+
+A simple code generator typically works on basic blocks of three-address code, producing target code one statement at a time. It uses two key data structures:
+
+1.  **Register Descriptor:**
+    *   **Role:** Keeps track of what is currently stored in each machine register (e.g., `R0` contains `a`, `R1` contains `b+c`).
+    *   **Mechanism:** When a register is needed, this descriptor is consulted to find a free one, or one whose contents can be spilled to memory. It's updated whenever a register's content changes.
+    *   **Illustration:** Imagine a table like:
+        | Register | Contents |
+        | :------- | :------- |
+        | R0       | `a`      |
+        | R1       | `temp1`  |
+        | R2       | `_empty_`|
+
+2.  **Address Descriptor:**
+    *   **Role:** Keeps track of the location(s) where the current value of a name (variable or temporary) can be found at runtime (e.g., `a` is in `R0` and memory, `temp1` is only in `R1`).
+    *   **Mechanism:** When an operand is needed, this descriptor helps locate its most efficient access point. It's updated after every assignment or load/store operation.
+    *   **Illustration:** Imagine a table like:
+        | Name  | Location(s)    |
+        | :---- | :------------- |
+        | `a`   | `R0`, `memory` |
+        | `b`   | `memory`       |
+        | `temp1`| `R1`           |
+
+### 5. Code Generation Algorithm and `getReg` Function
+
+This algorithm generates machine code for a three-address statement `x = y op z`. It prioritizes keeping values in registers for speed.
+
+**Code Generation Algorithm (for `x = y op z`):**
+
+1.  **Choose a Register/Location L for `x` (using `getReg`):**
+    *   Invoke `getReg(x = y op z)` to find an appropriate register `R` to hold the result `x`. If `x`'s value is already in a register, that register might be chosen. If no register is available, `getReg` might suggest spilling an existing register's content to memory to free it.
+    *   Let `L` be the chosen location (register).
+
+2.  **Ensure `y` is in a Register:**
+    *   Consult the **Address Descriptor** for `y`. Determine `y'` (the current most convenient location for `y`).
+    *   If `y` is *not* already in `L` (or a register chosen by `getReg` for `y` if `L` is for `x`):
+        *   Generate `MOV y', L` (move `y`'s value from `y'` to `L`). This assumes `L` is a register. If `y` is already in a register, say `R_y`, and `L` is different, then `MOV R_y, L` might be generated.
+
+3.  **Perform the Operation:**
+    *   Consult the **Address Descriptor** for `z`. Determine `z'` (the current most convenient location for `z`).
+    *   Generate `OP z', L` (perform the operation `op` with `z'` and `L`, storing the result in `L`).
+
+4.  **Update Descriptors for `x`:**
+    *   Update the **Address Descriptor** for `x` to indicate that `x` is now in `L`.
+    *   Update the **Register Descriptor** for `L` to indicate that `L` now contains `x`.
+    *   If `x` was previously in other registers, remove `x` from their descriptors.
+
+5.  **Manage Live/Dead Variables and Free Registers:**
+    *   For `y` and `z`: If their values are not "live" (i.e., will not be used again later in the block) and they were stored in registers, update the **Register Descriptor** for those registers to mark them as empty/free. This frees up registers for subsequent computations.
+
+**The `getReg` Function:**
+
+The `getReg` function is crucial for efficient register management. Its logic for `x = y op z` aims to find the best register `R` for storing the result `x`. It prioritizes:
+
+1.  **`y` is already in a register `R_y` and `R_y` will not be needed for `z`, and `y` is dead after this statement:** Use `R_y` to store `x`.
+2.  **There is an empty (free) register `R`:** Use `R`.
+3.  **`y` is in a register `R_y` but `R_y` is needed for `z` or `y` is live:** Find another register.
+4.  **No free registers exist:**
+    *   Choose an occupied register `R` whose current content (say `v`) is either not needed later or is also stored in memory.
+    *   If `v` is only in `R` and is live, generate `MOV R, Address(v)` (spill `v` to memory) to free `R`.
+    *   Use `R`.
+
+**Example: Generating Code for `x = (a-b)+(a+c)+(a+e)` (using a simplified 2-register model)**
+
+Let's assume our target machine has instructions like `MOV`, `SUB`, `ADD`, and 2 registers: `R0`, `R1`.
+Initial: All registers empty. All variables (`a, b, c, e, x`) in memory.
+
+**Three-Address Code (TAC):**
+1.  `t1 = a - b`
+2.  `t2 = a + c`
+3.  `t3 = a + e`
+4.  `t4 = t1 + t2`
+5.  `x = t4 + t3`
+
+---
+
+**Step-by-step Code Generation:**
+
+**Statement 1: `t1 = a - b`**
+*   `getReg` for `t1`: `R0` is empty. Use `R0`.
+*   Code:
+    ```assembly
+    MOV a, R0    ; Load 'a' into R0
+    SUB b, R0    ; R0 = R0 - b (R0 now holds a-b)
+    ```
+*   Descriptors:
+    *   Reg: `R0` contains `t1` (`a-b`)
+    *   Addr: `t1` in `R0`. `a, b` in memory.
+
+**Statement 2: `t2 = a + c`**
+*   `getReg` for `t2`: `R1` is empty. Use `R1`.
+*   Code:
+    ```assembly
+    MOV a, R1    ; Load 'a' into R1
+    ADD c, R1    ; R1 = R1 + c (R1 now holds a+c)
+    ```
+*   Descriptors:
+    *   Reg: `R0` contains `t1`, `R1` contains `t2` (`a+c`)
+    *   Addr: `t1` in `R0`, `t2` in `R1`. `a, b, c` in memory.
+
+**Statement 3: `t3 = a + e`**
+*   `getReg` for `t3`: No empty registers. `t1` (in `R0`) and `t2` (in `R1`) are both live (needed for `t4`). We must spill. Let's assume `R0` is chosen to spill.
+*   Code:
+    ```assembly
+    MOV R0, t1   ; Spill t1 to memory
+    MOV a, R0    ; Load 'a' into R0
+    ADD e, R0    ; R0 = R0 + e (R0 now holds a+e)
+    ```
+*   Descriptors:
+    *   Reg: `R0` contains `t3` (`a+e`), `R1` contains `t2` (`a+c`)
+    *   Addr: `t1` in memory, `t2` in `R1`, `t3` in `R0`. `a, b, c, e` in memory.
+
+**Statement 4: `t4 = t1 + t2`**
+*   `getReg` for `t4`: `R0` contains `t3`, `R1` contains `t2`. No empty registers. `t3` (in `R0`) is live (needed for final `x`). `t2` (in `R1`) is live (needed for `t4`). Let's assume `R0` is chosen to spill (this is suboptimal, should be `R1` for `t2` if `t2` is about to be used as operand). For simplicity, let's say `R0` is chosen.
+*   Code:
+    ```assembly
+    MOV R0, t3   ; Spill t3 to memory
+    MOV t1, R0   ; Load t1 from memory into R0
+    ADD t2, R0   ; R0 = R0 + t2 (R0 now holds t1+t2)
+    ```
+*   Descriptors:
+    *   Reg: `R0` contains `t4` (`t1+t2`), `R1` contains `t2` (`a+c`)
+    *   Addr: `t1` in memory, `t2` in `R1`, `t3` in memory, `t4` in `R0`. `a, b, c, e` in memory.
+    *   Free `R1` (contains `t2`) as `t2` is now used as an operand for `t4` and assuming `t2` is not live after this use.
+
+**Statement 5: `x = t4 + t3`**
+*   `getReg` for `x`: `R0` contains `t4`. `R1` is free (assuming `t2` was dead after `t4 = t1 + t2`). Use `R0`.
+*   Code:
+    ```assembly
+    ADD t3, R0   ; R0 = R0 + t3 (t3 is in memory) (R0 now holds t4+t3)
+    MOV R0, x    ; Store final result from R0 to x
+    ```
+*   Descriptors:
+    *   Reg: `R0` contains `x`. `R1` is empty.
+    *   Addr: `x` in memory, `t1, t3` in memory. `t4` is no longer needed.
+
+This simplified example shows how registers are managed, spilled, and used. The quality of generated code heavily depends on `getReg`'s intelligence.
+
+### 6. Sethi-Ullman Algorithm (for Optimal Code Generation in Expression Trees)
+
+The Sethi-Ullman algorithm (also known as the labeling algorithm) is a method to generate **optimal code** for an **expression tree** (or DAG representation of an expression) with a **minimum number of registers**, assuming a machine with any number of registers. It determines the minimum number of registers required to evaluate an expression tree without intermediate stores to memory.
+
+**Assumptions:**
+*   Target machine is a load-store architecture.
+*   Two-address instructions like `OP R, M` (R = R op M) or `OP M, R` (R = M op R).
+
+**Algorithm Steps:**
+
+1.  **Labeling Pass (Assign Register Needs):**
+    *   Traverse the expression tree in a post-order (bottom-up) fashion.
+    *   For each node `N`:
+        *   **Leaf Node (Operand `a` or constant):** Label `N` with 1 (requires 1 register to load its value).
+        *   **Internal Node (`op`):** Let `N_1` and `N_2` be its children, with labels `l_1` and `l_2` respectively.
+            *   If `l_1 == l_2`: Label `N` with `l_1 + 1`.
+            *   If `l_1 != l_2`: Label `N` with `max(l_1, l_2)`.
+    *   The label of the root node indicates the minimum number of registers required to evaluate the entire expression without spilling.
+
+2.  **Code Generation Pass (Top-Down with Register Allocation):**
+    *   Traverse the labeled tree in a pre-order (top-down) fashion.
+    *   At each node, decide which child to evaluate first. Prioritize evaluating the child that requires more registers (larger label). If labels are equal, evaluate the left child first.
+    *   Use the available registers (e.g., `R_i, R_j, ...`). When a child is evaluated, its result is stored in a register. The other child is then evaluated using a fresh set of registers, potentially spilling the first child's result if registers are scarce.
+
+**Example: `x = (a-b)+(a+c)+(a+e)` using Sethi-Ullman**
+
+Let's represent the expression as an expression tree (implicitly using temporaries from earlier):
+`t1 = a-b`
+`t2 = a+c`
+`t3 = a+e`
+`t4 = t1+t2`
+`x = t4+t3`
+
+**Expression Tree:**
+```
+       (+) (L3) <-- Root, needs 3 registers
+      /   \
+    t4    t3 (L2) <-- (a+e)
+   /   \
+(+) (L2) (a+e)
+/   \
+t1   t2 (L2) <-- (a+c)
+/ \ / \
+(a-b) (a+c)
+```
+*(L1) = Label 1, (L2) = Label 2, (L3) = Label 3*
+
+Let's draw the tree with labels more precisely, assuming `t1, t2, t3` are results of their subexpressions.
+
+**Labeling Pass:**
+1.  `a, b, c, e` (leaves) get label 1.
+2.  `a-b` (node for `t1`): children `a(L1), b(L1)`. `l1=l2=1`, so `t1` gets label `1+1=2`.
+3.  `a+c` (node for `t2`): children `a(L1), c(L1)`. `l1=l2=1`, so `t2` gets label `1+1=2`.
+4.  `a+e` (node for `t3`): children `a(L1), e(L1)`. `l1=l2=1`, so `t3` gets label `1+1=2`.
+5.  `t1+t2` (node for `t4`): children `t1(L2), t2(L2)`. `l1=l2=2`, so `t4` gets label `2+1=3`.
+6.  `t4+t3` (node for `x`): children `t4(L3), t3(L2)`. `l1=3, l2=2`. `max(3,2)=3`. So `x` needs 3 registers.
+
+**The Sethi-Ullman algorithm would suggest that 3 registers are needed for optimal evaluation of this expression.** The strategy would be to evaluate `t4` first as it requires more registers (3 vs 2 for `t3`).
+
+**Code Generation Pass (Simplified):** (Requires 3 registers, e.g., R0, R1, R2)
+
+1.  Evaluate `t4 = (a-b)+(a+c)` (left child of the root, higher label)
+    *   Evaluate `t1 = a-b`
+        ```assembly
+        MOV a, R0
+        SUB b, R0  ; R0 = a-b (t1)
+        ```
+    *   Evaluate `t2 = a+c`
+        ```assembly
+        MOV a, R1
+        ADD c, R1  ; R1 = a+c (t2)
+        ```
+    *   Evaluate `t4 = t1+t2`
+        ```assembly
+        ADD R1, R0 ; R0 = R0 + R1 (R0 = (a-b)+(a+c)) (t4)
+        ```    *   `R0` now holds `t4`. `R1` is free (if `t2` is not live).
+
+2.  Evaluate `t3 = a+e` (right child of the root)
+    ```assembly
+    MOV a, R1    ; R1 is now free, use it for t3
+    ADD e, R1    ; R1 = a+e (t3)
+    ```
+    *   `R1` now holds `t3`.
+
+3.  Evaluate `x = t4+t3` (root)
+    ```assembly
+    ADD R1, R0   ; R0 = R0 + R1 (R0 = t4 + t3)
+    MOV R0, x    ; Store final result
+    ```
+This yields code using 2 registers at any point, not 3. The Sethi-Ullman algorithm provides a *lower bound* on registers and a *strategy* for ordering, assuming registers are swapped. My manual walkthrough showed a case where only two registers were active simultaneously for operands, meaning 3 were sufficient but maybe not strictly necessary for this specific linear machine code output. The "L3" label implies 3 registers are *active* at the root level, meaning operands for the root and the temporary holding a child's result.
+
+### 7. Code Motion
+
+(As explained in detail in the Code Optimization module.)
+**Briefly:** Moving loop-invariant computations outside the loop to be computed only once, reducing redundant calculations.
+
+**Example (revisiting):**
+```c
+// Original C code
+void processArray(int arr[], int size, int factor) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = arr[i] * (factor + 10); // (factor + 10) is loop-invariant
+    }
+}
+
+// Three-address code (fragment)
+// L1: t1 = factor + 10
+//     t2 = arr[i] * t1
+//     arr[i] = t2
+//     i = i + 1
+//     if i < size GOTO L1
+
+// Optimized (Code Motion)
+// t_invariant = factor + 10  // Moved outside
+// L1: t1 = arr[i] * t_invariant
+//     arr[i] = t1
+//     i = i + 1
+//     if i < size GOTO L1
+```
+This transformation is crucial before code generation because it simplifies the inner loop, leading to fewer instructions being generated repeatedly.
+
+### 8. Code-Improving Transformations of Basic Blocks
+
+(As explained in detail in the Code Optimization module, particularly using DAGs.)
+**Briefly:** Transformations like Common Subexpression Elimination, Dead Code Elimination, Copy Propagation, Constant Folding, and Algebraic Transformations applied within a single basic block.
+
+**Example: `a=b+c; b=a-d; c=b+c; d=a-d` (Basic Block Transformations)**
+
+**Original Three-Address Code:**
+1.  `t1 = b + c`
+2.  `a = t1`
+3.  `t2 = a - d`
+4.  `b = t2`
+5.  `t3 = b + c`
+6.  `c = t3`
+7.  `t4 = a - d`
+8.  `d = t4`
+
+**DAG Construction & Transformation (conceptual):**
+*   `b+c` is computed as `t1`.
+*   Then `a` gets `t1`.
+*   Then `a-d` as `t2`, `b` gets `t2`.
+*   *Now, for `t3 = b+c`*: The `b` here refers to the *new* `b` (from `t2`). The `c` refers to the *original* `c`. This is a new expression.
+*   *Then, for `t4 = a-d`*: The `a` refers to the `a` from `t1`. This is a *common subexpression* with `t2 = a-d`. We can reuse `t2`.
+
+**Optimized Three-Address Code:**
+1.  `t1 = b + c` (Original `b`, `c`)
+2.  `a = t1`
+3.  `t2 = a - d`
+4.  `b_new = t2` (Using `b_new` to distinguish from original `b`)
+5.  `t3 = b_new + c` (Using new `b`, original `c`)
+6.  `c = t3`
+7.  `d = t2` (Reusing `t2` from line 3, Common Subexpression Elimination)
+
+These transformations significantly reduce the number of intermediate instructions, which then translates to less machine code to generate.
+
+### 9. Converting C Statements into Three-Address Code and Quadruples
+
+**C Statement:** `S :: A - B + C + D - E + F`
+
+This statement will be evaluated left-to-right due to operator precedence.
+
+**Three-Address Code (TAC):**
+1.  `t1 = A - B`
+2.  `t2 = t1 + C`
+3.  `t3 = t2 + D`
+4.  `t4 = t3 - E`
+5.  `t5 = t4 + F`
+6.  `S = t5` (Assuming `S` is the result variable)
+
+**Quadruples:**
+A quadruple is a record structure with four fields: `(operator, operand1, operand2, result)`.
+
+| #   | Operator | Operand1 | Operand2 | Result |
+| :-- | :------- | :------- | :------- | :----- |
+| (0) | `-`      | `A`      | `B`      | `t1`   |
+| (1) | `+`      | `t1`     | `C`      | `t2`   |
+| (2) | `+`      | `t2`     | `D`      | `t3`   |
+| (3) | `-`      | `t3`     | `E`      | `t4`   |
+| (4) | `+`      | `t4`     | `F`      | `t5`   |
+| (5) | `=`      | `t5`     |          | `S`    |
+
+### 10. Generating Machine Code from Three-Address Code
+
+Let's use the above TAC for `S = A - B + C + D - E + F` and assume a simple machine with registers `R0, R1`, `MOV` (load/store), `SUB`, `ADD` instructions.
+
+**Three-Address Code (recap):**
+1.  `t1 = A - B`
+2.  `t2 = t1 + C`
+3.  `t3 = t2 + D`
+4.  `t4 = t3 - E`
+5.  `t5 = t4 + F`
+6.  `S = t5`
+
+**Generated Machine Code:**
+
+*   **1. `t1 = A - B`**
+    ```assembly
+    MOV A, R0     ; Load A into R0 (R0 = A)
+    SUB B, R0     ; R0 = R0 - B (R0 = A - B, which is t1)
+    ```
+    *   *Descriptors:* R0 contains t1. t1 is in R0.
+*   **2. `t2 = t1 + C`**
+    ```assembly
+    ADD C, R0     ; R0 = R0 + C (R0 = t1 + C, which is t2)
+    ```
+    *   *Descriptors:* R0 contains t2. t2 is in R0. (t1 is dead in R0)
+*   **3. `t3 = t2 + D`**
+    ```assembly
+    ADD D, R0     ; R0 = R0 + D (R0 = t2 + D, which is t3)
+    ```
+    *   *Descriptors:* R0 contains t3. t3 is in R0. (t2 is dead in R0)
+*   **4. `t4 = t3 - E`**
+    ```assembly
+    SUB E, R0     ; R0 = R0 - E (R0 = t3 - E, which is t4)
+    ```
+    *   *Descriptors:* R0 contains t4. t4 is in R0. (t3 is dead in R0)
+*   **5. `t5 = t4 + F`**
+    ```assembly
+    ADD F, R0     ; R0 = R0 + F (R0 = t4 + F, which is t5)
+    ```
+    *   *Descriptors:* R0 contains t5. t5 is in R0. (t4 is dead in R0)
+*   **6. `S = t5`**
+    ```assembly
+    MOV R0, S     ; Store R0 into S (S = t5)
+    ```
+    *   *Descriptors:* R0 is now empty. S is in memory. (t5 is dead in R0)
+
+---
+
+**Another Example: `x = a/b + a/b * (c-d)`**
+
+**Three-Address Code:**
+1.  `t1 = a / b`
+2.  `t2 = c - d`
+3.  `t3 = t1 * t2`
+4.  `x = t1 + t3`
+
+**Generated Machine Code:** (Assuming `DIV` and `MUL` instructions)
+
+*   **1. `t1 = a / b`**
+    ```assembly
+    MOV a, R0
+    DIV b, R0    ; R0 = a / b (t1)
+    ```
+*   **2. `t2 = c - d`**
+    ```assembly
+    MOV c, R1
+    SUB d, R1    ; R1 = c - d (t2)
+    ```
+*   **3. `t3 = t1 * t2`**
+    ```assembly
+    MUL R1, R0   ; R0 = R0 * R1 (R0 = t1 * t2) (t3)
+    ```
+    *   `R1` is now free as `t2` (its content) is dead after multiplication.
+*   **4. `x = t1 + t3`**
+    *   Wait! `t1` was in `R0` initially, but `R0` now holds `t3`. `t1` must be reloaded or stored. This highlights the importance of keeping `t1` available for `x = t1 + t3`. This is where intelligent register management (like `getReg` or Sethi-Ullman) comes in.
+    *   **Revised Strategy (if `t1` needs to be preserved):**
+        *   `t1 = a / b`
+            ```assembly
+            MOV a, R0
+            DIV b, R0    ; R0 = a / b (t1)
+            ```
+        *   `t2 = c - d`
+            ```assembly
+            MOV c, R1
+            SUB d, R1    ; R1 = c - d (t2)
+            ```
+        *   `t3 = t1 * t2`
+            *   `t1` is in `R0`, `t2` is in `R1`. We need to preserve `R0` for `t1` for the final add.
+            *   Let's assume the result of `t1 * t2` can go into `R1`.
+            ```assembly
+            MOV R0, R2   ; Copy t1 to R2 to preserve R0 for t3's computation
+            MUL R1, R2   ; R2 = R2 * R1 (R2 = t1 * t2) (t3)
+            ```
+            *   Now `R0` has `t1`, `R1` has `t2` (dead), `R2` has `t3`.
+            *   *Correction for `t3 = t1 * t2`*: If the operation is `Result = Op1 * Op2`, and `Op1` is needed again, it should ideally be stored or preserved.
+            *   A better strategy using `getReg` would identify that `t1` needs to be kept.
+            ```assembly
+            // Re-evaluating t3 = t1 * t2
+            // R0 contains t1. R1 contains t2.
+            // If t1 is live after t3 calculation, we can't overwrite R0.
+            // Result of multiplication could go into R1 (assuming t2 is dead).
+            MUL R0, R1   ; R1 = R1 * R0 (R1 = t2 * t1 = t1 * t2) (t3)
+            ```            *   Descriptors: `R0` contains `t1`. `R1` contains `t3`.
+        *   `x = t1 + t3`
+            ```assembly
+            ADD R1, R0   ; R0 = R0 + R1 (R0 = t1 + t3)
+            MOV R0, x
+            ```
+This shows how register availability and liveness analysis (knowing if a variable is needed later) heavily influence the generated machine code and its efficiency.
+
+### 11. Illustrating the Role of Register and Address Descriptors
+
+(Already covered under "4. A Simple Code Generator" in detail, with illustrations.)
+**To reiterate:**
+*   **Register Descriptor:** Answers "What's in this register?" – crucial for finding free registers or knowing what needs to be saved.
+*   **Address Descriptor:** Answers "Where can I find this variable's value?" – crucial for deciding whether to load from memory, use an existing register, or spill a register.
+
+They work together dynamically. When an operation modifies a register, the Register Descriptor for that register is updated. If a variable's value changes, its Address Descriptor is updated to reflect its new primary location (and remove old ones).
+
+### 12. Step-by-Step Solutions for Generating Code Sequences for Various Assignment Expressions
+
+**Example: `x = (a-b) + (a-c) + (a-c)`**
+
+**Three-Address Code:**
+1.  `t1 = a - b`
+2.  `t2 = a - c` (Common subexpression with t3 later)
+3.  `t3 = t1 + t2`
+4.  `t4 = a - c` (Common subexpression with t2)
+5.  `x = t3 + t4`
+
+Let's apply some basic optimization (CSE) first to the TAC itself.
+
+**Optimized Three-Address Code (with CSE):**
+1.  `t1 = a - b`
+2.  `t2 = a - c`
+3.  `t3 = t1 + t2`
+4.  `x = t3 + t2` (Reusing `t2` for `a-c`)
+
+Now generate machine code (assuming two registers `R0, R1`):
+
+*   **1. `t1 = a - b`**
+    ```assembly
+    MOV a, R0   ; R0 = a
+    SUB b, R0   ; R0 = a - b (t1)
+    ```
+    *   *Descriptors:* R0 contains t1. t1 in R0.
+*   **2. `t2 = a - c`**
+    *   Need another register. `R1` is free.
+    ```assembly
+    MOV a, R1   ; R1 = a
+    SUB c, R1   ; R1 = a - c (t2)
+    ```
+    *   *Descriptors:* R0 contains t1. R1 contains t2. t1 in R0, t2 in R1.
+*   **3. `t3 = t1 + t2`**
+    *   `t1` is in `R0`, `t2` is in `R1`. We can perform `R0 = R0 + R1`. Result stays in `R0`.
+    ```assembly
+    ADD R1, R0  ; R0 = R0 + R1 (R0 = t1 + t2) (t3)
+    ```
+    *   *Descriptors:* R0 contains t3. R1 contains t2. t3 in R0, t2 in R1. (`t1` is dead in R0 after this use)
+*   **4. `x = t3 + t2`**
+    *   `t3` is in `R0`, `t2` is in `R1`.
+    ```assembly
+    ADD R1, R0  ; R0 = R0 + R1 (R0 = t3 + t2) (x)
+    MOV R0, x   ; Store R0 to x
+    ```
+    *   *Descriptors:* R0 empty. R1 empty. x in memory. (`t3`, `t2` are dead)
+
 
 ### **1. [2024] Q9: Differentiate local and global optimizations.**
 
