@@ -287,3 +287,13 @@ graph TD
 
 **SLR Parser Limitations:**
 SLR parsers are simpler to construct but less powerful than canonical LR(1) or LALR parsers. They can encounter shift-reduce or reduce-reduce conflicts for certain grammars, especially when the `FOLLOW` sets are large, leading to situations where the parser cannot deterministically decide on an action. This is because SLR uses only LR(0) items and the `FOLLOW` set for reduce decisions, which might not always provide enough context.
+
+
+## Error rec
+
+| Strategy | Mechanism | Pros | Cons |
+| :--- | :--- | :--- | :--- |
+| **Panic-Mode** | Skips tokens until a "Synchronizing Token" is found. | Simple; No infinite loops. | Skips large code blocks; misses errors. |
+| **Phrase-Level** | Performs local "surgery" (e.g., changes `,` to `;`). | Corrects any input string. | Hard to fix errors that happened *earlier*. |
+| **Error Productions** | Adds "Wrong" rules to the grammar for common mistakes. | Excellent diagnostic messages. | Increases grammar size & complexity. |
+| **Global Correction** | Finds the "closest" valid program (Least-cost). | Mathematically optimal. | Too slow/costly for real use. |
