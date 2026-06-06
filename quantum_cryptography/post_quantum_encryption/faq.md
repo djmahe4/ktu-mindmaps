@@ -1,5 +1,37 @@
 # FAQ: Foundations of Post-Quantum Cryptography
 
+## Intro
+Post-Quantum Cryptography (PQC) is a new generation of cryptographic algorithms designed to remain secure even against future quantum computers that can break today's RSA and ECC systems.
+
+### RSA
+
+1. Choose two large prime numbers.
+2. Multiply them together.
+3. Create a public key from the result.
+4. Create a private key using the original primes.
+5. **Shor's Algorithm:** Given the public key, a quantum computer can efficiently recover the original primes and break RSA.
+
+---
+
+### ECC
+
+1. Choose a secret number.
+2. Apply elliptic-curve multiplication.
+3. Publish the resulting point as the public key.
+4. Keep the secret number as the private key.
+5. **Shor's Algorithm:** Given the public key, a quantum computer can efficiently recover the secret number and break ECC.
+
+---
+
+### AES
+
+1. Generate a random secret key.
+2. Use the key to encrypt data.
+3. Share the same key with the receiver.
+4. Use the same key to decrypt data.
+5. **Grover's Algorithm:** A quantum computer can speed up key guessing, but cannot directly recover the key like Shor's does for RSA/ECC. AES-256 remains considered secure.
+
+
 ## Q1. Why do quantum computers threaten RSA and ECC but not AES to the same extent?
 
 RSA and ECC depend on mathematical problems such as integer factorization and discrete logarithms.
